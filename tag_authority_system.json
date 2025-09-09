@@ -1,0 +1,420 @@
+{
+  "authorities": [
+    {
+      "canonical_name": "Dogs",
+      "category": "subject",
+      "aliases": [
+        "dog",
+        "dogs",
+        "doggy",
+        "good dog"
+      ],
+      "description": "Content featuring dogs as primary subjects"
+    },
+    {
+      "canonical_name": "Wilderness",
+      "category": "location_type",
+      "aliases": [
+        "wilderness",
+        "wilderness area",
+        "wild",
+        "backcountry"
+      ],
+      "description": "Remote, undeveloped natural areas"
+    },
+    {
+      "canonical_name": "Bushcraft",
+      "category": "activity",
+      "aliases": [
+        "bushcraft",
+        "bushcrafting",
+        "bushcrafter",
+        "bushcraft skills",
+        "bushcraft camp"
+      ],
+      "description": "Traditional outdoor skills and self-reliance techniques"
+    },
+    {
+      "canonical_name": "Camping",
+      "category": "activity",
+      "aliases": [
+        "camping",
+        "camp",
+        "campout",
+        "wild camp",
+        "wild camping"
+      ],
+      "description": "Overnight outdoor accommodation"
+    },
+    {
+      "canonical_name": "Campfire Cooking",
+      "category": "activity",
+      "aliases": [
+        "campfire cooking",
+        "cooking",
+        "campfire food",
+        "fire cooking",
+        "camp food"
+      ],
+      "description": "Preparing food over open fires"
+    },
+    {
+      "canonical_name": "Campfire",
+      "category": "equipment",
+      "aliases": [
+        "campfire",
+        "fire",
+        "fire making"
+      ],
+      "description": "Open fires for cooking and warmth"
+    },
+    {
+      "canonical_name": "Winter Camping",
+      "category": "activity",
+      "aliases": [
+        "winter camping",
+        "winter camp",
+        "cold camping",
+        "winter"
+      ],
+      "description": "Camping in winter conditions"
+    },
+    {
+      "canonical_name": "Boundary Waters Canoe Area",
+      "category": "location",
+      "aliases": [
+        "bwca",
+        "bwcaw",
+        "boundary waters",
+        "boundary waters canoe area"
+      ],
+      "description": "Wilderness area in Minnesota/Ontario border region"
+    },
+    {
+      "canonical_name": "Dog Training",
+      "category": "activity",
+      "aliases": [
+        "dog training",
+        "camping dog"
+      ],
+      "description": "Training dogs for outdoor activities"
+    },
+    {
+      "canonical_name": "Fishing",
+      "category": "activity",
+      "aliases": [
+        "fishing",
+        "fish",
+        "catch and cook",
+        "catch and release",
+        "trout fishing"
+      ],
+      "description": "Recreational angling activities"
+    },
+    {
+      "canonical_name": "Backpacking",
+      "category": "activity",
+      "aliases": [
+        "backpacking",
+        "backpacker",
+        "backpack camping"
+      ],
+      "description": "Multi-day hiking with overnight gear"
+    },
+    {
+      "canonical_name": "Adventure",
+      "category": "content_type",
+      "aliases": [
+        "adventure",
+        "adventurer"
+      ],
+      "description": "Exciting outdoor experiences"
+    },
+    {
+      "canonical_name": "Survival Skills",
+      "category": "activity",
+      "aliases": [
+        "survival",
+        "survival skills",
+        "survival food",
+        "survival shelter"
+      ],
+      "description": "Skills for surviving in challenging conditions"
+    },
+    {
+      "canonical_name": "Forest",
+      "category": "location_type",
+      "aliases": [
+        "forest",
+        "woods"
+      ],
+      "description": "Wooded natural areas"
+    },
+    {
+      "canonical_name": "Canoe Camping",
+      "category": "activity",
+      "aliases": [
+        "canoe camping",
+        "canoe",
+        "canoeing",
+        "canoe trip",
+        "paddle",
+        "paddling"
+      ],
+      "description": "Camping accessed by canoe travel"
+    },
+    {
+      "canonical_name": "Gourmet Cooking",
+      "category": "activity",
+      "aliases": [
+        "gourmet cooking",
+        "gourmet",
+        "gourmet food"
+      ],
+      "description": "High-quality outdoor cooking"
+    },
+    {
+      "canonical_name": "Nature",
+      "category": "subject",
+      "aliases": [
+        "nature",
+        "outdoors",
+        "outdoor",
+        "nature sounds"
+      ],
+      "description": "Natural environments and phenomena"
+    },
+    {
+      "canonical_name": "Fall Camping",
+      "category": "activity",
+      "aliases": [
+        "fall camping",
+        "fall"
+      ],
+      "description": "Camping during autumn season"
+    },
+    {
+      "canonical_name": "Spring Camping",
+      "category": "activity",
+      "aliases": [
+        "spring camping",
+        "spring"
+      ],
+      "description": "Camping during spring season"
+    },
+    {
+      "canonical_name": "Michigan",
+      "category": "location",
+      "aliases": [
+        "michigan"
+      ],
+      "description": "U.S. state in Great Lakes region"
+    }
+  ],
+  "analysis": {
+    "total_authorities": 20,
+    "total_aliases": 70,
+    "unmapped_frequent_tags": [
+      [
+        "update",
+        14
+      ],
+      [
+        "channel",
+        8
+      ],
+      [
+        "monty",
+        9
+      ],
+      [
+        "rough collie",
+        9
+      ],
+      [
+        "unsuccessful fishing show",
+        10
+      ],
+      [
+        "canada",
+        108
+      ],
+      [
+        "how to fish",
+        43
+      ],
+      [
+        "wilderness camping",
+        56
+      ],
+      [
+        "how to camp",
+        133
+      ],
+      [
+        "tent",
+        13
+      ],
+      [
+        "outdoorsman",
+        113
+      ],
+      [
+        "catching fish",
+        17
+      ],
+      [
+        "backcountry camping",
+        104
+      ],
+      [
+        "leave no trace",
+        9
+      ],
+      [
+        "asmr",
+        84
+      ],
+      [
+        "pasta",
+        8
+      ],
+      [
+        "firesteel",
+        16
+      ],
+      [
+        "showshoeing",
+        17
+      ],
+      [
+        "wood burning stove",
+        16
+      ],
+      [
+        "food",
+        92
+      ],
+      [
+        "delicious",
+        37
+      ],
+      [
+        "snow",
+        71
+      ],
+      [
+        "woodsman",
+        19
+      ],
+      [
+        "funny",
+        115
+      ],
+      [
+        "entertaining",
+        17
+      ],
+      [
+        "hot tent",
+        18
+      ],
+      [
+        "cold",
+        18
+      ],
+      [
+        "frigid",
+        16
+      ],
+      [
+        "extreme",
+        16
+      ],
+      [
+        "camper",
+        19
+      ],
+      [
+        "winter time",
+        25
+      ],
+      [
+        "hiking",
+        56
+      ],
+      [
+        "walleye",
+        5
+      ],
+      [
+        "bass",
+        14
+      ],
+      [
+        "bluegill",
+        5
+      ],
+      [
+        "northern pike",
+        6
+      ],
+      [
+        "pike",
+        6
+      ],
+      [
+        "smallmouth bass",
+        5
+      ],
+      [
+        "largemouth bass",
+        6
+      ],
+      [
+        "river",
+        11
+      ],
+      [
+        "ice fishing",
+        5
+      ],
+      [
+        "fire skills",
+        64
+      ],
+      [
+        "nikon d5500",
+        41
+      ],
+      [
+        "gopro",
+        47
+      ],
+      [
+        "going camping",
+        38
+      ],
+      [
+        "wilderness adventure",
+        43
+      ],
+      [
+        "canoe paddle",
+        42
+      ],
+      [
+        "hilarious",
+        76
+      ],
+      [
+        "silly",
+        69
+      ],
+      [
+        "youtube",
+        5
+      ]
+    ]
+  }
+}

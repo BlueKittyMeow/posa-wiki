@@ -1,0 +1,157 @@
+{
+  "timestamp": "2025-01-02",
+  "chapter_results": {
+    "ba3p1ESNXQc": {
+      "title": "Dog Update - What's Happened And How They Are Doing",
+      "manual_chapters": [],
+      "has_chapters": false
+    },
+    "JQWNJPVp90Y": {
+      "title": "Mushrooms and Fish - The Unsuccessful Fishing Show - Episode 14",
+      "manual_chapters": [],
+      "has_chapters": false
+    },
+    "hbAfAQjVyNg": {
+      "title": "Overnight Camping With My Dog",
+      "manual_chapters": [],
+      "has_chapters": false
+    },
+    "aJkAWBOrXfE": {
+      "title": "The River Paddle of Frustration - The Unsuccessful Fishing Show - Episode 13",
+      "manual_chapters": [],
+      "has_chapters": false
+    },
+    "ZRY7ZraLkiw": {
+      "title": "Overnight Spring Canoe Camp With My Dog",
+      "manual_chapters": [],
+      "has_chapters": false
+    }
+  },
+  "caption_results": {
+    "ba3p1ESNXQc": {
+      "title": "Dog Update - What's Happened And How They Are Doing",
+      "has_captions": true,
+      "caption_tracks": [
+        {
+          "kind": "youtube#caption",
+          "etag": "i19k0caWJvdGrcintEK3S_GZl8w",
+          "id": "AUieDaYR73sU-6o9BRJAQh_yXoTp7pHfQKMwxLnkgwiNdGYBb-o",
+          "snippet": {
+            "videoId": "ba3p1ESNXQc",
+            "lastUpdated": "2025-06-08T23:47:13.085547Z",
+            "trackKind": "asr",
+            "language": "en",
+            "name": "",
+            "audioTrackType": "unknown",
+            "isCC": false,
+            "isLarge": false,
+            "isEasyReader": false,
+            "isDraft": false,
+            "isAutoSynced": false,
+            "status": "serving"
+          }
+        }
+      ]
+    },
+    "JQWNJPVp90Y": {
+      "title": "Mushrooms and Fish - The Unsuccessful Fishing Show - Episode 14",
+      "has_captions": true,
+      "caption_tracks": [
+        {
+          "kind": "youtube#caption",
+          "etag": "UBF8sMXieIVDcKRcQwaAsD-zoJY",
+          "id": "AUieDaaODt5BIuvRZoxnW8FqcapU57wfAOiitmPgfT-T53ICJU0",
+          "snippet": {
+            "videoId": "JQWNJPVp90Y",
+            "lastUpdated": "2025-05-14T00:39:02.173494Z",
+            "trackKind": "asr",
+            "language": "en",
+            "name": "",
+            "audioTrackType": "unknown",
+            "isCC": false,
+            "isLarge": false,
+            "isEasyReader": false,
+            "isDraft": false,
+            "isAutoSynced": false,
+            "status": "serving"
+          }
+        }
+      ]
+    },
+    "hbAfAQjVyNg": {
+      "title": "Overnight Camping With My Dog",
+      "has_captions": true,
+      "caption_tracks": [
+        {
+          "kind": "youtube#caption",
+          "etag": "aGgpLvZXqTsh3AdvZTvQc3mhMHA",
+          "id": "AUieDaamJqXeQFGNIKICEYPW5cQ4YJZBjykVjHR0T0GD1AVP11o",
+          "snippet": {
+            "videoId": "hbAfAQjVyNg",
+            "lastUpdated": "2025-05-10T23:26:08.220915Z",
+            "trackKind": "asr",
+            "language": "en",
+            "name": "",
+            "audioTrackType": "unknown",
+            "isCC": false,
+            "isLarge": false,
+            "isEasyReader": false,
+            "isDraft": false,
+            "isAutoSynced": false,
+            "status": "serving"
+          }
+        }
+      ]
+    },
+    "aJkAWBOrXfE": {
+      "title": "The River Paddle of Frustration - The Unsuccessful Fishing Show - Episode 13",
+      "has_captions": true,
+      "caption_tracks": [
+        {
+          "kind": "youtube#caption",
+          "etag": "FrBpC52gBcf20oVwVPknpmi4a1I",
+          "id": "AUieDaZPcpfr_qc5QvqyqGavDyjucKpdlTWkS6MgmyxuxC6iWP0",
+          "snippet": {
+            "videoId": "aJkAWBOrXfE",
+            "lastUpdated": "2025-05-11T02:33:00.346662Z",
+            "trackKind": "asr",
+            "language": "en",
+            "name": "",
+            "audioTrackType": "unknown",
+            "isCC": false,
+            "isLarge": false,
+            "isEasyReader": false,
+            "isDraft": false,
+            "isAutoSynced": false,
+            "status": "serving"
+          }
+        }
+      ]
+    },
+    "ZRY7ZraLkiw": {
+      "title": "Overnight Spring Canoe Camp With My Dog",
+      "has_captions": true,
+      "caption_tracks": [
+        {
+          "kind": "youtube#caption",
+          "etag": "SAS-O71hKO7rKqiRqLz-kEpyDZs",
+          "id": "AUieDaYMIC4HVrM_rzZOja0Fhc1hZ4bxLYPpbJqca9q2cxjfKLs",
+          "snippet": {
+            "videoId": "ZRY7ZraLkiw",
+            "lastUpdated": "2025-05-06T04:51:36.390593Z",
+            "trackKind": "asr",
+            "language": "en",
+            "name": "",
+            "audioTrackType": "unknown",
+            "isCC": false,
+            "isLarge": false,
+            "isEasyReader": false,
+            "isDraft": false,
+            "isAutoSynced": false,
+            "status": "serving"
+          }
+        }
+      ]
+    }
+  }
+}
