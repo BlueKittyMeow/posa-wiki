@@ -178,9 +178,18 @@ def people_list():
     ORDER BY video_count DESC, p.canonical_name ASC
     ''').fetchall()
     
+    # Calculate stats for template
+    family_count = sum(1 for p in people if p['canonical_name'].startswith("Matthew's"))
+    collaborator_count = sum(1 for p in people if not p['canonical_name'].startswith("Matthew's") and p['canonical_name'] != 'Matthew Posa')
+    most_featured = max(people, key=lambda x: x['video_count']) if people else None
+    
     conn.close()
     
-    return render_template('people_list.html', people=people)
+    return render_template('people_list.html', 
+                         people=people, 
+                         family_count=family_count,
+                         collaborator_count=collaborator_count,
+                         most_featured=most_featured)
 
 @app.route('/person/<int:person_id>')
 def person_detail(person_id):
