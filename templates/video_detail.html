@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block title %}{{ video.title }} - Posa Wiki{% endblock %}
+
+{% block content %}
+<!-- Video Header -->
+<div class="card">
+    <div class="card-header">
+        <div>
+            <h2 class="card-title">{{ video.title }}</h2>
+            <div style="display: flex; gap: 1rem; align-items: center; margin-top: 0.5rem;">
+                <span class="text-muted">📅 {{ video.published_at[:10] if video.published_at else 'Unknown Date' }}</span>
+                <a href="{{ url_for('date_view', date_str=video.published_at[:10]) }}" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.85rem;">View This Day</a>
+                <a href="https://youtube.com/watch?v={{ video.video_id }}" target="_blank" class="btn" style="padding: 0.25rem 0.75rem; font-size: 0.85rem;">📺 Watch on YouTube</a>
+            </div>
+        </div>
+        <button class="btn btn-secondary" onclick="editVideo('{{ video.video_id }}')">✏️ Edit</button>
+    </div>
+
+    <!-- Video Thumbnail -->
+    {% if video.thumbnail_url %}
+        <div style="margin-bottom: 1.5rem; text-align: center;">
+            <img 
+                src="{{ video.thumbnail_url }}" 
+                alt="{{ video.title }}"
+                style="max-width: 100%; height: auto; border-radius: var(--border-radius); box-shadow: var(--shadow);"
+            >
+        </div>
+    {% endif %}
+
+    <!-- Video Metadata -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+        {% if video.duration %}
+            <div>
+                <strong class="text-accent">⏱️ Duration:</strong>
+                <span>{{ video.duration|format_duration }}</span>
+            </div>
+        {% endif %}
+        
+        {% if video.view_count %}
+            <div>
+                <strong class="text-accent">👁️ Views:</strong>
+                <span>{{ "{:,}".format(video.view_count) }}</span>
+            </div>
+        {% endif %}
+        
+        {% if video.like_count %}
+            <div>
+                <strong class="text-accent">👍 Likes:</strong>
+                <span>{{ "{:,}".format(video.like_count) }}</span>
+            </div>
+        {% endif %}
+        
+        {% if video.comment_count %}
+            <div>
+                <strong class="text-accent">💬 Comments:</strong>
+                <span>{{ "{:,}".format(video.comment_count) }}</span>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Description -->
+    {% if video.description %}
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--border-radius); margin-bottom: 1.5rem;">
+            <h4 class="text-accent" style="margin-bottom: 1rem;">📝 Description</h4>
+            <div style="white-space: pre-wrap; line-height: 1.6;">{{ video.description }}</div>
+        </div>
+    {% endif %}
+
+    <!-- Adventure Crew -->
+    {% if people or dogs %}
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+            {% if people %}
+                <div>
+                    <h4 class="text-accent" style="margin-bottom: 1rem;">👥 People in this Video</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        {% for person in people %}
+                            <a href="{{ url_for('person_detail', person_id=person.person_id) }}" class="btn btn-secondary">
+                                {% if person.canonical_name == "Matthew Posa" %}🎬
+                                {% elif person.canonical_name.startswith("Matthew's") %}👨‍👩‍👧‍👦
+                                {% else %}🤝{% endif %}
+                                {{ person.canonical_name }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if dogs %}
+                <div>
+                    <h4 class="text-accent" style="margin-bottom: 1rem;">🐕 Adventure Dogs</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        {% for dog in dogs %}
+                            <span class="btn btn-secondary">🐾 {{ dog.name }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+
+<!-- Tags & Categories (if we have them) -->
+{% if video.validated_tags %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">🏷️ Tags & Categories</h3>
+        </div>
+        
+        {% set tags = video.validated_tags|from_json %}
+        {% if tags %}
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                {% for tag in tags %}
+                    <span style="background: var(--accent-mint); color: var(--bg-primary); padding: 0.5rem 1rem; border-radius: var(--border-radius-sm); font-size: 0.9rem;">{{ tag }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endif %}
+
+<!-- Technical Details -->
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">🔧 Technical Details</h3>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; font-size: 0.9rem;">
+        <div>
+            <strong class="text-accent">Video ID:</strong>
+            <code style="background: var(--bg-tertiary); padding: 0.25rem 0.5rem; border-radius: 4px; margin-left: 0.5rem;">{{ video.video_id }}</code>
+        </div>
+        
+        {% if video.published_at %}
+            <div>
+                <strong class="text-accent">Published:</strong>
+                <span>{{ video.published_at }}</span>
+            </div>
+        {% endif %}
+        
+        {% if video.channel_title %}
+            <div>
+                <strong class="text-accent">Channel:</strong>
+                <span>{{ video.channel_title }}</span>
+            </div>
+        {% endif %}
+        
+        {% if video.category_id %}
+            <div>
+                <strong class="text-accent">Category:</strong>
+                <span>{{ video.category_id }}</span>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Edit Video Modal (placeholder) -->
+<div id="edit-video-modal" class="modal-backdrop" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;">
+    <div class="card" style="width: 90%; max-width: 600px; margin: 0; max-height: 80vh; overflow-y: auto;">
+        <div class="card-header">
+            <h3 class="card-title">✏️ Edit Video: {{ video.title[:30] }}{% if video.title|length > 30 %}...{% endif %}</h3>
+            <button onclick="closeModal('edit-video-modal')" class="btn btn-secondary">✕</button>
+        </div>
+        
+        <form>
+            <div class="form-group mb-2">
+                <label class="form-label">Title</label>
+                <input type="text" value="{{ video.title }}" style="width: 100%;">
+            </div>
+            
+            <div class="form-group mb-2">
+                <label class="form-label">Description</label>
+                <textarea rows="6" style="width: 100%;">{{ video.description or '' }}</textarea>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-group">
+                    <label class="form-label">Published Date</label>
+                    <input type="datetime-local" value="{{ video.published_at[:16] if video.published_at else '' }}">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Duration</label>
+                    <input type="text" value="{{ video.duration or '' }}" placeholder="PT5M30S">
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+                <button type="button" onclick="closeModal('edit-video-modal')" class="btn btn-secondary">Cancel</button>
+                <button type="submit" class="btn">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function editVideo(videoId) {
+    openModal('edit-video-modal');
+}
+</script>
+{% endblock %}

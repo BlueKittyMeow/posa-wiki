@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}People - Posa Wiki{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">👥 Adventure Crew</h2>
+        <span class="text-muted">{{ people|length }} people</span>
+    </div>
+
+    {% if people %}
+        <ul class="entity-list">
+            {% for person in people %}
+            <li class="entity-item">
+                <a href="{{ url_for('person_detail', person_id=person.person_id) }}">
+                    <div>
+                        <strong>{{ person.canonical_name }}</strong>
+                        {% if person.canonical_name.startswith("Matthew's") %}
+                            <span class="text-muted" style="font-size: 0.85rem;">👨‍👩‍👧‍👦 Family</span>
+                        {% elif person.canonical_name == "Matthew Posa" %}
+                            <span class="text-muted" style="font-size: 0.85rem;">🎬 Channel Creator</span>
+                        {% else %}
+                            <span class="text-muted" style="font-size: 0.85rem;">🤝 Friend & Collaborator</span>
+                        {% endif %}
+                    </div>
+                    <span class="entity-count">{{ person.video_count }}</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="text-center" style="padding: 3rem;">
+            <p class="text-muted">No people found.</p>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Quick Stats -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+    <div class="card">
+        <h3 class="text-accent">👨‍👩‍👧‍👦 Family Members</h3>
+        <div style="font-size: 1.5rem; margin: 1rem 0;">
+            {{ people|selectattr('canonical_name', 'match', "Matthew's.*")|list|length }}
+        </div>
+        <div class="text-muted">Mom, Dad, Brother</div>
+    </div>
+    
+    <div class="card">
+        <h3 class="text-accent">🤝 Friends & Collaborators</h3>
+        <div style="font-size: 1.5rem; margin: 1rem 0;">
+            {{ people|rejectattr('canonical_name', 'match', "Matthew's.*")|rejectattr('canonical_name', 'equalto', 'Matthew Posa')|list|length }}
+        </div>
+        <div class="text-muted">Lucas, Funk, Jake, Ken, Erin</div>
+    </div>
+    
+    <div class="card">
+        <h3 class="text-accent">📹 Most Featured</h3>
+        <div style="font-size: 1.5rem; margin: 1rem 0;">
+            {% set most_featured = people|sort(attribute='video_count', reverse=true)|first %}
+            {{ most_featured.canonical_name if most_featured else 'None' }}
+        </div>
+        <div class="text-muted">{{ most_featured.video_count if most_featured else 0 }} videos</div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}{{ date.strftime('%B %d, %Y') }} - Posa Wiki{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">📅 {{ date.strftime('%A, %B %d, %Y') }}</h2>
+        <div style="display: flex; gap: 0.5rem;">
+            <a href="{{ url_for('videos_by_date', date_str=(date - timedelta(days=1)).strftime('%Y-%m-%d')) }}" class="btn btn-secondary">← Previous Day</a>
+            <a href="{{ url_for('videos_by_date', date_str=(date + timedelta(days=1)).strftime('%Y-%m-%d')) }}" class="btn btn-secondary">Next Day →</a>
+        </div>
+    </div>
+
+    {% if videos %}
+        <p class="text-muted" style="margin-bottom: 1.5rem;">{{ videos|length }} video{{ 's' if videos|length != 1 else '' }} published on this date</p>
+        
+        <div class="video-grid">
+            {% for video in videos %}
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    {% if video.thumbnail_url %}
+                        <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" loading="lazy">
+                    {% else %}
+                        <span>📹 No Thumbnail</span>
+                    {% endif %}
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">
+                        <a href="{{ url_for('video_detail', video_id=video.video_id) }}" style="color: inherit; text-decoration: none;">
+                            {{ video.title }}
+                        </a>
+                    </h3>
+                    <div class="video-meta">
+                        <span>⏰ {{ video.published_at[11:16] if video.published_at else 'Unknown Time' }}</span>
+                        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="editVideo('{{ video.video_id }}')">✏️ Edit</button>
+                    </div>
+                    {% if video.description %}
+                        <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.5rem; line-height: 1.3;">
+                            {{ video.description[:120] }}{% if video.description|length > 120 %}...{% endif %}
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center" style="padding: 3rem;">
+            <p class="text-muted">No videos published on {{ date.strftime('%B %d, %Y') }}.</p>
+            <a href="{{ url_for('index') }}" class="btn" style="margin-top: 1rem;">🏠 Back to Home</a>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Calendar Navigation Helper -->
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">🗓️ Quick Navigation</h3>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+        <div>
+            <label class="form-label">Jump to Date</label>
+            <input type="date" id="date-jump" value="{{ date.strftime('%Y-%m-%d') }}" onchange="goToDate(this.value)">
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <span class="form-label">Quick Jumps</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <button onclick="goToDate('{{ (date - timedelta(days=7)).strftime('%Y-%m-%d') }}')" class="btn btn-secondary">-1 Week</button>
+                <button onclick="goToDate('{{ (date - timedelta(days=30)).strftime('%Y-%m-%d') }}')" class="btn btn-secondary">-1 Month</button>
+                <button onclick="goToDate('{{ (date + timedelta(days=30)).strftime('%Y-%m-%d') }}')" class="btn btn-secondary">+1 Month</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function editVideo(videoId) {
+    // Placeholder for video editing modal
+    alert(`Edit video ${videoId} - Coming Soon!`);
+}
+
+function goToDate(dateStr) {
+    if (dateStr) {
+        window.location.href = `/date/${dateStr}`;
+    }
+}
+</script>
+{% endblock %}

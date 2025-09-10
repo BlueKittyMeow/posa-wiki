@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Posa Wiki - Home{% endblock %}
+
+{% block content %}
+<div class="header-nav">
+    <div class="nav-row">
+        <!-- Date Navigation -->
+        <div class="form-group">
+            <label class="form-label">📅 Jump to Date</label>
+            <input type="date" id="date-picker" onchange="goToDate(this.value)">
+        </div>
+        
+        <!-- Search -->
+        <div class="form-group">
+            <label class="form-label">🔍 Search Videos</label>
+            <form action="{{ url_for('search') }}" method="GET" style="display: flex; gap: 0.5rem;">
+                <input type="search" name="q" placeholder="Search titles and descriptions..." style="flex: 1;">
+                <button type="submit" class="btn">Search</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="nav-row">
+        <!-- Browse Options -->
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="{{ url_for('video_list') }}" class="btn btn-secondary">📺 View All Videos</a>
+            <a href="#" class="btn btn-secondary">❄️ Winter Camping</a>
+            <a href="#" class="btn btn-secondary">🛶 Canoe Adventures</a>
+            <a href="#" class="btn btn-secondary">🎣 Fishing Videos</a>
+            <a href="{{ url_for('people_list') }}" class="btn btn-secondary">👥 Browse People</a>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Videos Section -->
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">🕒 Recent Videos</h2>
+        <a href="{{ url_for('video_list') }}" class="btn btn-secondary">View All</a>
+    </div>
+    
+    <div class="video-grid">
+        {% for video in recent_videos %}
+        <div class="video-card">
+            <div class="video-thumbnail">
+                {% if video.thumbnail_url %}
+                    <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" loading="lazy">
+                {% else %}
+                    <span>📹 No Thumbnail</span>
+                {% endif %}
+            </div>
+            <div class="video-info">
+                <h3 class="video-title">
+                    <a href="{{ url_for('video_detail', video_id=video.video_id) }}" style="color: inherit; text-decoration: none;">
+                        {{ video.title }}
+                    </a>
+                </h3>
+                <div class="video-meta">
+                    <span>📅 {{ video.published_at[:10] if video.published_at else 'Unknown' }}</span>
+                    <a href="{{ url_for('date_view', date_str=video.published_at[:10]) }}" class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View Day</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Quick Stats -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+    <div class="card">
+        <h3 class="text-accent">📊 Channel Stats</h3>
+        <div style="font-size: 2rem; margin: 1rem 0;">{{ stats.total_videos }}</div>
+        <div class="text-muted">Total Videos</div>
+    </div>
+    
+    <div class="card">
+        <h3 class="text-accent">👥 Adventure Crew</h3>
+        <div style="font-size: 2rem; margin: 1rem 0;">{{ stats.total_people }}</div>
+        <div class="text-muted">People & Family</div>
+    </div>
+    
+    <div class="card">
+        <h3 class="text-accent">🐕 Good Boys</h3>
+        <div style="font-size: 2rem; margin: 1rem 0;">{{ stats.total_dogs }}</div>
+        <div class="text-muted">Adventure Dogs</div>
+    </div>
+    
+    <div class="card">
+        <h3 class="text-accent">🏷️ Categories</h3>
+        <div style="font-size: 2rem; margin: 1rem 0;">52</div>
+        <div class="text-muted">Tag Authorities</div>
+    </div>
+</div>
+
+<script>
+function goToDate(dateValue) {
+    if (dateValue) {
+        window.location.href = `/date/${dateValue}`;
+    }
+}
+
+// Set today's date as default
+document.getElementById('date-picker').value = new Date().toISOString().split('T')[0];
+</script>
+{% endblock %}

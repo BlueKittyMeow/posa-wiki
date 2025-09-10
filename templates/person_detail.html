@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}{{ person.canonical_name }} - Posa Wiki{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <div>
+            <h2 class="card-title">
+                {% if person.canonical_name == "Matthew Posa" %}🎬
+                {% elif person.canonical_name.startswith("Matthew's") %}👨‍👩‍👧‍👦
+                {% else %}🤝{% endif %}
+                {{ person.canonical_name }}
+            </h2>
+            <p class="text-muted">{{ videos|length }} videos</p>
+        </div>
+        <button class="btn btn-secondary" onclick="editPerson({{ person.person_id }})">✏️ Edit</button>
+    </div>
+
+    <!-- Person Info -->
+    {% if person.bio %}
+        <div style="margin-bottom: 1.5rem; padding: 1rem; background: var(--bg-tertiary); border-radius: var(--border-radius-sm);">
+            <p>{{ person.bio }}</p>
+        </div>
+    {% endif %}
+
+    {% if person.aliases %}
+        {% set aliases_list = person.aliases|from_json if person.aliases != 'null' else [] %}
+        {% if aliases_list %}
+            <div style="margin-bottom: 1.5rem;">
+                <h4 class="text-accent" style="margin-bottom: 0.5rem;">🏷️ Also Known As:</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    {% for alias in aliases_list %}
+                        <span style="background: var(--accent-primary); color: var(--bg-primary); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.85rem;">{{ alias }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+</div>
+
+<!-- Videos featuring this person -->
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">🎬 Videos Featuring {{ person.canonical_name }}</h3>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <span class="text-muted">{{ videos|length }} videos</span>
+            <select onchange="sortPersonVideos(this.value)" id="video-sort">
+                <option value="date_desc">📅 Newest First</option>
+                <option value="date_asc">📅 Oldest First</option>
+                <option value="title_asc">🔤 A-Z</option>
+                <option value="title_desc">🔤 Z-A</option>
+            </select>
+        </div>
+    </div>
+
+    {% if videos %}
+        <div class="video-grid" id="videos-container">
+            {% for video in videos %}
+            <div class="video-card" data-date="{{ video.published_at }}" data-title="{{ video.title }}">
+                <div class="video-thumbnail">
+                    {% if video.thumbnail_url %}
+                        <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" loading="lazy">
+                    {% else %}
+                        <span>📹 No Thumbnail</span>
+                    {% endif %}
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">
+                        <a href="{{ url_for('video_detail', video_id=video.video_id) }}" style="color: inherit; text-decoration: none;">
+                            {{ video.title }}
+                        </a>
+                    </h3>
+                    <div class="video-meta">
+                        <span>📅 {{ video.published_at[:10] if video.published_at else 'Unknown Date' }}</span>
+                        <a href="{{ url_for('date_view', date_str=video.published_at[:10]) }}" class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View Day</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center" style="padding: 3rem;">
+            <p class="text-muted">No videos found featuring {{ person.canonical_name }}.</p>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Edit Person Modal (placeholder) -->
+<div id="edit-person-modal" class="modal-backdrop" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;">
+    <div class="card" style="width: 90%; max-width: 500px; margin: 0;">
+        <div class="card-header">
+            <h3 class="card-title">✏️ Edit {{ person.canonical_name }}</h3>
+            <button onclick="closeModal('edit-person-modal')" class="btn btn-secondary">✕</button>
+        </div>
+        
+        <form>
+            <div class="form-group mb-2">
+                <label class="form-label">Full Name</label>
+                <input type="text" value="{{ person.canonical_name }}" style="width: 100%;">
+            </div>
+            
+            <div class="form-group mb-2">
+                <label class="form-label">Biography</label>
+                <textarea rows="3" style="width: 100%;">{{ person.bio or '' }}</textarea>
+            </div>
+            
+            <div class="form-group mb-2">
+                <label class="form-label">YouTube Handle</label>
+                <input type="text" value="{{ person.youtube_handle or '' }}" style="width: 100%;">
+            </div>
+            
+            <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+                <button type="button" onclick="closeModal('edit-person-modal')" class="btn btn-secondary">Cancel</button>
+                <button type="submit" class="btn">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function editPerson(personId) {
+    openModal('edit-person-modal');
+}
+
+function sortPersonVideos(sortType) {
+    const container = document.getElementById('videos-container');
+    const cards = Array.from(container.children);
+    
+    cards.sort((a, b) => {
+        switch(sortType) {
+            case 'date_desc':
+                return new Date(b.dataset.date) - new Date(a.dataset.date);
+            case 'date_asc':
+                return new Date(a.dataset.date) - new Date(b.dataset.date);
+            case 'title_asc':
+                return a.dataset.title.localeCompare(b.dataset.title);
+            case 'title_desc':
+                return b.dataset.title.localeCompare(a.dataset.title);
+            default:
+                return 0;
+        }
+    });
+    
+    container.innerHTML = '';
+    cards.forEach(card => container.appendChild(card));
+}
+</script>
+{% endblock %}

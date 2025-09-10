@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Posa Wiki{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fairyfloss.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h2>🏕️ Posa Wiki</h2>
+            <ul class="sidebar-nav">
+                <li><a href="{{ url_for('index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}">🏠 Home</a></li>
+                <li><a href="{{ url_for('video_list') }}" class="{% if request.endpoint == 'video_list' %}active{% endif %}">🎬 All Videos</a></li>
+            </ul>
+
+            <h2>👥 People</h2>
+            <ul class="sidebar-nav">
+                <li><a href="{{ url_for('people_list') }}" class="{% if request.endpoint == 'people_list' %}active{% endif %}">👤 Browse People</a></li>
+                <!-- Dynamic people list will be populated here -->
+                {% if sidebar_people %}
+                    {% for person in sidebar_people[:5] %}
+                        <li><a href="{{ url_for('person_detail', person_id=person.person_id) }}">{{ person.canonical_name }} <span class="entity-count">{{ person.video_count }}</span></a></li>
+                    {% endfor %}
+                    {% if sidebar_people|length > 5 %}
+                        <li><a href="{{ url_for('people_list') }}" class="text-muted">View all {{ sidebar_people|length }} people...</a></li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+
+            <h2>🐕 Dogs</h2>
+            <ul class="sidebar-nav">
+                <li><a href="#" class="{% if request.endpoint == 'dogs_list' %}active{% endif %}">🐾 Browse Dogs</a></li>
+                <li><a href="#">🐕 Monty</a></li>
+                <li><a href="#">🐕 Rueger</a></li>
+            </ul>
+
+            <h2>🗺️ Places</h2>
+            <ul class="sidebar-nav">
+                <li><a href="#" class="{% if request.endpoint == 'places_list' %}active{% endif %}">📍 Browse Places</a></li>
+                <li><a href="#">🛶 BWCA</a></li>
+                <li><a href="#">🏔️ Montana</a></li>
+                <li><a href="#">🌲 Michigan</a></li>
+            </ul>
+
+            <h2>🎯 Themes</h2>
+            <ul class="sidebar-nav">
+                <li><a href="#" class="{% if request.endpoint == 'themes_list' %}active{% endif %}">🏷️ Browse Themes</a></li>
+                <li><a href="#">❄️ Winter Camping</a></li>
+                <li><a href="#">🛶 Canoe Camping</a></li>
+                <li><a href="#">🌸 Spring Adventures</a></li>
+                <li><a href="#">🍂 Fall Camping</a></li>
+                <li><a href="#">🔥 Bushcraft</a></li>
+                <li><a href="#">🎣 Fishing</a></li>
+            </ul>
+
+            <h2>🗓️ Trips</h2>
+            <ul class="sidebar-nav">
+                <li><a href="#" class="{% if request.endpoint == 'trips_list' %}active{% endif %}">🎒 Browse Trips</a></li>
+                <li><a href="#">📹 Multi-day Series</a></li>
+                <li><a href="#">🏕️ Extended Adventures</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
