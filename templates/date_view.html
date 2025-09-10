@@ -7,8 +7,8 @@
     <div class="card-header">
         <h2 class="card-title">📅 {{ date.strftime('%A, %B %d, %Y') }}</h2>
         <div style="display: flex; gap: 0.5rem;">
-            <a href="{{ url_for('videos_by_date', date_str=(date - timedelta(days=1)).strftime('%Y-%m-%d')) }}" class="btn btn-secondary">← Previous Day</a>
-            <a href="{{ url_for('videos_by_date', date_str=(date + timedelta(days=1)).strftime('%Y-%m-%d')) }}" class="btn btn-secondary">Next Day →</a>
+            <a href="{{ url_for('date_view', date_str=(date - timedelta(days=1)).strftime('%Y-%m-%d')) }}" class="btn btn-secondary">← Previous Day</a>
+            <a href="{{ url_for('date_view', date_str=(date + timedelta(days=1)).strftime('%Y-%m-%d')) }}" class="btn btn-secondary">Next Day →</a>
         </div>
     </div>
 
@@ -32,7 +32,7 @@
                         </a>
                     </h3>
                     <div class="video-meta">
-                        <span>⏰ {{ video.published_at[11:16] if video.published_at else 'Unknown Time' }}</span>
+                        <span>⏰ {{ video.upload_date[11:16] if video.upload_date else 'Unknown Time' }}</span>
                         <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="editVideo('{{ video.video_id }}')">✏️ Edit</button>
                     </div>
                     {% if video.description %}

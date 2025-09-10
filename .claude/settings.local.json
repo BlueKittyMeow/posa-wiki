@@ -5,7 +5,10 @@
       "Bash(python3:*)",
       "WebSearch",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:tmfilho.github.io)"
+      "WebFetch(domain:tmfilho.github.io)",
+      "Bash(pkill:*)",
+      "Bash(lsof:*)",
+      "Bash(kill:*)"
     ],
     "deny": [],
     "ask": []

@@ -9,8 +9,8 @@
         <div>
             <h2 class="card-title">{{ video.title }}</h2>
             <div style="display: flex; gap: 1rem; align-items: center; margin-top: 0.5rem;">
-                <span class="text-muted">📅 {{ video.published_at[:10] if video.published_at else 'Unknown Date' }}</span>
-                <a href="{{ url_for('date_view', date_str=video.published_at[:10]) }}" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.85rem;">View This Day</a>
+                <span class="text-muted">📅 {{ video.upload_date[:10] if video.upload_date else 'Unknown Date' }}</span>
+                <a href="{{ url_for('date_view', date_str=video.upload_date[:10]) }}" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.85rem;">View This Day</a>
                 <a href="https://youtube.com/watch?v={{ video.video_id }}" target="_blank" class="btn" style="padding: 0.25rem 0.75rem; font-size: 0.85rem;">📺 Watch on YouTube</a>
             </div>
         </div>
@@ -130,10 +130,10 @@
             <code style="background: var(--bg-tertiary); padding: 0.25rem 0.5rem; border-radius: 4px; margin-left: 0.5rem;">{{ video.video_id }}</code>
         </div>
         
-        {% if video.published_at %}
+        {% if video.upload_date %}
             <div>
                 <strong class="text-accent">Published:</strong>
-                <span>{{ video.published_at }}</span>
+                <span>{{ video.upload_date }}</span>
             </div>
         {% endif %}
         
@@ -175,7 +175,7 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                 <div class="form-group">
                     <label class="form-label">Published Date</label>
-                    <input type="datetime-local" value="{{ video.published_at[:16] if video.published_at else '' }}">
+                    <input type="datetime-local" value="{{ video.upload_date[:16] if video.upload_date else '' }}">
                 </div>
                 
                 <div class="form-group">

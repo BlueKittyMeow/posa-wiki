@@ -87,7 +87,7 @@ def import_videos():
     
     # Load video data
     print("📥 Loading video data...")
-    with open('full_channel_scrape_20250909_100340.json', 'r') as f:
+    with open('complete_channel_scrape_20250909_122145.json', 'r') as f:
         video_data = json.load(f)
     
     videos = video_data['videos']

@@ -10,7 +10,7 @@
             <!-- Sort Controls -->
             <div class="form-group">
                 <select onchange="changeSorting()" id="sort-select">
-                    <option value="published_at" {% if sort_by == 'published_at' %}selected{% endif %}>📅 Upload Date</option>
+                    <option value="upload_date" {% if sort_by == 'upload_date' %}selected{% endif %}>📅 Upload Date</option>
                     <option value="title" {% if sort_by == 'title' %}selected{% endif %}>🔤 Title</option>
                     <option value="duration" {% if sort_by == 'duration' %}selected{% endif %}>⏱️ Duration</option>
                 </select>
@@ -42,7 +42,7 @@
                         </a>
                     </h3>
                     <div class="video-meta">
-                        <span>📅 {{ video.published_at[:10] if video.published_at else 'Unknown Date' }}</span>
+                        <span>📅 {{ video.upload_date[:10] if video.upload_date else 'Unknown Date' }}</span>
                         {% if video.duration %}
                             <span>⏱️ {{ format_duration(video.duration) if video.duration else 'Unknown' }}</span>
                         {% endif %}

@@ -57,7 +57,7 @@
     {% if videos %}
         <div class="video-grid" id="videos-container">
             {% for video in videos %}
-            <div class="video-card" data-date="{{ video.published_at }}" data-title="{{ video.title }}">
+            <div class="video-card" data-date="{{ video.upload_date }}" data-title="{{ video.title }}">
                 <div class="video-thumbnail">
                     {% if video.thumbnail_url %}
                         <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" loading="lazy">
@@ -72,8 +72,8 @@
                         </a>
                     </h3>
                     <div class="video-meta">
-                        <span>📅 {{ video.published_at[:10] if video.published_at else 'Unknown Date' }}</span>
-                        <a href="{{ url_for('date_view', date_str=video.published_at[:10]) }}" class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View Day</a>
+                        <span>📅 {{ video.upload_date[:10] if video.upload_date else 'Unknown Date' }}</span>
+                        <a href="{{ url_for('date_view', date_str=video.upload_date[:10]) }}" class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View Day</a>
                     </div>
                 </div>
             </div>

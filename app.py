@@ -67,9 +67,9 @@ def index():
     
     # Get recent videos (last 6)
     recent_videos = conn.execute('''
-    SELECT video_id, title, description, published_at, thumbnail_url
+    SELECT video_id, title, description, upload_date, thumbnail_url
     FROM videos 
-    ORDER BY published_at DESC
+    ORDER BY upload_date DESC
     LIMIT 6
     ''').fetchall()
     
@@ -87,19 +87,19 @@ def index():
 @app.route('/videos')
 def video_list():
     """Sortable video list with thumbnails"""
-    sort_by = request.args.get('sort', 'published_at')
+    sort_by = request.args.get('sort', 'upload_date')
     order = request.args.get('order', 'desc')
     
     conn = get_db_connection()
     
     # Build SQL query with sorting
     order_sql = 'ASC' if order == 'asc' else 'DESC'
-    valid_sorts = ['published_at', 'title', 'duration', 'view_count']
+    valid_sorts = ['upload_date', 'title', 'duration', 'view_count']
     if sort_by not in valid_sorts:
-        sort_by = 'published_at'
+        sort_by = 'upload_date'
     
     query = f'''
-    SELECT video_id, title, description, published_at, duration, 
+    SELECT video_id, title, description, upload_date, duration, 
            view_count, like_count, thumbnail_url
     FROM videos 
     ORDER BY {sort_by} {order_sql}
@@ -144,7 +144,7 @@ def video_detail(video_id):
     return render_template('video_detail.html', video=video, people=people, dogs=dogs)
 
 @app.route('/date/<date_str>')
-def videos_by_date(date_str):
+def date_view(date_str):
     """Videos published on a specific date"""
     try:
         # Parse date (YYYY-MM-DD format)
@@ -155,10 +155,10 @@ def videos_by_date(date_str):
     conn = get_db_connection()
     
     videos = conn.execute('''
-    SELECT video_id, title, description, published_at, thumbnail_url
+    SELECT video_id, title, description, upload_date, thumbnail_url
     FROM videos 
-    WHERE DATE(published_at) = ?
-    ORDER BY published_at DESC
+    WHERE DATE(upload_date) = ?
+    ORDER BY upload_date DESC
     ''', (date_str,)).fetchall()
     
     conn.close()
@@ -197,11 +197,11 @@ def person_detail(person_id):
     
     # Get their videos
     videos = conn.execute('''
-    SELECT v.video_id, v.title, v.published_at, v.thumbnail_url
+    SELECT v.video_id, v.title, v.upload_date, v.thumbnail_url
     FROM videos v
     JOIN video_people vp ON v.video_id = vp.video_id
     WHERE vp.person_id = ?
-    ORDER BY v.published_at DESC
+    ORDER BY v.upload_date DESC
     ''', (person_id,)).fetchall()
     
     conn.close()
@@ -220,10 +220,10 @@ def search():
     
     # Simple text search across title and description
     videos = conn.execute('''
-    SELECT video_id, title, description, published_at, thumbnail_url
+    SELECT video_id, title, description, upload_date, thumbnail_url
     FROM videos 
     WHERE title LIKE ? OR description LIKE ?
-    ORDER BY published_at DESC
+    ORDER BY upload_date DESC
     ''', (f'%{query}%', f'%{query}%')).fetchall()
     
     conn.close()
