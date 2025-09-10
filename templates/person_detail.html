@@ -6,6 +6,9 @@
 <div class="card">
     <div class="card-header">
         <div>
+            <div style="margin-bottom: 0.5rem;">
+                <a href="{{ url_for('people_list') }}" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.25rem 0.75rem;">← Back to People</a>
+            </div>
             <h2 class="card-title">
                 {% if person.canonical_name == "Matthew Posa" %}🎬
                 {% elif person.canonical_name.startswith("Matthew's") %}👨‍👩‍👧‍👦
