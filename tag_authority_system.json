@@ -12,17 +12,6 @@
       "description": "Content featuring dogs as primary subjects"
     },
     {
-      "canonical_name": "Wilderness",
-      "category": "location_type",
-      "aliases": [
-        "wilderness",
-        "wilderness area",
-        "wild",
-        "backcountry"
-      ],
-      "description": "Remote, undeveloped natural areas"
-    },
-    {
       "canonical_name": "Bushcraft",
       "category": "activity",
       "aliases": [
@@ -30,7 +19,9 @@
         "bushcrafting",
         "bushcrafter",
         "bushcraft skills",
-        "bushcraft camp"
+        "bushcraft camp",
+        "bushcraft shelter",
+        "bushcraft cooking"
       ],
       "description": "Traditional outdoor skills and self-reliance techniques"
     },
@@ -42,7 +33,8 @@
         "camp",
         "campout",
         "wild camp",
-        "wild camping"
+        "wild camping",
+        "going camping"
       ],
       "description": "Overnight outdoor accommodation"
     },
@@ -54,7 +46,8 @@
         "cooking",
         "campfire food",
         "fire cooking",
-        "camp food"
+        "camp food",
+        "bushcraft cooking"
       ],
       "description": "Preparing food over open fires"
     },
@@ -75,9 +68,45 @@
         "winter camping",
         "winter camp",
         "cold camping",
-        "winter"
+        "winter",
+        "winter time"
       ],
       "description": "Camping in winter conditions"
+    },
+    {
+      "canonical_name": "Spring Camping",
+      "category": "activity",
+      "aliases": [
+        "spring camping",
+        "spring camp",
+        "spring"
+      ],
+      "description": "Camping in spring conditions"
+    },
+    {
+      "canonical_name": "Fall Camping",
+      "category": "activity",
+      "aliases": [
+        "fall camping",
+        "fall camp",
+        "autumn camping",
+        "fall"
+      ],
+      "description": "Camping in fall/autumn conditions"
+    },
+    {
+      "canonical_name": "Survival Structures",
+      "category": "activity",
+      "aliases": [
+        "lean to",
+        "lean-to",
+        "quinzhee",
+        "quinzee",
+        "shelter",
+        "survival shelter",
+        "bushcraft shelter"
+      ],
+      "description": "Building emergency or primitive shelters"
     },
     {
       "canonical_name": "Boundary Waters Canoe Area",
@@ -107,7 +136,9 @@
         "fish",
         "catch and cook",
         "catch and release",
-        "trout fishing"
+        "trout fishing",
+        "catching fish",
+        "fisherman"
       ],
       "description": "Recreational angling activities"
     },
@@ -117,7 +148,8 @@
       "aliases": [
         "backpacking",
         "backpacker",
-        "backpack camping"
+        "backpack camping",
+        "backpack"
       ],
       "description": "Multi-day hiking with overnight gear"
     },
@@ -159,7 +191,8 @@
         "canoeing",
         "canoe trip",
         "paddle",
-        "paddling"
+        "paddling",
+        "canoe paddle"
       ],
       "description": "Camping accessed by canoe travel"
     },
@@ -180,27 +213,10 @@
         "nature",
         "outdoors",
         "outdoor",
-        "nature sounds"
+        "nature sounds",
+        "outside"
       ],
       "description": "Natural environments and phenomena"
-    },
-    {
-      "canonical_name": "Fall Camping",
-      "category": "activity",
-      "aliases": [
-        "fall camping",
-        "fall"
-      ],
-      "description": "Camping during autumn season"
-    },
-    {
-      "canonical_name": "Spring Camping",
-      "category": "activity",
-      "aliases": [
-        "spring camping",
-        "spring"
-      ],
-      "description": "Camping during spring season"
     },
     {
       "canonical_name": "Michigan",
@@ -209,139 +225,369 @@
         "michigan"
       ],
       "description": "U.S. state in Great Lakes region"
+    },
+    {
+      "canonical_name": "Giveaways",
+      "category": "content_type",
+      "aliases": [
+        "giveaway",
+        "giveaways",
+        "give away",
+        "subscriber giveaway",
+        "subscribers giveaway"
+      ],
+      "description": "Subscriber milestone giveaway videos"
+    },
+    {
+      "canonical_name": "Unboxing",
+      "category": "content_type",
+      "aliases": [
+        "unboxing",
+        "unbox",
+        "unboxing gifts"
+      ],
+      "description": "Fan mail and gear unboxing videos"
+    },
+    {
+      "canonical_name": "Channel Updates",
+      "category": "content_type",
+      "aliases": [
+        "update",
+        "channel update",
+        "channel"
+      ],
+      "description": "Channel status and personal update videos"
+    },
+    {
+      "canonical_name": "Anniversary Content",
+      "category": "content_type",
+      "aliases": [
+        "anniversary"
+      ],
+      "description": "Channel anniversary and milestone celebration videos"
+    },
+    {
+      "canonical_name": "Christmas Content",
+      "category": "content_type",
+      "aliases": [
+        "christmas",
+        "merry christmas",
+        "santa",
+        "santa clause"
+      ],
+      "description": "Christmas and holiday themed videos"
+    },
+    {
+      "canonical_name": "Subscriber Content",
+      "category": "content_type",
+      "aliases": [
+        "subscribers",
+        "subscriber"
+      ],
+      "description": "Content focused on subscriber engagement and community"
+    },
+    {
+      "canonical_name": "Snow Conditions",
+      "category": "weather",
+      "aliases": [
+        "snow",
+        "snowstorm",
+        "snowing",
+        "snowy",
+        "snow storm",
+        "winter storm",
+        "snowstorm camping",
+        "camping in a snowstorm",
+        "winter weather",
+        "snow camping",
+        "blizzard",
+        "camping in a blizzard"
+      ],
+      "description": "Snow and winter storm weather conditions including blizzards"
+    },
+    {
+      "canonical_name": "Rain Conditions",
+      "category": "weather",
+      "aliases": [
+        "rain",
+        "raining",
+        "rainstorm",
+        "storm",
+        "thunderstorm",
+        "camping in the rain",
+        "fire in the rain",
+        "severe weather"
+      ],
+      "description": "Rain and storm weather conditions"
+    },
+    {
+      "canonical_name": "Cold Conditions",
+      "category": "weather",
+      "aliases": [
+        "cold",
+        "frigid",
+        "freezing",
+        "cold weather"
+      ],
+      "description": "Cold temperature weather conditions"
+    },
+    {
+      "canonical_name": "Canada",
+      "category": "location",
+      "aliases": [
+        "canada"
+      ],
+      "description": "Canadian wilderness areas and adventures"
+    },
+    {
+      "canonical_name": "Montana",
+      "category": "location",
+      "aliases": [
+        "montana",
+        "montana wilderness"
+      ],
+      "description": "Montana state adventures (often with friends)"
+    },
+    {
+      "canonical_name": "Hiking",
+      "category": "activity",
+      "aliases": [
+        "hiking",
+        "hike",
+        "hiker",
+        "hike and cook"
+      ],
+      "description": "Day hiking and walking adventures"
+    },
+    {
+      "canonical_name": "Backcountry Camping",
+      "category": "activity",
+      "aliases": [
+        "backcountry camping",
+        "wilderness camping",
+        "remote camping",
+        "wilderness",
+        "wilderness area",
+        "wild",
+        "backcountry",
+        "wilderness adventure",
+        "camping in the wilderness"
+      ],
+      "description": "Remote wilderness camping and activities in undeveloped natural areas"
+    },
+    {
+      "canonical_name": "Overnight Camping",
+      "category": "activity",
+      "aliases": [
+        "overnight",
+        "overnight camping"
+      ],
+      "description": "Single night camping experiences"
+    },
+    {
+      "canonical_name": "Summer Camping",
+      "category": "activity",
+      "aliases": [
+        "summer camping",
+        "summer"
+      ],
+      "description": "Camping during summer season"
+    },
+    {
+      "canonical_name": "Snowshoeing",
+      "category": "activity",
+      "aliases": [
+        "snowshoeing",
+        "snowshoe",
+        "snow shoeing",
+        "snow shoe",
+        "snowshoes",
+        "showshoeing"
+      ],
+      "description": "Winter snowshoe hiking adventures"
+    },
+    {
+      "canonical_name": "Fire Skills",
+      "category": "activity",
+      "aliases": [
+        "fire skills",
+        "fire skill",
+        "firesteel"
+      ],
+      "description": "Fire making and fire management techniques"
+    },
+    {
+      "canonical_name": "Humor Content",
+      "category": "content_type",
+      "aliases": [
+        "funny",
+        "hilarious",
+        "silly",
+        "funny dog",
+        "silly dog",
+        "silly dogs",
+        "fun",
+        "entertaining"
+      ],
+      "description": "Comedic and entertaining video content"
+    },
+    {
+      "canonical_name": "Outdoorsman Content",
+      "category": "content_type",
+      "aliases": [
+        "outdoorsman",
+        "woodsman",
+        "camper",
+        "outdoors"
+      ],
+      "description": "Content focused on outdoor lifestyle and skills"
+    },
+    {
+      "canonical_name": "ASMR Content",
+      "category": "content_type",
+      "aliases": [
+        "asmr",
+        "asmr fire",
+        "asmr nature",
+        "relaxing sounds",
+        "fire asmr",
+        "relaxation",
+        "meditation"
+      ],
+      "description": "Relaxing audio content for ASMR experience"
+    },
+    {
+      "canonical_name": "How-To Content",
+      "category": "content_type",
+      "aliases": [
+        "how to camp",
+        "how to fish",
+        "camping skills",
+        "outdoor skills",
+        "knife skills",
+        "how to winter camp",
+        "how to start a fire",
+        "educational"
+      ],
+      "description": "Educational and instructional outdoor content"
+    },
+    {
+      "canonical_name": "Food Content",
+      "category": "content_type",
+      "aliases": [
+        "food",
+        "meal",
+        "dinner",
+        "cooking outdoors",
+        "meal prep",
+        "delicious",
+        "steak",
+        "pasta"
+      ],
+      "description": "Food preparation and cooking content"
+    },
+    {
+      "canonical_name": "Hot Tent Camping",
+      "category": "activity",
+      "aliases": [
+        "hot tent",
+        "wood burning stove"
+      ],
+      "description": "Winter camping with heated tent shelters"
+    },
+    {
+      "canonical_name": "Tent Camping",
+      "category": "equipment",
+      "aliases": [
+        "tent",
+        "tents"
+      ],
+      "description": "Camping with tent shelters"
+    },
+    {
+      "canonical_name": "Unsuccessful Fishing Show",
+      "category": "content_type",
+      "aliases": [
+        "unsuccessful fishing show",
+        "ufs",
+        "fishing show"
+      ],
+      "description": "Episodic fishing adventure series"
+    },
+    {
+      "canonical_name": "Monty",
+      "category": "character",
+      "aliases": [
+        "monty",
+        "monty dog",
+        "monty the collie"
+      ],
+      "description": "Matthew's primary dog companion, Rough Collie"
+    },
+    {
+      "canonical_name": "Rueger",
+      "category": "character",
+      "aliases": [
+        "rueger",
+        "rueger dog"
+      ],
+      "description": "Matthew's dog companion, mixed breed"
+    },
+    {
+      "canonical_name": "Matthew Posa",
+      "category": "person",
+      "aliases": [
+        "matthew posa"
+      ],
+      "description": "Matthew Posa, channel creator and host"
+    },
+    {
+      "canonical_name": "Lucas",
+      "category": "person",
+      "aliases": [
+        "lucas",
+        "captain teeny trout",
+        "teeny trout"
+      ],
+      "description": "Lucas Mathis, friend and fellow outdoor content creator"
+    },
+    {
+      "canonical_name": "Funk",
+      "category": "person",
+      "aliases": [
+        "funk"
+      ],
+      "description": "Friend and outdoor adventure companion"
+    },
+    {
+      "canonical_name": "Erin (Friend)",
+      "category": "person",
+      "aliases": [
+        "erin"
+      ],
+      "description": "Friend who appears in some adventures"
+    },
+    {
+      "canonical_name": "Rough Collie",
+      "category": "breed",
+      "aliases": [
+        "rough collie",
+        "collie"
+      ],
+      "description": "Dog breed - long-haired herding breed"
     }
   ],
   "analysis": {
-    "total_authorities": 20,
-    "total_aliases": 70,
+    "total_authorities": 52,
+    "total_aliases": 212,
     "unmapped_frequent_tags": [
-      [
-        "update",
-        14
-      ],
-      [
-        "channel",
-        8
-      ],
-      [
-        "monty",
-        9
-      ],
-      [
-        "rough collie",
-        9
-      ],
-      [
-        "unsuccessful fishing show",
-        10
-      ],
-      [
-        "canada",
-        108
-      ],
-      [
-        "how to fish",
-        43
-      ],
-      [
-        "wilderness camping",
-        56
-      ],
-      [
-        "how to camp",
-        133
-      ],
-      [
-        "tent",
-        13
-      ],
-      [
-        "outdoorsman",
-        113
-      ],
-      [
-        "catching fish",
-        17
-      ],
-      [
-        "backcountry camping",
-        104
-      ],
       [
         "leave no trace",
         9
       ],
       [
-        "asmr",
-        84
-      ],
-      [
-        "pasta",
-        8
-      ],
-      [
-        "firesteel",
-        16
-      ],
-      [
-        "showshoeing",
-        17
-      ],
-      [
-        "wood burning stove",
-        16
-      ],
-      [
-        "food",
-        92
-      ],
-      [
-        "delicious",
-        37
-      ],
-      [
-        "snow",
-        71
-      ],
-      [
-        "woodsman",
-        19
-      ],
-      [
-        "funny",
-        115
-      ],
-      [
-        "entertaining",
-        17
-      ],
-      [
-        "hot tent",
-        18
-      ],
-      [
-        "cold",
-        18
-      ],
-      [
-        "frigid",
-        16
-      ],
-      [
         "extreme",
         16
-      ],
-      [
-        "camper",
-        19
-      ],
-      [
-        "winter time",
-        25
-      ],
-      [
-        "hiking",
-        56
       ],
       [
         "walleye",
@@ -380,10 +626,6 @@
         5
       ],
       [
-        "fire skills",
-        64
-      ],
-      [
         "nikon d5500",
         41
       ],
@@ -392,28 +634,152 @@
         47
       ],
       [
-        "going camping",
-        38
-      ],
-      [
-        "wilderness adventure",
-        43
-      ],
-      [
-        "canoe paddle",
-        42
-      ],
-      [
-        "hilarious",
-        76
-      ],
-      [
-        "silly",
-        69
-      ],
-      [
         "youtube",
         5
+      ],
+      [
+        "cooking over a fire",
+        9
+      ],
+      [
+        "winter backpacking",
+        18
+      ],
+      [
+        "pulk",
+        8
+      ],
+      [
+        "trees",
+        12
+      ],
+      [
+        "winter wonderland",
+        5
+      ],
+      [
+        "lake superior",
+        5
+      ],
+      [
+        "cooking fish",
+        11
+      ],
+      [
+        "water",
+        8
+      ],
+      [
+        "lake",
+        20
+      ],
+      [
+        "lake trout",
+        11
+      ],
+      [
+        "sounds of nature",
+        6
+      ],
+      [
+        "spring animals",
+        6
+      ],
+      [
+        "trout",
+        13
+      ],
+      [
+        "lizards",
+        5
+      ],
+      [
+        "reptiles",
+        5
+      ],
+      [
+        "frogs",
+        5
+      ],
+      [
+        "sounds of spring",
+        5
+      ],
+      [
+        "shelter building",
+        10
+      ],
+      [
+        "epic",
+        13
+      ],
+      [
+        "eating",
+        10
+      ],
+      [
+        "nikon",
+        5
+      ],
+      [
+        "extreme weather",
+        14
+      ],
+      [
+        "mountains",
+        5
+      ],
+      [
+        "rocky mountains",
+        5
+      ],
+      [
+        "camping in the mountains",
+        5
+      ],
+      [
+        "bushcraft camping",
+        8
+      ],
+      [
+        "overnighter",
+        5
+      ],
+      [
+        "cook",
+        11
+      ],
+      [
+        "camping education",
+        5
+      ],
+      [
+        "dog walk",
+        6
+      ],
+      [
+        "dehydrated meal",
+        8
+      ],
+      [
+        "portage",
+        12
+      ],
+      [
+        "extended trip",
+        12
+      ],
+      [
+        "wood processing",
+        8
+      ],
+      [
+        "axe",
+        12
+      ],
+      [
+        "saw",
+        7
       ]
     ]
   }

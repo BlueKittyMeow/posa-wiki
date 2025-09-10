@@ -63,9 +63,22 @@ Primary table for video metadata from YouTube API
 
 ### series
 - `series_id` (INTEGER, PRIMARY KEY)
-- `name` (VARCHAR) - "Boundary Waters Adventures", "Winter Camping"
+- `name` (VARCHAR) - "Canoe Camping", "Winter Camping", "Boundary Waters", "Community Content", "Unsuccessful Fishing Show"
 - `description` (TEXT)
+- `is_episodic` (BOOLEAN DEFAULT FALSE) - TRUE for numbered episode series like UFS
+- `series_type` (VARCHAR) - "activity", "location", "content", "special"
 - `created_at` (TIMESTAMP)
+
+**Series Categories (Non-Exclusive - Videos Can Belong to Multiple):**
+- **Activity Series**: "Canoe Camping", "Winter Camping", "Spring Camping", "Fall Camping", "Backpacking"
+- **Location Series**: "Boundary Waters", "Isle Royale", "Michigan Adventures"  
+- **Content Series**: "Community Content" (giveaways+unboxing+updates), "Unsuccessful Fishing Show"
+- **Special Series**: "Special Occasions" (birthdays, holidays, anniversaries)
+
+**Example Multi-Series Videos:**
+- Winter camping for dog birthday → "Winter Camping" + "Special Occasions"
+- UFS episode in BWCA → "Canoe Camping" + "Boundary Waters" + "Unsuccessful Fishing Show"  
+- Spring camp with giveaway → "Spring Camping" + "Community Content"
 
 ### trips (NEW - for multi-part video linking)
 - `trip_id` (INTEGER, PRIMARY KEY)
@@ -124,7 +137,8 @@ Primary table for video metadata from YouTube API
 ### video_series (Many-to-Many)
 - `video_id` (VARCHAR, FOREIGN KEY)
 - `series_id` (INTEGER, FOREIGN KEY)
-- `episode_number` (INTEGER, NULLABLE) - If applicable
+- `episode_number` (INTEGER, NULLABLE) - For episodic series like "Unsuccessful Fishing Show #12"
+- `trip_id` (INTEGER, FK, NULLABLE) - Link UFS episodes to the actual trip they're from
 - `notes` (TEXT, NULLABLE)
 
 ### video_references (Many-to-Many)
@@ -169,13 +183,18 @@ Primary table for video metadata from YouTube API
 
 ## Authority Tables
 
-### breed_authority
+### breed_authority  
 - `breed_id` (INTEGER, PRIMARY KEY)
-- `breed_name` (VARCHAR) - "Rough Collie", "Labrador Retriever"
+- `breed_name` (VARCHAR) - "Rough Collie", "English Shepherd", "Labrador Retriever"
 - `breed_group` (VARCHAR) - "Herding", "Sporting", "Working"
 - `akc_recognized` (BOOLEAN) - Official AKC breed status
 - `source` (VARCHAR) - "AKC", "UKC", "mixed"
 - `notes` (TEXT, NULLABLE)
+
+**Example breeds for project:**
+- English Shepherd (Layla) - Herding group, not AKC recognized but UKC recognized
+- Rough Collie (Monty) - Herding group, AKC recognized  
+- Mixed Breed (Rueger) - No specific group, not AKC recognized
 
 ## Reciprocal Relationship Handling
 - **`is_reciprocal` flag**: When TRUE, automatically creates inverse relationship
