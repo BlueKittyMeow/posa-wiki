@@ -33,9 +33,15 @@
 
             <h2>🐕 Dogs</h2>
             <ul class="sidebar-nav">
-                <li><a href="#" class="{% if request.endpoint == 'dogs_list' %}active{% endif %}">🐾 Browse Dogs</a></li>
-                <li><a href="#">🐕 Monty</a></li>
-                <li><a href="#">🐕 Rueger</a></li>
+                <li><a href="{{ url_for('dogs_list') }}" class="{% if request.endpoint == 'dogs_list' %}active{% endif %}">🐾 Browse Dogs</a></li>
+                {% if sidebar_dogs %}
+                    {% for dog in sidebar_dogs %}
+                        <li><a href="{{ url_for('dog_detail', dog_id=dog.dog_id) }}">🐾 {{ dog.name }} <span class="entity-count">{{ dog.video_count }}</span></a></li>
+                    {% endfor %}
+                {% else %}
+                    <li><a href="{{ url_for('dog_detail', dog_id=1) }}">🐕 Monty</a></li>
+                    <li><a href="{{ url_for('dog_detail', dog_id=2) }}">🐕 Rueger</a></li>
+                {% endif %}
             </ul>
 
             <h2>🗺️ Places</h2>

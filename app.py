@@ -217,6 +217,56 @@ def person_detail(person_id):
     
     return render_template('person_detail.html', person=person, videos=videos)
 
+@app.route('/dogs')
+def dogs_list():
+    """Sidebar: List all dogs with video counts"""
+    conn = get_db_connection()
+    
+    dogs = conn.execute('''
+    SELECT d.dog_id, d.name, d.breed_primary, d.color, d.description, COUNT(vd.video_id) as video_count
+    FROM dogs d
+    LEFT JOIN video_dogs vd ON d.dog_id = vd.dog_id
+    GROUP BY d.dog_id, d.name, d.breed_primary, d.color, d.description
+    ORDER BY video_count DESC, d.name ASC
+    ''').fetchall()
+    
+    # Calculate stats for template
+    total_adventures = sum(d['video_count'] for d in dogs)
+    most_featured = max(dogs, key=lambda x: x['video_count']) if dogs else None
+    
+    conn.close()
+    
+    return render_template('dogs_list.html', 
+                         dogs=dogs,
+                         total_adventures=total_adventures,
+                         most_featured=most_featured)
+
+@app.route('/dog/<int:dog_id>')
+def dog_detail(dog_id):
+    """Dog detail page with info and videos"""
+    conn = get_db_connection()
+    
+    # Get dog details
+    dog = conn.execute('''
+    SELECT * FROM dogs WHERE dog_id = ?
+    ''', (dog_id,)).fetchone()
+    
+    if not dog:
+        return "Dog not found", 404
+    
+    # Get their videos
+    videos = conn.execute('''
+    SELECT v.video_id, v.title, v.upload_date, v.thumbnail_url
+    FROM videos v
+    JOIN video_dogs vd ON v.video_id = vd.video_id
+    WHERE vd.dog_id = ?
+    ORDER BY v.upload_date DESC
+    ''', (dog_id,)).fetchall()
+    
+    conn.close()
+    
+    return render_template('dog_detail.html', dog=dog, videos=videos)
+
 @app.route('/search')
 def search():
     """Search videos by title and description"""

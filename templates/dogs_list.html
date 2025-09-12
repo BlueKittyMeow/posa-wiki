@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Dogs - Posa Wiki{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <div>
+            <h2 class="card-title">🐕 Adventure Dogs</h2>
+            <span class="text-muted">{{ dogs|length }} dogs</span>
+        </div>
+    </div>
+
+    {% if dogs %}
+        <ul class="entity-list">
+            {% for dog in dogs %}
+            <li class="entity-item">
+                <a href="{{ url_for('dog_detail', dog_id=dog.dog_id) }}">
+                    <div>
+                        <strong>🐾 {{ dog.name }}</strong>
+                        {% if dog.breed_primary %}
+                            <span class="text-muted" style="font-size: 0.85rem;">{{ dog.breed_primary }}</span>
+                        {% endif %}
+                        {% if dog.color %}
+                            <span class="text-muted" style="font-size: 0.85rem;">• {{ dog.color }}</span>
+                        {% endif %}
+                    </div>
+                    <span class="entity-count">{{ dog.video_count }}</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="text-center" style="padding: 3rem;">
+            <p class="text-muted">No dogs found.</p>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Quick Stats -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+    <div class="card">
+        <h3 class="text-accent">🏔️ Total Adventures</h3>
+        <div style="font-size: 1.5rem; margin: 1rem 0;">
+            {{ total_adventures }}
+        </div>
+        <div class="text-muted">Video appearances</div>
+    </div>
+    
+    <div class="card">
+        <h3 class="text-accent">⭐ Most Featured</h3>
+        <div style="font-size: 1.5rem; margin: 1rem 0;">
+            {{ most_featured.name if most_featured else 'None' }}
+        </div>
+        <div class="text-muted">{{ most_featured.video_count if most_featured else 0 }} videos</div>
+    </div>
+    
+    <div class="card">
+        <h3 class="text-accent">🎬 Adventure Stars</h3>
+        <div style="font-size: 1.5rem; margin: 1rem 0;">
+            {{ dogs|selectattr('video_count')|list|length }}
+        </div>
+        <div class="text-muted">Active adventure dogs</div>
+    </div>
+</div>
+{% endblock %}
