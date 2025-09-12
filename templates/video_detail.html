@@ -63,7 +63,15 @@
     {% if video.description %}
         <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--border-radius); margin-bottom: 1.5rem;">
             <h4 class="text-accent" style="margin-bottom: 1rem;">📝 Description</h4>
-            <div style="white-space: pre-wrap; line-height: 1.6;">{{ video.description }}</div>
+            
+            <div id="description-container" style="position: relative; overflow: hidden;">
+                <div id="description-text" style="white-space: pre-wrap; line-height: 1.6; max-height: 7.5em; overflow: hidden; transition: max-height 0.3s ease;">{{ video.description }}</div>
+                <div id="fade-gradient" style="position: absolute; bottom: 0; left: 0; right: 0; height: 2em; background: linear-gradient(transparent, var(--bg-tertiary)); pointer-events: none; transition: opacity 0.3s ease;"></div>
+            </div>
+            
+            <button id="expand-btn" onclick="toggleDescription()" class="btn btn-secondary" style="margin-top: 1rem; font-size: 0.85rem; padding: 0.5rem 1rem;">
+                📖 Show More
+            </button>
         </div>
     {% endif %}
 
@@ -99,6 +107,35 @@
         </div>
     {% endif %}
 </div>
+
+<!-- Series/Trip Information -->
+{% if series_info %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">🎬 Part of Series</h3>
+        </div>
+        
+        {% for series in series_info %}
+            <div style="background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-mint) 100%); padding: 1.5rem; border-radius: var(--border-radius); margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h4 style="margin: 0; color: var(--bg-primary);">{{ series.trip_name }}</h4>
+                        <p style="margin: 0.5rem 0 0 0; color: var(--bg-primary); opacity: 0.9;">
+                            {% if series.version_type == 'episode' %}
+                                📺 Episode {{ series.part_number }} of {{ series.total_videos_in_series }}
+                            {% else %}
+                                🎬 Part {{ series.part_number }} of {{ series.total_videos_in_series }}
+                            {% endif %}
+                        </p>
+                    </div>
+                    <a href="{{ url_for('trip_detail', trip_id=series.trip_id) }}" class="btn" style="background: var(--bg-primary); color: var(--text-primary);">
+                        View All Parts →
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
 
 <!-- Tags & Categories (if we have them) -->
 {% if video.validated_tags %}
@@ -193,6 +230,28 @@
 </div>
 
 <script>
+let descriptionExpanded = false;
+
+function toggleDescription() {
+    const textEl = document.getElementById('description-text');
+    const fadeEl = document.getElementById('fade-gradient');
+    const btnEl = document.getElementById('expand-btn');
+    
+    if (!descriptionExpanded) {
+        // Expand
+        textEl.style.maxHeight = textEl.scrollHeight + 'px';
+        fadeEl.style.opacity = '0';
+        btnEl.innerHTML = '📖 Show Less';
+        descriptionExpanded = true;
+    } else {
+        // Collapse
+        textEl.style.maxHeight = '7.5em';
+        fadeEl.style.opacity = '1';
+        btnEl.innerHTML = '📖 Show More';
+        descriptionExpanded = false;
+    }
+}
+
 function editVideo(videoId) {
     openModal('edit-video-modal');
 }

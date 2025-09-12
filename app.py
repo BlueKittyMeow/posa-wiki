@@ -20,11 +20,15 @@ def from_json(value):
     return []
 
 def format_duration(duration_str):
-    """Format ISO 8601 duration string to readable format"""
+    """Format duration string to readable format"""
     if not duration_str:
         return "Unknown"
     
-    # Simple parsing for PT#M#S format
+    # If already formatted (MM:SS or HH:MM:SS), return as-is
+    if ':' in duration_str:
+        return duration_str
+    
+    # Handle ISO 8601 format (PT#M#S)
     try:
         duration_str = duration_str.replace('PT', '')
         minutes = 0
@@ -100,7 +104,7 @@ def video_list():
     
     query = f'''
     SELECT video_id, title, description, upload_date, duration, 
-           view_count, like_count, thumbnail_url
+           view_count, thumbnail_url
     FROM videos 
     ORDER BY {sort_by} {order_sql}
     '''
@@ -139,9 +143,20 @@ def video_detail(video_id):
     WHERE vd.video_id = ?
     ''', (video_id,)).fetchall()
     
+    # Get trip/series information
+    series_info = conn.execute('''
+    SELECT t.trip_id, t.trip_name, vv.part_number, vv.version_type, vv.total_parts,
+           COUNT(vv2.video_id) as total_videos_in_series
+    FROM trips t
+    JOIN video_versions vv ON t.trip_id = vv.trip_id
+    LEFT JOIN video_versions vv2 ON t.trip_id = vv2.trip_id
+    WHERE vv.video_id = ?
+    GROUP BY t.trip_id
+    ''', (video_id,)).fetchall()
+    
     conn.close()
     
-    return render_template('video_detail.html', video=video, people=people, dogs=dogs)
+    return render_template('video_detail.html', video=video, people=people, dogs=dogs, series_info=series_info)
 
 @app.route('/date/<date_str>')
 def date_view(date_str):
@@ -267,9 +282,37 @@ def dog_detail(dog_id):
     
     return render_template('dog_detail.html', dog=dog, videos=videos)
 
+@app.route('/series')
+def series_list():
+    """List all episodic series"""
+    conn = get_db_connection()
+    
+    series = conn.execute('''
+    SELECT t.trip_id, t.trip_name, t.start_date, t.end_date, t.description,
+           COUNT(vv.video_id) as video_count,
+           MIN(vv.part_number) as first_episode,
+           MAX(vv.part_number) as last_episode
+    FROM trips t
+    LEFT JOIN video_versions vv ON t.trip_id = vv.trip_id
+    WHERE t.series_type = 'series'
+    GROUP BY t.trip_id
+    ORDER BY t.start_date DESC
+    ''').fetchall()
+    
+    # Calculate stats
+    total_episodes = sum(s['video_count'] for s in series)
+    longest_series = max(series, key=lambda x: x['video_count']) if series else None
+    
+    conn.close()
+    
+    return render_template('series_list.html', 
+                         series=series,
+                         total_episodes=total_episodes,
+                         longest_series=longest_series)
+
 @app.route('/trips')
 def trips_list():
-    """List all multi-part trips/series"""
+    """List all multi-day adventure trips"""
     conn = get_db_connection()
     
     trips = conn.execute('''
@@ -280,6 +323,7 @@ def trips_list():
            GROUP_CONCAT(vv.version_type) as version_types
     FROM trips t
     LEFT JOIN video_versions vv ON t.trip_id = vv.trip_id
+    WHERE t.series_type = 'trip'
     GROUP BY t.trip_id
     ORDER BY t.start_date DESC
     ''').fetchall()

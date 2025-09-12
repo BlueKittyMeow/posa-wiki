@@ -1,46 +1,66 @@
-# Posa Wiki
+# 🏕️ Posa Wiki
 
-A wiki-style catalog system for Matthew Posa's outdoor adventure videos, featuring tag authority control and reference tracking.
+A fully functional Flask web application for browsing Matthew Posa's outdoor adventure videos with dark hacker girl aesthetic and comprehensive metadata.
 
-## Project Overview
+## 🚀 Live Features
 
-This system creates a structured database and wiki interface for cataloging YouTube outdoor adventure content, with special focus on:
-- **Tag Authority System**: Canonical tag mapping with alias resolution
-- **Posaism Tracking**: References, catchphrases, and recurring elements
-- **Multi-creator Support**: Matthew Posa (@MatthewPosa) and Lucas (@LucasAndLayla)
-- **Rich Metadata**: Locations, people, dogs, trips, and series organization
+**Running Flask App**: Start with `python app.py` on http://localhost:5001
 
-## Current Status
+- **358 Videos** with full YouTube metadata and thumbnails
+- **Dark Fairyfloss Theme** with DaddyTimeMono font
+- **Smart Navigation**: Browse by date, people, dogs, series, trips
+- **Full-text Search** across titles and descriptions
+- **Sortable Video Lists** by date, title, duration
+- **Rich Relationship Data**: People and dogs linked to their videos
 
-### ✅ Completed
-- Database schema design (`schema.md`)
-- Tag authority seed system (`tag_authority_seed.py`)
-- Initial data scraping for 277 videos
-- Reference/Posaism tracking structure
+## 📊 Current Database
 
-### 🚧 In Progress
-- Git repository setup
-- Expanded data collection for better tag coverage
-- SQLite database implementation
+- **358 videos** from Matthew Posa's channel
+- **9 people** (Matthew, family, collaborators)  
+- **3 dogs** (Monty, Rueger, etc.)
+- **13 trips/series** with episodic organization
+- **Tag authority system** with validation pipeline
 
-### 📋 Roadmap
-1. **Phase 1**: Read-only wiki pages from database
-2. **Phase 2**: Inline editing capabilities  
-3. **Phase 3**: Full admin interface for curation
+## 🎯 Key Pages
 
-## Data Sources
-- YouTube API for video metadata
-- Manual curation for references and relationships
-- Tag authority system for consistent categorization
+- **Home** (`/`) - Recent videos, date nav, search
+- **All Videos** (`/videos`) - Sortable list with thumbnails  
+- **People** (`/people`) - Adventure crew directory
+- **Dogs** (`/dogs`) - Four-legged cast members
+- **Series** (`/series`) - Episodic content like "Unsuccessful Fishing Show"
+- **Trips** (`/trips`) - Multi-day adventures
+- **Video Details** (`/video/ID`) - Full metadata and relationships
 
-## Key Features
-- **Wiki-style Interface**: Database-driven pages with cross-linking
-- **Tag Validation**: Authority-based tag normalization
-- **Reference Tracking**: First appearances and frequency analysis
-- **Multi-format Export**: JSON, SQL, CSV support planned
+## 🌈 Design Philosophy
 
-## Technology Stack
-- **Database**: SQLite (dev) → PostgreSQL (production)
-- **Backend**: Python with YouTube API integration
-- **Frontend**: Web interface for wiki browsing
-- **Version Control**: Git with GitHub hosting
+**Dark hacker girl aesthetic** with fairyfloss color palette (purples, pinks, mint), rounded edges, and programming font for a functional but beautiful interface.
+
+## 📋 Status & Roadmap
+
+### ✅ Phase 1: COMPLETE
+- ✅ Database schema and population
+- ✅ Flask web interface  
+- ✅ Core browsing functionality
+- ✅ Relationship tracking (people, dogs, trips)
+- ✅ Search and filtering
+
+### 🚧 Phase 2: In Progress  
+- Modal CRUD operations for editing
+- Theme/category browsing
+- Advanced search filters
+
+### 📋 Phase 3: Planned
+- User authentication for admin editing
+- Tag validation interface
+- Posaism/reference tracking pages
+
+## 🔧 Quick Start
+
+```bash
+python3 -m venv venv
+source venv/bin/activate  
+pip install -r requirements.txt
+python app.py
+```
+
+Visit http://localhost:5001 to explore the adventure catalog!

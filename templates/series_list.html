@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Series - Posa Wiki{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <div>
+            <h2 class="card-title">📺 Episodic Series</h2>
+            <span class="text-muted">{{ series|length }} series</span>
+        </div>
+    </div>
+
+    {% if series %}
+        <div style="display: grid; gap: 1.5rem;">
+            {% for show in series %}
+            <div class="card" style="margin: 0;">
+                <div class="card-header" style="padding: 1rem;">
+                    <div style="flex: 1;">
+                        <h3 style="margin: 0; margin-bottom: 0.5rem;">
+                            <a href="{{ url_for('trip_detail', trip_id=show.trip_id) }}" style="color: inherit; text-decoration: none;">
+                                📺 {{ show.trip_name }}
+                            </a>
+                        </h3>
+                        <div style="display: flex; gap: 1rem; align-items: center; font-size: 0.9rem;">
+                            <span class="text-muted">📅 Started {{ show.start_date[:10] if show.start_date else 'Unknown' }}</span>
+                            <span class="text-muted">📺 {{ show.video_count }} episodes</span>
+                            <span style="background: var(--accent-mint); color: var(--bg-primary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.75rem;">Series</span>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('trip_detail', trip_id=show.trip_id) }}" class="btn btn-secondary">Watch Series →</a>
+                </div>
+                
+                {% if show.description %}
+                    <div style="padding: 0 1rem 1rem 1rem;">
+                        <p class="text-muted" style="margin: 0; font-size: 0.9rem; line-height: 1.4;">
+                            {{ show.description[:120] }}{% if show.description|length > 120 %}...{% endif %}
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center" style="padding: 3rem;">
+            <p class="text-muted">No episodic series found.</p>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Quick Stats -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+    <div class="card">
+        <h3 class="text-accent">📺 Total Episodes</h3>
+        <div style="font-size: 1.5rem; margin: 1rem 0;">
+            {{ total_episodes }}
+        </div>
+        <div class="text-muted">Across all series</div>
+    </div>
+    
+    <div class="card">
+        <h3 class="text-accent">⭐ Longest Series</h3>
+        <div style="font-size: 1.5rem; margin: 1rem 0;">
+            {% if longest_series %}
+                {{ longest_series.trip_name[:25] }}{% if longest_series.trip_name|length > 25 %}...{% endif %}
+            {% else %}
+                None
+            {% endif %}
+        </div>
+        <div class="text-muted">{{ longest_series.video_count if longest_series else 0 }} episodes</div>
+    </div>
+    
+    <div class="card">
+        <h3 class="text-accent">🎬 Active Series</h3>
+        <div style="font-size: 1.5rem; margin: 1rem 0;">
+            {{ series|length }}
+        </div>
+        <div class="text-muted">Different shows</div>
+    </div>
+</div>
+{% endblock %}

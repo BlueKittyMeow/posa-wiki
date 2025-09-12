@@ -44,12 +44,17 @@
                 {% endif %}
             </ul>
 
-            <h2>🗺️ Places</h2>
+            <h2>📺 Series</h2>
             <ul class="sidebar-nav">
-                <li><a href="#" class="{% if request.endpoint == 'places_list' %}active{% endif %}">📍 Browse Places</a></li>
-                <li><a href="#">🛶 BWCA</a></li>
-                <li><a href="#">🏔️ Montana</a></li>
-                <li><a href="#">🌲 Michigan</a></li>
+                <li><a href="{{ url_for('series_list') }}" class="{% if request.endpoint == 'series_list' %}active{% endif %}">📺 Browse Series</a></li>
+                <li><a href="{{ url_for('trip_detail', trip_id=1) }}">🎣 Unsuccessful Fishing Show</a></li>
+            </ul>
+
+            <h2>🗓️ Trips</h2>
+            <ul class="sidebar-nav">
+                <li><a href="{{ url_for('trips_list') }}" class="{% if request.endpoint == 'trips_list' %}active{% endif %}">🎒 Browse Trips</a></li>
+                <li><a href="#" onclick="filterTrips('wilderness')">🏕️ Wilderness Adventures</a></li>
+                <li><a href="#" onclick="filterTrips('extended')">📹 Extended Versions</a></li>
             </ul>
 
             <h2>🎯 Themes</h2>
@@ -63,11 +68,12 @@
                 <li><a href="#">🎣 Fishing</a></li>
             </ul>
 
-            <h2>🗓️ Trips</h2>
+            <h2>🗺️ Places</h2>
             <ul class="sidebar-nav">
-                <li><a href="{{ url_for('trips_list') }}" class="{% if request.endpoint == 'trips_list' %}active{% endif %}">🎒 Browse Trips</a></li>
-                <li><a href="#" onclick="filterTrips('extended')">📹 Extended Series</a></li>
-                <li><a href="#" onclick="filterTrips('wilderness')">🏕️ Wilderness Adventures</a></li>
+                <li><a href="#" class="{% if request.endpoint == 'places_list' %}active{% endif %}">📍 Browse Places</a></li>
+                <li><a href="#">🛶 BWCA</a></li>
+                <li><a href="#">🏔️ Montana</a></li>
+                <li><a href="#">🌲 Michigan</a></li>
             </ul>
         </nav>
 

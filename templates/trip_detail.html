@@ -7,7 +7,11 @@
     <div class="card-header">
         <div>
             <div style="margin-bottom: 0.5rem;">
-                <a href="{{ url_for('trips_list') }}" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.25rem 0.75rem;">← Back to Trips</a>
+                {% if trip.series_type == 'series' %}
+                    <a href="{{ url_for('series_list') }}" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.25rem 0.75rem;">← Back to Series</a>
+                {% else %}
+                    <a href="{{ url_for('trips_list') }}" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.25rem 0.75rem;">← Back to Trips</a>
+                {% endif %}
             </div>
             <h2 class="card-title">
                 🎬 {{ trip.trip_name }}
@@ -25,8 +29,10 @@
 
     {% if trip.description %}
         <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--border-radius); margin-bottom: 1.5rem;">
-            <h4 class="text-accent" style="margin-bottom: 1rem;">📝 About This Adventure</h4>
-            <p>{{ trip.description }}</p>
+            <h4 class="text-accent" style="margin-bottom: 1rem;">
+                📝 {% if trip.series_type == 'series' %}About This Series{% else %}About This Adventure{% endif %}
+            </h4>
+            <p style="white-space: pre-wrap; line-height: 1.6;">{{ trip.description }}</p>
         </div>
     {% endif %}
 </div>

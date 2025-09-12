@@ -70,15 +70,28 @@ The app will start on `http://localhost:5001`
 
 The Flask app connects to the existing SQLite database with:
 - **358 videos** with full YouTube metadata
-- **People/Dogs junction tables** populated via description mining
+- **9 people** with video relationships
+- **3 dogs** (Monty, Rueger) with appearance tracking  
+- **13 trips/series** with episodic organization
 - **Tag authority system** for categorization
-- **Rich relationship data** for collaborative videos
 
-## 📝 TODO
+## 🎯 Current Features
 
-- [ ] Modal CRUD operations (currently placeholder)
-- [ ] Theme/category browsing pages
-- [ ] Trip/series grouping functionality
+- ✅ **Home page** with recent videos and date navigation
+- ✅ **All Videos** sortable list with thumbnails
+- ✅ **People directory** with video counts and individual profiles
+- ✅ **Dogs directory** with adventure tracking
+- ✅ **Series browsing** for episodic content
+- ✅ **Trip browsing** for multi-day adventures  
+- ✅ **Full-text search** across titles and descriptions
+- ✅ **Video detail pages** with relationships and metadata
+- ✅ **Date-based browsing** to find videos by upload date
+
+## 📋 Phase 2 TODO
+
+- [ ] Modal CRUD operations for editing content
+- [ ] Theme/category browsing pages  
+- [ ] Advanced search with people/dog/date filters
 - [ ] User authentication for admin-only editing
-- [ ] Advanced search with filters
-- [ ] Video embedding or better YouTube integration
+- [ ] Tag validation interface
+- [ ] Posaism/reference tracking pages
