@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+
+{% block title %}{{ trip.trip_name }} - Posa Wiki{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <div>
+            <div style="margin-bottom: 0.5rem;">
+                <a href="{{ url_for('trips_list') }}" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.25rem 0.75rem;">← Back to Trips</a>
+            </div>
+            <h2 class="card-title">
+                🎬 {{ trip.trip_name }}
+            </h2>
+            <div style="display: flex; gap: 1rem; align-items: center; margin-top: 0.5rem;">
+                <span class="text-muted">📅 {{ trip.start_date[:10] if trip.start_date else 'Unknown' }}</span>
+                {% if duration_days > 0 %}
+                    <span class="text-muted">⏱️ {{ duration_days }} day{{ 's' if duration_days != 1 else '' }} span</span>
+                {% endif %}
+                <span class="text-muted">🎥 {{ videos|length }} parts</span>
+            </div>
+        </div>
+        <button class="btn btn-secondary" onclick="editTrip({{ trip.trip_id }})">✏️ Edit</button>
+    </div>
+
+    {% if trip.description %}
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--border-radius); margin-bottom: 1.5rem;">
+            <h4 class="text-accent" style="margin-bottom: 1rem;">📝 About This Adventure</h4>
+            <p>{{ trip.description }}</p>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Video Parts -->
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">🎬 All Parts ({{ videos|length }})</h3>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <button onclick="playAll()" class="btn">▶️ Play All</button>
+            <select onchange="sortTripVideos(this.value)" id="video-sort">
+                <option value="part_asc">📹 Part Order</option>
+                <option value="date_asc">📅 Upload Order</option>
+                <option value="title_asc">🔤 A-Z</option>
+            </select>
+        </div>
+    </div>
+
+    {% if videos %}
+        <div class="video-grid" id="videos-container">
+            {% for video in videos %}
+            <div class="video-card" data-part="{{ video.part_number }}" data-date="{{ video.upload_date }}" data-title="{{ video.title }}">
+                <div class="video-thumbnail" style="position: relative;">
+                    {% if video.thumbnail_url %}
+                        <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" loading="lazy">
+                    {% else %}
+                        <span>📹 No Thumbnail</span>
+                    {% endif %}
+                    
+                    <!-- Part number badge -->
+                    <div style="position: absolute; top: 0.5rem; left: 0.5rem; background: var(--accent-purple); color: var(--bg-primary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">
+                        {% if video.version_type == 'episode' %}
+                            EP {{ video.part_number }}
+                        {% elif video.version_type == 'night' %}
+                            Night {{ video.part_number }}
+                        {% else %}
+                            Part {{ video.part_number }}
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Duration badge -->
+                    {% if video.duration %}
+                        <div style="position: absolute; bottom: 0.5rem; right: 0.5rem; background: rgba(0,0,0,0.8); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">
+                            {{ video.duration|format_duration }}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="video-info">
+                    <h3 class="video-title">
+                        <a href="{{ url_for('video_detail', video_id=video.video_id) }}" style="color: inherit; text-decoration: none;">
+                            {{ video.title }}
+                        </a>
+                    </h3>
+                    <div class="video-meta">
+                        <span>📅 {{ video.upload_date[:10] if video.upload_date else 'Unknown Date' }}</span>
+                        <a href="https://youtube.com/watch?v={{ video.video_id }}" target="_blank" class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">📺 YouTube</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Binge Watch Helper -->
+        <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--border-radius); text-align: center;">
+            <h4 style="margin-bottom: 1rem;">🍿 Binge Watch This Adventure</h4>
+            <p class="text-muted" style="margin-bottom: 1rem;">
+                Watch all {{ videos|length }} parts in sequence - perfect for your TV setup!
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                {% for video in videos[:3] %}
+                    <a href="https://youtube.com/watch?v={{ video.video_id }}" target="_blank" class="btn btn-secondary">
+                        {% if video.version_type == 'episode' %}
+                            📺 Episode {{ video.part_number }}
+                        {% else %}
+                            🎬 Part {{ video.part_number }}
+                        {% endif %}
+                    </a>
+                {% endfor %}
+                {% if videos|length > 3 %}
+                    <span class="text-muted">... and {{ videos|length - 3 }} more</span>
+                {% endif %}
+            </div>
+        </div>
+        
+    {% else %}
+        <div class="text-center" style="padding: 3rem;">
+            <p class="text-muted">No videos found for this trip.</p>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Edit Trip Modal (placeholder) -->
+<div id="edit-trip-modal" class="modal-backdrop" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;">
+    <div class="card" style="width: 90%; max-width: 500px; margin: 0;">
+        <div class="card-header">
+            <h3 class="card-title">✏️ Edit {{ trip.trip_name[:30] }}{% if trip.trip_name|length > 30 %}...{% endif %}</h3>
+            <button onclick="closeModal('edit-trip-modal')" class="btn btn-secondary">✕</button>
+        </div>
+        
+        <form>
+            <div class="form-group mb-2">
+                <label class="form-label">Trip Name</label>
+                <input type="text" value="{{ trip.trip_name }}" style="width: 100%;">
+            </div>
+            
+            <div class="form-group mb-2">
+                <label class="form-label">Description</label>
+                <textarea rows="3" style="width: 100%;">{{ trip.description or '' }}</textarea>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-group">
+                    <label class="form-label">Start Date</label>
+                    <input type="date" value="{{ trip.start_date[:10] if trip.start_date else '' }}" style="width: 100%;">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">End Date</label>
+                    <input type="date" value="{{ trip.end_date[:10] if trip.end_date else '' }}" style="width: 100%;">
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+                <button type="button" onclick="closeModal('edit-trip-modal')" class="btn btn-secondary">Cancel</button>
+                <button type="submit" class="btn">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function editTrip(tripId) {
+    openModal('edit-trip-modal');
+}
+
+function sortTripVideos(sortType) {
+    const container = document.getElementById('videos-container');
+    const cards = Array.from(container.children);
+    
+    cards.sort((a, b) => {
+        switch(sortType) {
+            case 'part_asc':
+                return parseInt(a.dataset.part) - parseInt(b.dataset.part);
+            case 'date_asc':
+                return new Date(a.dataset.date) - new Date(b.dataset.date);
+            case 'title_asc':
+                return a.dataset.title.localeCompare(b.dataset.title);
+            default:
+                return 0;
+        }
+    });
+    
+    container.innerHTML = '';
+    cards.forEach(card => container.appendChild(card));
+}
+
+function playAll() {
+    const videos = {{ videos|map(attribute='video_id')|list|tojson }};
+    if (videos.length > 0) {
+        // Create YouTube playlist URL - this creates a temporary playlist
+        const playlistUrl = `https://youtube.com/watch_videos?video_ids=${videos.join(',')}`;
+        window.open(playlistUrl, '_blank');
+    }
+}
+</script>
+{% endblock %}

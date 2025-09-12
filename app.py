@@ -267,6 +267,73 @@ def dog_detail(dog_id):
     
     return render_template('dog_detail.html', dog=dog, videos=videos)
 
+@app.route('/trips')
+def trips_list():
+    """List all multi-part trips/series"""
+    conn = get_db_connection()
+    
+    trips = conn.execute('''
+    SELECT t.trip_id, t.trip_name, t.start_date, t.end_date, t.description,
+           COUNT(vv.video_id) as video_count,
+           MIN(vv.part_number) as first_part,
+           MAX(vv.part_number) as last_part,
+           GROUP_CONCAT(vv.version_type) as version_types
+    FROM trips t
+    LEFT JOIN video_versions vv ON t.trip_id = vv.trip_id
+    GROUP BY t.trip_id
+    ORDER BY t.start_date DESC
+    ''').fetchall()
+    
+    # Calculate stats
+    total_adventures = sum(t['video_count'] for t in trips)
+    longest_trip = max(trips, key=lambda x: x['video_count']) if trips else None
+    
+    conn.close()
+    
+    return render_template('trips_list.html', 
+                         trips=trips,
+                         total_adventures=total_adventures,
+                         longest_trip=longest_trip)
+
+@app.route('/trip/<int:trip_id>')
+def trip_detail(trip_id):
+    """Trip detail page showing all parts in order"""
+    conn = get_db_connection()
+    
+    # Get trip details
+    trip = conn.execute('''
+    SELECT * FROM trips WHERE trip_id = ?
+    ''', (trip_id,)).fetchone()
+    
+    if not trip:
+        return "Trip not found", 404
+    
+    # Get all videos in this trip
+    videos = conn.execute('''
+    SELECT v.video_id, v.title, v.upload_date, v.thumbnail_url, v.duration,
+           vv.part_number, vv.version_type, vv.total_parts
+    FROM videos v
+    JOIN video_versions vv ON v.video_id = vv.video_id
+    WHERE vv.trip_id = ?
+    ORDER BY vv.part_number ASC
+    ''', (trip_id,)).fetchall()
+    
+    # Get trip duration in days
+    if trip['start_date'] and trip['end_date']:
+        from datetime import datetime
+        start = datetime.fromisoformat(trip['start_date'])
+        end = datetime.fromisoformat(trip['end_date'])
+        duration_days = (end - start).days
+    else:
+        duration_days = 0
+    
+    conn.close()
+    
+    return render_template('trip_detail.html', 
+                         trip=trip, 
+                         videos=videos, 
+                         duration_days=duration_days)
+
 @app.route('/search')
 def search():
     """Search videos by title and description"""

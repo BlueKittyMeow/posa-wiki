@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Trips - Posa Wiki{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <div>
+            <h2 class="card-title">🗓️ Multi-Part Adventures</h2>
+            <span class="text-muted">{{ trips|length }} trips</span>
+        </div>
+    </div>
+
+    {% if trips %}
+        <div style="display: grid; gap: 1.5rem;">
+            {% for trip in trips %}
+            <div class="card" style="margin: 0;">
+                <div class="card-header" style="padding: 1rem;">
+                    <div style="flex: 1;">
+                        <h3 style="margin: 0; margin-bottom: 0.5rem;">
+                            <a href="{{ url_for('trip_detail', trip_id=trip.trip_id) }}" style="color: inherit; text-decoration: none;">
+                                🎬 {{ trip.trip_name }}
+                            </a>
+                        </h3>
+                        <div style="display: flex; gap: 1rem; align-items: center; font-size: 0.9rem;">
+                            <span class="text-muted">📅 {{ trip.start_date[:10] if trip.start_date else 'Unknown' }}</span>
+                            <span class="text-muted">🎥 {{ trip.video_count }} parts</span>
+                            {% if 'extended' in trip.version_types %}
+                                <span style="background: var(--accent-purple); color: var(--bg-primary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.75rem;">Extended</span>
+                            {% endif %}
+                            {% if 'episode' in trip.version_types %}
+                                <span style="background: var(--accent-mint); color: var(--bg-primary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.75rem;">Series</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <a href="{{ url_for('trip_detail', trip_id=trip.trip_id) }}" class="btn btn-secondary">View All Parts →</a>
+                </div>
+                
+                {% if trip.description %}
+                    <div style="padding: 0 1rem 1rem 1rem;">
+                        <p class="text-muted" style="margin: 0; font-size: 0.9rem; line-height: 1.4;">
+                            {{ trip.description[:120] }}{% if trip.description|length > 120 %}...{% endif %}
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center" style="padding: 3rem;">
+            <p class="text-muted">No multi-part trips found.</p>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Quick Stats -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+    <div class="card">
+        <h3 class="text-accent">🏔️ Total Adventures</h3>
+        <div style="font-size: 1.5rem; margin: 1rem 0;">
+            {{ total_adventures }}
+        </div>
+        <div class="text-muted">Multi-part videos</div>
+    </div>
+    
+    <div class="card">
+        <h3 class="text-accent">⭐ Longest Series</h3>
+        <div style="font-size: 1.5rem; margin: 1rem 0;">
+            {% if longest_trip %}
+                {{ longest_trip.trip_name[:25] }}{% if longest_trip.trip_name|length > 25 %}...{% endif %}
+            {% else %}
+                None
+            {% endif %}
+        </div>
+        <div class="text-muted">{{ longest_trip.video_count if longest_trip else 0 }} parts</div>
+    </div>
+    
+    <div class="card">
+        <h3 class="text-accent">📺 Series Types</h3>
+        <div style="font-size: 1.5rem; margin: 1rem 0;">
+            {{ trips|length }}
+        </div>
+        <div class="text-muted">Different adventures</div>
+    </div>
+</div>
+{% endblock %}

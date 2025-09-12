@@ -65,9 +65,9 @@
 
             <h2>🗓️ Trips</h2>
             <ul class="sidebar-nav">
-                <li><a href="#" class="{% if request.endpoint == 'trips_list' %}active{% endif %}">🎒 Browse Trips</a></li>
-                <li><a href="#">📹 Multi-day Series</a></li>
-                <li><a href="#">🏕️ Extended Adventures</a></li>
+                <li><a href="{{ url_for('trips_list') }}" class="{% if request.endpoint == 'trips_list' %}active{% endif %}">🎒 Browse Trips</a></li>
+                <li><a href="#" onclick="filterTrips('extended')">📹 Extended Series</a></li>
+                <li><a href="#" onclick="filterTrips('wilderness')">🏕️ Wilderness Adventures</a></li>
             </ul>
         </nav>
 
