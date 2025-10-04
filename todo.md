@@ -1,6 +1,20 @@
 # Matthew Posa YouTube Catalog - Future Features & Enhancements
 
-## Phase 2 - Enhanced Authority Control
+## Phase 2A - Code Maintainability & Stability  
+- **Configuration Management**: Move hardcoded values to config.py or environment variables
+- **Error Handling & Logging**: Proper 404/500 error pages, logging for debugging
+- **Form Security**: CSRF protection and input validation for CRUD operations  
+- **Authentication System**: Flask-Login for admin features
+- **Pagination**: Implement pagination for video lists (performance with 358+ videos)
+
+## Phase 2B - API Development & CRUD Operations
+- **REST API Structure**: Flask-RESTful for JSON endpoints
+- **Modal CRUD Operations**: Inline editing for videos, people, dogs, trips
+- **SQL Query Optimization**: Move to database layer, optimize joins and indexes
+- **Database Connection Management**: Connection pooling or Flask-SQLAlchemy migration
+- **Search Performance**: Full-Text Search indexes to replace LIKE queries
+
+## Phase 2C - Enhanced Authority Control
 - **Tag-based authority validation**: Use YouTube tags to suggest/validate people, locations, activities
   - "boundary waters canoe area" → location authority record
   - "winter camping" → activity/series classification
@@ -36,11 +50,13 @@
 - **JSON-LD**: Linked data format for web integration
 - **CSV exports**: For spreadsheet analysis
 
-## Technical Improvements
-- **Thumbnail management**: Selective download, compression, CDN integration
-- **API rate limiting**: Intelligent batching and caching
-- **Database migration tools**: Schema versioning and updates
-- **Backup/restore**: Data preservation workflows
+## Technical Improvements (Later Phases)
+- **Thumbnail Optimization**: Lazy loading (✅ done), compression, CDN integration  
+- **Asset Management**: CSS/JS minification, static file optimization
+- **Template Optimization**: Extract navigation macros, reduce duplication
+- **Database Migration Tools**: Schema versioning and updates
+- **Backup/Restore**: Data preservation workflows
+- **API Rate Limiting**: Intelligent batching and caching for external APIs
 
 ## Content Curation Tools
 - **Batch editing interface**: Efficiently review and tag multiple videos

@@ -30,16 +30,25 @@
   - Junction tables working for relationships
   - Video metadata enriched beyond basic YouTube data
 
-### PHASE 2 IN PROGRESS 🚧
-- **Enhanced Editing**: Modal CRUD operations for content management
-- **Advanced Navigation**: Theme/category browsing pages
-- **Search Improvements**: Filter by people, dogs, dates, duration
+### PHASE 2A: CODE STABILITY 🚧 (Next Priority)
+- **Configuration Management**: Move hardcoded values to config files
+- **Error Handling**: Proper error pages and logging
+- **Form Security**: CSRF protection for upcoming CRUD operations
+- **Authentication**: Flask-Login system for admin features
+- **Pagination**: Performance improvement for large video lists
 
-### PHASE 3 PLANNED 📋
-1. **User Authentication**: Admin-only editing capabilities
-2. **Tag Validation Interface**: Web-based authority management
-3. **Posaism/Reference Pages**: Track catchphrases and recurring elements
-4. **Export Capabilities**: JSON, CSV, and other format outputs
+### PHASE 2B: API & CRUD DEVELOPMENT 📋
+- **REST API Structure**: JSON endpoints with Flask-RESTful
+- **Modal CRUD Operations**: Inline editing for all entities
+- **SQL Query Optimization**: Database layer with optimized queries
+- **Search Performance**: Full-Text Search indexes
+- **Database Architecture**: Connection pooling/Flask-SQLAlchemy
+
+### PHASE 2C: ENHANCED FEATURES 📋  
+- **Tag Validation Interface**: Web-based authority management
+- **Advanced Navigation**: Theme/category browsing pages
+- **Search Improvements**: Multi-filter search interface
+- **Posaism/Reference Pages**: Track catchphrases and recurring elements
 
 ### Key Design Decisions Made
 - **Breed Authority**: Simple authority table, no dedicated pages needed
