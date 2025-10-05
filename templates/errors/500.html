@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Server Error · Posa Wiki{% endblock %}
+{% block content %}
+<div class="card" style="max-width: 640px; margin: 2rem auto;">
+    <div class="card-header">
+        <h1 class="card-title">Campfire Glitch</h1>
+    </div>
+    <div class="card-body">
+        <p>Something unexpected sparked behind the scenes. We've logged the issue and will investigate.</p>
+        <p>If the problem continues, please reach out so we can get the adventure back on track.</p>
+        <div style="margin-top: 1.5rem;">
+            <a class="btn" href="{{ url_for('index') }}">Back to Safety</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

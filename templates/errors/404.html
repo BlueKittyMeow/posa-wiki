@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Page Not Found · Posa Wiki{% endblock %}
+{% block content %}
+<div class="card" style="max-width: 640px; margin: 2rem auto;">
+    <div class="card-header">
+        <h1 class="card-title">Lost in the Wilderness</h1>
+    </div>
+    <div class="card-body">
+        <p>We couldn't find the adventure you were looking for. Try heading back to safer trails or explore the map.</p>
+        <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+            <a class="btn" href="{{ url_for('index') }}">Return to Base Camp</a>
+            <a class="btn btn-secondary" href="{{ url_for('video_list') }}">Browse All Videos</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

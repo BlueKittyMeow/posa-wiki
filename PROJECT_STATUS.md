@@ -71,11 +71,13 @@
 - **Pagination**: Performance improvement for large video lists
 
 ### PHASE 2B: API & CRUD DEVELOPMENT 📋
+- **500 Error Page Check**: Not manually triggered yet (Codex). Validate during Phase 2B auth/CRUD work.
+
 - **REST API Structure**: JSON endpoints with Flask-RESTful
 - **Modal CRUD Operations**: Inline editing for all entities
 - **SQL Query Optimization**: Database layer with optimized queries
 - **Search Performance**: Full-Text Search indexes
-- **Database Architecture**: Connection pooling/Flask-SQLAlchemy
+- **Database Architecture**: Migrate data access layer to SQLAlchemy ORM, introduce Alembic for schema migrations, and implement connection pooling.
 
 ### PHASE 2C: ENHANCED FEATURES 📋  
 - **Tag Validation Interface**: Web-based authority management

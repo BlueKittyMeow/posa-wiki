@@ -9,6 +9,11 @@ import sqlite3
 import json
 from datetime import datetime, timedelta
 import os
+import logging
+from logging.handlers import RotatingFileHandler
+from pathlib import Path
+
+from config import CONFIG_BY_NAME, Config
 
 def from_json(value):
     """Template filter to parse JSON strings"""
@@ -48,8 +53,36 @@ def format_duration(duration_str):
     except:
         return duration_str
 
+
+def configure_logging(app):
+    """Attach logging handlers tailored to the environment."""
+    logging.basicConfig(level=logging.INFO)
+    app.logger.setLevel(logging.INFO)
+
+    if app.debug or app.testing:
+        return
+
+    logs_dir = Path('logs')
+    logs_dir.mkdir(exist_ok=True)
+
+    log_path = logs_dir / 'posa_wiki.log'
+    file_handler = RotatingFileHandler(log_path, maxBytes=1024 * 1024, backupCount=5)
+    formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
+    file_handler.setFormatter(formatter)
+    file_handler.setLevel(logging.INFO)
+
+    if not any(isinstance(handler, RotatingFileHandler) for handler in app.logger.handlers):
+        app.logger.addHandler(file_handler)
+
+
+env_name = os.getenv('POSA_WIKI_ENV', os.getenv('FLASK_ENV', 'development')).lower()
+config_class = CONFIG_BY_NAME.get(env_name, Config)
+
 app = Flask(__name__)
-app.secret_key = os.urandom(24)  # For session management later
+app.config.from_object(config_class)
+config_class.init_app(app)
+configure_logging(app)
+
 
 # Register template filters
 app.jinja_env.filters['from_json'] = from_json
@@ -60,9 +93,21 @@ app.jinja_env.globals['timedelta'] = timedelta
 
 def get_db_connection():
     """Get database connection"""
-    conn = sqlite3.connect('posa_wiki.db')
+    conn = sqlite3.connect(app.config['DATABASE_PATH'])
     conn.row_factory = sqlite3.Row  # Return rows as dicts
     return conn
+
+@app.errorhandler(404)
+def handle_not_found(error):
+    app.logger.warning('404 Not Found: %s', request.path)
+    return render_template('errors/404.html'), 404
+
+
+@app.errorhandler(500)
+def handle_server_error(error):
+    app.logger.exception('500 Internal Server Error on %s', request.path)
+    return render_template('errors/500.html'), 500
+
 
 @app.route('/')
 def index():
