@@ -2,15 +2,18 @@
 // Dark hacker girl aesthetic with fairyfloss theme
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Theme switching
+    initThemeSwitcher();
+
     // Mobile sidebar toggle
     const sidebar = document.querySelector('.sidebar');
     const mainContent = document.querySelector('.main-content');
-    
+
     // Add mobile menu button if needed
     if (window.innerWidth <= 768) {
         createMobileToggle();
     }
-    
+
     // Handle window resize
     window.addEventListener('resize', function() {
         if (window.innerWidth <= 768 && !document.querySelector('.mobile-toggle')) {
@@ -108,5 +111,47 @@ document.addEventListener('keydown', function(event) {
         }
     }
 });
+
+// Theme Switcher
+function initThemeSwitcher() {
+    const themeButtons = document.querySelectorAll('.theme-btn');
+    const currentTheme = localStorage.getItem('posa-wiki-theme') || 'fairyfloss';
+
+    // Apply saved theme on load
+    applyTheme(currentTheme);
+
+    // Add click handlers to theme buttons
+    themeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const theme = this.dataset.theme;
+            applyTheme(theme);
+            localStorage.setItem('posa-wiki-theme', theme);
+        });
+    });
+}
+
+function applyTheme(theme) {
+    const root = document.documentElement;
+    const themeButtons = document.querySelectorAll('.theme-btn');
+
+    // Remove all theme classes
+    root.classList.remove('theme-fairyfloss', 'theme-professional');
+
+    // Add the selected theme class (fairyfloss is default, so only add class for professional)
+    if (theme === 'professional') {
+        root.classList.add('theme-professional');
+    }
+
+    // Update active button state
+    themeButtons.forEach(btn => {
+        if (btn.dataset.theme === theme) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    console.log(`🎨 Theme switched to: ${theme}`);
+}
 
 console.log('🌈 Posa Wiki loaded - Fairyfloss Dark theme active!');

@@ -19,11 +19,11 @@
   --bg-foreign: #5B5574;
   --bg-debug: #A4904F;
   --bg-error: #6C6782;
-  
+
   --text-main: #F8F8F2;
   --text-secondary: #A19DAC;
   --text-cursor: #F8F8F0;
-  
+
   --accent-purple: #C5A3FF;
   --accent-mint: #85FFC2;
   --accent-peach: #FFCA9C;
@@ -31,10 +31,10 @@
   --accent-orange: #FFC400;
   --accent-bright-yellow: #FFF352;
   --accent-coral: #FF857F;
-  
+
   --interactive-selection: #B3962E;
   --interactive-brackets: #A8757B;
-  
+
   /* Semantic color assignments */
   --bg-primary: var(--bg-main);
   --bg-secondary: var(--bg-active);
@@ -45,13 +45,26 @@
   --accent-secondary: var(--accent-mint);
   --accent-warning: var(--accent-orange);
   --accent-danger: var(--accent-coral);
-  
+
   /* Layout */
   --sidebar-width: 280px;
   --border-radius: 12px;
   --border-radius-sm: 6px;
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+:root.theme-professional {
+  /* Sweater vest and slacks mode */
+  --bg-primary: #1e1e1e;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #2d2d2d;
+  --accent-primary: #4a9eff;
+  --accent-secondary: #6cb6ff;
+  --text-primary: #e4e4e4;
+  --text-muted: #a0a0a0;
+  --accent-warning: #ffa500;
+  --accent-danger: #ff6b6b;
 }
 
 /* Global Styles */
@@ -355,6 +368,57 @@ textarea:focus {
   padding: 0.25rem 0.5rem;
   border-radius: 12px;
   font-weight: 500;
+}
+
+/* Theme Toggle */
+.theme-toggle-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--bg-tertiary);
+}
+
+.theme-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.theme-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--bg-error);
+  color: var(--text-muted);
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius-sm);
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: left;
+}
+
+.theme-btn:hover {
+  background: var(--bg-error);
+  color: var(--text-primary);
+  transform: translateX(4px);
+}
+
+.theme-btn.active {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+  border-color: var(--accent-primary);
+  font-weight: 500;
+}
+
+.theme-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Utilities */
