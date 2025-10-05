@@ -13,35 +13,12 @@
     </div>
 
     {% if videos %}
+        {% from "_macros.html" import render_video_card %}
         <p class="text-muted" style="margin-bottom: 1.5rem;">{{ videos|length }} video{{ 's' if videos|length != 1 else '' }} published on this date</p>
         
         <div class="video-grid">
             {% for video in videos %}
-            <div class="video-card">
-                <div class="video-thumbnail">
-                    {% if video.thumbnail_url %}
-                        <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" loading="lazy">
-                    {% else %}
-                        <span>📹 No Thumbnail</span>
-                    {% endif %}
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">
-                        <a href="{{ url_for('video_detail', video_id=video.video_id) }}" style="color: inherit; text-decoration: none;">
-                            {{ video.title }}
-                        </a>
-                    </h3>
-                    <div class="video-meta">
-                        <span>⏰ {{ video.upload_date[11:16] if video.upload_date else 'Unknown Time' }}</span>
-                        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="editVideo('{{ video.video_id }}')">✏️ Edit</button>
-                    </div>
-                    {% if video.description %}
-                        <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.5rem; line-height: 1.3;">
-                            {{ video.description[:120] }}{% if video.description|length > 120 %}...{% endif %}
-                        </p>
-                    {% endif %}
-                </div>
-            </div>
+                {{ render_video_card(video) }}
             {% endfor %}
         </div>
     {% else %}

@@ -41,6 +41,10 @@
             </div>
             {% endfor %}
         </div>
+
+        <div class="pagination-container" style="padding: 1rem;">
+          {{ pagination.links }}
+        </div>
     {% else %}
         <div class="text-center" style="padding: 3rem;">
             <p class="text-muted">No episodic series found.</p>

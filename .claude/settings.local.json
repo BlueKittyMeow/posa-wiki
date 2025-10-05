@@ -9,7 +9,10 @@
       "Bash(pkill:*)",
       "Bash(lsof:*)",
       "Bash(kill:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(python run_migration.py:*)",
+      "Bash(source:*)",
+      "Bash(pip install:*)"
     ],
     "deny": [],
     "ask": []

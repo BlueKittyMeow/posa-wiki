@@ -33,36 +33,52 @@ This document outlines the concrete steps for Phase 2A, focusing on enhancing th
 
 ---
 
-### Step 3: Improve Search Performance with FTS5 - Gemini (tentative)
+### Step 3: Improve Search Performance with FTS5
+
+**Status: COMPLETE (Gemini)**
 
 **Goal:** Replace the inefficient `LIKE` queries in the search functionality with SQLite's optimized full-text search.
+
+1.  ✅ **Create FTS Index:** Write a one-time script (`build_fts_index.py`) that creates a new FTS5 virtual table in the database and populates it with data from the `videos` table.
+2.  ✅ **Update Search Route:** Modify the `/search` route in `app.py` to query against the new FTS5 table, providing a significant performance boost.
 
 1.  **Create FTS Index:** Write a one-time script (e.g., `build_fts_index.py`) that creates a new FTS5 virtual table in the database and populates it with data from the `videos` table.
 2.  **Update Search Route:** Modify the `/search` route in `app.py` to query against the new FTS5 table, providing a significant performance boost.
 
 ---
 
-### Step 4: Paginate List Views - Gemini (stretch)
+### Step 4: Paginate List Views
+
+**Status: COMPLETE (Gemini)**
 
 **Goal:** Improve the performance and usability of pages that list large numbers of items.
 
-1.  **Add Dependency:** Add `flask-paginate` to `requirements.txt`.
-2.  **Prototype on Videos Page:** Update the `/videos` route to implement pagination logic. Pass the generated pagination object to the `video_list.html` template.
-3.  **Render Controls:** Modify `video_list.html` to display the pagination controls.
-4.  **Roll Out:** Once working correctly, apply the same pagination logic and template controls to the `/people`, `/dogs`, `/series`, and `/trips` views.
+1.  ✅ **Add Dependency:** Add `flask-paginate` to `requirements.txt`.
+2.  ✅ **Prototype on Videos Page:** Update the `/videos` route to implement pagination logic. Pass the generated pagination object to the `video_list.html` template.
+3.  ✅ **Render Controls:** Modify `video_list.html` to display the pagination controls.
+4.  ✅ **Roll Out:** Apply the same pagination logic and template controls to the `/people`, `/dogs`, `/series`, and `/trips` views.
 
 ---
 
 ### Step 5: Establish Authentication Foundations - Claude
 
+**Status: COMPLETE (Claude)**
+
 **Goal:** Create the necessary components for a secure admin login system.
 
-1.  **Add Dependency:** Add `Flask-Login` to `requirements.txt`.
-2.  **Update Schema:** Manually add a `users` table to the `posa_wiki.db` database. Update `schema.md` to reflect this change.
-3.  **Create Admin User:** Write a simple script (e.g., `create_admin.py`) to add the first admin user, using `werkzeug.security.generate_password_hash` to secure the password.
-4.  **Create User Model:** Create a `user.py` file with a `User` class that is compatible with `Flask-Login`.
-5.  **Create Auth Blueprint:** Create an `auth.py` file as a Flask Blueprint to manage `/login` and `/logout` routes and their corresponding templates.
-6.  **Register Blueprint:** Register the new auth blueprint in the main `app.py` file.
+1.  ✅ **Add Dependency:** Added `Flask-Login==0.6.3` to `requirements.txt`.
+2.  ✅ **Update Schema:** Created `migrations/003_create_users_table.sql` with users table DDL and applied to database. Updated `schema.md` with complete documentation.
+3.  ✅ **Create Admin User:** Created Flask CLI command `flask create-admin` for secure user creation with password hashing.
+4.  ✅ **Create User Model:** Created `models/user.py` with `User` class implementing Flask-Login's `UserMixin`, including password verification and role checking methods.
+5.  ✅ **Create Auth Blueprint:** Created `blueprints/auth.py` with `/auth/login` and `/auth/logout` routes, plus login template in `templates/auth/login.html` (theme-aware, ready for CSRF in Step 6).
+6.  ✅ **Register Blueprint:** Registered auth blueprint and initialized Flask-Login in `app.py` with user_loader callback.
+7.  ✅ **Role-Based Decorators:** Created `utils/decorators.py` with `@admin_required` and `@editor_required` decorators for access control.
+8.  ✅ **UI Integration:** Added login/logout links to base template sidebar with current user display.
+
+**Test Admin User Created:**
+- Username: `admin`
+- Password: `admin123`
+- Role: `admin`
 
 ---
 

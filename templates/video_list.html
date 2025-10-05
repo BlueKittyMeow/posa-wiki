@@ -25,35 +25,10 @@
     </div>
 
     {% if videos %}
+        {% from "_macros.html" import render_video_card %}
         <div class="video-grid">
             {% for video in videos %}
-            <div class="video-card">
-                <div class="video-thumbnail">
-                    {% if video.thumbnail_url %}
-                        <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" loading="lazy">
-                    {% else %}
-                        <span>📹 No Thumbnail</span>
-                    {% endif %}
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">
-                        <a href="{{ url_for('video_detail', video_id=video.video_id) }}" style="color: inherit; text-decoration: none;">
-                            {{ video.title }}
-                        </a>
-                    </h3>
-                    <div class="video-meta">
-                        <span>📅 {{ video.upload_date[:10] if video.upload_date else 'Unknown Date' }}</span>
-                        {% if video.duration %}
-                            <span>⏱️ {{ video.duration }}</span>
-                        {% endif %}
-                    </div>
-                    {% if video.description %}
-                        <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.5rem; line-height: 1.3;">
-                            {{ video.description[:100] }}{% if video.description|length > 100 %}...{% endif %}
-                        </p>
-                    {% endif %}
-                </div>
-            </div>
+                {{ render_video_card(video) }}
             {% endfor %}
         </div>
     {% else %}
@@ -61,6 +36,10 @@
             <p class="text-muted">No videos found.</p>
         </div>
     {% endif %}
+</div>
+
+<div class="pagination-container">
+  {{ pagination.links }}
 </div>
 
 <script>

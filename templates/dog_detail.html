@@ -12,7 +12,7 @@
             <h2 class="card-title">
                 🐾 {{ dog.name }}
             </h2>
-            <p class="text-muted">{{ videos|length }} videos</p>
+            <p class="text-muted">{{ pagination.total }} videos</p>
         </div>
         <button class="btn btn-secondary" onclick="editDog({{ dog.dog_id }})">✏️ Edit</button>
     </div>
@@ -54,7 +54,7 @@
     <div class="card-header">
         <h3 class="card-title">🎬 Adventures with {{ dog.name }}</h3>
         <div style="display: flex; gap: 0.5rem; align-items: center;">
-            <span class="text-muted">{{ videos|length }} videos</span>
+            <span class="text-muted">{{ pagination.total }} videos</span>
             <select onchange="sortDogVideos(this.value)" id="video-sort">
                 <option value="date_desc">📅 Newest First</option>
                 <option value="date_asc">📅 Oldest First</option>
@@ -65,35 +65,16 @@
     </div>
 
     {% if videos %}
+        {% from "_macros.html" import render_video_card %}
         <div class="video-grid" id="videos-container">
             {% for video in videos %}
-            <div class="video-card" data-date="{{ video.upload_date }}" data-title="{{ video.title }}">
-                <div class="video-thumbnail">
-                    {% if video.thumbnail_url %}
-                        <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" loading="lazy">
-                    {% else %}
-                        <span>📹 No Thumbnail</span>
-                    {% endif %}
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">
-                        <a href="{{ url_for('video_detail', video_id=video.video_id) }}" style="color: inherit; text-decoration: none;">
-                            {{ video.title }}
-                        </a>
-                    </h3>
-                    <div class="video-meta">
-                        <span>📅 {{ video.upload_date[:10] if video.upload_date else 'Unknown Date' }}</span>
-                        <a href="{{ url_for('date_view', date_str=video.upload_date[:10]) }}" class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View Day</a>
-                    </div>
-                </div>
-            </div>
+                {{ render_video_card(video) }}
             {% endfor %}
         </div>
-    {% else %}
-        <div class="text-center" style="padding: 3rem;">
-            <p class="text-muted">No videos found featuring {{ dog.name }}.</p>
-        </div>
-    {% endif %}
+
+  <div class="pagination-container">
+    {{ pagination.links }}
+  </div>
 </div>
 
 <!-- Edit Dog Modal (placeholder) -->

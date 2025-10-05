@@ -73,10 +73,27 @@
 ### PHASE 2B: API & CRUD DEVELOPMENT 📋
 - **500 Error Page Check**: Not manually triggered yet (Codex). Validate during Phase 2B auth/CRUD work.
 
+- **Access Control for CRUD Operations**:
+  - Use `@editor_required` decorator on all edit routes
+  - Use `@admin_required` for user management routes
+  - Implement proper 403 error handling for unauthorized access
+
+- **Admin Panel Blueprint**:
+  - Create `/admin` blueprint for administrative functions
+  - User management UI (create, edit, delete, role changes)
+  - Audit log viewing (track who edited what)
+
 - **REST API Structure**: JSON endpoints with Flask-RESTful
-- **Modal CRUD Operations**: Inline editing for all entities
+  - API routes should be CSRF-exempt (use token auth instead)
+  - Implement API key or JWT authentication for external access
+
+- **Modal CRUD Operations**:
+  - Inline editing for all entities (videos, people, dogs, trips)
+  - Protected with `@editor_required` decorator
+  - CSRF tokens in all forms (from Step 6)
+
 - **SQL Query Optimization**: Database layer with optimized queries
-- **Search Performance**: Full-Text Search indexes
+- **Search Performance**: Full-Text Search indexes (✅ FTS5 already implemented in Phase 2A)
 - **Database Architecture**: Migrate data access layer to SQLAlchemy ORM, introduce Alembic for schema migrations, and implement connection pooling.
 
 ### PHASE 2C: ENHANCED FEATURES 📋  

@@ -7,7 +7,7 @@
     <div class="card-header">
         <div>
             <h2 class="card-title">🐕 Adventure Dogs</h2>
-            <span class="text-muted">{{ dogs|length }} dogs</span>
+            <span class="text-muted">{{ pagination.total }} dogs</span>
         </div>
     </div>
 
@@ -30,6 +30,10 @@
             </li>
             {% endfor %}
         </ul>
+
+        <div class="pagination-container" style="padding: 1rem;">
+          {{ pagination.links }}
+        </div>
     {% else %}
         <div class="text-center" style="padding: 3rem;">
             <p class="text-muted">No dogs found.</p>

@@ -21,7 +21,7 @@
                 {% if duration_days > 0 %}
                     <span class="text-muted">⏱️ {{ duration_days }} day{{ 's' if duration_days != 1 else '' }} span</span>
                 {% endif %}
-                <span class="text-muted">🎥 {{ videos|length }} parts</span>
+                <span class="text-muted">🎥 {{ pagination.total }} parts</span>
             </div>
         </div>
         <button class="btn btn-secondary" onclick="editTrip({{ trip.trip_id }})">✏️ Edit</button>
@@ -40,7 +40,7 @@
 <!-- Video Parts -->
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">🎬 All Parts ({{ videos|length }})</h3>
+        <h3 class="card-title">🎬 All Parts ({{ pagination.total }})</h3>
         <div style="display: flex; gap: 0.5rem; align-items: center;">
             <button onclick="playAll()" class="btn">▶️ Play All</button>
             <select onchange="sortTripVideos(this.value)" id="video-sort">
@@ -52,55 +52,22 @@
     </div>
 
     {% if videos %}
+        {% from "_macros.html" import render_video_card %}
         <div class="video-grid" id="videos-container">
             {% for video in videos %}
-            <div class="video-card" data-part="{{ video.part_number }}" data-date="{{ video.upload_date }}" data-title="{{ video.title }}">
-                <div class="video-thumbnail" style="position: relative;">
-                    {% if video.thumbnail_url %}
-                        <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" loading="lazy">
-                    {% else %}
-                        <span>📹 No Thumbnail</span>
-                    {% endif %}
-                    
-                    <!-- Part number badge -->
-                    <div style="position: absolute; top: 0.5rem; left: 0.5rem; background: var(--accent-purple); color: var(--bg-primary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">
-                        {% if video.version_type == 'episode' %}
-                            EP {{ video.part_number }}
-                        {% elif video.version_type == 'night' %}
-                            Night {{ video.part_number }}
-                        {% else %}
-                            Part {{ video.part_number }}
-                        {% endif %}
-                    </div>
-                    
-                    <!-- Duration badge -->
-                    {% if video.duration %}
-                        <div style="position: absolute; bottom: 0.5rem; right: 0.5rem; background: rgba(0,0,0,0.8); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">
-                            {{ video.duration|format_duration }}
-                        </div>
-                    {% endif %}
-                </div>
-                
-                <div class="video-info">
-                    <h3 class="video-title">
-                        <a href="{{ url_for('video_detail', video_id=video.video_id) }}" style="color: inherit; text-decoration: none;">
-                            {{ video.title }}
-                        </a>
-                    </h3>
-                    <div class="video-meta">
-                        <span>📅 {{ video.upload_date[:10] if video.upload_date else 'Unknown Date' }}</span>
-                        <a href="https://youtube.com/watch?v={{ video.video_id }}" target="_blank" class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">📺 YouTube</a>
-                    </div>
-                </div>
-            </div>
+                {{ render_video_card(video, part_number=video.part_number, version_type=video.version_type, show_youtube_link=True) }}
             {% endfor %}
+        </div>
+
+        <div class="pagination-container" style="padding: 1rem 0;">
+          {{ pagination.links }}
         </div>
         
         <!-- Binge Watch Helper -->
         <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--border-radius); text-align: center;">
             <h4 style="margin-bottom: 1rem;">🍿 Binge Watch This Adventure</h4>
             <p class="text-muted" style="margin-bottom: 1rem;">
-                Watch all {{ videos|length }} parts in sequence - perfect for your TV setup!
+                Watch all {{ pagination.total }} parts in sequence - perfect for your TV setup!
             </p>
             <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                 {% for video in videos[:3] %}

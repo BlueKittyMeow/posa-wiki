@@ -26,6 +26,26 @@ Primary table for video metadata from YouTube API
   - Example: ["moose encounter", "boundary waters canoe area", "bwca", "winter camping"]
   - These are creator-assigned and could be great for authority control validation
 
+## Authentication Tables
+
+### users
+User accounts for admin/editor access to the application
+- `user_id` (INTEGER, PRIMARY KEY)
+- `username` (TEXT, UNIQUE, NOT NULL) - Login username
+- `email` (TEXT, UNIQUE, NOT NULL) - User email address
+- `password_hash` (TEXT, NOT NULL) - Hashed password (werkzeug.security)
+- `role` (TEXT, DEFAULT 'viewer') - Access level: 'admin', 'editor', or 'viewer'
+  - **admin**: Full access to all CRUD operations
+  - **editor**: Can edit content but not manage users
+  - **viewer**: Read-only access
+- `created_at` (TEXT, DEFAULT CURRENT_TIMESTAMP) - Account creation timestamp
+- `last_login` (TEXT, NULLABLE) - Last login timestamp for audit trail
+
+**Indexes:**
+- `idx_users_username` on `username` for fast login lookups
+- `idx_users_email` on `email` for email-based operations
+- `idx_users_role` on `role` for permission checks
+
 ## Authority Tables
 
 ### people

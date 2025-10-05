@@ -40,30 +40,14 @@
         <a href="{{ url_for('video_list') }}" class="btn btn-secondary">View All</a>
     </div>
     
-    <div class="video-grid">
-        {% for video in recent_videos %}
-        <div class="video-card">
-            <div class="video-thumbnail">
-                {% if video.thumbnail_url %}
-                    <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" loading="lazy">
-                {% else %}
-                    <span>📹 No Thumbnail</span>
-                {% endif %}
-            </div>
-            <div class="video-info">
-                <h3 class="video-title">
-                    <a href="{{ url_for('video_detail', video_id=video.video_id) }}" style="color: inherit; text-decoration: none;">
-                        {{ video.title }}
-                    </a>
-                </h3>
-                <div class="video-meta">
-                    <span>📅 {{ video.upload_date[:10] if video.upload_date else 'Unknown' }}</span>
-                    <a href="{{ url_for('date_view', date_str=video.upload_date[:10]) }}" class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View Day</a>
-                </div>
-            </div>
+    {% if recent_videos %}
+        {% from "_macros.html" import render_video_card %}
+        <div class="video-grid">
+            {% for video in recent_videos %}
+                {{ render_video_card(video) }}
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
+    {% endif %}
 </div>
 
 <!-- Quick Stats -->

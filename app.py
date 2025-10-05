@@ -5,6 +5,8 @@ Dark hacker girl aesthetic with fairyfloss theme and rounded edges
 """
 
 from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask_paginate import Pagination, get_page_args
+from flask_login import LoginManager, current_user
 import sqlite3
 import json
 from datetime import datetime, timedelta
@@ -14,6 +16,7 @@ from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 from config import CONFIG_BY_NAME, Config
+from models.user import User
 
 def from_json(value):
     """Template filter to parse JSON strings"""
@@ -83,6 +86,27 @@ app.config.from_object(config_class)
 config_class.init_app(app)
 configure_logging(app)
 
+# Initialize Flask-Login
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'auth.login'
+login_manager.login_message = 'Please log in to access this page.'
+login_manager.login_message_category = 'info'
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    """Load user for Flask-Login session management"""
+    conn = get_db_connection()
+    user = User.get_by_id(user_id, conn)
+    conn.close()
+    return user
+
+
+# Register blueprints
+from blueprints.auth import auth_bp
+app.register_blueprint(auth_bp)
+
 
 # Register template filters
 app.jinja_env.filters['from_json'] = from_json
@@ -96,6 +120,23 @@ def get_db_connection():
     conn = sqlite3.connect(app.config['DATABASE_PATH'])
     conn.row_factory = sqlite3.Row  # Return rows as dicts
     return conn
+
+def paginate(conn, query, params, count_query, count_params=(), per_page=20):
+    """A helper function to paginate queries."""
+    page, per_page, offset = get_page_args(page_parameter='page', 
+                                           per_page_parameter='per_page', 
+                                           default_per_page=per_page)
+    
+    total = conn.execute(count_query, count_params).fetchone()[0]
+    
+    paginated_query = query + " LIMIT ? OFFSET ?"
+    results = conn.execute(paginated_query, params + (per_page, offset)).fetchall()
+    
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4',
+                            record_name='items')
+    
+    return results, pagination
 
 @app.errorhandler(404)
 def handle_not_found(error):
@@ -141,7 +182,13 @@ def video_list():
     
     conn = get_db_connection()
     
-    # Build SQL query with sorting
+    # Pagination
+    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', default_per_page=20)
+    
+    # Get total number of videos for pagination
+    total = conn.execute('SELECT COUNT(*) FROM videos').fetchone()[0]
+    
+    # Build SQL query with sorting and pagination
     order_sql = 'ASC' if order == 'asc' else 'DESC'
     valid_sorts = ['upload_date', 'title', 'duration', 'view_count']
     if sort_by not in valid_sorts:
@@ -152,12 +199,21 @@ def video_list():
            view_count, thumbnail_url
     FROM videos 
     ORDER BY {sort_by} {order_sql}
+    LIMIT ? OFFSET ?
     '''
     
-    videos = conn.execute(query).fetchall()
+    videos = conn.execute(query, (per_page, offset)).fetchall()
     conn.close()
     
-    return render_template('video_list.html', videos=videos, sort_by=sort_by, order=order)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4',
+                            record_name='videos')
+    
+    return render_template('video_list.html', 
+                         videos=videos, 
+                         sort_by=sort_by, 
+                         order=order,
+                         pagination=pagination)
 
 @app.route('/video/<video_id>')
 def video_detail(video_id):
@@ -229,24 +285,32 @@ def date_view(date_str):
 def people_list():
     """Sidebar: List all people with video counts"""
     conn = get_db_connection()
-    
+
+    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', default_per_page=20)
+    total = conn.execute('SELECT COUNT(*) FROM people').fetchone()[0]
+
     people = conn.execute('''
     SELECT p.person_id, p.canonical_name, COUNT(vp.video_id) as video_count
     FROM people p
     LEFT JOIN video_people vp ON p.person_id = vp.person_id
     GROUP BY p.person_id, p.canonical_name
     ORDER BY video_count DESC, p.canonical_name ASC
-    ''').fetchall()
+    LIMIT ? OFFSET ?
+    ''', (per_page, offset)).fetchall()
     
-    # Calculate stats for template
-    family_count = sum(1 for p in people if p['canonical_name'].startswith("Matthew's"))
-    collaborator_count = sum(1 for p in people if not p['canonical_name'].startswith("Matthew's") and p['canonical_name'] != 'Matthew Posa')
-    most_featured = max(people, key=lambda x: x['video_count']) if people else None
+    # Calculate stats for template (on all people, not just the page)
+    all_people = conn.execute('''SELECT p.canonical_name, COUNT(vp.video_id) as video_count FROM people p LEFT JOIN video_people vp ON p.person_id = vp.person_id GROUP BY p.person_id''').fetchall()
+    family_count = sum(1 for p in all_people if p['canonical_name'].startswith("Matthew's"))
+    collaborator_count = sum(1 for p in all_people if not p['canonical_name'].startswith("Matthew's") and p['canonical_name'] != 'Matthew Posa')
+    most_featured = max(all_people, key=lambda x: x['video_count']) if all_people else None
     
     conn.close()
+
+    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4', record_name='people')
     
     return render_template('people_list.html', 
                          people=people, 
+                         pagination=pagination,
                          family_count=family_count,
                          collaborator_count=collaborator_count,
                          most_featured=most_featured)
@@ -264,40 +328,50 @@ def person_detail(person_id):
     if not person:
         return "Person not found", 404
     
-    # Get their videos
-    videos = conn.execute('''
+    # Paginate their videos
+    videos_query = '''
     SELECT v.video_id, v.title, v.upload_date, v.thumbnail_url
     FROM videos v
     JOIN video_people vp ON v.video_id = vp.video_id
     WHERE vp.person_id = ?
     ORDER BY v.upload_date DESC
-    ''', (person_id,)).fetchall()
-    
+    '''
+    count_query = 'SELECT COUNT(*) FROM video_people WHERE person_id = ?'
+    videos, pagination = paginate(conn, videos_query, (person_id,), count_query, (person_id,))
+
     conn.close()
     
-    return render_template('person_detail.html', person=person, videos=videos)
+    return render_template('person_detail.html', person=person, videos=videos, pagination=pagination)
 
 @app.route('/dogs')
 def dogs_list():
     """Sidebar: List all dogs with video counts"""
     conn = get_db_connection()
     
+    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', default_per_page=20)
+    total = conn.execute('SELECT COUNT(*) FROM dogs').fetchone()[0]
+
     dogs = conn.execute('''
     SELECT d.dog_id, d.name, d.breed_primary, d.color, d.description, COUNT(vd.video_id) as video_count
     FROM dogs d
     LEFT JOIN video_dogs vd ON d.dog_id = vd.dog_id
     GROUP BY d.dog_id, d.name, d.breed_primary, d.color, d.description
     ORDER BY video_count DESC, d.name ASC
-    ''').fetchall()
+    LIMIT ? OFFSET ?
+    ''', (per_page, offset)).fetchall()
     
-    # Calculate stats for template
-    total_adventures = sum(d['video_count'] for d in dogs)
-    most_featured = max(dogs, key=lambda x: x['video_count']) if dogs else None
+    # Calculate stats for template (on all dogs)
+    all_dogs = conn.execute('''SELECT COUNT(vd.video_id) as video_count FROM dogs d LEFT JOIN video_dogs vd ON d.dog_id = vd.dog_id GROUP BY d.dog_id''').fetchall()
+    total_adventures = sum(d['video_count'] for d in all_dogs)
+    most_featured = max(all_dogs, key=lambda x: x['video_count']) if all_dogs else None
     
     conn.close()
+
+    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4', record_name='dogs')
     
     return render_template('dogs_list.html', 
                          dogs=dogs,
+                         pagination=pagination,
                          total_adventures=total_adventures,
                          most_featured=most_featured)
 
@@ -314,24 +388,29 @@ def dog_detail(dog_id):
     if not dog:
         return "Dog not found", 404
     
-    # Get their videos
-    videos = conn.execute('''
+    # Paginate their videos
+    videos_query = '''
     SELECT v.video_id, v.title, v.upload_date, v.thumbnail_url
     FROM videos v
     JOIN video_dogs vd ON v.video_id = vd.video_id
     WHERE vd.dog_id = ?
     ORDER BY v.upload_date DESC
-    ''', (dog_id,)).fetchall()
+    '''
+    count_query = 'SELECT COUNT(*) FROM video_dogs WHERE dog_id = ?'
+    videos, pagination = paginate(conn, videos_query, (dog_id,), count_query, (dog_id,))
     
     conn.close()
     
-    return render_template('dog_detail.html', dog=dog, videos=videos)
+    return render_template('dog_detail.html', dog=dog, videos=videos, pagination=pagination)
 
 @app.route('/series')
 def series_list():
     """List all episodic series"""
     conn = get_db_connection()
     
+    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', default_per_page=20)
+    total = conn.execute("SELECT COUNT(*) FROM trips WHERE series_type = 'series'").fetchone()[0]
+
     series = conn.execute('''
     SELECT t.trip_id, t.trip_name, t.start_date, t.end_date, t.description,
            COUNT(vv.video_id) as video_count,
@@ -342,16 +421,21 @@ def series_list():
     WHERE t.series_type = 'series'
     GROUP BY t.trip_id
     ORDER BY t.start_date DESC
-    ''').fetchall()
+    LIMIT ? OFFSET ?
+    ''', (per_page, offset)).fetchall()
     
     # Calculate stats
-    total_episodes = sum(s['video_count'] for s in series)
-    longest_series = max(series, key=lambda x: x['video_count']) if series else None
+    all_series = conn.execute("""SELECT t.trip_name, COUNT(vv.video_id) as video_count FROM trips t LEFT JOIN video_versions vv ON t.trip_id = vv.trip_id WHERE t.series_type = 'series' GROUP BY t.trip_id""").fetchall()
+    total_episodes = sum(s['video_count'] for s in all_series)
+    longest_series = max(all_series, key=lambda x: x['video_count']) if all_series else None
     
     conn.close()
+
+    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4', record_name='series')
     
     return render_template('series_list.html', 
                          series=series,
+                         pagination=pagination,
                          total_episodes=total_episodes,
                          longest_series=longest_series)
 
@@ -360,6 +444,9 @@ def trips_list():
     """List all multi-day adventure trips"""
     conn = get_db_connection()
     
+    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', default_per_page=20)
+    total = conn.execute("SELECT COUNT(*) FROM trips WHERE series_type = 'trip'").fetchone()[0]
+
     trips = conn.execute('''
     SELECT t.trip_id, t.trip_name, t.start_date, t.end_date, t.description,
            COUNT(vv.video_id) as video_count,
@@ -371,16 +458,21 @@ def trips_list():
     WHERE t.series_type = 'trip'
     GROUP BY t.trip_id
     ORDER BY t.start_date DESC
-    ''').fetchall()
+    LIMIT ? OFFSET ?
+    ''', (per_page, offset)).fetchall()
     
     # Calculate stats
-    total_adventures = sum(t['video_count'] for t in trips)
-    longest_trip = max(trips, key=lambda x: x['video_count']) if trips else None
+    all_trips = conn.execute("""SELECT t.trip_name, COUNT(vv.video_id) as video_count FROM trips t LEFT JOIN video_versions vv ON t.trip_id = vv.trip_id WHERE t.series_type = 'trip' GROUP BY t.trip_id""").fetchall()
+    total_adventures = sum(t['video_count'] for t in all_trips)
+    longest_trip = max(all_trips, key=lambda x: x['video_count']) if all_trips else None
     
     conn.close()
+
+    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4', record_name='trips')
     
     return render_template('trips_list.html', 
                          trips=trips,
+                         pagination=pagination,
                          total_adventures=total_adventures,
                          longest_trip=longest_trip)
 
@@ -398,14 +490,16 @@ def trip_detail(trip_id):
         return "Trip not found", 404
     
     # Get all videos in this trip
-    videos = conn.execute('''
+    videos_query = '''
     SELECT v.video_id, v.title, v.upload_date, v.thumbnail_url, v.duration,
            vv.part_number, vv.version_type, vv.total_parts
     FROM videos v
     JOIN video_versions vv ON v.video_id = vv.video_id
     WHERE vv.trip_id = ?
     ORDER BY vv.part_number ASC
-    ''', (trip_id,)).fetchall()
+    '''
+    count_query = 'SELECT COUNT(*) FROM video_versions WHERE trip_id = ?'
+    videos, pagination = paginate(conn, videos_query, (trip_id,), count_query, (trip_id,))
     
     # Get trip duration in days
     if trip['start_date'] and trip['end_date']:
@@ -421,6 +515,7 @@ def trip_detail(trip_id):
     return render_template('trip_detail.html', 
                          trip=trip, 
                          videos=videos, 
+                         pagination=pagination,
                          duration_days=duration_days)
 
 @app.route('/search')
@@ -433,17 +528,75 @@ def search():
     
     conn = get_db_connection()
     
-    # Simple text search across title and description
+    # Sanitize the query for FTS5: escape double quotes and wrap in double quotes
+    # to treat the entire search as a single phrase.
+    sanitized_query = f'"' + query.replace('"', '""') + '"'
+    
+    # Use the FTS table for fast text search
     videos = conn.execute('''
-    SELECT video_id, title, description, upload_date, thumbnail_url
-    FROM videos 
-    WHERE title LIKE ? OR description LIKE ?
-    ORDER BY upload_date DESC
-    ''', (f'%{query}%', f'%{query}%')).fetchall()
+    SELECT v.video_id, v.title, v.description, v.upload_date, v.thumbnail_url
+    FROM videos_fts f
+    JOIN videos v ON f.rowid = v.rowid
+    WHERE f.videos_fts MATCH ?
+    ORDER BY v.upload_date DESC
+    ''', (sanitized_query,)).fetchall()
     
     conn.close()
     
     return render_template('search_results.html', videos=videos, query=query)
+
+
+# Flask CLI Commands
+@app.cli.command('create-admin')
+def create_admin():
+    """Create a new admin user via CLI
+
+    Usage: flask create-admin
+    """
+    import click
+
+    click.echo('Create Admin User')
+    click.echo('=' * 40)
+
+    username = click.prompt('Username', type=str)
+    email = click.prompt('Email', type=str)
+    password = click.prompt('Password', hide_input=True, confirmation_prompt=True)
+
+    # Validate inputs
+    if not username or not email or not password:
+        click.echo('Error: All fields are required', err=True)
+        return
+
+    # Create user
+    conn = get_db_connection()
+    try:
+        # Check if username exists
+        existing = conn.execute('SELECT user_id FROM users WHERE username = ?', (username,)).fetchone()
+        if existing:
+            click.echo(f'Error: Username "{username}" already exists', err=True)
+            conn.close()
+            return
+
+        # Check if email exists
+        existing = conn.execute('SELECT user_id FROM users WHERE email = ?', (email,)).fetchone()
+        if existing:
+            click.echo(f'Error: Email "{email}" already exists', err=True)
+            conn.close()
+            return
+
+        # Create admin user
+        user = User.create(username, email, password, role='admin', db_conn=conn)
+        click.echo(f'\n✓ Admin user created successfully!')
+        click.echo(f'  Username: {user.username}')
+        click.echo(f'  Email: {user.email}')
+        click.echo(f'  Role: {user.role}')
+        click.echo(f'  User ID: {user.user_id}\n')
+
+    except Exception as e:
+        click.echo(f'Error creating user: {e}', err=True)
+    finally:
+        conn.close()
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)

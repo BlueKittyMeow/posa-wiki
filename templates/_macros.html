@@ -1,0 +1,39 @@
+{% macro render_video_card(video, part_number=None, version_type=None, show_youtube_link=False) %}
+<div class="video-card" data-part="{{ part_number }}" data-date="{{ video.upload_date }}" data-title="{{ video.title }}">
+    <div class="video-thumbnail" style="position: relative;">
+        <a href="{{ url_for('video_detail', video_id=video.video_id) }}">
+            {% if video.thumbnail_url %}
+                <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" loading="lazy">
+            {% else %}
+                <span>📹 No Thumbnail</span>
+            {% endif %}
+        </a>
+        {% if part_number is not none %}
+        <div style="position: absolute; top: 0.5rem; left: 0.5rem; background: var(--accent-purple); color: var(--bg-primary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">
+            {% if version_type == 'episode' %}EP
+            {% elif version_type == 'night' %}Night
+            {% else %}Part{% endif %}
+            {{ part_number }}
+        </div>
+        {% endif %}
+        {% if video.duration %}
+        <div style="position: absolute; bottom: 0.5rem; right: 0.5rem; background: rgba(0,0,0,0.8); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">
+            {{ video.duration|format_duration }}
+        </div>
+        {% endif %}
+    </div>
+    <div class="video-info">
+        <h3 class="video-title">
+            <a href="{{ url_for('video_detail', video_id=video.video_id) }}" style="color: inherit; text-decoration: none;">
+                {{ video.title }}
+            </a>
+        </h3>
+        <div class="video-meta">
+            <span>📅 <a href="{{ url_for('date_view', date_str=video.upload_date[:10]) }}">{{ video.upload_date[:10] if video.upload_date else 'Unknown Date' }}</a></span>
+            {% if show_youtube_link %}
+            <a href="https://youtube.com/watch?v={{ video.video_id }}" target="_blank" class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">📺 YouTube</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endmacro %}

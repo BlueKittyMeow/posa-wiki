@@ -104,6 +104,23 @@
                     </button>
                 </div>
             </div>
+
+            {% if current_user.is_authenticated %}
+                <div class="theme-toggle-section">
+                    <h2>👤 {{ current_user.username }}</h2>
+                    <ul class="sidebar-nav">
+                        <li><span class="entity-count" style="margin-right: 0.5rem;">{{ current_user.role }}</span></li>
+                        <li><a href="{{ url_for('auth.logout') }}">🔓 Logout</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <div class="theme-toggle-section">
+                    <h2>🔐 Admin</h2>
+                    <ul class="sidebar-nav">
+                        <li><a href="{{ url_for('auth.login') }}">🔓 Login</a></li>
+                    </ul>
+                </div>
+            {% endif %}
         </nav>
 
         <!-- Main Content -->
