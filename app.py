@@ -7,6 +7,7 @@ Dark hacker girl aesthetic with fairyfloss theme and rounded edges
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_paginate import Pagination, get_page_args
 from flask_login import LoginManager, current_user
+from flask_wtf import CSRFProtect
 import sqlite3
 import json
 from datetime import datetime, timedelta
@@ -85,6 +86,9 @@ app = Flask(__name__)
 app.config.from_object(config_class)
 config_class.init_app(app)
 configure_logging(app)
+
+csrf = CSRFProtect()
+csrf.init_app(app)
 
 # Initialize Flask-Login
 login_manager = LoginManager()

@@ -19,19 +19,25 @@
     {% endwith %}
 
     <form method="POST" action="{{ url_for('auth.login') }}">
-        <!-- CSRF token will be added here in Step 6 by Codex -->
+        {{ form.hidden_tag() }}
 
         <div class="form-group mb-2">
             <label class="form-label" for="username">Username</label>
             <input
                 type="text"
                 id="username"
-                name="username"
+                name="{{ form.username.name }}"
+                value="{{ form.username.data|default('', true) }}"
                 required
                 autofocus
                 style="width: 100%;"
                 placeholder="Enter your username"
             >
+            {% if form.username.errors %}
+                <div class="form-error" style="color: var(--accent-danger); font-size: 0.85rem; margin-top: 0.25rem;">
+                    {{ form.username.errors[0] }}
+                </div>
+            {% endif %}
         </div>
 
         <div class="form-group mb-2">
@@ -39,26 +45,32 @@
             <input
                 type="password"
                 id="password"
-                name="password"
+                name="{{ form.password.name }}"
                 required
                 style="width: 100%;"
                 placeholder="Enter your password"
             >
+            {% if form.password.errors %}
+                <div class="form-error" style="color: var(--accent-danger); font-size: 0.85rem; margin-top: 0.25rem;">
+                    {{ form.password.errors[0] }}
+                </div>
+            {% endif %}
         </div>
 
         <div class="form-group mb-2" style="flex-direction: row; align-items: center; gap: 0.5rem;">
             <input
                 type="checkbox"
                 id="remember"
-                name="remember"
+                name="{{ form.remember_me.name }}"
                 style="width: auto;"
+                {% if form.remember_me.data %}checked{% endif %}
             >
             <label for="remember" style="margin: 0; cursor: pointer;">Remember me</label>
         </div>
 
         <div style="margin-top: 1.5rem;">
             <button type="submit" class="btn" style="width: 100%;">
-                🔓 Login
+                🔓 {{ form.submit.label.text }}
             </button>
         </div>
     </form>

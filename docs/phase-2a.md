@@ -84,8 +84,10 @@ This document outlines the concrete steps for Phase 2A, focusing on enhancing th
 
 ### Step 6: Implement Form Security (CSRF) - Codex
 
+**Status:** ✅ Completed (Codex)
+
 **Goal:** Protect the application against Cross-Site Request Forgery attacks, starting with the new login form.
 
-1.  **Add Dependency:** Add `Flask-WTF` to `requirements.txt`.
-2.  **Initialize CSRF Protection:** In `app.py`, initialize `CSRFProtect(app)` after loading the application configuration.
-3.  **Secure Login Form:** Integrate the CSRF token into the login form located in the `auth` blueprint's template. This will serve as the first and primary test case for CSRF protection.
+1. ✅ **Add Dependency:** Added `Flask-WTF` to `requirements.txt` alongside python-dotenv (Codex).
+2. ✅ **Initialize CSRF Protection:** Registered `CSRFProtect` in `app.py` so every POST requires a valid token (Codex).
+3. ✅ **Secure Login Form:** Introduced `LoginForm` (Flask-WTF) and added CSRF token + validation to `/auth/login` (Codex).

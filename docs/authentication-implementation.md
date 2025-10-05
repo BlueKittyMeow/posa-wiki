@@ -111,6 +111,16 @@ Sidebar changes:
 - Shows "Logout" link for authenticated users
 - Theme-consistent styling
 
+
+### 9. Flask-WTF Login Form
+**Files:** `forms/auth.py`, `templates/auth/login.html`
+
+- Adds `LoginForm` with CSRF protection via Flask-WTF
+- Centralizes field validation (DataRequired, remember me)
+- `login` route updated to use `form.validate_on_submit()`
+- Template renders `form.hidden_tag()` for CSRF token
+- Displays inline validation errors for missing fields
+
 ---
 
 ## How to Use
@@ -174,9 +184,9 @@ def manage_users():
 - Role-based access control
 - Last login tracking
 
-### Coming in Step 6 (Codex) ⏳
-- CSRF protection via Flask-WTF
-- CSRF tokens in login form
+### Step 6 Updates (Codex) ✅
+- CSRF protection via Flask-WTF (enabled)
+- CSRF tokens in login form (`LoginForm` with `form.hidden_tag()`)
 
 ### Recommended for Phase 2B 📋
 - Rate limiting for login attempts
@@ -197,6 +207,9 @@ def manage_users():
 │   ├── __init__.py
 │   └── user.py
 ├── blueprints/
+│   ├── __init__.py
+│   └── auth.py
+├── forms/
 │   ├── __init__.py
 │   └── auth.py
 ├── utils/
