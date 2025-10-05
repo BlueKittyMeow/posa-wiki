@@ -135,11 +135,13 @@ function applyTheme(theme) {
     const themeButtons = document.querySelectorAll('.theme-btn');
 
     // Remove all theme classes
-    root.classList.remove('theme-fairyfloss', 'theme-professional');
+    root.classList.remove('theme-fairyfloss', 'theme-professional', 'theme-academia');
 
-    // Add the selected theme class (fairyfloss is default, so only add class for professional)
+    // Add the selected theme class (fairyfloss is default, so only add class for non-default themes)
     if (theme === 'professional') {
         root.classList.add('theme-professional');
+    } else if (theme === 'academia') {
+        root.classList.add('theme-academia');
     }
 
     // Update active button state

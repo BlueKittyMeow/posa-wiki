@@ -116,7 +116,7 @@
         </div>
         
         {% for series in series_info %}
-            <div style="background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-mint) 100%); padding: 1.5rem; border-radius: var(--border-radius); margin-bottom: 1rem;">
+            <div style="background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%); padding: 1.5rem; border-radius: var(--border-radius); margin-bottom: 1rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
                         <h4 style="margin: 0; color: var(--bg-primary);">{{ series.trip_name }}</h4>
@@ -148,7 +148,7 @@
         {% if tags %}
             <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                 {% for tag in tags %}
-                    <span style="background: var(--accent-mint); color: var(--bg-primary); padding: 0.5rem 1rem; border-radius: var(--border-radius-sm); font-size: 0.9rem;">{{ tag }}</span>
+                    <span style="background: var(--accent-secondary); color: var(--bg-primary); padding: 0.5rem 1rem; border-radius: var(--border-radius-sm); font-size: 0.9rem;">{{ tag }}</span>
                 {% endfor %}
             </div>
         {% endif %}

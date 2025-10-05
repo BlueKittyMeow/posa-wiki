@@ -67,6 +67,40 @@
   --accent-danger: #ff6b6b;
 }
 
+:root.theme-academia {
+  /* Warm paper and parchment bases */
+  --bg-primary: #f4f1e8;          /* aged book page ecru */
+  --bg-secondary: #e8e3d6;        /* slightly darker parchment */
+  --bg-tertiary: #d4cdb8;         /* worn paper edges */
+
+  /* Rich academic accents */
+  --accent-primary: #8b4513;      /* saddle brown leather */
+  --accent-secondary: #2f5233;    /* forest green book cloth */
+  --accent-tertiary: #6b2e2e;     /* burgundy book spine */
+
+  /* Text like old ink */
+  --text-primary: #2a2419;        /* sepia-black */
+  --text-secondary: #554d42;      /* faded ink */
+  --text-muted: #8b8175;          /* aged text */
+
+  /* Card/content areas */
+  --card-bg: #fdfbf7;             /* clean cream paper */
+  --card-border: #c9bfa6;         /* antique gold edge */
+  --card-hover: #f9f5eb;          /* warmer highlight */
+
+  /* Interactive elements */
+  --link-color: #5a4a2f;          /* old library catalog brown */
+  --link-hover: #8b4513;          /* warm leather */
+  --button-bg: #d4cdb8;           /* neutral tweed */
+  --button-hover: #c2b9a3;        /* pressed tweed */
+
+  /* Shadows for depth (subtle, like bookshelf shadows) */
+  --shadow: 0 4px 12px rgba(42, 36, 25, 0.08);
+  --shadow-lg: 0 8px 24px rgba(42, 36, 25, 0.12);
+  --accent-warning: #d4851f;
+  --accent-danger: #a8443d;
+}
+
 /* Global Styles */
 * {
   margin: 0;
