@@ -16,27 +16,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle window resize
     window.addEventListener('resize', function() {
-        if (window.innerWidth <= 768 && !document.querySelector('.mobile-toggle')) {
+        if (window.innerWidth <= 768 && !document.querySelector('.mobile-header')) {
             createMobileToggle();
         } else if (window.innerWidth > 768) {
-            const toggle = document.querySelector('.mobile-toggle');
-            if (toggle) toggle.remove();
+            const header = document.querySelector('.mobile-header');
+            const overlay = document.querySelector('.sidebar-overlay');
+            if (header) header.remove();
+            if (overlay) overlay.remove();
             sidebar.classList.remove('open');
         }
     });
 });
 
 function createMobileToggle() {
+    // Create mobile header
+    const header = document.createElement('div');
+    header.className = 'mobile-header';
+
+    // Create toggle button
     const toggle = document.createElement('button');
-    toggle.className = 'mobile-toggle btn';
+    toggle.className = 'mobile-toggle';
     toggle.innerHTML = '☰ Menu';
-    toggle.style.cssText = 'position: fixed; top: 1rem; left: 1rem; z-index: 200;';
-    
+
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+
     toggle.addEventListener('click', function() {
-        document.querySelector('.sidebar').classList.toggle('open');
+        const sidebar = document.querySelector('.sidebar');
+        const isOpen = sidebar.classList.toggle('open');
+        overlay.style.display = isOpen ? 'block' : 'none';
     });
-    
-    document.body.appendChild(toggle);
+
+    // Close sidebar when clicking overlay
+    overlay.addEventListener('click', function() {
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.classList.remove('open');
+        overlay.style.display = 'none';
+    });
+
+    header.appendChild(toggle);
+    document.body.insertBefore(header, document.body.firstChild);
+    document.body.appendChild(overlay);
 }
 
 // Date picker utilities
