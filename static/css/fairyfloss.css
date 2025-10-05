@@ -52,6 +52,7 @@
   --border-radius-sm: 6px;
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --focus-shadow: rgba(197, 163, 255, 0.1);
 }
 
 :root.theme-professional {
@@ -59,12 +60,14 @@
   --bg-primary: #1e1e1e;
   --bg-secondary: #2d2d2d;
   --bg-tertiary: #2d2d2d;
+  --bg-error: #3a3a3a;
   --accent-primary: #4a9eff;
   --accent-secondary: #6cb6ff;
   --text-primary: #e4e4e4;
   --text-muted: #a0a0a0;
   --accent-warning: #ffa500;
   --accent-danger: #ff6b6b;
+  --focus-shadow: rgba(74, 158, 255, 0.15);
 }
 
 :root.theme-academia {
@@ -72,6 +75,7 @@
   --bg-primary: #f4f1e8;          /* aged book page ecru */
   --bg-secondary: #e8e3d6;        /* slightly darker parchment */
   --bg-tertiary: #d4cdb8;         /* worn paper edges */
+  --bg-error: #c2b9a3;            /* pressed tweed for hover states */
 
   /* Rich academic accents */
   --accent-primary: #8b4513;      /* saddle brown leather */
@@ -99,6 +103,7 @@
   --shadow-lg: 0 8px 24px rgba(42, 36, 25, 0.12);
   --accent-warning: #d4851f;
   --accent-danger: #a8443d;
+  --focus-shadow: rgba(139, 69, 19, 0.12);
 }
 
 /* Global Styles */
@@ -238,7 +243,7 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(197, 163, 255, 0.1);
+  box-shadow: 0 0 0 3px var(--focus-shadow);
 }
 
 /* Buttons */
@@ -595,20 +600,80 @@ textarea:focus {
 }
 
 @media (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+
   .main-content {
-    padding: 1rem;
+    padding: 0.75rem;
   }
 
   .header-nav {
-    padding: 1rem;
+    padding: 0.75rem;
   }
 
   .form-group {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   .btn {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .card {
+    padding: 0.75rem;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .video-thumbnail {
+    height: 140px;
+  }
+
+  .video-info {
+    padding: 0.75rem;
+  }
+
+  .video-title {
     font-size: 0.9rem;
+  }
+
+  .video-meta {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 360px) {
+  body {
+    font-size: 12px;
+  }
+
+  .main-content {
+    padding: 0.5rem;
+  }
+
+  .mobile-header {
+    padding: 0.75rem;
+  }
+
+  .mobile-toggle {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .video-thumbnail {
+    height: 120px;
+  }
+
+  .card {
+    padding: 0.5rem;
+  }
+
+  .btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
   }
 }
