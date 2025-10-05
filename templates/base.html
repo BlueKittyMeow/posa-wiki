@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Posa Wiki{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/fairyfloss.css') }}">
+    <script>
+        // Apply theme immediately to prevent flash
+        (function() {
+            const theme = localStorage.getItem('posa-wiki-theme') || 'fairyfloss';
+            if (theme === 'professional') {
+                document.documentElement.classList.add('theme-professional');
+            } else if (theme === 'academia') {
+                document.documentElement.classList.add('theme-academia');
+            }
+        })();
+    </script>
     {% block extra_css %}{% endblock %}
 </head>
 <body>
