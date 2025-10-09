@@ -12,7 +12,8 @@
       "Bash(find:*)",
       "Bash(python run_migration.py:*)",
       "Bash(source:*)",
-      "Bash(pip install:*)"
+      "Bash(pip install:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []
