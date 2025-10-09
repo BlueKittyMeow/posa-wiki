@@ -70,7 +70,7 @@ def configure_logging(app):
     logs_dir.mkdir(exist_ok=True)
 
     log_path = logs_dir / 'posa_wiki.log'
-    file_handler = RotatingFileHandler(log_path, maxBytes=1024 * 1024, backupCount=5)
+    file_handler = RotatingFileHandler(log_path, maxBytes=10 * 1024 * 1024, backupCount=5)
     formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
     file_handler.setFormatter(formatter)
     file_handler.setLevel(logging.INFO)
@@ -365,7 +365,12 @@ def dogs_list():
     ''', (per_page, offset)).fetchall()
     
     # Calculate stats for template (on all dogs)
-    all_dogs = conn.execute('''SELECT COUNT(vd.video_id) as video_count FROM dogs d LEFT JOIN video_dogs vd ON d.dog_id = vd.dog_id GROUP BY d.dog_id''').fetchall()
+    all_dogs = conn.execute('''
+    SELECT d.dog_id, d.name, COUNT(vd.video_id) as video_count
+    FROM dogs d
+    LEFT JOIN video_dogs vd ON d.dog_id = vd.dog_id
+    GROUP BY d.dog_id, d.name
+    ''').fetchall()
     total_adventures = sum(d['video_count'] for d in all_dogs)
     most_featured = max(all_dogs, key=lambda x: x['video_count']) if all_dogs else None
     
@@ -603,4 +608,4 @@ def create_admin():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    app.run(host='0.0.0.0', port=5001)

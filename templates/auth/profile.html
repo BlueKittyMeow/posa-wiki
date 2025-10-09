@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile - Posa Wiki{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 2rem auto;">
+    <div class="card-header">
+        <h2 class="card-title">👤 Account Overview</h2>
+    </div>
+    <div class="card-body" style="display: grid; gap: 1rem;">
+        <div>
+            <span class="text-muted">Username</span>
+            <div style="font-size: 1.1rem;">{{ current_user.username }}</div>
+        </div>
+        <div>
+            <span class="text-muted">Role</span>
+            <div style="font-size: 1.1rem; text-transform: capitalize;">{{ current_user.role }}</div>
+        </div>
+        <div>
+            <span class="text-muted">Email</span>
+            <div style="font-size: 1.1rem;">{{ current_user.email }}</div>
+        </div>
+        <div>
+            <span class="text-muted">Last Login</span>
+            <div style="font-size: 1.1rem;">{{ current_user.last_login or 'First login pending' }}</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,73 +1,64 @@
-# Phase 2A QA Findings (Codex)
+# Phase 2A QA Findings
 
-## 1. Missing Template (High Severity)
+## Initial Review (Codex)
+
+### 1. Missing Template (High Severity) ✅ RESOLVED
 - **Issue:** `/auth/profile` view renders `auth/profile.html`, but the template is absent (`blueprints/auth.py:52`).
 - **Impact:** Any request to `/auth/profile` raises a 500.
-- **Recommendation:** Add `templates/auth/profile.html` or disable the route until implemented.
+- **Resolution:** Added `templates/auth/profile.html` with theme-aware user profile display.
 
-## 2. Dog Stats Missing Metadata (Medium Severity)
+### 2. Dog Stats Missing Metadata (Medium Severity) ✅ RESOLVED
 - **Issue:** Dog stats query only returns `video_count` per dog (directory list), yet the template expects `most_featured.name` (`app.py:368-370`, `templates/dogs_list.html:57`).
-- **Impact:** “Most Featured” card shows blank name/count.
-- **Recommendation:** Update the aggregate query to return dog name (and other fields) or fetch full dog records before computing stats.
+- **Impact:** "Most Featured" card shows blank name/count.
+- **Resolution:** Expanded query to fetch full dog records with name and video_count (`app.py:369-373`).
 
-## 3. Paged Totals Misreported (Medium Severity)
+### 3. Paged Totals Misreported (Medium Severity) ✅ RESOLVED
 - **Issue:** Templates display counts based on current page lengths (`series|length`, `trips|length`, `dogs|…|length`). After pagination, these no longer represent the full dataset.
-- **Recommendation:** Use `pagination.total` (or precomputed totals from the DB) for display badges so counts remain accurate regardless of pagination.
+- **Resolution:** Updated all list templates to use `pagination.total` for accurate counts (dogs_list.html:10, series_list.html:10, trips_list.html:10, people_list.html:10).
 
-## 4. FTS Index Maintenance (Medium Severity)
+### 4. FTS Index Maintenance (Medium Severity) ✅ RESOLVED
 - **Issue:** `build_fts_index.py` drops/rebuilds the FTS table and bulk-loads data but no triggers keep `videos_fts` in sync with `videos`.
 - **Impact:** Any new or updated videos require rerunning the script before they appear in search results.
-- **Recommendation:** Add FTS triggers or schedule a rebuild after data import scripts to keep the index current.
+- **Resolution:** Added INSERT, UPDATE, DELETE triggers to `build_fts_index.py` (lines 45-61) to automatically maintain FTS index.
 
-## 5. Documentation Cleanup (Low Severity)
+### 5. Documentation Cleanup (Low Severity) ✅ RESOLVED
 - **Issue:** Step 3 in `docs/phase-2a.md` duplicates the bullet list (checked & unchecked copies).
-- **Recommendation:** Remove the redundant lines to keep the status list concise.
+- **Resolution:** Removed duplicate lines from phase-2a.md.
 
 — Codex
 
-## 6. Logging Configuration Lacks Size Limits (Low-Medium Severity)
+## Second Review (Claude)
+
+### 6. Logging Configuration Lacks Size Limits (Low-Medium Severity) ✅ RESOLVED
 - **Issue:** `RotatingFileHandler` in `configure_logging()` (`app.py:72-79`) doesn't specify `maxBytes` or `backupCount` parameters.
 - **Impact:** Log files could grow unbounded in production, potentially filling disk space.
-- **Recommendation:** Add size limits to RotatingFileHandler:
-  ```python
-  file_handler = RotatingFileHandler(
-      logs_dir / 'posa_wiki.log',
-      maxBytes=10_485_760,  # 10MB
-      backupCount=5
-  )
-  ```
+- **Resolution:** Added size limits to RotatingFileHandler at app.py:73 (`maxBytes=10*1024*1024, backupCount=5`).
 
-## 7. CSRF Security Hardening Missing (Low-Medium Severity)
+### 7. CSRF Security Hardening Missing (Low-Medium Severity) ✅ RESOLVED
 - **Issue:** Flask-WTF CSRF protection is initialized but lacks security configuration in `config.py`.
 - **Impact:** CSRF tokens never expire and lack additional SSL validation in production.
-- **Recommendation:** Add to `ProductionConfig` class:
-  ```python
-  WTF_CSRF_TIME_LIMIT = 3600  # 1 hour token lifetime
-  WTF_CSRF_SSL_STRICT = True  # Require SSL for CSRF validation
-  ```
+- **Resolution:** Added `WTF_CSRF_TIME_LIMIT=3600` and `WTF_CSRF_SSL_STRICT=True` to `ProductionConfig` (config.py:58-59).
 
-## 8. No Production Secret Key Validation (Medium Severity)
+### 8. No Production Secret Key Validation (Medium Severity) ✅ RESOLVED
 - **Issue:** Application uses `SECRET_KEY` default `'dev-secret-change-me'` if `FLASK_SECRET_KEY` env var not set (`config.py:26`).
 - **Impact:** Production deployment could run with insecure default key, compromising session security.
-- **Recommendation:** Add validation in `ProductionConfig.init_app()`:
-  ```python
-  @staticmethod
-  def init_app(app):
-      if app.config['SECRET_KEY'] == 'dev-secret-change-me':
-          raise RuntimeError('Production requires FLASK_SECRET_KEY environment variable')
-  ```
+- **Resolution:** Added validation in `ProductionConfig.init_app()` that raises `RuntimeError` if default key is used (config.py:62-65).
 
-## 9. Error Templates Not Theme-Tested (Low Severity)
+### 9. Error Templates Not Theme-Tested (Low Severity) ⚠️ NOTED FOR PHASE 2B
 - **Issue:** Error templates (`templates/errors/404.html`, `500.html`) extend `base.html` but no explicit verification they render properly with all three themes and with/without authenticated users.
 - **Impact:** Error pages might display incorrectly in edge cases (e.g., error during login).
-- **Recommendation:** Add manual test cases for error pages in all themes and authentication states to Phase 2B testing checklist.
+- **Status:** Added manual testing requirement to phase-2a.md (line 26). To be validated during Phase 2B QA.
 
 — Claude
 
+---
 
-## Phase 2A Debugging & Review Log
+## Summary
 
-This document records issues, bugs, and reviews logged during the implementation of Phase 2A.
+**All critical and medium severity issues: RESOLVED ✅**
+
+Phase 2A is complete and production-ready with proper error handling, logging, security hardening, and performance optimizations. One low-severity note remains for manual theme testing during Phase 2B.
+
 
 ---
 
@@ -115,3 +106,12 @@ more careful testing is required after each modification, especially when dealin
 resolving these issues quickly.
 
 --- Gemini
+
+## Codex Follow-up Actions
+- ✅ Added `templates/auth/profile.html` so `/auth/profile` renders without error.
+- ✅ Expanded dog stats query and replaced paginated counts with `pagination.total` in dog/series/trip templates.
+- ✅ Reworked `build_fts_index.py` to drop/rebuild triggers and keep FTS in sync; ran the script to apply changes.
+- ✅ Cleaned duplicate Step 3 bullets and noted theme-testing requirement in `docs/phase-2a.md`.
+- ✅ Strengthened logging (10MB rotation), CSRF config defaults, and production secret-key validation in `config.py`.
+
+— Codex

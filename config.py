@@ -36,10 +36,12 @@ class Config:
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = os.getenv('SESSION_COOKIE_SAMESITE', 'Lax')
 
+    WTF_CSRF_TIME_LIMIT = None
+    WTF_CSRF_SSL_STRICT = False
+
     @staticmethod
     def init_app(app):
         """Hook for any environment-specific initialization."""
-        # Nothing needed yet, but method kept for parity with Flask patterns
         return None
 
 class DevelopmentConfig(Config):
@@ -53,6 +55,14 @@ class ProductionConfig(Config):
     TESTING = False
     SESSION_COOKIE_SECURE = True
     SEND_FILE_MAX_AGE_DEFAULT = 31536000  # one year
+    WTF_CSRF_TIME_LIMIT = 3600
+    WTF_CSRF_SSL_STRICT = True
+
+    @staticmethod
+    def init_app(app):
+        Config.init_app(app)
+        if app.config['SECRET_KEY'] == 'dev-secret-change-me':
+            raise RuntimeError('Production requires FLASK_SECRET_KEY environment variable')
 
 class TestingConfig(Config):
     DEBUG = False

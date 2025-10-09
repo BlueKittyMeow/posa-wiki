@@ -7,7 +7,7 @@
     <div class="card-header">
         <div>
             <h2 class="card-title">📺 Episodic Series</h2>
-            <span class="text-muted">{{ series|length }} series</span>
+            <span class="text-muted">{{ pagination.total }} series</span>
         </div>
     </div>
 
@@ -77,7 +77,7 @@
     <div class="card">
         <h3 class="text-accent">🎬 Active Series</h3>
         <div style="font-size: 1.5rem; margin: 1rem 0;">
-            {{ series|length }}
+            {{ pagination.total }}
         </div>
         <div class="text-muted">Different shows</div>
     </div>

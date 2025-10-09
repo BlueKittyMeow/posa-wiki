@@ -62,7 +62,7 @@
     <div class="card">
         <h3 class="text-accent">🎬 Adventure Stars</h3>
         <div style="font-size: 1.5rem; margin: 1rem 0;">
-            {{ dogs|selectattr('video_count')|list|length }}
+            {{ pagination.total }}
         </div>
         <div class="text-muted">Active adventure dogs</div>
     </div>

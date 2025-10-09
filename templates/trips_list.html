@@ -7,7 +7,7 @@
     <div class="card-header">
         <div>
             <h2 class="card-title">🗓️ Multi-Part Adventures</h2>
-            <span class="text-muted">{{ trips|length }} trips</span>
+            <span class="text-muted">{{ pagination.total }} trips</span>
         </div>
     </div>
 
@@ -82,7 +82,7 @@
     <div class="card">
         <h3 class="text-accent">📺 Series Types</h3>
         <div style="font-size: 1.5rem; margin: 1rem 0;">
-            {{ trips|length }}
+            {{ pagination.total }}
         </div>
         <div class="text-muted">Different adventures</div>
     </div>

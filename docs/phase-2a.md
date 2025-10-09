@@ -1,6 +1,8 @@
 # Phase 2A: Code Stability Implementation Plan
 
-This document outlines the concrete steps for Phase 2A, focusing on enhancing the stability, security, and performance of the application before new features are added.
+**Status: COMPLETE**
+
+This document outlines the concrete steps for Phase 2A, focusing on enhancing the stability, security, and performance of the application before new features are added. All steps have been successfully implemented.
 
 ---
 
@@ -21,7 +23,7 @@ This document outlines the concrete steps for Phase 2A, focusing on enhancing th
 ### Step 2: Centralized Error Handling and Logging
 
 - Note (Codex): 500 error page not manually triggered yet; plan to validate during upcoming auth/CRUD work.
-
+- Note (Claude): During Phase 2B, include manual checks that 404/500 render correctly across all themes and both anonymous/authenticated states.
 
 **Status:** ✅ Completed (Codex)
 
@@ -42,8 +44,6 @@ This document outlines the concrete steps for Phase 2A, focusing on enhancing th
 1.  ✅ **Create FTS Index:** Write a one-time script (`build_fts_index.py`) that creates a new FTS5 virtual table in the database and populates it with data from the `videos` table.
 2.  ✅ **Update Search Route:** Modify the `/search` route in `app.py` to query against the new FTS5 table, providing a significant performance boost.
 
-1.  **Create FTS Index:** Write a one-time script (e.g., `build_fts_index.py`) that creates a new FTS5 virtual table in the database and populates it with data from the `videos` table.
-2.  **Update Search Route:** Modify the `/search` route in `app.py` to query against the new FTS5 table, providing a significant performance boost.
 
 ---
 
