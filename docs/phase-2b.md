@@ -1,7 +1,27 @@
 # Phase 2B: API & CRUD Development
 
-**Status:** Planning Complete | Ready for Implementation
+**Status:** In Progress - Step 1.2 Complete ✓
 **Goal:** Deliver a fully functional admin panel with CRUD operations for all major data models, a versioned REST API, and hardened security.
+
+## Progress Update
+
+**Step 1.1: Blueprint Restructuring** ✓ COMPLETE
+- Created admin.py, crud.py, api/__init__.py, api/v1/__init__.py blueprints
+- Registered all blueprints in app.py
+- Verified all existing routes still functional
+
+**Step 1.2: Service Layer Scaffold** ✓ COMPLETE
+- Created services/base_service.py with custom exceptions (NotFoundError, ValidationError, DatabaseError, ReferenceError)
+- Created migration 005_add_soft_delete.sql (adds deleted_at and deleted_by columns to all major tables)
+- Implemented services/person_service.py with complete functionality:
+  - CRUD operations (create, read, update, delete, list)
+  - Soft delete (default) and hard delete (with reference checking)
+  - Restore functionality for soft-deleted items
+  - Alias management (get, add, remove, update "also known as" names)
+- Written 39 comprehensive unit tests (21 core + 18 alias tests) - ALL PASSING
+- Service layer pattern validated and ready for replication to other entities
+
+**Next Steps:** Step 1.3 - Forms Library, then Step 1.4 - Security Infrastructure
 
 ---
 
@@ -117,8 +137,16 @@ Server-side forms require: One route, one template
 **1.2. Service Layer Scaffold**
 - Create `services/` directory with `base_service.py` (shared utilities)
 - Implement `services/person_service.py` with basic CRUD operations
-- Add error handling: custom exceptions (`NotFoundError`, `ValidationError`)
+- Add error handling: custom exceptions (`NotFoundError`, `ValidationError`, `DatabaseError`)
+- Implement soft delete pattern (default) with `deleted_at` column
+- Implement hard delete with reference cleanup and warnings
 - Write unit tests for service layer (mock DB, test logic)
+
+**Deletion Strategy:**
+- **Soft Delete (Default):** Mark `deleted_at = NOW()`, preserve all references, can be restored
+- **Hard Delete (Admin Only):** Check for references, warn user, cascade delete if confirmed
+- **Reference Cleanup:** Service layer checks `video_people`, `video_dogs` etc. before hard delete
+- See "Referential Integrity & Deletion Strategy" section below for details
 
 **1.3. Forms Library**
 - Create `forms/crud_forms.py` with reusable field sets
@@ -150,6 +178,16 @@ Server-side forms require: One route, one template
 - Edit user (username, email, role, active status)
 - Deactivate user (soft delete, preserve for audit trail)
 - All routes protected with `@admin_required`
+
+**2.4. Deleted Items Management**
+- Create `/admin/trash` view showing all soft-deleted items
+- Filter by entity type (People, Dogs, Videos, Users)
+- Restore button for each item (calls service `restore_*` method)
+- Hard delete button with confirmation modal showing:
+  - Count of referencing entities (e.g., "appears in 15 videos")
+  - List of affected items
+  - Type "DELETE" confirmation required
+  - Cascade deletes all references if confirmed
 
 **2.3. Audit Logging**
 - Create `audit_log` table migration script (004_create_audit_log.sql)
@@ -424,6 +462,130 @@ Service layer calls (same code path as CRUD)
 - **Dev 3:** API (Step 4) - starts after Step 1 done
 
 **Total: 12-15 working days (2.5-3 weeks)**
+
+---
+
+## Referential Integrity & Deletion Strategy
+
+### Soft Delete (Default Behavior)
+
+**Purpose:** Preserve data and references for audit trail, allow restoration
+
+**Implementation:**
+- All major tables get `deleted_at TIMESTAMP NULL` and `deleted_by INTEGER` columns
+- Default queries filter: `WHERE deleted_at IS NULL`
+- Soft-deleted items hidden from normal views but preserved in database
+- All references remain intact (video_people, video_dogs, etc.)
+
+**Service Methods:**
+```python
+def delete_person(person_id, deleted_by_user_id):
+    """Soft delete - marks as deleted, preserves all data and references"""
+    conn.execute(
+        'UPDATE people SET deleted_at = CURRENT_TIMESTAMP, deleted_by = ? WHERE person_id = ?',
+        (deleted_by_user_id, person_id)
+    )
+
+def restore_person(person_id):
+    """Restore soft-deleted person - all references still intact"""
+    conn.execute('UPDATE people SET deleted_at = NULL, deleted_by = NULL WHERE person_id = ?', (person_id,))
+```
+
+### Hard Delete (Admin Panel Only)
+
+**Purpose:** Permanently remove data when cleanup is needed
+
+**Implementation:**
+- Check for references before deletion
+- Warn admin about affected entities
+- Require explicit confirmation
+- Cascade delete all references
+- Log action in audit_log
+
+**Service Method:**
+```python
+def hard_delete_person(person_id, force=False):
+    """Permanently delete person (checks references first)"""
+    conn = get_db_connection()
+
+    # Count references
+    video_count = conn.execute(
+        'SELECT COUNT(*) FROM video_people WHERE person_id = ?',
+        (person_id,)
+    ).fetchone()[0]
+
+    if video_count > 0 and not force:
+        raise ValidationError(
+            f'Cannot delete: {video_count} videos reference this person. '
+            f'Use force=True to cascade delete.'
+        )
+
+    # Cascade delete references
+    conn.execute('DELETE FROM video_people WHERE person_id = ?', (person_id,))
+
+    # Delete entity
+    conn.execute('DELETE FROM people WHERE person_id = ?', (person_id,))
+    conn.commit()
+```
+
+**UI Flow (Admin Panel):**
+1. Admin clicks "Delete ×" on soft-deleted item in trash view
+2. Modal shows:
+   - "Permanently delete Person Name?"
+   - "Appears in 15 videos: [list]"
+   - "Will remove all references"
+   - Type "DELETE" to confirm
+3. Backend calls `hard_delete_person(id, force=True)`
+4. Audit log records: `"person.hard_deleted: removed with 15 video references"`
+
+### Migration Required
+
+```sql
+-- 005_add_soft_delete.sql
+ALTER TABLE people ADD COLUMN deleted_at TEXT DEFAULT NULL;
+ALTER TABLE people ADD COLUMN deleted_by INTEGER REFERENCES users(user_id);
+ALTER TABLE dogs ADD COLUMN deleted_at TEXT DEFAULT NULL;
+ALTER TABLE dogs ADD COLUMN deleted_by INTEGER REFERENCES users(user_id);
+ALTER TABLE videos ADD COLUMN deleted_at TEXT DEFAULT NULL;
+ALTER TABLE videos ADD COLUMN deleted_by INTEGER REFERENCES users(user_id);
+ALTER TABLE trips ADD COLUMN deleted_at TEXT DEFAULT NULL;
+ALTER TABLE trips ADD COLUMN deleted_by INTEGER REFERENCES users(user_id);
+ALTER TABLE users ADD COLUMN deleted_at TEXT DEFAULT NULL;
+ALTER TABLE users ADD COLUMN deleted_by INTEGER REFERENCES users(user_id);
+
+CREATE INDEX idx_people_deleted_at ON people(deleted_at);
+CREATE INDEX idx_dogs_deleted_at ON dogs(deleted_at);
+CREATE INDEX idx_videos_deleted_at ON videos(deleted_at);
+CREATE INDEX idx_trips_deleted_at ON trips(deleted_at);
+CREATE INDEX idx_users_deleted_at ON users(deleted_at);
+```
+
+### Reference Tables by Entity
+
+**People:**
+- `video_people` (many-to-many with videos)
+
+**Dogs:**
+- `video_dogs` (many-to-many with videos)
+
+**Videos:**
+- `video_people` (many-to-many with people)
+- `video_dogs` (many-to-many with dogs)
+- `video_versions` (one-to-many with trips)
+
+**Trips/Series:**
+- `video_versions` (one-to-many with videos)
+
+**Users:**
+- `audit_log.user_id` (one-to-many)
+- `people.deleted_by`, `dogs.deleted_by`, etc. (one-to-many)
+
+### Auto-Cleanup (Future Enhancement)
+
+Optional Flask CLI command to clean up old soft-deleted items:
+```bash
+flask cleanup-deleted --days 30  # Hard delete anything deleted >30 days ago
+```
 
 ---
 

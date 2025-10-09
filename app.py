@@ -137,7 +137,16 @@ def inject_sidebar_data():
 
 # Register blueprints
 from blueprints.auth import auth_bp
+from blueprints.admin import admin_bp
+from blueprints.crud import crud_bp
+from blueprints.api import api_base_bp
+from blueprints.api.v1 import api_v1_bp
+
 app.register_blueprint(auth_bp)
+app.register_blueprint(admin_bp)
+app.register_blueprint(crud_bp)
+app.register_blueprint(api_base_bp)
+app.register_blueprint(api_v1_bp)
 
 
 # Register template filters
