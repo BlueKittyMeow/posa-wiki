@@ -111,25 +111,27 @@ def load_user(user_id):
 def inject_sidebar_data():
     """Inject data for the sidebar into all templates"""
     conn = get_db_connection()
-    
+
     sidebar_people = conn.execute('''
         SELECT p.person_id, p.canonical_name, COUNT(vp.video_id) as video_count
         FROM people p
         LEFT JOIN video_people vp ON p.person_id = vp.person_id
         GROUP BY p.person_id, p.canonical_name
         ORDER BY video_count DESC
+        LIMIT 3
     ''').fetchall()
-    
+
     sidebar_dogs = conn.execute('''
         SELECT d.dog_id, d.name, COUNT(vd.video_id) as video_count
         FROM dogs d
         LEFT JOIN video_dogs vd ON d.dog_id = vd.dog_id
         GROUP BY d.dog_id, d.name
         ORDER BY video_count DESC
+        LIMIT 3
     ''').fetchall()
-    
+
     conn.close()
-    
+
     return dict(sidebar_people=sidebar_people, sidebar_dogs=sidebar_dogs)
 
 
