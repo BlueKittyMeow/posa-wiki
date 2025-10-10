@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Access Denied · Posa Wiki{% endblock %}
+{% block content %}
+<div class="card" style="max-width: 640px; margin: 2rem auto;">
+    <div class="card-header">
+        <h1 class="card-title">Restricted Trail</h1>
+    </div>
+    <div class="card-body">
+        <p>You don't have permission to access this area. This trail is restricted to authorized explorers only.</p>
+        <p>If you believe you should have access, please contact the trail guide (admin).</p>
+        <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+            <a class="btn" href="{{ url_for('index') }}">Return to Base Camp</a>
+            <a class="btn btn-secondary" href="{{ url_for('video_list') }}">Browse Public Videos</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

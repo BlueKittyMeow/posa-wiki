@@ -8,6 +8,7 @@ from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_paginate import Pagination, get_page_args
 from flask_login import LoginManager, current_user
 from flask_wtf import CSRFProtect
+from flask_jwt_extended import JWTManager
 import sqlite3
 import json
 from datetime import datetime, timedelta
@@ -18,6 +19,7 @@ from pathlib import Path
 
 from config import CONFIG_BY_NAME, Config
 from models.user import User
+from services.auth_service import init_jwt_redis, is_token_revoked
 
 def from_json(value):
     """Template filter to parse JSON strings"""
@@ -96,6 +98,52 @@ login_manager.init_app(app)
 login_manager.login_view = 'auth.login'
 login_manager.login_message = 'Please log in to access this page.'
 login_manager.login_message_category = 'info'
+
+# Initialize JWT for API authentication
+jwt = JWTManager(app)
+init_jwt_redis(app)
+
+
+@jwt.token_in_blocklist_loader
+def check_if_token_revoked(jwt_header, jwt_payload):
+    """Check if a JWT token has been revoked (logged out)"""
+    return is_token_revoked(jwt_header, jwt_payload)
+
+
+@jwt.expired_token_loader
+def expired_token_callback(jwt_header, jwt_payload):
+    """Handle expired tokens"""
+    return jsonify({
+        'error': 'token_expired',
+        'message': 'The token has expired. Please refresh or log in again.'
+    }), 401
+
+
+@jwt.invalid_token_loader
+def invalid_token_callback(error):
+    """Handle invalid tokens"""
+    return jsonify({
+        'error': 'invalid_token',
+        'message': 'Invalid token. Please log in again.'
+    }), 401
+
+
+@jwt.unauthorized_loader
+def missing_token_callback(error):
+    """Handle missing tokens"""
+    return jsonify({
+        'error': 'authorization_required',
+        'message': 'API request requires authentication token.'
+    }), 401
+
+
+@jwt.revoked_token_loader
+def revoked_token_callback(jwt_header, jwt_payload):
+    """Handle revoked tokens (logged out)"""
+    return jsonify({
+        'error': 'token_revoked',
+        'message': 'The token has been revoked. Please log in again.'
+    }), 401
 
 
 @login_manager.user_loader
@@ -178,6 +226,13 @@ def paginate(conn, query, params, count_query, count_params=(), per_page=20):
                             record_name='items')
     
     return results, pagination
+
+@app.errorhandler(403)
+def handle_forbidden(error):
+    app.logger.warning('403 Forbidden: %s by user %s', request.path,
+                      current_user.username if current_user.is_authenticated else 'anonymous')
+    return render_template('errors/403.html'), 403
+
 
 @app.errorhandler(404)
 def handle_not_found(error):

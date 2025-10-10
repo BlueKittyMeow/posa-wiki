@@ -15,8 +15,13 @@ To be implemented in Phase 2B Step 4.
 
 from flask import Blueprint, jsonify, request
 from flask_login import current_user
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 api_v1_bp = Blueprint('api_v1', __name__, url_prefix='/api/v1')
+
+# Import and register auth endpoints
+from blueprints.api.v1.auth import auth_api_bp
+api_v1_bp.register_blueprint(auth_api_bp)
 
 
 # Example endpoint structure (to be implemented in Step 4):
