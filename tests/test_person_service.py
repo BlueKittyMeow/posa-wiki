@@ -26,6 +26,8 @@ def db_conn():
             canonical_name TEXT NOT NULL,
             bio TEXT,
             photo_url TEXT,
+            photo_local_path TEXT,
+            photo_visible BOOLEAN DEFAULT 1,
             aliases TEXT,
             deleted_at TEXT DEFAULT NULL,
             deleted_by INTEGER DEFAULT NULL

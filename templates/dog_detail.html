@@ -17,6 +17,18 @@
         <button class="btn btn-secondary" onclick="editDog({{ dog.dog_id }})">✏️ Edit</button>
     </div>
 
+    <!-- Dog Photo -->
+    {% if dog.photo_visible and (dog.photo_local_path or dog.photo_url) %}
+        <div style="margin-bottom: 1.5rem; text-align: center;">
+            <img
+                src="{{ url_for('static', filename=dog.photo_local_path) if dog.photo_local_path else dog.photo_url }}"
+                alt="{{ dog.name }}"
+                style="max-width: 400px; max-height: 500px; border-radius: var(--border-radius-md); box-shadow: 0 4px 12px rgba(0,0,0,0.15);"
+                onerror="this.style.display='none';"
+            />
+        </div>
+    {% endif %}
+
     <!-- Dog Info -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
         {% if dog.breed_primary %}
@@ -72,9 +84,14 @@
             {% endfor %}
         </div>
 
-  <div class="pagination-container">
-    {{ pagination.links }}
-  </div>
+        <div class="pagination-container">
+            {{ pagination.links }}
+        </div>
+    {% else %}
+        <div class="text-center" style="padding: 3rem;">
+            <p class="text-muted">No videos found featuring {{ dog.name }}.</p>
+        </div>
+    {% endif %}
 </div>
 
 <!-- Edit Dog Modal (placeholder) -->

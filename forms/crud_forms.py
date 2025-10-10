@@ -140,6 +140,29 @@ class PersonForm(FlaskForm):
         render_kw={'rows': 4, 'placeholder': 'Brief biography...'}
     )
 
+    # Photo fields
+    photo_url = StringField(
+        'Photo URL',
+        validators=[
+            Optional(),
+            URL(message='Must be a valid URL'),
+            Length(max=500)
+        ],
+        render_kw={'placeholder': 'https://... (external photo URL)'}
+    )
+
+    photo_file = FileField(
+        'Upload Photo',
+        validators=[Optional(), FileAllowed(['jpg', 'jpeg', 'png', 'webp'], 'Images only!')],
+        description='Upload a photo (JPG, PNG, or WebP)'
+    )
+
+    photo_visible = BooleanField(
+        'Photo Visible',
+        default=True,
+        description='Uncheck to hide photo for privacy'
+    )
+
     notes = TextAreaField(
         'Notes',
         validators=[Optional(), Length(max=5000)],
@@ -205,6 +228,29 @@ class DogForm(FlaskForm):
         'Description',
         validators=[Optional(), Length(max=5000)],
         render_kw={'rows': 4, 'placeholder': 'Description...'}
+    )
+
+    # Photo fields
+    photo_url = StringField(
+        'Photo URL',
+        validators=[
+            Optional(),
+            URL(message='Must be a valid URL'),
+            Length(max=500)
+        ],
+        render_kw={'placeholder': 'https://... (external photo URL)'}
+    )
+
+    photo_file = FileField(
+        'Upload Photo',
+        validators=[Optional(), FileAllowed(['jpg', 'jpeg', 'png', 'webp'], 'Images only!')],
+        description='Upload a photo (JPG, PNG, or WebP)'
+    )
+
+    photo_visible = BooleanField(
+        'Photo Visible',
+        default=True,
+        description='Uncheck to hide photo for privacy'
     )
 
     notes = TextAreaField(

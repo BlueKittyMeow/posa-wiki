@@ -1,6 +1,6 @@
 # Phase 2B: API & CRUD Development
 
-**Status:** In Progress - Step 1.2 Complete ✓
+**Status:** In Progress - Step 1.3 Complete (+ Image Features) ✓
 **Goal:** Deliver a fully functional admin panel with CRUD operations for all major data models, a versioned REST API, and hardened security.
 
 ## Progress Update
@@ -38,6 +38,39 @@
 - Forms are reusable for both CRUD UI (HTML) and REST API (JSON validation)
 - Written 21 comprehensive unit tests - ALL PASSING
 *Completed by Claude*
+
+**Step 1.3.1: Image Upload & Privacy Features** ✓ COMPLETE
+- Created migration 006_add_image_fields.sql:
+  - Added photo_url, photo_local_path, photo_visible to people table
+  - Added photo_url, photo_local_path, photo_visible to dogs table
+  - Created indexes for photo_visible queries
+- Updated services/person_service.py:
+  - Added photo_local_path and photo_visible parameters to create_person()
+  - Added photo fields to allowed update fields
+  - Added validation for photo_local_path (max 500 chars)
+- Updated PersonForm and DogForm:
+  - Added photo_url field (external URL input)
+  - Added photo_file field (file upload with FileAllowed validator)
+  - Added photo_visible checkbox (privacy control, default: visible)
+  - Supports both URL-based and uploaded photos
+- Updated display templates:
+  - person_detail.html now displays photo if visible and exists
+  - dog_detail.html now displays photo if visible and exists
+  - Photos displayed with responsive sizing, rounded corners, and shadow
+  - Graceful fallback if image fails to load (onerror handler)
+- Admin privacy control:
+  - photo_visible boolean allows hiding photos for privacy
+  - Unchecking "Photo Visible" hides photo from public view
+  - Field editable via CRUD forms (when built in Step 3)
+*Completed by Claude*
+
+**Implementation Notes:**
+- Photos can be provided via URL (photo_url) or uploaded file (photo_file)
+- Uploaded files stored locally (photo_local_path) with preference over URLs
+- Privacy toggle (photo_visible) gives admin control over photo visibility
+- Templates check both photo_visible AND photo existence before displaying
+- Graceful degradation: if image fails to load, it's hidden automatically
+- Forms support multiple image formats: JPG, JPEG, PNG, WebP
 
 **Next Steps:** Step 1.4 - Security Infrastructure
 

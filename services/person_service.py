@@ -85,7 +85,9 @@ def create_person(
     db_conn: sqlite3.Connection,
     canonical_name: str,
     bio: Optional[str] = None,
-    photo_url: Optional[str] = None
+    photo_url: Optional[str] = None,
+    photo_local_path: Optional[str] = None,
+    photo_visible: bool = True
 ) -> Dict[str, Any]:
     """Create a new person.
 
@@ -94,6 +96,8 @@ def create_person(
         canonical_name: Person's full name
         bio: Optional biography
         photo_url: Optional photo URL
+        photo_local_path: Optional local file path for uploaded photo
+        photo_visible: Whether photo is visible (privacy control), default True
 
     Returns:
         Created person dict
@@ -111,6 +115,8 @@ def create_person(
         validate_string_length(bio, 'bio', 5000)
     if photo_url:
         validate_string_length(photo_url, 'photo_url', 500)
+    if photo_local_path:
+        validate_string_length(photo_local_path, 'photo_local_path', 500)
 
     # Check for duplicate name
     existing = db_conn.execute(
@@ -126,8 +132,8 @@ def create_person(
 
     try:
         cursor = db_conn.execute(
-            'INSERT INTO people (canonical_name, bio, photo_url) VALUES (?, ?, ?)',
-            (canonical_name, bio, photo_url)
+            'INSERT INTO people (canonical_name, bio, photo_url, photo_local_path, photo_visible) VALUES (?, ?, ?, ?, ?)',
+            (canonical_name, bio, photo_url, photo_local_path, photo_visible)
         )
         db_conn.commit()
 
@@ -164,7 +170,7 @@ def update_person(
     person = get_person_by_id(db_conn, person_id, include_deleted=False)
 
     # Validate allowed fields
-    allowed_fields = {'canonical_name', 'bio', 'photo_url'}
+    allowed_fields = {'canonical_name', 'bio', 'photo_url', 'photo_local_path', 'photo_visible'}
     update_fields = {k: v for k, v in kwargs.items() if k in allowed_fields}
 
     if not update_fields:
@@ -191,6 +197,9 @@ def update_person(
 
     if 'photo_url' in update_fields and update_fields['photo_url']:
         validate_string_length(update_fields['photo_url'], 'photo_url', 500)
+
+    if 'photo_local_path' in update_fields and update_fields['photo_local_path']:
+        validate_string_length(update_fields['photo_local_path'], 'photo_local_path', 500)
 
     # Build UPDATE query
     set_clause = ', '.join([f'{field} = ?' for field in update_fields.keys()])
