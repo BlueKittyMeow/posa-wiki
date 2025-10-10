@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python -m pytest tests/test_forms.py -v)"
+      "Bash(python -m pytest tests/test_forms.py -v)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": []
