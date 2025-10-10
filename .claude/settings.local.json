@@ -1,20 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:www.youtube.com)",
-      "Bash(python3:*)",
-      "WebSearch",
-      "WebFetch(domain:github.com)",
-      "WebFetch(domain:tmfilho.github.io)",
-      "Bash(pkill:*)",
-      "Bash(lsof:*)",
-      "Bash(kill:*)",
-      "Bash(find:*)",
-      "Bash(python run_migration.py:*)",
-      "Bash(source:*)",
-      "Bash(pip install:*)",
-      "Bash(curl:*)",
-      "Bash(python -m pytest tests/test_person_service.py -v)"
+      "Bash(python -m pytest tests/test_forms.py -v)"
     ],
     "deny": [],
     "ask": []
