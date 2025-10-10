@@ -55,7 +55,7 @@ def forbidden(error):
 ```
 
 **Testing:**
-- Test in all three themes (fairyfloss, gruvbox, nord)
+- Test with the `fairyfloss.css` theme and ensure it adapts gracefully.
 - Test logged in vs logged out
 - Test from different roles (viewer, editor, admin)
 
@@ -122,6 +122,9 @@ def forbidden(error):
                     └─────────────┘
 ```
 
+#### Note on Future SQLAlchemy Migration
+The database queries in this plan are written to align with the project's current raw `sqlite3` pattern. This is intentional. By concentrating all database interaction logic within `service` modules (like `user_service`), we create a clean data access layer. When the time comes to migrate to an ORM like SQLAlchemy, the refactoring effort will be isolated to these service modules, preventing a complex, application-wide search for queries.
+
 #### Implementation Steps
 
 **A. Install Dependencies**
@@ -156,9 +159,9 @@ class Config:
     REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
 ```
 
-**C. Create utils/api_auth.py**
+**C. Create services/api_auth_service.py**
 ```python
-"""API authentication utilities using JWT."""
+"""API authentication services using JWT."""
 
 from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token
 from flask_jwt_extended import get_jwt, jwt_required, get_jwt_identity
@@ -213,13 +216,14 @@ def revoke_token(jti, reason='logout'):
     """Revoke a token immediately"""
     from datetime import timedelta
     from flask import current_app
+    from services.audit_log_service import create_audit_log
 
     # Add to Redis blacklist
     expires = current_app.config['JWT_ACCESS_TOKEN_EXPIRES']
     add_token_to_blacklist(jti, expires)
 
-    # Log in audit log (if implemented)
-    # create_audit_log('token_revoked', details={'reason': reason})
+    # Log in audit log
+    create_audit_log('token_revoked', details={'reason': reason})
 ```
 
 **D. Create API Auth Blueprint**
@@ -231,8 +235,9 @@ from flask_jwt_extended import (
     jwt_required, get_jwt_identity, get_jwt
 )
 from werkzeug.security import check_password_hash
-from models import User
-from utils.api_auth import add_token_to_blacklist
+# This assumes a user_service exists for DB operations
+from services.user_service import get_user_by_username, get_user_by_id
+from services.api_auth_service import add_token_to_blacklist
 
 auth_api_bp = Blueprint('auth_api', __name__)
 
@@ -244,24 +249,25 @@ def api_login():
     if not data or not data.get('username') or not data.get('password'):
         return jsonify({'error': 'Username and password required'}), 400
 
-    user = User.query.filter_by(username=data['username']).first()
+    # Using service layer for database access
+    user = get_user_by_username(data['username'])
 
-    if not user or not check_password_hash(user.password_hash, data['password']):
+    if not user or not check_password_hash(user['password_hash'], data['password']):
         return jsonify({'error': 'Invalid credentials'}), 401
 
     # Create tokens with user identity
     access_token = create_access_token(
-        identity=user.id,
-        additional_claims={'role': user.role, 'username': user.username}
+        identity=user['id'],
+        additional_claims={'role': user['role'], 'username': user['username']}
     )
-    refresh_token = create_refresh_token(identity=user.id)
+    refresh_token = create_refresh_token(identity=user['id'])
 
     response = jsonify({
         'message': 'Login successful',
         'user': {
-            'id': user.id,
-            'username': user.username,
-            'role': user.role
+            'id': user['id'],
+            'username': user['username'],
+            'role': user['role']
         }
     })
 
@@ -285,12 +291,12 @@ def api_refresh():
     add_token_to_blacklist(jti, timedelta(days=7))
 
     # Create new tokens
-    user = User.query.get(identity)
+    user = get_user_by_id(identity)
     new_access_token = create_access_token(
-        identity=user.id,
-        additional_claims={'role': user.role, 'username': user.username}
+        identity=user['id'],
+        additional_claims={'role': user['role'], 'username': user['username']}
     )
-    new_refresh_token = create_refresh_token(identity=user.id)
+    new_refresh_token = create_refresh_token(identity=user['id'])
 
     response = jsonify({'message': 'Token refreshed'})
 
@@ -401,7 +407,7 @@ RATELIMIT_DEFAULT = "200 per day;50 per hour"
 pip install Flask-Limiter==3.5.0
 ```
 
-**B. Create utils/rate_limit.py**
+**B. Create services/rate_limit_service.py**
 ```python
 """Rate limiting configuration and utilities."""
 
@@ -466,7 +472,7 @@ def init_rate_limiter(app):
 
 ```python
 # Apply to specific routes
-from utils.rate_limit import limiter, get_role_based_limit
+from services.rate_limit_service import limiter, get_role_based_limit
 
 # Login endpoint - strict per-IP limit (prevent brute force)
 @auth_bp.route('/login', methods=['POST'])
@@ -542,37 +548,24 @@ def list_users():
 ### **1.4.4: Audit Logging**
 **Estimated Time:** 3-4 hours
 **Complexity:** Medium-High
-**Dependencies:** Database migration
+**Dependencies:** Python `logging` module, Database migration
 
 #### Why Async Audit Logging?
 
 **Performance Impact:**
 - Synchronous DB write: +20-50ms per request
 - Async queue: <1ms per request
-- **Decision**: Use async for user-facing operations
+- **Decision**: Use a non-blocking, asynchronous queue for all audit logging.
 
-#### Architecture
+#### Architecture (Using Python's `logging` module)
+This approach uses the robust, built-in Python `logging` framework to achieve non-blocking, asynchronous logging. It is the industry-standard method.
 
 ```
-┌──────────────┐
-│   Request    │
-│   Handler    │
-└──────┬───────┘
-       │
-       │ create_audit_log_async(event)
-       ▼
-┌──────────────┐
-│  Audit Queue │ (In-memory queue)
-│   (Thread)   │
-└──────┬───────┘
-       │
-       │ Background thread
-       │ processes queue
-       ▼
-┌──────────────┐
-│   Database   │
-│  audit_logs  │
-└──────────────┘
+┌──────────────┐      ┌────────────────┐      ┌──────────────────┐      ┌──────────────┐
+│   Request    ├─────►│ QueueHandler   ├─────►│      Queue       ├─────►│ QueueListener│
+│   Handler    │      │(Adds context)  │      │ (In-memory)      │      │ (Background  ├─► To Handler
+└──────────────┘      └────────────────┘      └──────────────────┘      │   Thread)    │
+                                                                        └──────────────┘
 ```
 
 #### Implementation
@@ -588,7 +581,7 @@ CREATE TABLE audit_logs (
 
     -- User context
     user_id INTEGER,
-    username TEXT,
+    username TEXT, -- Logged sparingly, prefer user_id
 
     -- Request context
     ip_address TEXT,
@@ -620,172 +613,134 @@ CREATE INDEX idx_audit_resource ON audit_logs(resource_type, resource_id);
 CREATE INDEX idx_audit_user_time ON audit_logs(user_id, timestamp);
 ```
 
-**B. Create utils/audit_log.py**
+**B. Create services/audit_log_service.py**
 ```python
-"""Audit logging utilities with async processing."""
-
-from queue import Queue
-from threading import Thread
+"""
+Audit logging service using Python's standard logging module for
+non-blocking, asynchronous processing.
+"""
+import logging
+import logging.handlers
+import queue
 import json
-from datetime import datetime
+import atexit
 from flask import request, has_request_context
 from flask_login import current_user
 
-# Audit log queue for async processing
-audit_queue = Queue(maxsize=1000)  # Prevent memory overflow
+# 1. Create a dedicated logger for audit trails
+audit_logger = logging.getLogger('audit')
+audit_logger.setLevel(logging.INFO)
+audit_logger.propagate = False # Prevent duplicate logs in root logger
 
-# Event type constants
-AUDIT_EVENTS = {
-    # Authentication
-    'login_success': 'User logged in',
-    'login_failure': 'Failed login attempt',
-    'logout': 'User logged out',
-    'password_change': 'Password changed',
+# 2. Create a queue for log records
+log_queue = queue.Queue(-1) # Unbounded queue
 
-    # Authorization
-    'access_denied': 'Access denied',
-    'permission_change': 'Permissions modified',
+# 3. Create a handler that writes to the database
+# This custom handler will be used by the listener in the background thread.
+class DatabaseHandler(logging.Handler):
+    def emit(self, record):
+        # Import here to avoid circular dependencies at startup
+        from app import get_db_connection
 
-    # Data operations
-    'data_create': 'Record created',
-    'data_update': 'Record updated',
-    'data_delete': 'Record deleted',
+        details = record.details if hasattr(record, 'details') else None
 
-    # Admin operations
-    'user_create': 'User created',
-    'user_update': 'User updated',
-    'user_delete': 'User deleted',
+        log_entry = (
+            record.created,
+            record.user_id if hasattr(record, 'user_id') else None,
+            record.username if hasattr(record, 'username') else None,
+            record.ip_address if hasattr(record, 'ip_address') else None,
+            record.user_agent if hasattr(record, 'user_agent') else None,
+            record.endpoint if hasattr(record, 'endpoint') else None,
+            record.method if hasattr(record, 'method') else None,
+            record.event_type,
+            record.levelname,
+            record.resource_type if hasattr(record, 'resource_type') else None,
+            record.resource_id if hasattr(record, 'resource_id') else None,
+            json.dumps(details) if details else None
+        )
 
-    # API operations
-    'api_key_created': 'API key generated',
-    'token_revoked': 'Token revoked',
-
-    # Security events
-    'rate_limit_exceeded': 'Rate limit exceeded',
-    'invalid_token': 'Invalid token used',
-    'suspicious_activity': 'Suspicious activity detected'
-}
-
-def audit_worker():
-    """Background thread that processes audit log queue."""
-    while True:
         try:
-            log_data = audit_queue.get(timeout=1)
-
-            if log_data is None:  # Shutdown signal
-                break
-
-            # Import here to avoid circular imports
-            from app import get_db_connection
-
             conn = get_db_connection()
             cursor = conn.cursor()
-
-            # Insert audit log
             cursor.execute('''
                 INSERT INTO audit_logs
                 (timestamp, user_id, username, ip_address, user_agent,
                  endpoint, method, event_type, severity, resource_type,
                  resource_id, details)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ''', (
-                log_data['timestamp'],
-                log_data.get('user_id'),
-                log_data.get('username'),
-                log_data.get('ip_address'),
-                log_data.get('user_agent'),
-                log_data.get('endpoint'),
-                log_data.get('method'),
-                log_data['event_type'],
-                log_data.get('severity', 'INFO'),
-                log_data.get('resource_type'),
-                log_data.get('resource_id'),
-                json.dumps(log_data.get('details')) if log_data.get('details') else None
-            ))
-
+                VALUES (datetime(?, 'unixepoch'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', log_entry)
             conn.commit()
             conn.close()
-
-            audit_queue.task_done()
-
         except Exception as e:
-            # Log error but don't crash worker
+            # Handle database errors (e.g., log to stderr)
             import sys
-            print(f"Audit logging error: {e}", file=sys.stderr)
+            print(f"Failed to write audit log to database: {e}", file=sys.stderr)
 
-# Start audit worker thread
-audit_thread = Thread(target=audit_worker, daemon=True)
-audit_thread.start()
+# 4. Create a listener to process the queue
+# The listener runs in a background thread and directs logs to the DatabaseHandler.
+db_handler = DatabaseHandler()
+queue_listener = logging.handlers.QueueListener(log_queue, db_handler)
+
+# 5. Create a handler for the main thread to put logs ON the queue
+queue_handler = logging.handlers.QueueHandler(log_queue)
+audit_logger.addHandler(queue_handler)
+
+# 6. Custom filter to add contextual data to log records
+class ContextualFilter(logging.Filter):
+    def filter(self, record):
+        if has_request_context():
+            record.ip_address = request.remote_addr
+            record.user_agent = request.headers.get('User-Agent', '')[:500]
+            record.endpoint = request.endpoint
+            record.method = request.method
+        if current_user and current_user.is_authenticated:
+            record.user_id = current_user.id
+            # Sparingly log username, prefer user_id
+            record.username = current_user.username
+        return True
+
+audit_logger.addFilter(ContextualFilter())
+
+def init_audit_logging(app):
+    """Start the audit logging background thread."""
+    queue_listener.start()
+    # Ensure the listener is stopped cleanly on app shutdown
+    atexit.register(queue_listener.stop)
 
 def redact_sensitive_fields(data):
-    """Redact sensitive fields from audit log details."""
+    """Redact sensitive fields from a dictionary."""
     if not isinstance(data, dict):
         return data
+    sensitive_keys = ['password', 'password_hash', 'token', 'secret', 'api_key']
+    return {k: '[REDACTED]' if k.lower() in sensitive_keys else v for k, v in data.items()}
 
-    sensitive_fields = [
-        'password', 'password_hash', 'token', 'secret',
-        'api_key', 'credit_card', 'ssn'
-    ]
-
-    return {
-        k: '[REDACTED]' if k.lower() in sensitive_fields else v
-        for k, v in data.items()
-    }
-
-def create_audit_log(
-    event_type,
-    resource_type=None,
-    resource_id=None,
-    details=None,
-    severity='INFO'
-):
+def create_audit_log(event_type, severity='INFO', resource_type=None, resource_id=None, details=None):
     """
-    Create audit log entry (async).
+    Creates an audit log entry by sending it to the async logger.
 
     Args:
-        event_type: Type of event (see AUDIT_EVENTS)
-        resource_type: Type of resource affected
-        resource_id: ID of affected resource
-        details: Additional details (dict)
-        severity: INFO, WARNING, ERROR, CRITICAL
+        event_type (str): The type of event (e.g., 'login_success').
+        severity (str): 'INFO', 'WARNING', 'ERROR', 'CRITICAL'.
+        resource_type (str, optional): The type of resource affected.
+        resource_id (int, optional): The ID of the resource affected.
+        details (dict, optional): Additional details, will be JSON-serialized.
     """
-    log_data = {
-        'timestamp': datetime.utcnow().isoformat(),
+    extra_data = {
         'event_type': event_type,
-        'severity': severity,
         'resource_type': resource_type,
-        'resource_id': resource_id
+        'resource_id': resource_id,
+        'details': redact_sensitive_fields(details) if details else None
     }
+    
+    log_level = getattr(logging, severity.upper(), logging.INFO)
+    audit_logger.log(log_level, f"Event: {event_type}", extra=extra_data)
 
-    # Add request context if available
-    if has_request_context():
-        log_data['ip_address'] = request.remote_addr
-        log_data['user_agent'] = request.headers.get('User-Agent', '')[:500]
-        log_data['endpoint'] = request.endpoint
-        log_data['method'] = request.method
-
-    # Add user context if authenticated
-    if current_user.is_authenticated:
-        log_data['user_id'] = current_user.id
-        log_data['username'] = current_user.username
-
-    # Redact sensitive data
-    if details:
-        log_data['details'] = redact_sensitive_fields(details)
-
-    # Add to queue (non-blocking)
-    try:
-        audit_queue.put_nowait(log_data)
-    except:
-        # Queue full - log error but don't block request
-        import sys
-        print("Audit queue full - log dropped", file=sys.stderr)
 ```
 
 **C. Usage Examples**
 
 ```python
-from utils.audit_log import create_audit_log
+from services.audit_log_service import create_audit_log
 
 # Login success
 @auth_bp.route('/login', methods=['POST'])
@@ -796,9 +751,11 @@ def login():
         create_audit_log('login_success', severity='INFO')
         return redirect(url_for('index'))
     else:
-        create_audit_log('login_failure',
-                        details={'username': username},
-                        severity='WARNING')
+        create_audit_log(
+            'login_failure',
+            severity='WARNING',
+            details={'username': username} # Username is safe here as it's the subject of the event
+        )
         return render_template('login.html', error='Invalid credentials')
 
 # CRUD operation
@@ -810,10 +767,10 @@ def delete_person(person_id):
 
     create_audit_log(
         'data_delete',
+        severity='WARNING',
         resource_type='person',
         resource_id=person_id,
-        details={'name': person['canonical_name']},
-        severity='WARNING'
+        details={'name': person['canonical_name']}
     )
 
     delete_person_service(db_conn, person_id)
@@ -824,9 +781,11 @@ def delete_person(person_id):
 @login_required
 def admin_users():
     if current_user.role != 'admin':
-        create_audit_log('access_denied',
-                        endpoint='/admin/users',
-                        severity='WARNING')
+        create_audit_log(
+            'access_denied',
+            severity='WARNING',
+            details={'denied_endpoint': '/admin/users'}
+        )
         abort(403)
     # ... admin logic ...
 ```
@@ -834,11 +793,11 @@ def admin_users():
 **D. Cleanup & Retention**
 
 ```python
-# utils/audit_log.py additions
+# services/audit_log_service.py additions
 
 def cleanup_old_audit_logs(retention_days=90):
     """Delete audit logs older than retention period."""
-    from datetime import timedelta
+    from datetime import timedelta, datetime
     from app import get_db_connection
 
     cutoff_date = datetime.utcnow() - timedelta(days=retention_days)
@@ -847,8 +806,8 @@ def cleanup_old_audit_logs(retention_days=90):
     cursor = conn.cursor()
 
     cursor.execute(
-        'DELETE FROM audit_logs WHERE timestamp < ?',
-        (cutoff_date.isoformat(),)
+        "DELETE FROM audit_logs WHERE timestamp < datetime(?, 'unixepoch')",
+        (cutoff_date.timestamp(),)
     )
 
     deleted_count = cursor.rowcount
@@ -865,13 +824,13 @@ def cleanup_old_audit_logs(retention_days=90):
 
 **What we DON'T log:**
 - Passwords (plaintext or hashed)
-- Full tokens (only token type)
-- Credit card numbers
-- Personal health information
-- Full email addresses (use user_id instead)
+- Full tokens or API keys (use redaction)
+- Credit card numbers, SSNs, etc.
+- Full email addresses (use `user_id` for correlation)
 
 **What we DO log:**
-- User ID (for correlation)
+- **`user_id` (Primary Identifier)**: For correlating actions to a user.
+- **`username`**: Logged *only* when it is the subject of an action (e.g., a failed login attempt). Avoid logging it for general activity.
 - IP address (for security analysis)
 - Event type and severity
 - Resource type and ID
@@ -880,24 +839,25 @@ def cleanup_old_audit_logs(retention_days=90):
 #### Security Considerations
 
 **Strengths:**
-- ✅ Non-blocking (async queue)
-- ✅ PII-protected (redaction)
+- ✅ Non-blocking and performant (standard async logging)
+- ✅ PII-protected (redaction and clear guidelines)
 - ✅ Comprehensive events (auth, data, admin)
+- ✅ Clean shutdown handling (`atexit`)
 - ✅ Retention policy (auto-cleanup)
 
 **Potential Weak Points & Mitigations:**
 
-1. **Queue Overflow (Memory)**
-   - **Mitigation**: Queue max size (1000), drop if full
-   - **Monitoring**: Alert on dropped logs
+1. **Queue Memory Usage**
+   - **Mitigation**: The queue is unbounded, which prevents blocking but could consume memory if the DB writer falls behind.
+   - **Monitoring**: Monitor application memory. For extreme-scale, a bounded queue or external message broker (e.g., RabbitMQ) would be the next step.
 
 2. **PII Leakage in Details**
-   - **Mitigation**: Automatic redaction of sensitive fields
-   - **Review**: Regular audit of logged data
+   - **Mitigation**: Automatic redaction of sensitive fields.
+   - **Review**: Regular audit of logged data to ensure redaction is effective.
 
 3. **Log Tampering**
-   - **Mitigation**: Database permissions (read-only for most users)
-   - **Future**: Write-once storage, cryptographic signatures
+   - **Mitigation**: Strict database permissions (the application user should have INSERT-only rights to the `audit_logs` table).
+   - **Future**: Write-once storage, cryptographic signatures.
 
 #### Testing Checklist
 
@@ -907,7 +867,7 @@ def cleanup_old_audit_logs(retention_days=90):
 - [ ] PII redaction works (passwords not logged)
 - [ ] Async processing (request completes fast)
 - [ ] Cleanup works (old logs deleted)
-- [ ] Queue handles overflow gracefully
+- [ ] App shutdown processes remaining logs in queue
 
 ---
 
