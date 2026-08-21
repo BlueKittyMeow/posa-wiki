@@ -69,7 +69,10 @@ class Config:
 
     # Rate limiting
     RATELIMIT_ENABLED = _bool_env('RATELIMIT_ENABLED', True)
-    RATELIMIT_DEFAULT = os.getenv('RATELIMIT_DEFAULT', '200 per day;50 per hour')
+    # Empty by default: no global limit. A site-wide '200 per day' bucket 429'd
+    # ordinary browsing (and, behind a proxy, every visitor shared one bucket).
+    # Sensitive endpoints declare their own limits (e.g. login is 5/minute).
+    RATELIMIT_DEFAULT = os.getenv('RATELIMIT_DEFAULT', '')
     RATELIMIT_STORAGE_URI = os.getenv('RATELIMIT_STORAGE_URI', '')
 
     @staticmethod

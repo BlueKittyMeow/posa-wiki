@@ -36,6 +36,9 @@ ENV/
 *.sqlite
 *.sqlite3
 
+# Backup copies (e.g. posa_wiki.db.bak taken before a migration)
+*.bak
+
 # IDE
 .vscode/
 .idea/

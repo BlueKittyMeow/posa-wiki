@@ -1,7 +1,7 @@
 """Authentication blueprint for login/logout functionality"""
-from flask import Blueprint, render_template, request, redirect, url_for, flash, g
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
-import sqlite3
+from db import get_db
 from models.user import User
 from forms.auth import LoginForm
 from services.audit_log_service import create_audit_log
@@ -9,14 +9,6 @@ from services.rate_limit_service import limiter, per_ip_key
 
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
-
-
-def get_db_connection():
-    """Get database connection (imported from app context)"""
-    from flask import current_app
-    conn = sqlite3.connect(current_app.config['DATABASE_PATH'])
-    conn.row_factory = sqlite3.Row
-    return conn
 
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
@@ -34,21 +26,19 @@ def login():
         password = form.password.data
         remember = form.remember_me.data
 
-        conn = get_db_connection()
+        conn = get_db()
         user = User.get_by_username(username, conn)
 
         if user and user.check_password(password):
             login_user(user, remember=remember)
             user.update_last_login(conn)
             create_audit_log('login_success', resource_type='user', resource_id=user.user_id)
-            conn.close()
 
             next_page = request.args.get('next')
             if next_page and next_page.startswith('/'):
                 return redirect(next_page)
             return redirect(url_for('index'))
 
-        conn.close()
         create_audit_log('login_failure', severity='WARNING', details={'username': username})
         flash('Invalid username or password.', 'error')
     elif form.is_submitted():

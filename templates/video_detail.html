@@ -33,7 +33,7 @@
         {% if video.duration %}
             <div>
                 <strong class="text-accent">⏱️ Duration:</strong>
-                <span>{{ video.duration|format_duration }}</span>
+                <span>{{ video.duration_seconds|default(video.duration, true)|format_duration }}</span>
             </div>
         {% endif %}
         
@@ -217,7 +217,7 @@
                 
                 <div class="form-group">
                     <label class="form-label">Duration</label>
-                    <input type="text" value="{{ video.duration or '' }}" placeholder="PT5M30S">
+                    <input type="text" value="{{ video.duration or '' }}" placeholder="9:31">
                 </div>
             </div>
             

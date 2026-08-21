@@ -9,6 +9,8 @@ import json
 from datetime import datetime
 from collections import Counter
 
+from utils.duration import parse_duration_to_seconds
+
 def load_tag_authorities():
     """Load tag authority system for validation"""
     with open('tag_authority_system.json', 'r') as f:
@@ -119,7 +121,10 @@ def import_videos():
         video_id = video['id']
         title = snippet.get('title', '')
         upload_date = snippet.get('publishedAt', '')[:10] if snippet.get('publishedAt') else None
-        duration = parse_duration(content_details.get('duration'))
+        raw_duration = content_details.get('duration')
+        duration = parse_duration(raw_duration)
+        # Numeric duration for sortable queries (migration 008).
+        duration_seconds = parse_duration_to_seconds(raw_duration)
         view_count = int(statistics.get('viewCount', 0)) if statistics.get('viewCount') else 0
         description = snippet.get('description', '')
         thumbnail_url = snippet.get('thumbnails', {}).get('high', {}).get('url', '')
@@ -140,15 +145,16 @@ def import_videos():
         # Insert video
         cursor.execute('''
         INSERT OR REPLACE INTO videos (
-            video_id, title, upload_date, duration, view_count, description, 
+            video_id, title, upload_date, duration, duration_seconds, view_count, description,
             thumbnail_url, youtube_tags, validated_tags, unvalidated_tags,
             created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             video_id,
             title,
             upload_date,
             duration,
+            duration_seconds,
             view_count,
             description,
             thumbnail_url,

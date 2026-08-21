@@ -4,12 +4,12 @@ Posa Wiki - Flask Web Interface
 Dark hacker girl aesthetic with fairyfloss theme and rounded edges
 """
 
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify, redirect, url_for, abort
 from flask_paginate import Pagination, get_page_args
 from flask_login import LoginManager, current_user
 from flask_wtf import CSRFProtect
 from flask_jwt_extended import JWTManager
-import sqlite3
+from werkzeug.middleware.proxy_fix import ProxyFix
 import json
 from datetime import datetime, timedelta
 import os
@@ -17,8 +17,11 @@ import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
+import db as db_module
+from db import get_db
 from config import CONFIG_BY_NAME, Config
 from models.user import User
+from utils.duration import format_seconds, parse_duration_to_seconds
 from services.auth_service import init_jwt_redis, is_token_revoked
 from services.audit_log_service import init_audit_logging, create_audit_log
 from services.rate_limit_service import init_rate_limiter
@@ -32,34 +35,22 @@ def from_json(value):
             return []
     return []
 
-def format_duration(duration_str):
-    """Format duration string to readable format"""
-    if not duration_str:
+def format_duration(value):
+    """Template filter: render a duration as H:MM:SS or M:SS.
+
+    Prefers an integer seconds value (videos.duration_seconds), but falls back
+    gracefully when handed the legacy string form ('9:31', 'PT9M31S') so any
+    template still passing `video.duration` keeps working.
+    """
+    if value is None or value == '':
         return "Unknown"
-    
-    # If already formatted (MM:SS or HH:MM:SS), return as-is
-    if ':' in duration_str:
-        return duration_str
-    
-    # Handle ISO 8601 format (PT#M#S)
-    try:
-        duration_str = duration_str.replace('PT', '')
-        minutes = 0
-        seconds = 0
-        
-        if 'M' in duration_str:
-            minutes = int(duration_str.split('M')[0])
-            duration_str = duration_str.split('M')[1] if 'M' in duration_str else duration_str
-        
-        if 'S' in duration_str:
-            seconds = int(duration_str.replace('S', ''))
-        
-        if minutes > 0:
-            return f"{minutes}:{seconds:02d}"
-        else:
-            return f"0:{seconds:02d}"
-    except:
-        return duration_str
+
+    seconds = parse_duration_to_seconds(value)
+    if seconds is None:
+        # Unparseable - show whatever we were given rather than losing it.
+        return str(value)
+
+    return format_seconds(seconds)
 
 
 def configure_logging(app):
@@ -90,6 +81,16 @@ app = Flask(__name__)
 app.config.from_object(config_class)
 config_class.init_app(app)
 configure_logging(app)
+
+# Behind cloudflared/nginx every request arrives from 127.0.0.1, which collapses
+# per-IP rate limiting into a single bucket and hides the real client IP from
+# the audit log. Enable with PROXY_FIX=1 *only* when a trusted proxy really is
+# in front of the app -- otherwise clients could spoof X-Forwarded-For.
+if os.getenv('PROXY_FIX') == '1':
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
+
+# Request-scoped DB connection + teardown (see db.py)
+db_module.init_app(app)
 
 init_rate_limiter(app)
 init_audit_logging(app)
@@ -154,16 +155,15 @@ def revoked_token_callback(jwt_header, jwt_payload):
 @login_manager.user_loader
 def load_user(user_id):
     """Load user for Flask-Login session management"""
-    conn = get_db_connection()
+    conn = get_db()
     user = User.get_by_id(user_id, conn)
-    conn.close()
     return user
 
 
 @app.context_processor
 def inject_sidebar_data():
     """Inject data for the sidebar into all templates"""
-    conn = get_db_connection()
+    conn = get_db()
 
     sidebar_people = conn.execute('''
         SELECT p.person_id, p.canonical_name, COUNT(vp.video_id) as video_count
@@ -182,8 +182,6 @@ def inject_sidebar_data():
         ORDER BY video_count DESC
         LIMIT 3
     ''').fetchall()
-
-    conn.close()
 
     return dict(sidebar_people=sidebar_people, sidebar_dogs=sidebar_dogs)
 
@@ -217,12 +215,6 @@ app.jinja_env.filters['format_duration'] = format_duration
 
 # Add timedelta to template globals for date navigation
 app.jinja_env.globals['timedelta'] = timedelta
-
-def get_db_connection():
-    """Get database connection"""
-    conn = sqlite3.connect(app.config['DATABASE_PATH'])
-    conn.row_factory = sqlite3.Row  # Return rows as dicts
-    return conn
 
 def paginate(conn, query, params, count_query, count_params=(), per_page=20):
     """A helper function to paginate queries."""
@@ -269,7 +261,7 @@ def handle_server_error(error):
 @app.route('/')
 def index():
     """Landing page with date nav, search, and browse options"""
-    conn = get_db_connection()
+    conn = get_db()
     
     # Get recent videos (last 6)
     recent_videos = conn.execute('''
@@ -285,9 +277,7 @@ def index():
         'total_people': conn.execute('SELECT COUNT(*) FROM people').fetchone()[0],
         'total_dogs': conn.execute('SELECT COUNT(*) FROM dogs').fetchone()[0],
     }
-    
-    conn.close()
-    
+
     return render_template('index.html', recent_videos=recent_videos, stats=stats)
 
 @app.route('/videos')
@@ -296,7 +286,7 @@ def video_list():
     sort_by = request.args.get('sort', 'upload_date')
     order = request.args.get('order', 'desc')
     
-    conn = get_db_connection()
+    conn = get_db()
     
     # Pagination
     page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', default_per_page=20)
@@ -306,20 +296,29 @@ def video_list():
     
     # Build SQL query with sorting and pagination
     order_sql = 'ASC' if order == 'asc' else 'DESC'
-    valid_sorts = ['upload_date', 'title', 'duration', 'view_count']
-    if sort_by not in valid_sorts:
+    # Map the public sort key to the column actually ordered on. 'duration' is
+    # a display string ('9:31', '10:00:36') and sorts lexicographically, so
+    # order by the numeric duration_seconds instead.
+    sort_columns = {
+        'upload_date': 'upload_date',
+        'title': 'title',
+        'duration': 'duration_seconds',
+        'view_count': 'view_count',
+    }
+    if sort_by not in sort_columns:
         sort_by = 'upload_date'
-    
+    sort_column = sort_columns[sort_by]
+
+    # Keep NULLs at the end regardless of direction.
     query = f'''
-    SELECT video_id, title, description, upload_date, duration, 
+    SELECT video_id, title, description, upload_date, duration, duration_seconds,
            view_count, thumbnail_url
-    FROM videos 
-    ORDER BY {sort_by} {order_sql}
+    FROM videos
+    ORDER BY ({sort_column} IS NULL) ASC, {sort_column} {order_sql}
     LIMIT ? OFFSET ?
     '''
     
     videos = conn.execute(query, (per_page, offset)).fetchall()
-    conn.close()
     
     pagination = Pagination(page=page, per_page=per_page, total=total,
                             css_framework='bootstrap4',
@@ -334,7 +333,7 @@ def video_list():
 @app.route('/video/<video_id>')
 def video_detail(video_id):
     """Video detail page with metadata and related videos"""
-    conn = get_db_connection()
+    conn = get_db()
     
     # Get video details
     video = conn.execute('''
@@ -342,7 +341,7 @@ def video_detail(video_id):
     ''', (video_id,)).fetchone()
     
     if not video:
-        return "Video not found", 404
+        abort(404)
     
     # Get associated people
     people = conn.execute('''
@@ -370,9 +369,7 @@ def video_detail(video_id):
     WHERE vv.video_id = ?
     GROUP BY t.trip_id
     ''', (video_id,)).fetchall()
-    
-    conn.close()
-    
+
     return render_template('video_detail.html', video=video, people=people, dogs=dogs, series_info=series_info)
 
 @app.route('/date/<date_str>')
@@ -384,7 +381,7 @@ def date_view(date_str):
     except ValueError:
         return "Invalid date format. Use YYYY-MM-DD", 400
     
-    conn = get_db_connection()
+    conn = get_db()
     
     videos = conn.execute('''
     SELECT video_id, title, description, upload_date, thumbnail_url
@@ -392,15 +389,13 @@ def date_view(date_str):
     WHERE DATE(upload_date) = ?
     ORDER BY upload_date DESC
     ''', (date_str,)).fetchall()
-    
-    conn.close()
-    
+
     return render_template('date_view.html', videos=videos, date=target_date)
 
 @app.route('/people')
 def people_list():
     """Sidebar: List all people with video counts"""
-    conn = get_db_connection()
+    conn = get_db()
 
     page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', default_per_page=20)
     total = conn.execute('SELECT COUNT(*) FROM people').fetchone()[0]
@@ -419,8 +414,6 @@ def people_list():
     family_count = sum(1 for p in all_people if p['canonical_name'].startswith("Matthew's"))
     collaborator_count = sum(1 for p in all_people if not p['canonical_name'].startswith("Matthew's") and p['canonical_name'] != 'Matthew Posa')
     most_featured = max(all_people, key=lambda x: x['video_count']) if all_people else None
-    
-    conn.close()
 
     pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4', record_name='people')
     
@@ -434,7 +427,7 @@ def people_list():
 @app.route('/person/<int:person_id>')
 def person_detail(person_id):
     """Person detail page with bio and videos"""
-    conn = get_db_connection()
+    conn = get_db()
     
     # Get person details
     person = conn.execute('''
@@ -442,7 +435,7 @@ def person_detail(person_id):
     ''', (person_id,)).fetchone()
     
     if not person:
-        return "Person not found", 404
+        abort(404)
     
     # Paginate their videos
     videos_query = '''
@@ -455,14 +448,12 @@ def person_detail(person_id):
     count_query = 'SELECT COUNT(*) FROM video_people WHERE person_id = ?'
     videos, pagination = paginate(conn, videos_query, (person_id,), count_query, (person_id,))
 
-    conn.close()
-    
     return render_template('person_detail.html', person=person, videos=videos, pagination=pagination)
 
 @app.route('/dogs')
 def dogs_list():
     """Sidebar: List all dogs with video counts"""
-    conn = get_db_connection()
+    conn = get_db()
     
     page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', default_per_page=20)
     total = conn.execute('SELECT COUNT(*) FROM dogs').fetchone()[0]
@@ -485,8 +476,6 @@ def dogs_list():
     ''').fetchall()
     total_adventures = sum(d['video_count'] for d in all_dogs)
     most_featured = max(all_dogs, key=lambda x: x['video_count']) if all_dogs else None
-    
-    conn.close()
 
     pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4', record_name='dogs')
     
@@ -499,7 +488,7 @@ def dogs_list():
 @app.route('/dog/<int:dog_id>')
 def dog_detail(dog_id):
     """Dog detail page with info and videos"""
-    conn = get_db_connection()
+    conn = get_db()
     
     # Get dog details
     dog = conn.execute('''
@@ -507,7 +496,7 @@ def dog_detail(dog_id):
     ''', (dog_id,)).fetchone()
     
     if not dog:
-        return "Dog not found", 404
+        abort(404)
     
     # Paginate their videos
     videos_query = '''
@@ -519,15 +508,13 @@ def dog_detail(dog_id):
     '''
     count_query = 'SELECT COUNT(*) FROM video_dogs WHERE dog_id = ?'
     videos, pagination = paginate(conn, videos_query, (dog_id,), count_query, (dog_id,))
-    
-    conn.close()
-    
+
     return render_template('dog_detail.html', dog=dog, videos=videos, pagination=pagination)
 
 @app.route('/series')
 def series_list():
     """List all episodic series"""
-    conn = get_db_connection()
+    conn = get_db()
     
     page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', default_per_page=20)
     total = conn.execute("SELECT COUNT(*) FROM trips WHERE series_type = 'series'").fetchone()[0]
@@ -549,8 +536,6 @@ def series_list():
     all_series = conn.execute("""SELECT t.trip_name, COUNT(vv.video_id) as video_count FROM trips t LEFT JOIN video_versions vv ON t.trip_id = vv.trip_id WHERE t.series_type = 'series' GROUP BY t.trip_id""").fetchall()
     total_episodes = sum(s['video_count'] for s in all_series)
     longest_series = max(all_series, key=lambda x: x['video_count']) if all_series else None
-    
-    conn.close()
 
     pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4', record_name='series')
     
@@ -563,7 +548,7 @@ def series_list():
 @app.route('/trips')
 def trips_list():
     """List all multi-day adventure trips"""
-    conn = get_db_connection()
+    conn = get_db()
     
     page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', default_per_page=20)
     total = conn.execute("SELECT COUNT(*) FROM trips WHERE series_type = 'trip'").fetchone()[0]
@@ -586,8 +571,6 @@ def trips_list():
     all_trips = conn.execute("""SELECT t.trip_name, COUNT(vv.video_id) as video_count FROM trips t LEFT JOIN video_versions vv ON t.trip_id = vv.trip_id WHERE t.series_type = 'trip' GROUP BY t.trip_id""").fetchall()
     total_adventures = sum(t['video_count'] for t in all_trips)
     longest_trip = max(all_trips, key=lambda x: x['video_count']) if all_trips else None
-    
-    conn.close()
 
     pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4', record_name='trips')
     
@@ -600,7 +583,7 @@ def trips_list():
 @app.route('/trip/<int:trip_id>')
 def trip_detail(trip_id):
     """Trip detail page showing all parts in order"""
-    conn = get_db_connection()
+    conn = get_db()
     
     # Get trip details
     trip = conn.execute('''
@@ -608,11 +591,12 @@ def trip_detail(trip_id):
     ''', (trip_id,)).fetchone()
     
     if not trip:
-        return "Trip not found", 404
+        abort(404)
     
     # Get all videos in this trip
     videos_query = '''
     SELECT v.video_id, v.title, v.upload_date, v.thumbnail_url, v.duration,
+           v.duration_seconds,
            vv.part_number, vv.version_type, vv.total_parts
     FROM videos v
     JOIN video_versions vv ON v.video_id = vv.video_id
@@ -630,9 +614,7 @@ def trip_detail(trip_id):
         duration_days = (end - start).days
     else:
         duration_days = 0
-    
-    conn.close()
-    
+
     return render_template('trip_detail.html', 
                          trip=trip, 
                          videos=videos, 
@@ -647,7 +629,7 @@ def search():
     if not query:
         return render_template('search_results.html', videos=[], query=query)
     
-    conn = get_db_connection()
+    conn = get_db()
     
     # Sanitize the query for FTS5: escape double quotes and wrap in double quotes
     # to treat the entire search as a single phrase.
@@ -661,9 +643,7 @@ def search():
     WHERE f.videos_fts MATCH ?
     ORDER BY v.upload_date DESC
     ''', (sanitized_query,)).fetchall()
-    
-    conn.close()
-    
+
     return render_template('search_results.html', videos=videos, query=query)
 
 
@@ -689,20 +669,18 @@ def create_admin():
         return
 
     # Create user
-    conn = get_db_connection()
+    conn = get_db()
     try:
         # Check if username exists
         existing = conn.execute('SELECT user_id FROM users WHERE username = ?', (username,)).fetchone()
         if existing:
             click.echo(f'Error: Username "{username}" already exists', err=True)
-            conn.close()
             return
 
         # Check if email exists
         existing = conn.execute('SELECT user_id FROM users WHERE email = ?', (email,)).fetchone()
         if existing:
             click.echo(f'Error: Email "{email}" already exists', err=True)
-            conn.close()
             return
 
         # Create admin user
@@ -715,8 +693,7 @@ def create_admin():
 
     except Exception as e:
         click.echo(f'Error creating user: {e}', err=True)
-    finally:
-        conn.close()
+    # Connection is closed by the app-context teardown handler (see db.py).
 
 
 if __name__ == '__main__':
