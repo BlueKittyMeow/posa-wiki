@@ -33,6 +33,15 @@ class Config:
     SECRET_KEY = os.getenv('FLASK_SECRET_KEY', 'dev-secret-change-me')
     DATABASE_PATH = os.getenv('DATABASE_PATH', str(BASE_DIR / 'posa_wiki.db'))
 
+    # Review-queue side files (candidate dumps + persisted human decisions).
+    # Overridable so tests can point them at a tmp dir.
+    DATA_DIR = os.getenv('DATA_DIR', str(BASE_DIR / 'data'))
+    TAG_AUTHORITY_PATH = os.getenv(
+        'TAG_AUTHORITY_PATH', str(BASE_DIR / 'tag_authority_system.json'))
+
+    # Review queue pagination
+    REVIEW_ITEMS_PER_PAGE = _int_env('REVIEW_ITEMS_PER_PAGE', 30)
+
     # Pagination defaults
     VIDEOS_PER_PAGE = _int_env('VIDEOS_PER_PAGE', 24)
     PEOPLE_PER_PAGE = _int_env('PEOPLE_PER_PAGE', 20)

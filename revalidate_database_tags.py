@@ -8,9 +8,14 @@ import sqlite3
 import json
 from datetime import datetime
 
-def load_tag_authorities():
-    """Load current tag authority system with multi-authority support"""
-    with open('tag_authority_system.json', 'r') as f:
+def load_tag_authorities(path='tag_authority_system.json'):
+    """Load current tag authority system with multi-authority support
+
+    ``path`` defaults to the repo-root authority file (the historical
+    behaviour); callers such as the /admin tag-review queue pass an explicit
+    path so tests can point at a scratch copy.
+    """
+    with open(path, 'r') as f:
         data = json.load(f)
     
     alias_to_authority = {}

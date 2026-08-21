@@ -41,6 +41,14 @@ if str(REPO_ROOT) not in sys.path:
 DEFAULT_DB = str(REPO_ROOT / 'posa_wiki.db')
 DEFAULT_JSON = str(REPO_ROOT / 'data' / 'series_review_candidates.json')
 
+# Human decisions made in the /admin review queue. Pairs the owner already
+# approved or rejected are never proposed again (the queue also filters at
+# display time, since this dump is regenerated wholesale on every run).
+from services.review_service import (  # noqa: E402  (needs REPO_ROOT on path)
+    DEFAULT_DECISIONS_PATH, load_series_decisions, series_decision_key)
+
+DEFAULT_DECISIONS_JSON = str(DEFAULT_DECISIONS_PATH)
+
 COMMUNITY_UMBRELLA = 'Community Content'
 COMMUNITY_CHILDREN = ('Unboxing', 'Channel Updates', 'Giveaways')
 
@@ -186,8 +194,9 @@ def classify(row):
 
 
 def assign(db_path=DEFAULT_DB, json_path=DEFAULT_JSON, dry_run=False,
-           verbose=True):
+           verbose=True, decisions_path=DEFAULT_DECISIONS_JSON):
     """Apply the high-confidence rules; dump review candidates. Returns dict."""
+    decisions = load_series_decisions(decisions_path)
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
@@ -206,6 +215,7 @@ def assign(db_path=DEFAULT_DB, json_path=DEFAULT_JSON, dry_run=False,
     missing_series = Counter()
     review_candidates = []
     inserted_total = 0
+    decided_skipped = 0
 
     for row in videos:
         high, review = classify(row)
@@ -226,6 +236,10 @@ def assign(db_path=DEFAULT_DB, json_path=DEFAULT_JSON, dry_run=False,
                 inserted_total += 1
 
         for series_name, rule in review:
+            # Already ruled on by a human in /admin/review/series.
+            if series_decision_key(row['video_id'], series_name) in decisions:
+                decided_skipped += 1
+                continue
             review_candidates.append({
                 'video_id': row['video_id'],
                 'title': row['title'],
@@ -254,7 +268,9 @@ def assign(db_path=DEFAULT_DB, json_path=DEFAULT_JSON, dry_run=False,
         'database': db_path,
         'count': len(review_candidates),
         'note': 'Medium-confidence proposals only. Nothing here has been '
-                'written to the database; a human decides.',
+                'written to the database; a human decides (see '
+                '/admin/review/series).',
+        'already_decided_skipped': decided_skipped,
         'candidates': review_candidates,
     }
     if not dry_run and json_path:
@@ -278,6 +294,9 @@ def assign(db_path=DEFAULT_DB, json_path=DEFAULT_JSON, dry_run=False,
               + ('' if dry_run else f' -> {json_path}'))
         for name, count in sorted(by_rule.items()):
             print(f'      ? {name:34s} {count}')
+        if decided_skipped:
+            print(f'\n   Skipped (already decided in /admin): '
+                  f'{decided_skipped}')
 
     return {
         'videos_scanned': len(videos),
@@ -288,6 +307,7 @@ def assign(db_path=DEFAULT_DB, json_path=DEFAULT_JSON, dry_run=False,
         'review_by_series': dict(Counter(
             c['proposed_series'] for c in review_candidates)),
         'missing_series': dict(missing_series),
+        'already_decided_skipped': decided_skipped,
     }
 
 
@@ -298,10 +318,13 @@ def main():
                         help='review-candidate output path')
     parser.add_argument('--dry-run', action='store_true',
                         help='roll back and skip the JSON dump')
+    parser.add_argument('--decisions', default=DEFAULT_DECISIONS_JSON,
+                        help='human review decisions to skip')
     parser.add_argument('--quiet', action='store_true')
     args = parser.parse_args()
 
-    assign(args.db, args.json, dry_run=args.dry_run, verbose=not args.quiet)
+    assign(args.db, args.json, dry_run=args.dry_run, verbose=not args.quiet,
+           decisions_path=args.decisions)
     return 0
 
 

@@ -111,6 +111,9 @@
                     <h2>👤 {{ current_user.username }}</h2>
                     <ul class="sidebar-nav">
                         <li><span class="entity-count" style="margin-right: 0.5rem;">{{ current_user.role }}</span></li>
+                        {% if current_user.is_editor() %}
+                            <li><a href="{{ url_for('admin.dashboard') }}" class="{% if request.blueprint == 'admin' %}active{% endif %}">🛠️ Admin &amp; Review</a></li>
+                        {% endif %}
                         <li><a href="{{ url_for('auth.logout') }}">🔓 Logout</a></li>
                     </ul>
                 </div>
@@ -126,6 +129,17 @@
 
         <!-- Main Content -->
         <main class="main-content">
+            {% block flashes %}
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-stack">
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            {% endblock %}
             {% block content %}{% endblock %}
         </main>
     </div>

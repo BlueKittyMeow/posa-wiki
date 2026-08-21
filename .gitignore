@@ -67,3 +67,8 @@ temp/
 data/*.json
 data/*.txt
 *.bak.*
+
+# ...but human review decisions are NOT regenerable -- keep them tracked.
+!data/series_review_decisions.json
+!data/tag_review_dismissed.json
+!data/dog_review_dismissed.json

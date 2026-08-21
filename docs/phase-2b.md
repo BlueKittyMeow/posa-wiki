@@ -1,6 +1,6 @@
 # Phase 2B: API & CRUD Development
 
-**Status:** In Progress - Step 1.3 Complete (+ Image Features) ✓
+**Status:** In Progress - Step 2 (Review Queues) Complete ✓
 **Goal:** Deliver a fully functional admin panel with CRUD operations for all major data models, a versioned REST API, and hardened security.
 
 ## Progress Update
@@ -71,6 +71,49 @@
 - Created asynchronous audit logging service and `audit_logs` table migration
 - Wired security hooks into web and API authentication flows
 *Completed by Codex*
+
+**Step 2 (RESHAPED): Admin Panel — Review Queues First** ✓ COMPLETE
+Owner decision: Step 2's centrepiece is a **review-queue web UI** that replaces
+the old "an agent pastes a list of proposals, the owner replies by number"
+workflow. User-management CRUD (originally 2.2/2.4 below) is deferred.
+
+Built:
+- `services/review_service.py` — the queue framework. A queue is one class
+  (`items` / `approve` / `reject`) registered in `QUEUES`; items carry kind,
+  video_id, title, thumbnail, upload date, proposal, provenance/rule, payload.
+  Adding a fourth queue is a class plus a registry entry.
+- Three queues:
+  - **Series candidates** — reads `data/series_review_candidates.json`;
+    proposals for retired (Michigan Adventures) or nonexistent series are
+    filtered out, as are already-decided pairs and rows that already exist.
+  - **Unvalidated tags** — one item per DISTINCT `videos.unvalidated_tags`
+    value with a count and up to 6 sample titles. Approve appends an authority
+    to `tag_authority_system.json` and re-runs the validation split for the
+    affected videos (reuses `revalidate_database_tags`, no duplicated logic).
+    Reject persists to `data/tag_review_dismissed.json`.
+  - **Dog candidates ("Layla rule")** — videos with Lucas but no Layla.
+    Approve inserts `video_dogs` with a provenance note; reject persists to
+    `data/dog_review_dismissed.json`.
+- `blueprints/admin.py` — `GET /admin` (dashboard: queue counts + catalogue
+  stats), `GET /admin/review/<queue>` (card grid, thumbnails, 30/page
+  pagination, "Approve all shown" with confirm), `POST
+  /admin/review/<queue>/<action>` (CSRF-protected, flash + redirect back).
+  All routes `@editor_required`.
+- Provenance: approvals stamp `human:web-review` into `video_series.notes` /
+  `video_dogs.notes`; every approve/reject writes an audit log entry
+  (`review.<queue>.<action>`, resource_id = video/tag, details = proposal).
+- Decision durability: `data/series_review_decisions.json` (keyed
+  `video_id|series`) is read both by the queue *and* by
+  `scripts/assign_series.py`, which now skips already-decided pairs. The three
+  decision files are git-tracked exceptions to `data/*.json` being ignored.
+- UI: flash rendering added to `base.html` (all pages), Admin link in the
+  sidebar for authenticated editors/admins, themed CSS (`.alert`,
+  `.review-card`, `.stat-tile`, …) using the existing custom properties, so it
+  works in all three themes.
+- Tests: `tests/test_admin_review.py` (19 tests) — access control, dashboard,
+  each queue page, approve/reject round-trips for all three queues, decision
+  persistence + disappearance from the queue, CSRF rejection, bulk approve.
+*Completed by Claude*
 
 **Step 1.5: Viewer Test Account & Login Flow** ⏳ TODO
 - Seed a default viewer user for non-admin testing (CLI helper or migration)

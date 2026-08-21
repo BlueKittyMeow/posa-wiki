@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}{{ queue.label }} review - Posa Wiki{% endblock %}
+
+{% block content %}
+{% set here = request.full_path %}
+<div class="card">
+    <div class="card-header">
+        <div>
+            <h2 class="card-title">{{ queue.icon }} {{ queue.label }}</h2>
+            <span class="text-muted">
+                {{ total }} pending
+                {%- if total_pages > 1 %} &middot; page {{ page }} of {{ total_pages }}{% endif %}
+            </span>
+        </div>
+        <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary">← Dashboard</a>
+    </div>
+
+    <p class="text-muted" style="font-size: 0.85rem; line-height: 1.6;">{{ queue.description }}</p>
+
+    {% if candidates_missing %}
+    <div class="alert alert-warning" style="margin-top: 1rem;">
+        No <code>data/series_review_candidates.json</code> found — regenerate it with
+        <code>python scripts/assign_series.py</code>.
+    </div>
+    {% endif %}
+
+    {% if items %}
+    <form method="POST"
+          action="{{ url_for('admin.review_action', queue_key=queue.key, action='approve') }}"
+          style="margin-top: 1rem;"
+          onsubmit="return confirm('Approve all {{ items|length }} proposals shown on this page?');">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="next" value="{{ here }}">
+        {% for item in items %}
+            <input type="hidden" name="payload" value="{{ item.payload_json }}">
+        {% endfor %}
+        <button type="submit" class="btn btn-warning" style="font-size: 0.8rem; padding: 0.4rem 0.9rem;">
+            ✅ Approve all {{ items|length }} shown
+        </button>
+    </form>
+    {% endif %}
+</div>
+
+{% if items %}
+<div class="review-grid">
+    {% for item in items %}
+    <div class="review-card">
+        {% if item.video_id %}
+        <a href="{{ url_for('video_detail', video_id=item.video_id) }}">
+            {% if item.thumbnail_url %}
+                <img class="review-thumb" src="{{ item.thumbnail_url }}" alt="{{ item.title }}" loading="lazy">
+            {% else %}
+                <span class="review-thumb-placeholder">📹 No thumbnail</span>
+            {% endif %}
+        </a>
+        {% else %}
+            <span class="review-thumb-placeholder">🏷️ No thumbnail</span>
+        {% endif %}
+
+        <div class="review-body">
+            <div class="review-title">
+                {% if item.video_id %}
+                    <a href="{{ url_for('video_detail', video_id=item.video_id) }}">{{ item.title }}</a>
+                {% else %}
+                    {{ item.title }}
+                {% endif %}
+            </div>
+            <div class="text-muted" style="font-size: 0.78rem;">
+                {% if item.upload_date %}📅 {{ item.upload_date[:10] }}{% endif %}
+                {% if item.detail %}<span class="badge" style="margin-left: 0.4rem;">{{ item.detail }}</span>{% endif %}
+            </div>
+            <div class="review-proposal">➜ {{ item.proposal }}</div>
+            <div class="review-provenance">{{ item.provenance }}</div>
+            {% if item.samples %}
+            <ul class="review-samples">
+                {% for sample in item.samples %}
+                <li>{{ sample }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <div class="review-actions">
+            <form method="POST" action="{{ url_for('admin.review_action', queue_key=queue.key, action='approve') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="next" value="{{ here }}">
+                <input type="hidden" name="payload" value="{{ item.payload_json }}">
+                <button type="submit" class="btn">✅ Approve</button>
+            </form>
+            <form method="POST" action="{{ url_for('admin.review_action', queue_key=queue.key, action='reject') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="next" value="{{ here }}">
+                <input type="hidden" name="payload" value="{{ item.payload_json }}">
+                <button type="submit" class="btn btn-secondary">✖ Reject</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% if total_pages > 1 %}
+<div class="pagination-container">
+    <ul class="pagination">
+        <li class="page-item {% if page <= 1 %}disabled{% endif %}">
+            <a class="page-link" href="{{ url_for('admin.review_queue', queue_key=queue.key, page=page-1) }}">« Prev</a>
+        </li>
+        {% for p in range(1, total_pages + 1) %}
+        <li class="page-item {% if p == page %}active{% endif %}">
+            <a class="page-link" href="{{ url_for('admin.review_queue', queue_key=queue.key, page=p) }}">{{ p }}</a>
+        </li>
+        {% endfor %}
+        <li class="page-item {% if page >= total_pages %}disabled{% endif %}">
+            <a class="page-link" href="{{ url_for('admin.review_queue', queue_key=queue.key, page=page+1) }}">Next »</a>
+        </li>
+    </ul>
+</div>
+{% endif %}
+
+{% else %}
+<div class="card text-center" style="padding: 3rem;">
+    <p class="text-muted">{{ queue.empty_message }}</p>
+</div>
+{% endif %}
+{% endblock %}

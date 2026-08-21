@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - Posa Wiki{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <div>
+            <h2 class="card-title">🛠️ Admin &amp; Review</h2>
+            <span class="text-muted">
+                {{ pending_total }} proposal{{ 's' if pending_total != 1 else '' }} waiting on a human
+            </span>
+        </div>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">🏠 Back to site</a>
+    </div>
+
+    <div class="queue-grid">
+        {% for queue in queues %}
+        <div class="card" style="margin: 0;">
+            <h3 style="margin: 0 0 0.5rem 0; font-size: 1rem;">
+                <a href="{{ url_for('admin.review_queue', queue_key=queue.key) }}" style="color: inherit; text-decoration: none;">
+                    {{ queue.icon }} {{ queue.label }}
+                </a>
+                <span class="badge badge-count" style="margin-left: 0.5rem;">{{ queue.count }}</span>
+            </h3>
+            <p class="text-muted" style="font-size: 0.82rem; line-height: 1.5; margin-bottom: 0.9rem;">
+                {{ queue.description }}
+            </p>
+            <a href="{{ url_for('admin.review_queue', queue_key=queue.key) }}"
+               class="btn {% if queue.count == 0 %}btn-secondary{% endif %}"
+               style="font-size: 0.8rem; padding: 0.35rem 0.9rem;">
+                {% if queue.count %}Review {{ queue.count }} →{% else %}Nothing pending{% endif %}
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if candidates_missing %}
+    <div class="alert alert-warning" style="margin-top: 1.5rem;">
+        No <code>data/series_review_candidates.json</code> found — regenerate it with
+        <code>python scripts/assign_series.py</code>.
+    </div>
+    {% endif %}
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">📊 Catalogue stats</h2>
+    </div>
+    <div class="stat-grid">
+        <div class="stat-tile">
+            <div class="stat-value">{{ stats.videos }}</div>
+            <div class="stat-label">Videos</div>
+        </div>
+        <div class="stat-tile">
+            <div class="stat-value">{{ stats.people }}</div>
+            <div class="stat-label">People</div>
+        </div>
+        <div class="stat-tile">
+            <div class="stat-value">{{ stats.dogs }}</div>
+            <div class="stat-label">Dogs</div>
+        </div>
+        <div class="stat-tile">
+            <div class="stat-value">{{ stats.series }}</div>
+            <div class="stat-label">Series</div>
+        </div>
+        <div class="stat-tile">
+            <div class="stat-value">{{ stats.series_memberships }}</div>
+            <div class="stat-label">Series memberships</div>
+        </div>
+        <div class="stat-tile">
+            <div class="stat-value">{{ stats.transcript_segments }}</div>
+            <div class="stat-label">Transcript segments</div>
+        </div>
+        <div class="stat-tile">
+            <div class="stat-value">{{ stats.transcribed_videos }}</div>
+            <div class="stat-label">Videos transcribed</div>
+        </div>
+        <div class="stat-tile">
+            <div class="stat-value">{{ stats.audit_events }}</div>
+            <div class="stat-label">Audit events</div>
+        </div>
+        <div class="stat-tile">
+            <div class="stat-value" style="font-size: 1rem;">{{ stats.newest_upload or '—' }}</div>
+            <div class="stat-label">Newest upload</div>
+        </div>
+        <div class="stat-tile">
+            <div class="stat-value" style="font-size: 1rem;">{{ (stats.last_catalog_touch or '—')[:19] }}</div>
+            <div class="stat-label">Catalogue last touched</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
