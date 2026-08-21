@@ -933,3 +933,170 @@ textarea:focus {
   color: var(--bg-primary);
   font-weight: 700;
 }
+
+/* ==========================================================================
+   Watch page (/watch/<video_id>) -- night-friendly viewing surface.
+   The player stage is deliberately theme-independent: black is black.
+   ========================================================================== */
+
+.watch-stage {
+  background: #000;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.watch-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+/* Fallback for browsers without aspect-ratio */
+@supports not (aspect-ratio: 16 / 9) {
+  .watch-frame {
+    height: 0;
+    padding-bottom: 56.25%;
+  }
+}
+
+.watch-frame .watch-player,
+.watch-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.watch-overlay {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 2;
+}
+
+.watch-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1rem 0 0.5rem 0;
+}
+
+.watch-dim-btn,
+.watch-night-btn {
+  flex: 1 1 8rem;
+  min-height: 48px;
+  min-width: 48px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.watch-dim-btn:hover,
+.watch-night-btn:hover {
+  background: var(--bg-secondary);
+}
+
+.watch-dim-btn.is-active,
+.watch-night-btn.is-active {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+  border-color: var(--accent-secondary);
+}
+
+.watch-night-btn {
+  flex-basis: 100%;
+}
+
+.watch-hint {
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.watch-hint kbd {
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.8rem;
+}
+
+.watch-meta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.watch-chips {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.5rem 0;
+}
+
+.watch-episode-nav {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.watch-episode-link {
+  flex: 1 1 14rem;
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: left;
+  padding: 0.75rem 1rem;
+}
+
+.watch-episode-title {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  font-weight: normal;
+}
+
+/* Full-page night mode: black out the chrome around the player. */
+body.watch-night {
+  background: #000;
+}
+
+body.watch-night .app-container,
+body.watch-night .main-content {
+  background: #000;
+}
+
+body.watch-night .sidebar {
+  opacity: 0.15;
+  transition: opacity 0.25s ease;
+}
+
+body.watch-night .sidebar:hover,
+body.watch-night .sidebar:focus-within {
+  opacity: 1;
+}
+
+body.watch-night .card,
+body.watch-night .watch-hint {
+  opacity: 0.35;
+  transition: opacity 0.25s ease;
+}
+
+body.watch-night .card:hover,
+body.watch-night .card:focus-within {
+  opacity: 1;
+}

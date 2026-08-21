@@ -160,9 +160,37 @@ def _seed_rows(conn: sqlite3.Connection) -> dict:
         (1, trip_id, "main", 1, 1, "vid_medium"),
     )
 
+    # An episodic series so /watch can prove Previous/Next episode links.
+    # The name is deliberately outside seed_series.py's canonical list so
+    # seeding/retiring in test_series.py stays idempotent; notes follow the
+    # 'auto:' provenance convention assign_series.py writes.
+    episodic_series_id = 900
+    conn.execute(
+        """
+        INSERT INTO series (series_id, name, description, is_episodic, series_type)
+        VALUES (?, ?, ?, ?, ?)
+        """,
+        (episodic_series_id, "Nightly Test Episodes",
+         "Three seeded episodes used by the watch-page tests.", 1, "activity"),
+    )
+    for episode_number, video_id in enumerate(
+            ("vid_short", "vid_medium", "vid_long"), start=1):
+        conn.execute(
+            """
+            INSERT INTO video_series (video_id, series_id, episode_number, notes)
+            VALUES (?, ?, ?, ?)
+            """,
+            (video_id, episodic_series_id, episode_number,
+             "auto:conftest-episodic-seed"),
+        )
+
     conn.commit()
 
     return {
+        "episodic_series_id": episodic_series_id,
+        "episodic_middle_video_id": "vid_medium",
+        "episodic_prev_video_id": "vid_short",
+        "episodic_next_video_id": "vid_long",
         "video_ids_desc_by_duration": ["vid_long", "vid_medium", "vid_short"],
         "video_ids_asc_by_duration": ["vid_short", "vid_medium", "vid_long"],
         "video_id": "vid_medium",

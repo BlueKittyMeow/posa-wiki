@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Watch: {{ video.title }} - Posa Wiki{% endblock %}
+
+{% block content %}
+<div class="watch-page" data-video-id="{{ video.video_id }}">
+
+    <!-- Player stage: black, theme-independent -->
+    <div class="watch-stage">
+        <div class="watch-frame">
+            <div id="watch-player" class="watch-player"></div>
+            <div id="watch-overlay" class="watch-overlay" role="button" tabindex="0"
+                 aria-label="Dim overlay — tap to change dimming"></div>
+        </div>
+    </div>
+
+    <!-- Dim controls -->
+    <div class="watch-controls" role="group" aria-label="Screen dimming">
+        <button type="button" class="watch-dim-btn" data-dim="0" aria-pressed="false">☀️ Bright</button>
+        <button type="button" class="watch-dim-btn" data-dim="0.5" aria-pressed="false">🌤️ Half</button>
+        <button type="button" class="watch-dim-btn" data-dim="0.75" aria-pressed="false">🌒 Quarter</button>
+        <button type="button" class="watch-dim-btn" data-dim="1" aria-pressed="false">🌑 Dark</button>
+        <button type="button" id="watch-night-btn" class="watch-night-btn" aria-pressed="false">🌙 Night</button>
+    </div>
+    <p class="watch-hint text-muted">
+        Audio keeps playing at every dim level — “Dark” only covers the picture.
+        Keys: <kbd>d</kbd> dim · <kbd>n</kbd> night · <kbd>space</kbd> play/pause.
+        Cast from the player to send it to the TV.
+    </p>
+
+    <!-- Context (normal brightness) -->
+    <div class="card watch-context">
+        <div class="card-header">
+            <div>
+                <h2 class="card-title">{{ video.title }}</h2>
+                <div class="watch-meta">
+                    <span class="text-muted">📅 {{ video.upload_date[:10] if video.upload_date else 'Unknown Date' }}</span>
+                    {% if video.duration or video.duration_seconds %}
+                        <span class="text-muted">⏱️ {{ video.duration_seconds|default(video.duration, true)|format_duration }}</span>
+                    {% endif %}
+                    <a href="{{ url_for('video_detail', video_id=video.video_id) }}"
+                       class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.85rem;">📄 Video Details</a>
+                </div>
+            </div>
+        </div>
+
+        {% if series_memberships %}
+            <div class="watch-chips">
+                {% for membership in series_memberships %}
+                    <a href="{{ url_for('series_detail', series_id=membership.series_id) }}"
+                       class="btn btn-secondary" style="font-size: 0.9rem;">
+                        {% if membership.is_episodic %}📺{% else %}🏷️{% endif %} {{ membership.name }}
+                        {%- if membership.episode_number %} &middot; Ep {{ membership.episode_number }}{% endif %}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if people or dogs %}
+            <div class="watch-chips">
+                {% for person in people %}
+                    <a href="{{ url_for('person_detail', person_id=person.person_id) }}" class="btn btn-secondary">
+                        {% if person.canonical_name == "Matthew Posa" %}🎬
+                        {% elif person.canonical_name.startswith("Matthew's") %}👨‍👩‍👧‍👦
+                        {% else %}🤝{% endif %}
+                        {{ person.canonical_name }}
+                    </a>
+                {% endfor %}
+                {% for dog in dogs %}
+                    <a href="{{ url_for('dog_detail', dog_id=dog.dog_id) }}" class="btn btn-secondary">🐾 {{ dog.name }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Episode navigation, or more from this series -->
+    {% if prev_episode or next_episode %}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">📺 {{ episode_series.name }}</h3>
+            </div>
+            <div class="watch-episode-nav">
+                {% if prev_episode %}
+                    <a class="btn btn-secondary watch-episode-link"
+                       href="{{ url_for('watch', video_id=prev_episode.video_id) }}">
+                        ← Previous{% if prev_episode.episode_number %} (Ep {{ prev_episode.episode_number }}){% endif %}
+                        <span class="watch-episode-title">{{ prev_episode.title }}</span>
+                    </a>
+                {% endif %}
+                {% if next_episode %}
+                    <a class="btn btn-secondary watch-episode-link"
+                       href="{{ url_for('watch', video_id=next_episode.video_id) }}">
+                        Next{% if next_episode.episode_number %} (Ep {{ next_episode.episode_number }}){% endif %} →
+                        <span class="watch-episode-title">{{ next_episode.title }}</span>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    {% elif related %}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">🎬 More from {{ episode_series.name }}</h3>
+            </div>
+            <div class="video-grid">
+                {% for other in related %}
+                    <div class="video-card">
+                        <div class="video-thumbnail" style="position: relative;">
+                            <a href="{{ url_for('watch', video_id=other.video_id) }}">
+                                {% if other.thumbnail_url %}
+                                    <img src="{{ other.thumbnail_url }}" alt="{{ other.title }}" loading="lazy">
+                                {% else %}
+                                    <span>📹 No Thumbnail</span>
+                                {% endif %}
+                            </a>
+                            {% if other.duration or other.duration_seconds %}
+                            <div style="position: absolute; bottom: 0.5rem; right: 0.5rem; background: rgba(0,0,0,0.8); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">
+                                {{ other.duration_seconds|default(other.duration, true)|format_duration }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">
+                                <a href="{{ url_for('watch', video_id=other.video_id) }}" style="color: inherit; text-decoration: none;">
+                                    {{ other.title }}
+                                </a>
+                            </h3>
+                            <div class="video-meta">
+                                <span>📅 {{ other.upload_date[:10] if other.upload_date else 'Unknown Date' }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/watch.js') }}?v={{ STATIC_V }}"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+{% endblock %}

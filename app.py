@@ -403,6 +403,100 @@ def video_detail(video_id):
                            dogs=dogs, series_info=series_info,
                            series_memberships=series_memberships)
 
+
+@app.route('/watch/<video_id>')
+def watch(video_id):
+    """Night-friendly viewing surface: big embedded player + dim overlay.
+
+    Public (no auth). Embeds YouTube's *official* IFrame player so the
+    viewer's own logged-in session applies (ad-free with Premium, and the
+    view still counts for the channel). We never proxy or extract streams.
+    """
+    conn = get_db()
+
+    video = conn.execute(
+        'SELECT * FROM videos WHERE video_id = ?', (video_id,)
+    ).fetchone()
+
+    if not video:
+        abort(404)
+
+    people = conn.execute('''
+    SELECT p.person_id, p.canonical_name
+    FROM people p
+    JOIN video_people vp ON p.person_id = vp.person_id
+    WHERE vp.video_id = ?
+    ORDER BY p.canonical_name
+    ''', (video_id,)).fetchall()
+
+    dogs = conn.execute('''
+    SELECT d.dog_id, d.name
+    FROM dogs d
+    JOIN video_dogs vd ON d.dog_id = vd.dog_id
+    WHERE vd.video_id = ?
+    ORDER BY d.name
+    ''', (video_id,)).fetchall()
+
+    series_memberships = conn.execute('''
+    SELECT s.series_id, s.name, s.series_type, s.is_episodic,
+           vs.episode_number
+    FROM series s
+    JOIN video_series vs ON s.series_id = vs.series_id
+    WHERE vs.video_id = ?
+    ORDER BY s.series_type, s.name
+    ''', (video_id,)).fetchall()
+
+    # Prefer an episodic membership that actually has an episode number --
+    # that's the one that can offer Previous/Next.
+    episodic = next(
+        (m for m in series_memberships
+         if m['is_episodic'] and m['episode_number'] is not None),
+        None)
+
+    prev_episode = next_episode = None
+    episode_series = None
+    related = []
+
+    if episodic is not None:
+        episode_series = episodic
+        neighbour_sql = '''
+        SELECT v.video_id, v.title, v.thumbnail_url, vs.episode_number
+        FROM videos v
+        JOIN video_series vs ON v.video_id = vs.video_id
+        WHERE vs.series_id = ? AND v.deleted_at IS NULL
+          AND vs.episode_number IS NOT NULL AND vs.episode_number {op} ?
+        ORDER BY vs.episode_number {order}
+        LIMIT 1
+        '''
+        params = (episodic['series_id'], episodic['episode_number'])
+        prev_episode = conn.execute(
+            neighbour_sql.format(op='<', order='DESC'), params).fetchone()
+        next_episode = conn.execute(
+            neighbour_sql.format(op='>', order='ASC'), params).fetchone()
+
+    if prev_episode is None and next_episode is None and series_memberships:
+        # Not episodic (or a one-off episode): show a small "more from this
+        # series" strip instead.
+        episode_series = series_memberships[0]
+        related = conn.execute('''
+        SELECT v.video_id, v.title, v.upload_date, v.thumbnail_url,
+               v.duration, v.duration_seconds
+        FROM videos v
+        JOIN video_series vs ON v.video_id = vs.video_id
+        WHERE vs.series_id = ? AND v.video_id != ? AND v.deleted_at IS NULL
+        ORDER BY v.upload_date DESC
+        LIMIT 6
+        ''', (episode_series['series_id'], video_id)).fetchall()
+
+    return render_template('watch.html', video=video, people=people,
+                           dogs=dogs,
+                           series_memberships=series_memberships,
+                           episode_series=episode_series,
+                           prev_episode=prev_episode,
+                           next_episode=next_episode,
+                           related=related)
+
+
 @app.route('/date/<date_str>')
 def date_view(date_str):
     """Videos published on a specific date"""
