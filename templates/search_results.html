@@ -42,7 +42,7 @@
                 {{ render_video_card(video) }}
             {% endfor %}
         </div>
-        {% else %}
+        {% elif not transcript_hits %}
             <div class="text-center" style="padding: 3rem;">
                 <h3 style="margin-bottom: 1rem;">🤷 No Results Found</h3>
                 <p class="text-muted" style="margin-bottom: 2rem;">
@@ -55,6 +55,38 @@
                     <a href="{{ url_for('index') }}" class="btn btn-secondary">🏠 Back to Home</a>
                 </div>
             </div>
+        {% endif %}
+
+        {% if transcript_hits %}
+        <div style="margin-top: 2.5rem;">
+            <div class="card-header">
+                <h3 class="card-title">🗣️ Spoken in videos</h3>
+                <span class="text-muted">
+                    {{ transcript_hits|length }} video{{ 's' if transcript_hits|length != 1 else '' }}
+                </span>
+            </div>
+            <p class="text-muted" style="margin-bottom: 1rem;">
+                Matches from the auto-generated captions. Timestamps open the moment on YouTube.
+            </p>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                {% for hit in transcript_hits %}
+                <li class="card" style="margin-bottom: 0.75rem;">
+                    <a href="{{ url_for('video_detail', video_id=hit.video_id) }}" class="text-accent">
+                        {{ hit.title }}
+                    </a>
+                    <blockquote style="margin: 0.5rem 0 0.5rem 0; padding-left: 0.75rem;
+                                       border-left: 3px solid var(--accent, #c4941a);
+                                       line-height: 1.5;">
+                        {{ hit.snippet }}
+                    </blockquote>
+                    <a href="{{ hit.youtube_url }}" target="_blank" rel="noopener noreferrer"
+                       class="btn btn-secondary">
+                        ▶ {{ hit.timestamp }} on YouTube
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
         {% endif %}
     {% else %}
         <!-- Search help/suggestions -->

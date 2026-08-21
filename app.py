@@ -10,7 +10,9 @@ from flask_login import LoginManager, current_user
 from flask_wtf import CSRFProtect
 from flask_jwt_extended import JWTManager
 from werkzeug.middleware.proxy_fix import ProxyFix
+from markupsafe import Markup, escape
 import json
+import sqlite3
 from datetime import datetime, timedelta
 import os
 import logging
@@ -697,14 +699,15 @@ def search():
     query = request.args.get('q', '').strip()
     
     if not query:
-        return render_template('search_results.html', videos=[], query=query)
-    
+        return render_template('search_results.html', videos=[],
+                               transcript_hits=[], query=query)
+
     conn = get_db()
-    
+
     # Sanitize the query for FTS5: escape double quotes and wrap in double quotes
     # to treat the entire search as a single phrase.
     sanitized_query = f'"' + query.replace('"', '""') + '"'
-    
+
     # Use the FTS table for fast text search
     videos = conn.execute('''
     SELECT v.video_id, v.title, v.description, v.upload_date, v.thumbnail_url
@@ -714,7 +717,69 @@ def search():
     ORDER BY v.upload_date DESC
     ''', (sanitized_query,)).fetchall()
 
-    return render_template('search_results.html', videos=videos, query=query)
+    transcript_hits = search_transcripts(conn, sanitized_query)
+
+    return render_template('search_results.html', videos=videos,
+                           transcript_hits=transcript_hits, query=query)
+
+
+TRANSCRIPT_HIT_LIMIT = 10
+
+
+def search_transcripts(conn, sanitized_query, limit=TRANSCRIPT_HIT_LIMIT):
+    """Return the best-ranked transcript segment per video for an FTS query.
+
+    ``sanitized_query`` is the already-escaped FTS5 phrase used for
+    ``videos_fts``.  Returns [] when the transcript tables have not been
+    created yet (migration 010 / scripts/ingest_transcripts.py) so search keeps
+    working on a database without transcripts.
+    """
+    # snippet() cannot be used in an aggregate/GROUP BY context, so pull the
+    # top-ranked segments and keep the first (best) one per video in Python.
+    try:
+        rows = conn.execute('''
+        SELECT s.video_id,
+               v.title,
+               s.start_seconds,
+               s.text,
+               snippet(transcripts_fts, 0, char(2), char(3), '…', 24) AS snippet
+        FROM transcripts_fts f
+        JOIN transcript_segments s ON s.segment_id = f.rowid
+        JOIN videos v ON v.video_id = s.video_id
+        WHERE f.transcripts_fts MATCH ?
+        ORDER BY f.rank
+        LIMIT ?
+        ''', (sanitized_query, limit * 20)).fetchall()
+    except sqlite3.OperationalError:
+        return []
+
+    hits = []
+    seen = set()
+    for row in rows:
+        if row['video_id'] in seen:
+            continue
+        seen.add(row['video_id'])
+        if len(hits) >= limit:
+            break
+        start = int(row['start_seconds'] or 0)
+        # snippet() marks the match with control characters so the surrounding
+        # transcript text can be HTML-escaped before the <mark> tags go in.
+        snippet = escape(row['snippet'] or row['text'])
+        snippet = Markup(
+            str(snippet).replace('\x02', '<mark>').replace('\x03', '</mark>')
+        )
+        hits.append({
+            'video_id': row['video_id'],
+            'title': row['title'],
+            'start_seconds': start,
+            'timestamp': format_seconds(start),
+            'text': row['text'],
+            'snippet': snippet,
+            'youtube_url': (
+                f"https://www.youtube.com/watch?v={row['video_id']}&t={start}s"
+            ),
+        })
+    return hits
 
 
 # Flask CLI Commands

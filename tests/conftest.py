@@ -26,6 +26,7 @@ MIGRATION_FILES = [
     "006_add_image_fields.sql",
     "007_create_audit_logs.sql",
     "008_add_duration_seconds.sql",
+    "010_create_transcripts.sql",
 ]
 
 

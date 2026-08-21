@@ -123,6 +123,74 @@ that fired (`auto:title-pattern`, `auto:tag-match`, `auto:episode-pattern`,
 guesses go to `data/series_review_candidates.json` for a human pass and are
 never written to the database.
 
+## Transcripts
+
+`scripts/ingest_transcripts.py` turns the subtitle sidecars written by the
+yt-dlp channel archive (`scripts/archive_channel.sh`) into searchable text. It
+reads files, never the network — no API key, no quota.
+
+Each archived video has a WebVTT sidecar beside its media file:
+
+```
+/mnt/media6t/archive/posa/<dirname>/<title> [<video_id>].en.vtt
+```
+
+The video id is the last `[...]` group in the filename; `.en.vtt` wins over
+`.en-orig.vtt` when a video has both.
+
+```bash
+# look first
+./venv/bin/python scripts/ingest_transcripts.py --dry-run
+
+# for real (defaults to /mnt/media6t/archive/posa and the repo posa_wiki.db)
+./venv/bin/python scripts/ingest_transcripts.py
+```
+
+| Flag | Effect |
+|------|--------|
+| `--archive-dir PATH` | Archive root to scan. Default `/mnt/media6t/archive/posa`. |
+| `--db PATH` | Point at a different SQLite file (used by the tests). |
+| `--redo VIDEO_ID` | Delete that video's segments + status row and re-parse it. |
+| `--dry-run` | Parse and report; the transaction is rolled back. |
+| `--quiet` | Less per-file chatter. |
+
+It applies `migrations/010_create_transcripts.sql` itself if the transcript
+tables are missing, so there is no separate migration step. Storage:
+
+- `transcript_segments` — one row per spoken phrase (`video_id`,
+  `start_seconds`, `duration_seconds`, `text`).
+- `transcript_status` — one row per video: `ingested` / `no_captions` /
+  `error`, plus `source` (`youtube-asr-vtt` today, `whisper-large-v3` later),
+  `language`, `segment_count`, `ingested_at`.
+- `transcripts_fts` — FTS5 mirror of the segment text, kept in sync by the
+  `transcript_segments_ai` / `_au` / `_ad` triggers exactly like `videos_fts`.
+  Nothing to rebuild by hand.
+
+Idempotent: a video already in `transcript_status` is skipped, so re-running
+after each archive pass only picks up new material.
+
+**Order matters.** A sidecar whose video id is not yet in `videos` is reported
+and skipped (never fatal, nothing written) — the catalog update has to run
+first. The monthly flow on Factotum is:
+
+```bash
+YOUTUBE_API_KEY=... ./venv/bin/python scripts/update_catalog.py   # new rows in `videos`
+./scripts/archive_channel.sh                                      # media + .en.vtt sidecars
+./venv/bin/python scripts/ingest_transcripts.py                   # sidecars -> searchable text
+```
+
+The `/search` page queries `transcripts_fts` alongside `videos_fts` and shows
+the matches under a "Spoken in videos" section, each linking to the moment on
+YouTube (`?v=<id>&t=<seconds>s`).
+
+Parsing note: YouTube's auto-generated captions are a *rolling* format — every
+cue repeats the previous line and adds one new line carrying per-word
+`<00:00:01.599><c>` timing tags. `parse_vtt()` strips that markup and collapses
+the repeats so each phrase is stored once, at its earliest start time. If a
+future caption source parses badly, that function (and
+`tests/test_transcripts.py`, which runs it against real trimmed sidecars) is
+where to look.
+
 ## What stays manual
 
 - **Medium-confidence series membership.** Day Hiking, Backyard Adventures and
@@ -148,4 +216,12 @@ monkeypatched, so it runs with no key and no network:
 
 ```bash
 ./venv/bin/python -m pytest tests/test_update_catalog.py -q
+```
+
+`tests/test_transcripts.py` does the same for transcripts: `parse_vtt()` against
+the trimmed real sidecars in `tests/fixtures/`, a full ingest into a throwaway
+database and archive tree, idempotency, and the `/search` transcript section.
+
+```bash
+./venv/bin/python -m pytest tests/test_transcripts.py -q
 ```
