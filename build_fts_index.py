@@ -48,15 +48,19 @@ def build_fts_index(db_path='posa_wiki.db'):
             VALUES (new.rowid, new.title, new.description);
         END;
 
+        -- External-content FTS5 tables must be maintained with the special
+        -- 'delete' command form; a plain DELETE/UPDATE leaves stale index
+        -- entries behind.
         CREATE TRIGGER videos_ad AFTER DELETE ON videos BEGIN
-            DELETE FROM videos_fts WHERE rowid = old.rowid;
+            INSERT INTO videos_fts(videos_fts, rowid, title, description)
+            VALUES('delete', old.rowid, old.title, old.description);
         END;
 
         CREATE TRIGGER videos_au AFTER UPDATE ON videos BEGIN
-            UPDATE videos_fts
-            SET title = new.title,
-                description = new.description
-            WHERE rowid = new.rowid;
+            INSERT INTO videos_fts(videos_fts, rowid, title, description)
+            VALUES('delete', old.rowid, old.title, old.description);
+            INSERT INTO videos_fts(rowid, title, description)
+            VALUES (new.rowid, new.title, new.description);
         END;
         """)
         print("- Created FTS maintenance triggers.")

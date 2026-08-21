@@ -46,7 +46,6 @@ CANONICAL_SERIES = [
     ('Boundary Waters', 'Boundary Waters Canoe Area adventures', 0,
      'location'),
     ('Isle Royale', 'Isle Royale National Park adventures', 0, 'location'),
-    ('Michigan Adventures', 'Michigan-based outdoor content', 0, 'location'),
     ('Backyard Adventures', 'Home-based adventures in and around the yard',
      0, 'location'),
     # --- content --------------------------------------------------------
