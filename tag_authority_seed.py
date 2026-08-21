@@ -8,7 +8,7 @@ import json
 from collections import Counter
 
 def load_dataset():
-    with open('full_channel_scrape_20250902_142647.json', 'r') as f:
+    with open('data/full_channel_scrape_20250902_142647.json', 'r') as f:
         return json.load(f)
 
 def generate_tag_authorities():

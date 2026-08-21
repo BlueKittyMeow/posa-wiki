@@ -63,3 +63,6 @@ logs/
 tmp/
 temp/
 *.tmp
+# Regenerable scrape/analysis dumps (see data/README.md)
+data/*.json
+data/*.txt

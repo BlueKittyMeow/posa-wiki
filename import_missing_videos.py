@@ -80,7 +80,7 @@ def import_missing_videos():
     
     # Load complete video data
     print("📥 Loading complete video data...")
-    with open('complete_channel_scrape_20250909_122145.json', 'r') as f:
+    with open('data/complete_channel_scrape_20250909_122145.json', 'r') as f:
         complete_data = json.load(f)
     
     complete_videos = complete_data['videos']

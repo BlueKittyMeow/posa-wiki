@@ -279,10 +279,10 @@ def mine_video_descriptions():
         'entity_stats': dict(entity_stats)
     }
     
-    with open('video_description_mining_results.json', 'w') as f:
+    with open('data/video_description_mining_results.json', 'w') as f:
         json.dump(results, f, indent=2)
-    
-    print(f"\\n💾 Detailed results saved to video_description_mining_results.json")
+
+    print(f"\\n💾 Detailed results saved to data/video_description_mining_results.json")
     print(f"\\n🎯 NEXT STEPS:")
     print(f"   1. Review high confidence matches - these look very accurate")
     print(f"   2. Check medium confidence family terms")

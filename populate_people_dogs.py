@@ -117,7 +117,7 @@ def populate_people_dogs_junctions():
     
     # Load description mining results instead of validated tags
     try:
-        with open('video_description_mining_results.json', 'r') as f:
+        with open('data/video_description_mining_results.json', 'r') as f:
             mining_results = json.load(f)
     except FileNotFoundError:
         print("❌ Description mining results not found. Run mine_video_descriptions.py first.")
