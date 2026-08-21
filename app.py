@@ -226,6 +226,15 @@ app.jinja_env.filters['format_duration'] = format_duration
 # Add timedelta to template globals for date navigation
 app.jinja_env.globals['timedelta'] = timedelta
 
+# Cache-buster for static assets: production serves them with a 1-year
+# max-age, so stamp URLs with the stylesheet's mtime — deploys change it.
+try:
+    STATIC_VERSION = int(os.path.getmtime(
+        Path(app.static_folder) / 'css' / 'fairyfloss.css'))
+except OSError:
+    STATIC_VERSION = 1
+app.jinja_env.globals['STATIC_V'] = STATIC_VERSION
+
 def paginate(conn, query, params, count_query, count_params=(), per_page=20):
     """A helper function to paginate queries."""
     page, per_page, offset = get_page_args(page_parameter='page', 
