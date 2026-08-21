@@ -25,9 +25,11 @@
         <!-- Browse Options -->
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
             <a href="{{ url_for('video_list') }}" class="btn btn-secondary">📺 View All Videos</a>
-            <a href="#" class="btn btn-secondary">❄️ Winter Camping</a>
-            <a href="#" class="btn btn-secondary">🛶 Canoe Adventures</a>
-            <a href="#" class="btn btn-secondary">🎣 Fishing Videos</a>
+            {# series ids come from the sidebar context processor -- never hardcoded,
+               the production database's ids may differ from the local copy. #}
+            <a href="{{ url_for('series_detail', series_id=series_ids['Winter Camping']) if series_ids.get('Winter Camping') else url_for('series_list') }}" class="btn btn-secondary">❄️ Winter Camping</a>
+            <a href="{{ url_for('series_detail', series_id=series_ids['Canoe Camping']) if series_ids.get('Canoe Camping') else url_for('series_list') }}" class="btn btn-secondary">🛶 Canoe Adventures</a>
+            <a href="{{ url_for('series_detail', series_id=series_ids['Unsuccessful Fishing Show']) if series_ids.get('Unsuccessful Fishing Show') else url_for('series_list') }}" class="btn btn-secondary">🎣 Fishing Videos</a>
             <a href="{{ url_for('people_list') }}" class="btn btn-secondary">👥 Browse People</a>
         </div>
     </div>

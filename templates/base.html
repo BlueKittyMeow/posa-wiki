@@ -58,7 +58,8 @@
             <h2>📺 Series</h2>
             <ul class="sidebar-nav">
                 <li><a href="{{ url_for('series_list') }}" class="{% if request.endpoint == 'series_list' %}active{% endif %}">📺 Browse Series</a></li>
-                <li><a href="{{ url_for('trip_detail', trip_id=1) }}">🎣 Unsuccessful Fishing Show</a></li>
+                {# the Fishing Show is a series now, not a trip; id looked up by name #}
+                <li><a href="{{ url_for('series_detail', series_id=series_ids['Unsuccessful Fishing Show']) if series_ids.get('Unsuccessful Fishing Show') else url_for('series_list') }}">🎣 Unsuccessful Fishing Show</a></li>
             </ul>
 
             <h2>🗓️ Trips</h2>

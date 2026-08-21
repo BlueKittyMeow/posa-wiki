@@ -58,13 +58,16 @@ DEFAULT_DB = str(REPO_ROOT / 'posa_wiki.db')
 TAG_AUTHORITY_PATH = str(REPO_ROOT / 'tag_authority_system.json')
 
 # Episodic series auto-assignment.  Add a new series in one line: a title
-# regex, the trip_name it belongs to, and how to pull the episode number out.
+# regex, the ``series.name`` it belongs to, and how to pull the episode
+# number out.  Episodes land in ``video_series`` (the series table is the
+# source of truth for thematic groupings); ``trips``/``video_versions`` are
+# reserved for genuine multi-part trips.  For the broader title/tag rules see
+# ``scripts/assign_series.py``, which should be rerun after this script.
 PATTERNS = [
     {
-        'trip_name': 'The Unsuccessful Fishing Show',
+        'series_name': 'Unsuccessful Fishing Show',
         'title_re': re.compile(r'unsuccessful fishing show', re.IGNORECASE),
         'episode_re': re.compile(r'episode\s+(\d+)', re.IGNORECASE),
-        'version_type': 'episode',
     },
 ]
 
@@ -297,7 +300,7 @@ def enrich_people_dogs(cursor, rows, verbose=True):
 
 
 def assign_episodes(cursor, rows, verbose=True):
-    """Auto-assign episodic videos to their trip via ``video_versions``."""
+    """Auto-assign episodic videos to their series via ``video_series``."""
     assigned = 0
 
     for row in rows:
@@ -309,45 +312,36 @@ def assign_episodes(cursor, rows, verbose=True):
             if not match:
                 continue
 
-            trip = cursor.execute(
-                'SELECT trip_id FROM trips WHERE trip_name = ?',
-                (pattern['trip_name'],),
+            series = cursor.execute(
+                'SELECT series_id FROM series WHERE name = ?',
+                (pattern['series_name'],),
             ).fetchone()
-            if not trip:
+            if not series:
                 if verbose:
-                    print(f"   ⚠️  Trip '{pattern['trip_name']}' not found — "
-                          f'skipping episode assignment for {row["video_id"]}')
+                    print(f"   ⚠️  Series '{pattern['series_name']}' not "
+                          f'found (run scripts/seed_series.py) — skipping '
+                          f'episode assignment for {row["video_id"]}')
                 break
-            trip_id = trip[0]
+            series_id = series[0]
 
             already = cursor.execute(
-                'SELECT 1 FROM video_versions WHERE trip_id = ? AND video_id = ?',
-                (trip_id, row['video_id']),
+                'SELECT 1 FROM video_series WHERE series_id = ? AND video_id = ?',
+                (series_id, row['video_id']),
             ).fetchone()
             if already:
                 break
 
             episode_num = int(match.group(1))
             cursor.execute('''
-            INSERT INTO video_versions (trip_id, version_type, part_number,
-                                        total_parts, video_id)
-            VALUES (?, ?, ?, ?, ?)
-            ''', (trip_id, pattern['version_type'], episode_num, None,
-                  row['video_id']))
+            INSERT INTO video_series (video_id, series_id, episode_number,
+                                      trip_id, notes)
+            VALUES (?, ?, ?, NULL, ?)
+            ''', (row['video_id'], series_id, episode_num,
+                  'auto:episode-pattern'))
             assigned += 1
             if verbose:
                 print(f'   🎬 {row["video_id"]}: '
-                      f'{pattern["trip_name"]} episode {episode_num}')
-
-            # Keep total_parts consistent across the trip.
-            total = cursor.execute(
-                'SELECT COUNT(*) FROM video_versions WHERE trip_id = ?',
-                (trip_id,),
-            ).fetchone()[0]
-            cursor.execute(
-                'UPDATE video_versions SET total_parts = ? WHERE trip_id = ?',
-                (total, trip_id),
-            )
+                      f'{pattern["series_name"]} episode {episode_num}')
             break
 
     return assigned

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}{{ series.name }} - Posa Wiki{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <div>
+            <div style="margin-bottom: 0.5rem;">
+                <a href="{{ url_for('series_list') }}" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.25rem 0.75rem;">← Back to Series</a>
+            </div>
+            <h2 class="card-title">
+                {% if series.is_episodic %}📺{% else %}🏷️{% endif %} {{ series.name }}
+            </h2>
+            <div style="display: flex; gap: 1rem; align-items: center; margin-top: 0.5rem; flex-wrap: wrap;">
+                <span class="text-muted">🎥 {{ pagination.total }} video{{ 's' if pagination.total != 1 else '' }}</span>
+                <span class="text-muted">🏷️ {{ series.series_type }}</span>
+                {% if series.is_episodic %}
+                    <span style="background: var(--accent-mint); color: var(--bg-primary); padding: 0.15rem 0.5rem; border-radius: 12px; font-size: 0.7rem;">Episodic</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% if series.description %}
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--border-radius);">
+            <h4 class="text-accent" style="margin-bottom: 1rem;">📝 About This Series</h4>
+            <p style="white-space: pre-wrap; line-height: 1.6;">{{ series.description }}</p>
+        </div>
+    {% endif %}
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">🎬 Videos ({{ pagination.total }})</h3>
+    </div>
+
+    {% if videos %}
+        {% from "_macros.html" import render_video_card %}
+        <div class="video-grid">
+            {% for video in videos %}
+                {{ render_video_card(video, part_number=video.episode_number, version_type='episode', show_youtube_link=True) }}
+            {% endfor %}
+        </div>
+
+        <div class="pagination-container" style="padding: 1rem 0;">
+          {{ pagination.links }}
+        </div>
+    {% else %}
+        <div class="text-center" style="padding: 3rem;">
+            <p class="text-muted">No videos in this series yet.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

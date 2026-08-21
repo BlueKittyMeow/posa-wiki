@@ -184,19 +184,20 @@ def test_person_and_dog_links_created(test_db, mocked_api):
 
 
 def test_episode_row_created(test_db, mocked_api):
+    """Episodes land in video_series against the series table (not trips)."""
     summary = _run(test_db)
     conn = sqlite3.connect(test_db)
     row = conn.execute(
-        'SELECT vv.part_number, vv.version_type, t.trip_name '
-        'FROM video_versions vv JOIN trips t ON t.trip_id = vv.trip_id '
-        'WHERE vv.video_id = ?', (FAKE_EPISODE_ID,),
+        'SELECT vs.episode_number, vs.notes, s.name '
+        'FROM video_series vs JOIN series s ON s.series_id = vs.series_id '
+        'WHERE vs.video_id = ?', (FAKE_EPISODE_ID,),
     ).fetchone()
     conn.close()
 
     assert row is not None
     assert row[0] == 99
-    assert row[1] == 'episode'
-    assert row[2] == 'The Unsuccessful Fishing Show'
+    assert row[1] == 'auto:episode-pattern'
+    assert row[2] == 'Unsuccessful Fishing Show'
     assert summary['episodes_assigned'] == 1
 
 
@@ -206,7 +207,7 @@ def test_second_run_is_idempotent(test_db, mocked_api):
 
     conn = sqlite3.connect(test_db)
     before = conn.execute('SELECT COUNT(*) FROM videos').fetchone()[0]
-    before_versions = conn.execute('SELECT COUNT(*) FROM video_versions').fetchone()[0]
+    before_versions = conn.execute('SELECT COUNT(*) FROM video_series').fetchone()[0]
     conn.close()
 
     second = _run(test_db)
@@ -218,7 +219,7 @@ def test_second_run_is_idempotent(test_db, mocked_api):
     conn = sqlite3.connect(test_db)
     assert conn.execute('SELECT COUNT(*) FROM videos').fetchone()[0] == before
     assert conn.execute(
-        'SELECT COUNT(*) FROM video_versions').fetchone()[0] == before_versions
+        'SELECT COUNT(*) FROM video_series').fetchone()[0] == before_versions
     conn.close()
 
 

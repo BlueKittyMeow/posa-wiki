@@ -6,48 +6,46 @@
 <div class="card">
     <div class="card-header">
         <div>
-            <h2 class="card-title">📺 Episodic Series</h2>
-            <span class="text-muted">{{ pagination.total }} series</span>
+            <h2 class="card-title">📺 Series</h2>
+            <span class="text-muted">{{ total_series }} series &middot; {{ total_memberships }} video memberships</span>
         </div>
+        <a href="{{ url_for('trips_list') }}" class="btn btn-secondary">🗓️ Multi-Part Trips →</a>
     </div>
 
-    {% if series %}
-        <div style="display: grid; gap: 1.5rem;">
-            {% for show in series %}
-            <div class="card" style="margin: 0;">
-                <div class="card-header" style="padding: 1rem;">
-                    <div style="flex: 1;">
-                        <h3 style="margin: 0; margin-bottom: 0.5rem;">
-                            <a href="{{ url_for('trip_detail', trip_id=show.trip_id) }}" style="color: inherit; text-decoration: none;">
-                                📺 {{ show.trip_name }}
-                            </a>
-                        </h3>
-                        <div style="display: flex; gap: 1rem; align-items: center; font-size: 0.9rem;">
-                            <span class="text-muted">📅 Started {{ show.start_date[:10] if show.start_date else 'Unknown' }}</span>
-                            <span class="text-muted">📺 {{ show.video_count }} episodes</span>
-                            <span style="background: var(--accent-mint); color: var(--bg-primary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.75rem;">Series</span>
-                        </div>
+    {% if grouped_series %}
+        {% for group in grouped_series %}
+        <div style="margin-bottom: 2rem;">
+            <h3 class="text-accent" style="margin-bottom: 1rem;">{{ group.heading }}</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;">
+                {% for show in group.series %}
+                <div class="card" style="margin: 0;">
+                    <h4 style="margin: 0 0 0.5rem 0;">
+                        <a href="{{ url_for('series_detail', series_id=show.series_id) }}" style="color: inherit; text-decoration: none;">
+                            {% if show.is_episodic %}📺{% else %}🏷️{% endif %} {{ show.name }}
+                        </a>
+                    </h4>
+                    <div style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+                        <span class="text-muted">
+                            {{ show.video_count }} video{{ 's' if show.video_count != 1 else '' }}
+                        </span>
+                        {% if show.is_episodic %}
+                            <span style="background: var(--accent-mint); color: var(--bg-primary); padding: 0.15rem 0.5rem; border-radius: 12px; font-size: 0.7rem; margin-left: 0.5rem;">Episodic</span>
+                        {% endif %}
                     </div>
-                    <a href="{{ url_for('trip_detail', trip_id=show.trip_id) }}" class="btn btn-secondary">Watch Series →</a>
-                </div>
-                
-                {% if show.description %}
-                    <div style="padding: 0 1rem 1rem 1rem;">
-                        <p class="text-muted" style="margin: 0; font-size: 0.9rem; line-height: 1.4;">
+                    {% if show.description %}
+                        <p class="text-muted" style="margin: 0 0 0.75rem 0; font-size: 0.85rem; line-height: 1.4;">
                             {{ show.description[:120] }}{% if show.description|length > 120 %}...{% endif %}
                         </p>
-                    </div>
-                {% endif %}
+                    {% endif %}
+                    <a href="{{ url_for('series_detail', series_id=show.series_id) }}" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.25rem 0.75rem;">Browse →</a>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
-
-        <div class="pagination-container" style="padding: 1rem;">
-          {{ pagination.links }}
-        </div>
+        {% endfor %}
     {% else %}
         <div class="text-center" style="padding: 3rem;">
-            <p class="text-muted">No episodic series found.</p>
+            <p class="text-muted">No populated series yet — run <code>scripts/assign_series.py</code>.</p>
         </div>
     {% endif %}
 </div>
@@ -55,31 +53,23 @@
 <!-- Quick Stats -->
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
     <div class="card">
-        <h3 class="text-accent">📺 Total Episodes</h3>
-        <div style="font-size: 1.5rem; margin: 1rem 0;">
-            {{ total_episodes }}
-        </div>
-        <div class="text-muted">Across all series</div>
+        <h3 class="text-accent">📺 Series</h3>
+        <div style="font-size: 1.5rem; margin: 1rem 0;">{{ total_series }}</div>
+        <div class="text-muted">With at least one video</div>
     </div>
-    
+
     <div class="card">
-        <h3 class="text-accent">⭐ Longest Series</h3>
+        <h3 class="text-accent">⭐ Largest Series</h3>
         <div style="font-size: 1.5rem; margin: 1rem 0;">
-            {% if longest_series %}
-                {{ longest_series.trip_name[:25] }}{% if longest_series.trip_name|length > 25 %}...{% endif %}
-            {% else %}
-                None
-            {% endif %}
+            {% if largest_series %}{{ largest_series.name }}{% else %}None{% endif %}
         </div>
-        <div class="text-muted">{{ longest_series.video_count if longest_series else 0 }} episodes</div>
+        <div class="text-muted">{{ largest_series.video_count if largest_series else 0 }} videos</div>
     </div>
-    
+
     <div class="card">
-        <h3 class="text-accent">🎬 Active Series</h3>
-        <div style="font-size: 1.5rem; margin: 1rem 0;">
-            {{ pagination.total }}
-        </div>
-        <div class="text-muted">Different shows</div>
+        <h3 class="text-accent">🔗 Memberships</h3>
+        <div style="font-size: 1.5rem; margin: 1rem 0;">{{ total_memberships }}</div>
+        <div class="text-muted">Videos can belong to several series</div>
     </div>
 </div>
 {% endblock %}

@@ -95,18 +95,42 @@ Back up `posa_wiki.db` before the first real server run.
 - Description mining for new rows (`mine_video_descriptions.analyze_description`)
   and the resulting `video_people` / `video_dogs` junction rows
   (`populate_people_dogs.link_entities`).
-- Episode auto-assignment for recognised episodic series. The `PATTERNS` list at
-  the top of the script maps a title regex → trip name; adding a future series is
-  one entry. Currently: *The Unsuccessful Fishing Show*.
+- Episode auto-assignment for recognised episodic series. **As of 2026-08-20 this
+  writes to `video_series` against the `series` table**, not to
+  `trips`/`video_versions` — the `series` table is the source of truth for
+  thematic groupings and shows, and `trips` is reserved for genuine multi-part
+  trips. The `PATTERNS` list at the top of the script maps a title regex →
+  `series.name`; adding a future series is one entry. Currently: *Unsuccessful
+  Fishing Show*.
 - FTS: nothing to do — the `videos_ai` / `videos_au` / `videos_ad` triggers keep
   `videos_fts` in sync. The script verifies they exist and warns (suggesting
   `build_fts_index.py`) if they don't. It never rebuilds the index for you.
 
+## After an update run: reassign series
+
+`scripts/update_catalog.py` only handles the numbered episodic patterns. Rerun
+the broader thematic rules afterwards:
+
+```bash
+python scripts/seed_series.py     # only needed if the taxonomy changed
+python scripts/assign_series.py   # title/tag rules -> video_series
+```
+
+Both are idempotent — a second run inserts nothing. `assign_series.py` writes
+high-confidence memberships only, stamping `video_series.notes` with the rule
+that fired (`auto:title-pattern`, `auto:tag-match`, `auto:episode-pattern`,
+`auto:implied-by-child`) so provenance stays queryable. Medium-confidence
+guesses go to `data/series_review_candidates.json` for a human pass and are
+never written to the database.
+
 ## What stays manual
 
-- **Series / trip membership beyond the episodic patterns.** A multi-part canoe
-  trip with freeform titles will not be grouped automatically — assign it in the
-  app or with `import_trips.py` / `separate_series_trips.py`.
+- **Medium-confidence series membership.** Day Hiking, Backyard Adventures and
+  Michigan Adventures are proposal-only; promote them by hand from
+  `data/series_review_candidates.json`.
+- **Multi-part trip membership.** A multi-part canoe trip with freeform titles
+  will not be grouped automatically — assign it in the app or with
+  `import_trips.py` / `separate_series_trips.py`.
 - **Locations, number of nights, season, weather, series notes** — all curated
   fields, untouched by the updater.
 - **New people or dogs.** Mining only knows the entities hardcoded in

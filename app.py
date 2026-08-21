@@ -183,7 +183,15 @@ def inject_sidebar_data():
         LIMIT 3
     ''').fetchall()
 
-    return dict(sidebar_people=sidebar_people, sidebar_dogs=sidebar_dogs)
+    # name -> series_id lookup so templates can link to featured series
+    # without hardcoding ids (they differ between local and production dbs).
+    series_ids = {
+        row['name']: row['series_id']
+        for row in conn.execute('SELECT series_id, name FROM series')
+    }
+
+    return dict(sidebar_people=sidebar_people, sidebar_dogs=sidebar_dogs,
+                series_ids=series_ids)
 
 
 # Register blueprints
@@ -370,7 +378,19 @@ def video_detail(video_id):
     GROUP BY t.trip_id
     ''', (video_id,)).fetchall()
 
-    return render_template('video_detail.html', video=video, people=people, dogs=dogs, series_info=series_info)
+    # Thematic series memberships (the series table, not trips)
+    series_memberships = conn.execute('''
+    SELECT s.series_id, s.name, s.series_type, s.is_episodic,
+           vs.episode_number
+    FROM series s
+    JOIN video_series vs ON s.series_id = vs.series_id
+    WHERE vs.video_id = ?
+    ORDER BY s.series_type, s.name
+    ''', (video_id,)).fetchall()
+
+    return render_template('video_detail.html', video=video, people=people,
+                           dogs=dogs, series_info=series_info,
+                           series_memberships=series_memberships)
 
 @app.route('/date/<date_str>')
 def date_view(date_str):
@@ -511,39 +531,89 @@ def dog_detail(dog_id):
 
     return render_template('dog_detail.html', dog=dog, videos=videos, pagination=pagination)
 
+# Display order + headings for the series_type groups on /series. The series
+# table (not trips) is the source of truth for thematic groupings; trips are
+# reserved for genuine multi-part trips.
+SERIES_TYPE_GROUPS = [
+    ('activity', '🏃 Adventure Types'),
+    ('location', '📍 Places'),
+    ('content', '🎭 Shows & Community'),
+    ('special', '🎉 Special'),
+]
+
+
 @app.route('/series')
 def series_list():
-    """List all episodic series"""
+    """List every populated series, grouped by series_type."""
     conn = get_db()
-    
-    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', default_per_page=20)
-    total = conn.execute("SELECT COUNT(*) FROM trips WHERE series_type = 'series'").fetchone()[0]
 
-    series = conn.execute('''
-    SELECT t.trip_id, t.trip_name, t.start_date, t.end_date, t.description,
-           COUNT(vv.video_id) as video_count,
-           MIN(vv.part_number) as first_episode,
-           MAX(vv.part_number) as last_episode
-    FROM trips t
-    LEFT JOIN video_versions vv ON t.trip_id = vv.trip_id
-    WHERE t.series_type = 'series'
-    GROUP BY t.trip_id
-    ORDER BY t.start_date DESC
-    LIMIT ? OFFSET ?
-    ''', (per_page, offset)).fetchall()
-    
-    # Calculate stats
-    all_series = conn.execute("""SELECT t.trip_name, COUNT(vv.video_id) as video_count FROM trips t LEFT JOIN video_versions vv ON t.trip_id = vv.trip_id WHERE t.series_type = 'series' GROUP BY t.trip_id""").fetchall()
-    total_episodes = sum(s['video_count'] for s in all_series)
-    longest_series = max(all_series, key=lambda x: x['video_count']) if all_series else None
+    rows = conn.execute('''
+    SELECT s.series_id, s.name, s.description, s.is_episodic, s.series_type,
+           COUNT(vs.video_id) as video_count
+    FROM series s
+    JOIN video_series vs ON s.series_id = vs.series_id
+    JOIN videos v ON v.video_id = vs.video_id AND v.deleted_at IS NULL
+    GROUP BY s.series_id
+    ORDER BY video_count DESC, s.name ASC
+    ''').fetchall()
 
-    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4', record_name='series')
-    
-    return render_template('series_list.html', 
-                         series=series,
-                         pagination=pagination,
-                         total_episodes=total_episodes,
-                         longest_series=longest_series)
+    # Empty series are hidden entirely (the JOIN above already does that).
+    grouped = []
+    for series_type, heading in SERIES_TYPE_GROUPS:
+        members = [r for r in rows if r['series_type'] == series_type]
+        if members:
+            grouped.append({'series_type': series_type, 'heading': heading,
+                            'series': members})
+
+    total_series = len(rows)
+    total_memberships = sum(r['video_count'] for r in rows)
+    largest_series = rows[0] if rows else None
+
+    return render_template('series_list.html',
+                           grouped_series=grouped,
+                           total_series=total_series,
+                           total_memberships=total_memberships,
+                           largest_series=largest_series)
+
+
+@app.route('/series/<int:series_id>')
+def series_detail(series_id):
+    """Series detail page listing every video in the series."""
+    conn = get_db()
+
+    series = conn.execute(
+        'SELECT * FROM series WHERE series_id = ?', (series_id,)
+    ).fetchone()
+
+    if not series:
+        abort(404)
+
+    # Episodic series read in episode order (unnumbered entries -- e.g. Hike
+    # and Cook -- fall back to upload date); everything else newest first.
+    if series['is_episodic']:
+        order_by = ('ORDER BY vs.episode_number IS NULL, vs.episode_number ASC, '
+                    'v.upload_date ASC')
+    else:
+        order_by = 'ORDER BY v.upload_date DESC'
+
+    videos_query = f'''
+    SELECT v.video_id, v.title, v.upload_date, v.thumbnail_url, v.duration,
+           v.duration_seconds, vs.episode_number, vs.notes
+    FROM videos v
+    JOIN video_series vs ON v.video_id = vs.video_id
+    WHERE vs.series_id = ? AND v.deleted_at IS NULL
+    {order_by}
+    '''
+    count_query = ('SELECT COUNT(*) FROM video_series vs '
+                   'JOIN videos v ON v.video_id = vs.video_id '
+                   'WHERE vs.series_id = ? AND v.deleted_at IS NULL')
+    videos, pagination = paginate(conn, videos_query, (series_id,),
+                                  count_query, (series_id,))
+
+    return render_template('series_detail.html',
+                           series=series,
+                           videos=videos,
+                           pagination=pagination)
 
 @app.route('/trips')
 def trips_list():

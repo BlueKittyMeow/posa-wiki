@@ -96,3 +96,49 @@ INSERT INTO series VALUES
 - All winter camping videos: `WHERE series_id = 1`
 - Boundary Waters canoe trips: `WHERE series_id IN (4,6)` 
 - Community content in winter: `WHERE series_id IN (1,9)`
+---
+
+## Implemented 2026-08-20 — with owner taxonomy amendments
+
+This design is now live. `series` is the **source of truth for thematic
+groupings**; `trips` is reserved for genuine multi-part trips (one adventure
+split across several uploads). Amendments to the plan above, all
+owner-approved:
+
+- **Winter Camping and Canoe Camping are first-class activity series** (they
+  were the two the homepage already advertised).
+- **Spring Camping / Fall Camping retired.** Season becomes a *facet* of the
+  video record later, not a series. `scripts/seed_series.py` removes the rows
+  (it refuses if anything references them) and documents the decision.
+- **Community Content stays as an umbrella**, with new child series
+  **Unboxing**, **Channel Updates** and **Giveaways**. Membership in a child
+  always implies membership in the umbrella — the assignment script writes
+  both rows (`notes = 'auto:implied-by-child'`).
+- **Holidays are memberships in Special Occasions**, not per-holiday series.
+- **New series added:** Day Hiking (activity), Backyard Adventures (location),
+  Hike and Cook (content, episodic *by upload date* — the show was never
+  numbered), A Winter Camping Christmas Story (content, episodic, numbered
+  1–6, the 2017 original being the unnumbered #1).
+- **The Unsuccessful Fishing Show migrated out of `trips`.** Its 14 episode
+  assignments moved from `video_versions` into `video_series` with
+  `episode_number` preserved (`notes = 'migrated:trip-episode'`), and the trip
+  row plus its `video_versions` rows were removed. `scripts/update_catalog.py`
+  now assigns new episodes to `video_series` against `series.name`.
+
+### Scripts (both idempotent, safe to rerun on the server)
+
+| Script | Job |
+|---|---|
+| `scripts/seed_series.py` | Upserts the canonical taxonomy **by name** (never by id — production ids differ), retires the season series, migrates the Fishing Show. |
+| `scripts/assign_series.py` | Auto-populates `video_series` from title/tag rules. High confidence inserts; medium confidence goes to `data/series_review_candidates.json` for a human. `notes` records which rule fired. |
+
+### App
+
+`/series` reads the `series` table, grouped by `series_type` (Adventure Types
+/ Places / Shows & Community / Special), showing member counts and hiding
+empty series. `/series/<id>` lists the members — episodic series in episode
+order (unnumbered ones by upload date), everything else newest first. Video
+detail pages show their series memberships as links alongside the (still
+separate) multi-part trip block. Featured-series links look their ids up by
+name at render time via the `series_ids` context processor, so nothing
+hardcodes an id.

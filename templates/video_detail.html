@@ -108,11 +108,29 @@
     {% endif %}
 </div>
 
-<!-- Series/Trip Information -->
+<!-- Thematic series memberships (series table) -->
+{% if series_memberships %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">📺 Series</h3>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; padding: 0.5rem 0;">
+            {% for membership in series_memberships %}
+                <a href="{{ url_for('series_detail', series_id=membership.series_id) }}"
+                   class="btn btn-secondary" style="font-size: 0.9rem;">
+                    {% if membership.is_episodic %}📺{% else %}🏷️{% endif %} {{ membership.name }}
+                    {%- if membership.episode_number %} &middot; Ep {{ membership.episode_number }}{% endif %}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+<!-- Multi-part trip information (trips table) -->
 {% if series_info %}
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">🎬 Part of Series</h3>
+            <h3 class="card-title">🎬 Part of a Multi-Part Trip</h3>
         </div>
         
         {% for series in series_info %}
