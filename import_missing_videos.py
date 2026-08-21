@@ -9,9 +9,9 @@ from datetime import datetime
 
 from utils.duration import parse_duration_to_seconds
 
-def load_tag_authorities():
+def load_tag_authorities(path='tag_authority_system.json'):
     """Load tag authority system for validation"""
-    with open('tag_authority_system.json', 'r') as f:
+    with open(path, 'r') as f:
         data = json.load(f)
     
     alias_to_authority = {}

@@ -29,6 +29,7 @@ def load_known_entities():
     known_dogs = {
         'monty': ['monty'],
         'rueger': ['rueger'],
+        'layla': ['layla'],
         'frodo': ['frodo']  # From your mention
     }
     
@@ -109,7 +110,7 @@ def analyze_description(description, known_people, known_dogs, family_terms, com
                     high_confidence.append((person, 'person', f'mentioned: {alias}'))
             else:
                 # For single words, use word boundaries
-                if re.search(r'\\b' + re.escape(alias) + r'\\b', desc_lower):
+                if re.search(r'\b' + re.escape(alias) + r'\b', desc_lower):
                     high_confidence.append((person, 'person', f'mentioned: {alias}'))
     
     for dog, aliases in known_dogs.items():
@@ -118,16 +119,16 @@ def analyze_description(description, known_people, known_dogs, family_terms, com
                 if alias in desc_lower:
                     high_confidence.append((dog, 'dog', f'mentioned: {alias}'))
             else:
-                if re.search(r'\\b' + re.escape(alias) + r'\\b', desc_lower):
+                if re.search(r'\b' + re.escape(alias) + r'\b', desc_lower):
                     high_confidence.append((dog, 'dog', f'mentioned: {alias}'))
     
     # MEDIUM CONFIDENCE: Family terms
     for term in family_terms:
-        if re.search(r'\\b' + term + r'\\b', desc_lower):
+        if re.search(r'\b' + term + r'\b', desc_lower):
             medium_confidence.append((term, 'family', f'family term: {term}'))
     
     # LOW CONFIDENCE: Potential names (proper nouns that could be people)
-    words = re.findall(r'\\b[A-Z][a-z]+\\b', description)
+    words = re.findall(r'\b[A-Z][a-z]+\b', description)
     for word in words:
         word_lower = word.lower()
         # Skip obvious non-names
