@@ -20,6 +20,8 @@ from pathlib import Path
 from config import CONFIG_BY_NAME, Config
 from models.user import User
 from services.auth_service import init_jwt_redis, is_token_revoked
+from services.audit_log_service import init_audit_logging, create_audit_log
+from services.rate_limit_service import init_rate_limiter
 
 def from_json(value):
     """Template filter to parse JSON strings"""
@@ -88,6 +90,9 @@ app = Flask(__name__)
 app.config.from_object(config_class)
 config_class.init_app(app)
 configure_logging(app)
+
+init_rate_limiter(app)
+init_audit_logging(app)
 
 csrf = CSRFProtect()
 csrf.init_app(app)
@@ -189,12 +194,21 @@ from blueprints.admin import admin_bp
 from blueprints.crud import crud_bp
 from blueprints.api import api_base_bp
 from blueprints.api.v1 import api_v1_bp
+from blueprints.api.v1.auth import auth_api_bp
 
 app.register_blueprint(auth_bp)
 app.register_blueprint(admin_bp)
 app.register_blueprint(crud_bp)
 app.register_blueprint(api_base_bp)
 app.register_blueprint(api_v1_bp)
+
+csrf.exempt(auth_api_bp)
+
+csrf.exempt(api_base_bp)
+csrf.exempt(api_v1_bp)
+
+csrf.exempt(api_base_bp)
+csrf.exempt(api_v1_bp)
 
 
 # Register template filters
@@ -231,6 +245,12 @@ def paginate(conn, query, params, count_query, count_params=(), per_page=20):
 def handle_forbidden(error):
     app.logger.warning('403 Forbidden: %s by user %s', request.path,
                       current_user.username if current_user.is_authenticated else 'anonymous')
+    create_audit_log(
+        event_type='access_denied',
+        resource_type='url',
+        resource_id=request.path,
+        details={'message': str(error)}
+    )
     return render_template('errors/403.html'), 403
 
 

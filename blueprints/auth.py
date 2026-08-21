@@ -4,6 +4,8 @@ from flask_login import login_user, logout_user, login_required, current_user
 import sqlite3
 from models.user import User
 from forms.auth import LoginForm
+from services.audit_log_service import create_audit_log
+from services.rate_limit_service import limiter, per_ip_key
 
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
@@ -18,6 +20,7 @@ def get_db_connection():
 
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
+@limiter.limit("5 per minute", key_func=per_ip_key())
 def login():
     """Login page and handler with CSRF-protected form
     """
@@ -37,6 +40,7 @@ def login():
         if user and user.check_password(password):
             login_user(user, remember=remember)
             user.update_last_login(conn)
+            create_audit_log('login_success', resource_type='user', resource_id=user.user_id)
             conn.close()
 
             next_page = request.args.get('next')
@@ -45,6 +49,7 @@ def login():
             return redirect(url_for('index'))
 
         conn.close()
+        create_audit_log('login_failure', severity='WARNING', details={'username': username})
         flash('Invalid username or password.', 'error')
     elif form.is_submitted():
         flash('Please correct the errors in the form.', 'error')
@@ -56,6 +61,7 @@ def login():
 @login_required
 def logout():
     """Log out current user"""
+    create_audit_log('logout', resource_type='user', resource_id=current_user.get_id())
     logout_user()
     flash('You have been logged out.', 'success')
     return redirect(url_for('index'))

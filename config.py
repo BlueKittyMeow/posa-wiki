@@ -67,6 +67,11 @@ class Config:
     REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
     REDIS_ENABLED = _bool_env('REDIS_ENABLED', False)  # Disabled by default in dev
 
+    # Rate limiting
+    RATELIMIT_ENABLED = _bool_env('RATELIMIT_ENABLED', True)
+    RATELIMIT_DEFAULT = os.getenv('RATELIMIT_DEFAULT', '200 per day;50 per hour')
+    RATELIMIT_STORAGE_URI = os.getenv('RATELIMIT_STORAGE_URI', '')
+
     @staticmethod
     def init_app(app):
         """Hook for any environment-specific initialization."""
@@ -97,6 +102,8 @@ class ProductionConfig(Config):
             raise RuntimeError('Production requires FLASK_SECRET_KEY environment variable')
         if app.config['JWT_SECRET_KEY'] == app.config['SECRET_KEY']:
             app.logger.warning('JWT_SECRET_KEY not set, using FLASK_SECRET_KEY')
+        if not app.config.get('RATELIMIT_STORAGE_URI'):
+            app.config['RATELIMIT_STORAGE_URI'] = app.config['REDIS_URL']
 
 class TestingConfig(Config):
     DEBUG = False

@@ -146,3 +146,16 @@ def log_token_event(event: str, user_id: int, token_jti: Optional[str] = None, *
         log_data['jti'] = token_jti
 
     logger.info(f'JWT Event: {event}', extra=log_data)
+
+    # Persist to audit log (best effort)
+    try:
+        from services.audit_log_service import create_audit_log
+
+        create_audit_log(
+            event_type=event,
+            resource_type='user',
+            resource_id=user_id,
+            details=log_data
+        )
+    except Exception as exc:  # pragma: no cover - audit logging failure should not break auth
+        logger.debug('Audit log unavailable: %s', exc)

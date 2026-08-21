@@ -64,6 +64,19 @@
   - Field editable via CRUD forms (when built in Step 3)
 *Completed by Claude*
 
+**Step 1.4: Security Infrastructure** ✓ COMPLETE
+- Added theme-aware 403 handler with audit logging
+- Implemented JWT authentication with blacklist support (Redis or in-memory fallback)
+- Added rate limiting via Flask-Limiter (per-IP login throttling, per-user API limits)
+- Created asynchronous audit logging service and `audit_logs` table migration
+- Wired security hooks into web and API authentication flows
+*Completed by Codex*
+
+**Step 1.5: Viewer Test Account & Login Flow** ⏳ TODO
+- Seed a default viewer user for non-admin testing (CLI helper or migration)
+- Expose a simple “viewer login” helper in docs for QA scenarios
+- Document how to exercise 403 flow using the viewer account
+
 **Implementation Notes:**
 - Photos can be provided via URL (photo_url) or uploaded file (photo_file)
 - Uploaded files stored locally (photo_local_path) with preference over URLs
