@@ -27,6 +27,7 @@ MIGRATION_FILES = [
     "007_create_audit_logs.sql",
     "008_add_duration_seconds.sql",
     "010_create_transcripts.sql",
+    "011_add_season_provenance.sql",
 ]
 
 

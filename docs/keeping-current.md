@@ -106,7 +106,7 @@ Back up `posa_wiki.db` before the first real server run.
   `videos_fts` in sync. The script verifies they exist and warns (suggesting
   `build_fts_index.py`) if they don't. It never rebuilds the index for you.
 
-## After an update run: reassign series
+## After an update run: reassign series and derive seasons
 
 `scripts/update_catalog.py` only handles the numbered episodic patterns. Rerun
 the broader thematic rules afterwards:
@@ -114,14 +114,49 @@ the broader thematic rules afterwards:
 ```bash
 python scripts/seed_series.py     # only needed if the taxonomy changed
 python scripts/assign_series.py   # title/tag rules -> video_series
+python scripts/derive_seasons.py  # title/tag rules -> videos.season
 ```
 
-Both are idempotent — a second run inserts nothing. `assign_series.py` writes
+All three are idempotent — a second run inserts nothing. `assign_series.py` writes
 high-confidence memberships only, stamping `video_series.notes` with the rule
 that fired (`auto:title-pattern`, `auto:tag-match`, `auto:episode-pattern`,
 `auto:implied-by-child`) so provenance stays queryable. Medium-confidence
 guesses go to `data/series_review_candidates.json` for a human pass and are
 never written to the database.
+
+### Seasons
+
+`scripts/derive_seasons.py` fills `videos.season` from the same kind of
+evidence, with provenance in `videos.season_confidence` / `videos.season_source`
+(migration `011`). Seasons are a **video facet, not a series**, and three rules
+govern it:
+
+- **Unknown (NULL) is a legitimate value.** Most of the catalogue has no season
+  evidence, and the script never guesses to fill the column. A video that
+  matches two seasons is a *conflict* and is left Unknown.
+- **Upload date is not evidence.** Uploads lag filming badly, especially for
+  the early videos — several winter trips were published in April.
+- **A human decision is untouchable.** `season_confidence = 'human'` is never
+  overwritten, and an existing high-confidence value is only re-derived when
+  the season is currently NULL.
+
+Medium-confidence guesses (holiday titles, description keywords, the
+`winter camping` YouTube tag) go to `data/season_review_candidates.json` and
+are clicked through at `/admin/review/seasons`. Approving stamps
+`season_confidence = 'human'`; rejecting means "Unknown stands" and the video
+is never proposed again (decisions persist in
+`data/season_review_decisions.json`).
+
+Note on the `winter camping` tag: it is copy-pasted channel SEO boilerplate
+(130 videos carry it; 37 of them share one identical 44-tag block, and it sits
+on canoe trips and anniversary compilations), so it only *proposes* winter
+rather than writing it. `TRUST_WINTER_TAG` at the top of the script flips that
+back to a high-confidence write if the owner ever decides otherwise.
+
+```bash
+python scripts/derive_seasons.py --dry-run   # counts only, writes nothing
+python scripts/derive_seasons.py             # apply + regenerate the queue
+```
 
 ## Transcripts
 
@@ -175,6 +210,8 @@ first. The monthly flow on Factotum is:
 
 ```bash
 YOUTUBE_API_KEY=... ./venv/bin/python scripts/update_catalog.py   # new rows in `videos`
+./venv/bin/python scripts/assign_series.py                        # thematic series
+./venv/bin/python scripts/derive_seasons.py                       # videos.season
 ./scripts/archive_channel.sh                                      # media + .en.vtt sidecars
 ./venv/bin/python scripts/ingest_transcripts.py                   # sidecars -> searchable text
 ```

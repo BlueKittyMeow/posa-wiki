@@ -22,8 +22,7 @@ from flask_login import current_user
 
 from db import get_db
 from services.audit_log_service import create_audit_log
-from services.review_service import (QUEUES, SeriesCandidateQueue, get_queue,
-                                     queue_summaries)
+from services.review_service import QUEUES, get_queue, queue_summaries
 from utils.decorators import editor_required
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
@@ -63,16 +62,21 @@ def dashboard():
     conn = get_db()
     summaries = queue_summaries(conn)
 
-    series_queue = QUEUES.get('series')
-    candidates_missing = (isinstance(series_queue, SeriesCandidateQueue)
-                          and series_queue.file_missing())
+    # Every queue fed from a regenerable JSON dump can report the file as
+    # missing; the dashboard lists them all rather than just series.
+    missing_files = [
+        {'file': queue.candidates_file,
+         'command': queue.regenerate_command}
+        for queue in QUEUES.values()
+        if queue.candidates_file and queue.file_missing()
+    ]
 
     return render_template(
         'admin/dashboard.html',
         queues=summaries,
         stats=_dashboard_stats(conn),
         pending_total=sum(q['count'] for q in summaries),
-        candidates_missing=candidates_missing,
+        missing_files=missing_files,
     )
 
 
@@ -96,8 +100,7 @@ def review_queue(queue_key):
     page = min(page, total_pages)
     visible = items[(page - 1) * per_page: page * per_page]
 
-    candidates_missing = (isinstance(queue, SeriesCandidateQueue)
-                          and queue.file_missing())
+    candidates_missing = bool(queue.candidates_file) and queue.file_missing()
 
     return render_template(
         'admin/review_queue.html',

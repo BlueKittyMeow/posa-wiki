@@ -2,6 +2,8 @@
 
 {% block title %}{{ video.title }} - Posa Wiki{% endblock %}
 
+{% from "_macros.html" import season_chip %}
+
 {% block content %}
 <!-- Video Header -->
 <div class="card">
@@ -11,6 +13,8 @@
             <div style="display: flex; gap: 1rem; align-items: center; margin-top: 0.5rem;">
                 <a href="{{ url_for('watch', video_id=video.video_id) }}" class="btn" style="font-weight: 700;">▶ Watch</a>
                 <span class="text-muted">📅 {{ video.upload_date[:10] if video.upload_date else 'Unknown Date' }}</span>
+                {# Only rendered when the season is actually known. #}
+                {{ season_chip(video.season) }}
                 <a href="{{ url_for('date_view', date_str=video.upload_date[:10]) }}" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.85rem;">View This Day</a>
                 <a href="https://youtube.com/watch?v={{ video.video_id }}" target="_blank" class="btn" style="padding: 0.25rem 0.75rem; font-size: 0.85rem;">📺 Watch on YouTube</a>
             </div>

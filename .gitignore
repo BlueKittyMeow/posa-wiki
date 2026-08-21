@@ -72,3 +72,4 @@ data/*.txt
 !data/series_review_decisions.json
 !data/tag_review_dismissed.json
 !data/dog_review_dismissed.json
+!data/season_review_decisions.json

@@ -35,12 +35,12 @@
         {% endfor %}
     </div>
 
-    {% if candidates_missing %}
+    {% for missing in missing_files %}
     <div class="alert alert-warning" style="margin-top: 1.5rem;">
-        No <code>data/series_review_candidates.json</code> found — regenerate it with
-        <code>python scripts/assign_series.py</code>.
+        No <code>{{ missing.file }}</code> found — regenerate it with
+        <code>{{ missing.command }}</code>.
     </div>
-    {% endif %}
+    {% endfor %}
 </div>
 
 <div class="card">

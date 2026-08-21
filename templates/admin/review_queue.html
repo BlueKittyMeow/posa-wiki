@@ -20,8 +20,8 @@
 
     {% if candidates_missing %}
     <div class="alert alert-warning" style="margin-top: 1rem;">
-        No <code>data/series_review_candidates.json</code> found — regenerate it with
-        <code>python scripts/assign_series.py</code>.
+        No <code>{{ queue.candidates_file }}</code> found — regenerate it with
+        <code>{{ queue.regenerate_command }}</code>.
     </div>
     {% endif %}
 

@@ -235,6 +235,19 @@ except OSError:
     STATIC_VERSION = 1
 app.jinja_env.globals['STATIC_V'] = STATIC_VERSION
 
+# Season is a facet of a video, not a series. 'unknown' (season IS NULL) is a
+# legitimate, first-class value -- most of the catalogue has no season
+# evidence and we never guess one. Chip order matches the calendar.
+SEASON_FILTERS = (
+    ('winter', '❄️ Winter'),
+    ('spring', '🌱 Spring'),
+    ('summer', '☀️ Summer'),
+    ('fall', '🍂 Fall'),
+    ('unknown', '❔ Unknown'),
+)
+SEASON_FILTER_KEYS = frozenset(key for key, _label in SEASON_FILTERS)
+
+
 def paginate(conn, query, params, count_query, count_params=(), per_page=20):
     """A helper function to paginate queries."""
     page, per_page, offset = get_page_args(page_parameter='page', 
@@ -301,18 +314,37 @@ def index():
 
 @app.route('/videos')
 def video_list():
-    """Sortable video list with thumbnails"""
+    """Sortable video list with thumbnails, optionally filtered by season"""
     sort_by = request.args.get('sort', 'upload_date')
     order = request.args.get('order', 'desc')
-    
+
+    # Season is a video facet. 'unknown' is a first-class choice (season IS
+    # NULL) -- most of the catalogue genuinely has no season evidence, and
+    # that is an answer, not a gap.
+    season = (request.args.get('season') or '').lower()
+    if season not in SEASON_FILTER_KEYS:
+        season = ''
+    if season == 'unknown':
+        season_sql, season_params = 'WHERE season IS NULL', ()
+    elif season:
+        season_sql, season_params = 'WHERE season = ?', (season,)
+    else:
+        season_sql, season_params = '', ()
+
     conn = get_db()
-    
+
     # Pagination
     page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', default_per_page=20)
-    
+
     # Get total number of videos for pagination
-    total = conn.execute('SELECT COUNT(*) FROM videos').fetchone()[0]
-    
+    total = conn.execute(
+        f'SELECT COUNT(*) FROM videos {season_sql}', season_params).fetchone()[0]
+
+    # Chip-row counts, so the filter shows how much is behind each option.
+    season_counts = {row[0] or 'unknown': row[1] for row in conn.execute(
+        'SELECT season, COUNT(*) FROM videos GROUP BY season')}
+    season_counts['all'] = sum(season_counts.values())
+
     # Build SQL query with sorting and pagination
     order_sql = 'ASC' if order == 'asc' else 'DESC'
     # Map the public sort key to the column actually ordered on. 'duration' is
@@ -331,22 +363,26 @@ def video_list():
     # Keep NULLs at the end regardless of direction.
     query = f'''
     SELECT video_id, title, description, upload_date, duration, duration_seconds,
-           view_count, thumbnail_url
+           view_count, thumbnail_url, season
     FROM videos
+    {season_sql}
     ORDER BY ({sort_column} IS NULL) ASC, {sort_column} {order_sql}
     LIMIT ? OFFSET ?
     '''
-    
-    videos = conn.execute(query, (per_page, offset)).fetchall()
-    
+
+    videos = conn.execute(query, season_params + (per_page, offset)).fetchall()
+
     pagination = Pagination(page=page, per_page=per_page, total=total,
                             css_framework='bootstrap4',
                             record_name='videos')
-    
-    return render_template('video_list.html', 
-                         videos=videos, 
-                         sort_by=sort_by, 
+
+    return render_template('video_list.html',
+                         videos=videos,
+                         sort_by=sort_by,
                          order=order,
+                         season=season,
+                         season_filters=SEASON_FILTERS,
+                         season_counts=season_counts,
                          pagination=pagination)
 
 @app.route('/video/<video_id>')

@@ -24,6 +24,20 @@
         </div>
     </div>
 
+    <!-- Season filter: a video facet, not a series. Unknown is a real answer. -->
+    <div class="season-filter" role="group" aria-label="Filter by season">
+        <a class="season-chip season-chip-all {% if not season %}is-active{% endif %}"
+           href="{{ url_for('video_list', sort=sort_by, order=order) }}">
+            🎬 All <span class="season-chip-count">{{ season_counts.get('all', 0) }}</span>
+        </a>
+        {% for key, label in season_filters %}
+        <a class="season-chip season-chip-{{ key }} {% if season == key %}is-active{% endif %}"
+           href="{{ url_for('video_list', sort=sort_by, order=order, season=key) }}">
+            {{ label }} <span class="season-chip-count">{{ season_counts.get(key, 0) }}</span>
+        </a>
+        {% endfor %}
+    </div>
+
     {% if videos %}
         {% from "_macros.html" import render_video_card %}
         <div class="video-grid">
@@ -33,7 +47,9 @@
         </div>
     {% else %}
         <div class="text-center" style="padding: 3rem;">
-            <p class="text-muted">No videos found.</p>
+            <p class="text-muted">
+                {% if season %}No videos with that season yet.{% else %}No videos found.{% endif %}
+            </p>
         </div>
     {% endif %}
 </div>
@@ -46,7 +62,11 @@
 function changeSorting() {
     const sortBy = document.getElementById('sort-select').value;
     const order = document.getElementById('order-select').value;
-    window.location.href = `{{ url_for('video_list') }}?sort=${sortBy}&order=${order}`;
+    const params = new URLSearchParams({sort: sortBy, order: order});
+    // Keep the season filter when the sort changes.
+    const season = {{ (season or '')|tojson }};
+    if (season) { params.set('season', season); }
+    window.location.href = `{{ url_for('video_list') }}?${params.toString()}`;
 }
 </script>
 {% endblock %}

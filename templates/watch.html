@@ -2,6 +2,8 @@
 
 {% block title %}Watch: {{ video.title }} - Posa Wiki{% endblock %}
 
+{% from "_macros.html" import season_chip %}
+
 {% block content %}
 <div class="watch-page" data-video-id="{{ video.video_id }}">
 
@@ -38,6 +40,8 @@
                     {% if video.duration or video.duration_seconds %}
                         <span class="text-muted">⏱️ {{ video.duration_seconds|default(video.duration, true)|format_duration }}</span>
                     {% endif %}
+                    {# Only rendered when the season is actually known. #}
+                    {{ season_chip(video.season) }}
                     <a href="{{ url_for('video_detail', video_id=video.video_id) }}"
                        class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.85rem;">📄 Video Details</a>
                 </div>

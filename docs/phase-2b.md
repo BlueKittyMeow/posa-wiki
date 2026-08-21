@@ -1,6 +1,6 @@
 # Phase 2B: API & CRUD Development
 
-**Status:** In Progress - Step 2 (Review Queues) Complete ✓
+**Status:** In Progress - Step 2 (Review Queues) + Step 2.5 (Seasons) Complete ✓
 **Goal:** Deliver a fully functional admin panel with CRUD operations for all major data models, a versioned REST API, and hardened security.
 
 ## Progress Update
@@ -113,6 +113,47 @@ Built:
 - Tests: `tests/test_admin_review.py` (19 tests) — access control, dashboard,
   each queue page, approve/reject round-trips for all three queues, decision
   persistence + disappearance from the queue, CSRF rejection, bulk approve.
+*Completed by Claude*
+
+**Step 2.5: Seasons as a Video Facet** ✓ COMPLETE
+- Owner-approved model: seasons are a **facet of a video**, not a series.
+  Winter is nearly binary (snow evidence); the rest are fuzzy; **Unknown
+  (NULL) is a legitimate value** and is never guessed at. Upload date is
+  explicitly *not* evidence — uploads lag filming badly (several winter trips
+  were published in April).
+- Migration `011_add_season_provenance.sql`: `videos.season_confidence`
+  (`high` / `medium` / `human`) + `videos.season_source` (rule name or
+  `human:web-review`). `videos.season` already existed and was 100% NULL.
+- `scripts/derive_seasons.py` (idempotent, `--db` / `--dry-run` / `--json`):
+  high-confidence title rules write directly; holidays, description keywords
+  and the `winter camping` tag only *propose*. Conflicts (two seasons matched)
+  are never auto-written. Never overwrites `season_confidence='human'`, and
+  only re-derives a high-confidence value when the season is currently NULL.
+- First run over 358 videos: winter 71, spring 25, summer 2, fall 12,
+  **unknown 248**, plus 77 review candidates. A second run writes 0.
+- **Finding:** the `winter camping` YouTube tag was specced as high
+  confidence, but it is copy-pasted channel SEO boilerplate — 130 videos carry
+  it and 37 of those share one *identical* 44-tag block; it sits on canoe
+  trips, "Hike and Cook - Late Start Edition" and the 5-year anniversary
+  compilation. Auto-writing it would have mislabelled ~63 videos as winter, so
+  a tag-only match proposes instead of writing (`TRUST_WINTER_TAG = False`
+  flips it back). Tag-only matches on paddling titles are suppressed entirely —
+  open water contradicts ice.
+- Review queue `seasons` (4th entry in the `QUEUES` registry, so the dashboard
+  counts it automatically). Approve writes `season` +
+  `season_confidence='human'` + `season_source='human:web-review'`; reject
+  means "Unknown stands". Decisions in `data/season_review_decisions.json`,
+  keyed by `video_id`, read by both the queue and the script. The
+  "candidates file missing" banner was generalised off `SeriesCandidateQueue`
+  onto a `candidates_file` / `regenerate_command` pair on the base class.
+- Site surfacing: themed `season_chip()` macro (❄️🌱☀️🍂, rendered only when
+  the season is known) on `video_detail.html` and `watch.html`; `/videos`
+  gained a chip-row filter with counts (`?season=winter`, `unknown` =
+  `season IS NULL`) that preserves sort/order/page.
+- Tests: `tests/test_seasons.py` (37 tests) — rule units incl. conflict,
+  human-never-overwritten, idempotency, upload-date-is-not-evidence and
+  ambiguous-canoe-stays-Unknown; queue approve/reject round-trips; `/videos`
+  filtering; badge rendering and *non*-rendering.
 *Completed by Claude*
 
 **Step 1.5: Viewer Test Account & Login Flow** ⏳ TODO

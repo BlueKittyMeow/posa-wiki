@@ -43,11 +43,14 @@ REVIEW_PROVENANCE = 'human:web-review'
 
 SERIES_CANDIDATES_FILENAME = 'series_review_candidates.json'
 SERIES_DECISIONS_FILENAME = 'series_review_decisions.json'
+SEASON_CANDIDATES_FILENAME = 'season_review_candidates.json'
+SEASON_DECISIONS_FILENAME = 'season_review_decisions.json'
 TAG_DISMISSED_FILENAME = 'tag_review_dismissed.json'
 DOG_DISMISSED_FILENAME = 'dog_review_dismissed.json'
 
 DEFAULT_DATA_DIR = REPO_ROOT / 'data'
 DEFAULT_DECISIONS_PATH = DEFAULT_DATA_DIR / SERIES_DECISIONS_FILENAME
+DEFAULT_SEASON_DECISIONS_PATH = DEFAULT_DATA_DIR / SEASON_DECISIONS_FILENAME
 
 MAX_TAG_SAMPLES = 6
 
@@ -158,6 +161,56 @@ def record_series_decision(video_id, series_name, decision, extra=None,
     return record
 
 
+# --------------------------------------------------------------------------
+# Season decisions -- shared with scripts/derive_seasons.py
+# --------------------------------------------------------------------------
+
+def load_season_decisions(path=None) -> Dict[str, Any]:
+    """Return ``{video_id: decision-record}`` for already-reviewed seasons.
+
+    Keyed by ``video_id`` alone (unlike series, a video has exactly one
+    season), so a rejected proposal suppresses *every* future proposal for
+    that video -- "Unknown" is a legitimate answer and must stick.
+
+    Importable from plain scripts (no Flask app context required).
+    """
+    if path is None:
+        path = DEFAULT_SEASON_DECISIONS_PATH
+    payload = read_json(path, default={}) or {}
+    decisions = payload.get('decisions')
+    return decisions if isinstance(decisions, dict) else {}
+
+
+def record_season_decision(video_id, season, decision, extra=None, path=None):
+    """Persist an approve/reject for a proposed video season."""
+    if path is None:
+        path = data_path(SEASON_DECISIONS_FILENAME)
+    payload = read_json(path, default=None) or {}
+    decisions = payload.get('decisions')
+    if not isinstance(decisions, dict):
+        decisions = {}
+    record = {
+        'video_id': video_id,
+        'season': season,
+        'decision': decision,
+        'decided_at': _now(),
+        'source': REVIEW_PROVENANCE,
+    }
+    if extra:
+        record.update(extra)
+    decisions[video_id] = record
+    payload['decisions'] = decisions
+    payload['updated_at'] = _now()
+    payload.setdefault(
+        'note',
+        'Human season decisions from the /admin review queue. '
+        'derive_seasons.py reads this file so decided videos are never '
+        'proposed again. A reject means "Unknown stands".',
+    )
+    write_json(path, payload)
+    return record
+
+
 def _load_dismissed(filename) -> List[str]:
     payload = read_json(data_path(filename), default=None) or {}
     dismissed = payload.get('dismissed')
@@ -221,6 +274,15 @@ class ReviewQueue:
     description = ''
     empty_message = 'Nothing to review. 🎉'
 
+    #: Set by queues fed from a regenerable JSON dump, so the UI can say
+    #: which file is missing and which script rebuilds it.
+    candidates_file: Optional[str] = None
+    regenerate_command: Optional[str] = None
+
+    def file_missing(self) -> bool:
+        """True when this queue's candidates dump has not been generated."""
+        return False
+
     def items(self, conn) -> List[ReviewItem]:
         raise NotImplementedError
 
@@ -257,6 +319,8 @@ class SeriesCandidateQueue(ReviewQueue):
                    'video_series row stamped ' + REVIEW_PROVENANCE + '.')
     empty_message = ('No pending series candidates. Regenerate them with '
                      'python scripts/assign_series.py.')
+    candidates_file = 'data/' + SERIES_CANDIDATES_FILENAME
+    regenerate_command = 'python scripts/assign_series.py'
 
     def _candidates(self):
         payload = read_json(data_path(SERIES_CANDIDATES_FILENAME), default=None)
@@ -658,13 +722,156 @@ class DogCandidateQueue(ReviewQueue):
 
 
 # --------------------------------------------------------------------------
+# 4. Season candidates
+# --------------------------------------------------------------------------
+
+SEASON_LABELS = {
+    'winter': '❄️ Winter',
+    'spring': '🌱 Spring',
+    'summer': '☀️ Summer',
+    'fall': '🍂 Fall',
+}
+
+
+class SeasonCandidateQueue(ReviewQueue):
+    """Medium-confidence season proposals from ``scripts/derive_seasons.py``.
+
+    Seasons are a video facet, not a series. Rejecting is a real answer here:
+    it means "Unknown stands", and the video is never proposed again.
+    """
+
+    key = 'seasons'
+    label = 'Season candidates'
+    icon = '🍂'
+    description = ('Medium-confidence season guesses (holidays, description '
+                   'keywords). Approving stamps the video '
+                   + REVIEW_PROVENANCE + '; rejecting means Unknown stands. '
+                   'Unknown is always a legitimate answer.')
+    empty_message = ('No pending season candidates. Regenerate them with '
+                     'python scripts/derive_seasons.py.')
+    candidates_file = 'data/' + SEASON_CANDIDATES_FILENAME
+    regenerate_command = 'python scripts/derive_seasons.py'
+
+    VALID_SEASONS = ('winter', 'spring', 'summer', 'fall')
+
+    def _candidates(self):
+        payload = read_json(data_path(SEASON_CANDIDATES_FILENAME), default=None)
+        if not payload:
+            return None  # signals "file missing"
+        candidates = payload.get('candidates')
+        return candidates if isinstance(candidates, list) else []
+
+    def file_missing(self) -> bool:
+        return self._candidates() is None
+
+    def items(self, conn) -> List[ReviewItem]:
+        candidates = self._candidates()
+        if not candidates:
+            return []
+
+        decisions = load_season_decisions(data_path(SEASON_DECISIONS_FILENAME))
+
+        video_ids = [c.get('video_id') for c in candidates if c.get('video_id')]
+        videos = {}
+        if video_ids:
+            marks = ','.join('?' * len(video_ids))
+            videos = {
+                row['video_id']: row
+                for row in conn.execute(
+                    'SELECT video_id, title, upload_date, thumbnail_url, '
+                    'season, season_confidence '
+                    f'FROM videos WHERE video_id IN ({marks})', video_ids)
+            }
+
+        items = []
+        for candidate in candidates:
+            video_id = candidate.get('video_id')
+            season = (candidate.get('proposed_season') or '').lower()
+            if not video_id or season not in self.VALID_SEASONS:
+                continue
+            if video_id in decisions:
+                continue
+            video = videos.get(video_id)
+            if video is None:
+                continue
+            # A human already settled this one, or a high-confidence rule
+            # has since claimed it -- either way, stop asking.
+            if video['season_confidence'] == 'human':
+                continue
+            if video['season'] is not None:
+                continue
+
+            evidence = candidate.get('evidence')
+            items.append(ReviewItem(
+                kind='season',
+                item_id=f'season:{video_id}:{season}',
+                title=video['title'] or candidate.get('title') or video_id,
+                proposal=f'Season: {SEASON_LABELS.get(season, season)}',
+                provenance='rule: ' + (candidate.get('rule') or 'unknown')
+                           + f" ({candidate.get('confidence', 'medium')} "
+                           'confidence)',
+                payload={'video_id': video_id, 'season': season},
+                video_id=video_id,
+                thumbnail_url=video['thumbnail_url'],
+                upload_date=video['upload_date'],
+                detail=SEASON_LABELS.get(season, season),
+                samples=[evidence] if evidence else [],
+            ))
+        return items
+
+    # -- actions ----------------------------------------------------------
+    def _resolve(self, conn, payload):
+        video_id = (payload.get('video_id') or '').strip()
+        season = (payload.get('season') or '').strip().lower()
+        if not video_id or not season:
+            raise ValueError('Missing video_id or season.')
+        if season not in self.VALID_SEASONS:
+            raise ValueError(f'“{season}” is not a season.')
+        row = conn.execute(
+            'SELECT video_id, season_confidence FROM videos WHERE video_id = ?',
+            (video_id,)).fetchone()
+        if row is None:
+            raise ValueError(f'Video {video_id} does not exist.')
+        return video_id, season, row
+
+    def approve(self, conn, payload):
+        video_id, season, _row = self._resolve(conn, payload)
+        conn.execute(
+            'UPDATE videos SET season = ?, season_confidence = ?, '
+            'season_source = ?, updated_at = ? WHERE video_id = ?',
+            (season, 'human', REVIEW_PROVENANCE,
+             datetime.now().isoformat(), video_id),
+        )
+        conn.commit()
+        record_season_decision(video_id, season, 'approve',
+                               path=data_path(SEASON_DECISIONS_FILENAME))
+        return {
+            'message': f'Set {video_id} to {season}.',
+            'resource_id': video_id,
+            'details': {'video_id': video_id, 'season': season,
+                        'season_confidence': 'human',
+                        'season_source': REVIEW_PROVENANCE},
+        }
+
+    def reject(self, conn, payload):
+        video_id, season, _row = self._resolve(conn, payload)
+        record_season_decision(video_id, season, 'reject',
+                               path=data_path(SEASON_DECISIONS_FILENAME))
+        return {
+            'message': f'Dismissed “{season}” for {video_id}; Unknown stands.',
+            'resource_id': video_id,
+            'details': {'video_id': video_id, 'season': season},
+        }
+
+
+# --------------------------------------------------------------------------
 # Registry
 # --------------------------------------------------------------------------
 
 QUEUES: Dict[str, ReviewQueue] = {
     queue.key: queue
     for queue in (SeriesCandidateQueue(), UnvalidatedTagQueue(),
-                  DogCandidateQueue())
+                  DogCandidateQueue(), SeasonCandidateQueue())
 }
 
 

@@ -37,3 +37,24 @@
     </div>
 </div>
 {% endmacro %}
+{# Season is a video *facet*, not a series: a small themed chip, and only
+   when we actually know. NULL means Unknown and renders nothing -- we never
+   guess a season just to fill the slot. #}
+{% macro season_chip(season, link=true) %}
+{%- set seasons = {
+      'winter': ('❄️', 'Winter'),
+      'spring': ('🌱', 'Spring'),
+      'summer': ('☀️', 'Summer'),
+      'fall':   ('🍂', 'Fall')
+   } -%}
+{%- if season and season in seasons -%}
+  {%- set icon, label = seasons[season] -%}
+  {%- if link -%}
+  <a class="season-chip season-chip-{{ season }}"
+     href="{{ url_for('video_list', season=season) }}"
+     title="Browse {{ label|lower }} videos">{{ icon }} {{ label }}</a>
+  {%- else -%}
+  <span class="season-chip season-chip-{{ season }}">{{ icon }} {{ label }}</span>
+  {%- endif -%}
+{%- endif -%}
+{% endmacro %}
