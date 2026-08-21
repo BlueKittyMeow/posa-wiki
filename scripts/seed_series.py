@@ -76,7 +76,10 @@ COMMUNITY_CHILDREN = ('Unboxing', 'Channel Updates', 'Giveaways')
 # Seasons are being retired as series -- they become a facet of the video
 # record later.  Removing the rows keeps /series honest; the script is the
 # documentation of the decision.
-RETIRED_SERIES = ('Spring Camping', 'Fall Camping')
+# Michigan Adventures retired 2026-08-20 (owner decision): being in Michigan
+# is a video-level fact (tag), not a collection — the early-era videos it
+# matched are already browsable via tags.
+RETIRED_SERIES = ('Spring Camping', 'Fall Camping', 'Michigan Adventures')
 
 # The trip row that was really a thematic show all along.
 FISHING_TRIP_NAME = 'The Unsuccessful Fishing Show'

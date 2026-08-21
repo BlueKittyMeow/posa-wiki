@@ -179,9 +179,8 @@ def classify(row):
             or _tag_re_hit(tags, RE_BACKYARD)):
         review.append(('Backyard Adventures', 'backyard-in-title-desc-tags'))
 
-    # -- medium confidence: Michigan Adventures ---------------------------
-    if _tag_hit(tags, 'michigan'):
-        review.append(('Michigan Adventures', 'michigan-tag-only'))
+    # Michigan Adventures was retired as a series (owner decision 2026-08-20):
+    # location-in-Michigan stays a tag-level fact, not a collection. No rule.
 
     return high, review
 
