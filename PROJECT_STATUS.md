@@ -1,127 +1,73 @@
-# Project Status - Posa Wiki
+# Project Status — Posa Wiki
 
-## Current Phase: PHASE 2A COMPLETE ✅ - Moving to Phase 2B
+**Updated: 2026-08-24.** Live at https://posa-wiki.bluekittymeow.com (public,
+no auth; editing behind login). Runs on Factotum (gunicorn :8018, cloudflared).
+Branch of record: `2b-dev`. Deploy = rsync working tree (exclude venv/.git/.env/
+db/data) + `sudo systemctl restart posa-wiki`. See `docs/keeping-current.md`
+for the automation runbook.
 
-### PHASE 1 COMPLETE ✅
-- **Fully Functional Flask Web App**: Running on http://localhost:5001
-  - **Three theme system** with persistent localStorage:
-    - Fairyfloss (dark purple/pink/mint - default)
-    - Professional (blue corporate theme)
-    - Academia (warm paper/parchment/leather aesthetic)
-  - DaddyTimeMono custom font with JetBrains Mono fallback
-  - Complete navigation: Home, Videos, People, Dogs, Series, Trips
-  - Sortable video listings with thumbnails
-  - Full-text search functionality
-  - Date-based browsing
-  - Individual video detail pages
-  - **Fully responsive design** with optimized breakpoints:
-    - Desktop (1200px+): Full sidebar navigation
-    - Tablet (900px-1200px): Compact sidebar
-    - Mobile (768px-900px): Slide-out sidebar with overlay
-    - Small mobile (480px-768px): Optimized scaling
-    - Ultra-small (360px-480px): Aggressive space optimization
+## What's live
 
-- **Production Database**: 
-  - **358 videos** with complete YouTube metadata
-  - **9 people** with video relationships
-  - **3 dogs** (Monty, Rueger, etc.) with appearance tracking
-  - **13 trips/series** with episodic organization
-  - Tag authority system structure implemented
+- **Catalog:** 373 videos, full YouTube metadata, numeric duration sort,
+  FTS5 search. Weekly self-update (`posa-catalog.timer` → update_catalog →
+  assign_series → derive_seasons).
+- **Series system** (multi-membership, series table is source of truth):
+  activity/location/content/special types, episodic numbering (Unsuccessful
+  Fishing Show, Christmas Story), 600+ memberships, `/series/<id>` pages.
+  Retired: Spring/Fall Camping (seasons are a facet), Michigan Adventures
+  (location is a tag).
+- **Season facet:** high-confidence auto-derivation from titles (conflicts and
+  holiday-inferences go to review; human values untouchable), filter chips on
+  /videos, Unknown is legitimate.
+- **Transcript search:** "Spoken in videos" section on /search with
+  timestamped YouTube deep links. Segments ingest daily from the channel
+  archive's subtitle sidecars (`posa-transcripts.timer`).
+- **Admin review center** (`/admin`, editor login): four queues — series
+  candidates, unvalidated tags (promote-to-authority), Layla-via-Lucas dog
+  candidates, seasons. Decisions persist in `data/*_decisions.json` on the Pi
+  (never in git, never clobbered by deploys); all actions audit-logged.
+- **Watch page** (`/watch/<id>`): official YouTube embed (Premium ad-free +
+  views count), tap-to-dim overlay (50/75/100% with audio continuing),
+  night mode, keyboard shortcuts, prev/next episode, cast from phone Chrome.
+- **Channel backup:** full-fidelity yt-dlp archive to `/mnt/media6t/archive/posa/`
+  on Factotum (video + info.json + thumbnails + subtitles). Daily paced runs
+  (50/run, randomized sleeps — YouTube bot-flags marathon sessions). ~1.0–1.2 TB
+  when complete.
 
-- **Complete Web Interface**:
-  - Video browsing and sorting
-  - People and dog directories with video counts
-  - Series and trip organization
-  - Search across titles and descriptions
-  - Theme switcher in sidebar with three distinct aesthetics
-  - FOUC-free theme loading with inline script
-  - Mobile-friendly hamburger menu with overlay
-  - Theme-consistent hover states across all UI elements
+## Automation on Factotum
 
-- **Database Implementation**:
-  - SQLite database fully populated and operational
-  - Junction tables working for relationships
-  - Video metadata enriched beyond basic YouTube data
+| Unit | Cadence | Purpose |
+|---|---|---|
+| `posa-wiki.service` | always | The site (gunicorn 127.0.0.1:8018) |
+| `posa-catalog.timer` | weekly Sun 23:30 | New uploads → DB → series/seasons |
+| `posa-archive.timer` | daily (backfill; monthly later) | Channel backup |
+| `posa-transcripts.timer` | daily | Subtitle sidecars → transcript search |
 
-### Recent Updates (2025-10-04) 🎨
-- **Multi-Theme System**: Implemented three-theme switcher
-  - Added Fairyfloss (default dark), Professional (blue corporate), Academia (warm paper) themes
-  - CSS custom properties for semantic color assignment
-  - localStorage persistence across sessions
-  - Inline script prevents FOUC (Flash of Unstyled Content)
+## Test suite
 
-- **Responsive Design Overhaul**:
-  - Created 5 responsive breakpoints (1200px, 900px, 768px, 480px, 360px)
-  - Mobile header with hamburger menu and backdrop overlay
-  - Proper content margins to prevent overlap
-  - Scaled typography and spacing for ultra-small screens
-  - Video thumbnail sizing adapts to viewport
+`./venv/bin/python -m pytest tests/ -q` → 226 passed / 4 known pre-existing
+failures (403-handler routing + 3 JWT auth tests — Phase 2B follow-up).
 
-- **Theme Consistency**:
-  - Fixed hardcoded Fairyfloss colors in hover states
-  - All UI elements now respect active theme
-  - Series/tag badges use theme-appropriate colors
-  - Input focus shadows match theme accent colors
+## Next up (roughly in order)
 
-### PHASE 2A COMPLETE ✅
-- **Configuration Management**: Centralized config (`config.py`), `.env` support, removed hardcoded values.
-- **Error Handling & Logging**: Custom 404/500 pages, robust logging with rotating file handler.
-- **Form Security**: CSRF protection implemented with Flask-WTF.
-- **Authentication**: Flask-Login integrated, `User` model, `auth` blueprint, `create-admin` CLI command.
-- **Pagination**: All list and detail views paginated using a reusable helper function.
-- **Search Performance**: Full-Text Search (FTS5) implemented for videos.
+- Whisper vs Parakeet local ASR bake-off on MarshLair → replace YouTube ASR
+  transcripts with better ones (names!), same tables via `source` column.
+- Posaism detection + reference pages over the transcript corpus.
+- BWCA lake-mention extraction → per-video lake routes → little maps
+  (see `docs/research/LAKE_ROUTES_IDEA.md`).
+- Friend-trips collection (`docs/research/FRIEND_TRIPS_SEED.md`) once people
+  coverage improves.
+- Entity CRUD forms (Phase 2B Step 3; service layer + forms already built).
+- Faceted browse UI combining series/season/people/dogs/duration filters.
+- Visual redesign pass (with faceted browse).
+- Fix 4 pre-existing test failures.
+- Teeny Trout channel indexing (separate future project).
 
-### PHASE 2B: API & CRUD DEVELOPMENT 📋
+## History
 
-- **Testing Strategy**: Implemented a testing strategy using `pytest` and `pytest-flask`. This allows for automated testing of the application, including error pages and other functionality. This is a more robust and efficient way to test the application than manual testing.
-
-- **Access Control for CRUD Operations**:
-  - Use `@editor_required` decorator on all edit routes
-  - Use `@admin_required` for user management routes
-  - Implement proper 403 error handling for unauthorized access
-
-- **Admin Panel Blueprint**:
-  - Create `/admin` blueprint for administrative functions
-  - User management UI (create, edit, delete, role changes)
-  - Audit log viewing (track who edited what)
-
-- **REST API Structure**: JSON endpoints with Flask-RESTful
-  - API routes should be CSRF-exempt (use token auth instead)
-  - Implement API key or JWT authentication for external access
-
-- **Modal CRUD Operations**:
-  - Inline editing for all entities (videos, people, dogs, trips)
-  - Protected with `@editor_required` decorator
-  - CSRF tokens in all forms (from Step 6)
-
-- **SQL Query Optimization**: Database layer with optimized queries
-- **Search Performance**: Full-Text Search indexes (✅ FTS5 already implemented in Phase 2A) (✅ FTS5 already implemented in Phase 2A)
-- **Database Architecture**: Migrate data access layer to SQLAlchemy ORM, introduce Alembic for schema migrations, and implement connection pooling.
-
-### PHASE 2C: ENHANCED FEATURES 📋  
-- **Tag Validation Interface**: Web-based authority management
-- **Advanced Navigation**: Theme/category browsing pages
-- **Search Improvements**: Multi-filter search interface
-- **Posaism/Reference Pages**: Track catchphrases and recurring elements
-
-### Key Design Decisions Made
-- **Breed Authority**: Simple authority table, no dedicated pages needed
-- **Reference Pages**: One page per Posaism, lists all video appearances  
-- **Wiki Approach**: Database-driven content, basic web pages populated from DB
-- **Tag Separation**: validated_tags vs unvalidated_tags arrays for iterative improvement
-- **Future CRUD**: Roadmap for inline editing capabilities
-
-### Technology Stack
-- **Database**: SQLite (development) → PostgreSQL (production)
-- **Backend**: Python with YouTube API
-- **Data Format**: JSON for flexible fields (tags, aliases)
-- **Version Control**: Git + GitHub
-
-### Current Data Assets
-- `full_channel_scrape_20250902_142647.json` - 277 videos
-- `tag_authority_system.json` - 20 authorities with 70+ aliases
-- `schema.md` - Complete database design
-- Various analysis scripts and test data
-
-## Immediate Priority
-**Expand data collection before running tag validator** - need broader tag sample to build better authority coverage.
+Phase 1 (browse UI) and Phase 2A (config, errors, CSRF, auth, pagination,
+FTS) complete — see git history and `docs/`. Phase 2B step 1 complete
+(blueprints, service layer, forms, JWT/rate-limit/audit security); Step 2
+reshaped into the review center. `fable-review.md` (on `main`) was the
+2026-07 audit that seeded the fix roadmap; `docs/research/` holds the
+working analyses.

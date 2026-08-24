@@ -40,46 +40,32 @@ Every run ends with a summary: new videos, people/dog links added, episodes
 assigned, and the number of unvalidated tags on the new rows (review those with
 `review_unvalidated_tags.py`).
 
-## Running it on a server
+## What actually runs on Factotum (deployed 2026-08-24)
 
-Put the key in an environment file readable only by the service user:
+The key lives in `/srv/posa-wiki/.env` (`YOUTUBE_API_KEY=...`, chmod 600),
+which doubles as the systemd `EnvironmentFile`. Three timers, all
+`Persistent=true` (missed fires catch up on boot):
 
-```ini
-# /etc/default/posa-wiki
-YOUTUBE_API_KEY=AIza...
-```
+| Unit | Cadence | Does |
+|---|---|---|
+| `posa-catalog.timer` | weekly, Sun 23:30 | `update_catalog.py` → `assign_series.py` → `derive_seasons.py` (three sequential ExecStart lines in one oneshot service) |
+| `posa-archive.timer` | **daily during backfill**; drop to monthly once caught up | `scripts/archive_channel.sh` — channel backup to `/mnt/media6t/archive/posa/` |
+| `posa-transcripts.timer` | daily | `ingest_transcripts.py` — new subtitle sidecars → transcript search |
 
-```ini
-# /etc/systemd/system/posa-catalog-update.service
-[Unit]
-Description=Posa wiki catalog update
+Check any of them with `sudo journalctl -u posa-<name>.service` (sudo — the
+non-root session bus quirk on Factotum makes bare `systemctl` whine).
 
-[Service]
-Type=oneshot
-User=posa
-WorkingDirectory=/srv/posa-wiki
-EnvironmentFile=/etc/default/posa-wiki
-ExecStart=/srv/posa-wiki/venv/bin/python scripts/update_catalog.py
-```
+**Archive pacing (learned 2026-08-21):** a continuous multi-hour yt-dlp session
+got the Pi's IP bot-flagged by YouTube ("Sign in to confirm you're not a bot",
+every video failing thereafter). `archive_channel.sh` therefore runs capped
+(`--max-downloads 50`, exit code 101 = success) with randomized 20–90 s sleeps
+between videos, daily. Do NOT "fix" a stall by removing the pacing, and do not
+reach for `--cookies` — that would tie a real YouTube account to bulk
+downloading. If a run fails with bot-check errors, just let the next daily run
+retry; the block is IP-temporary and `.archive.txt` makes every run resumable.
 
-```ini
-# /etc/systemd/system/posa-catalog-update.timer
-[Unit]
-Description=Monthly Posa wiki catalog update
-
-[Timer]
-OnCalendar=monthly
-Persistent=true
-
-[Install]
-WantedBy=timers.target
-```
-
-`systemctl enable --now posa-catalog-update.timer`. Monthly is plenty for a
-channel that posts weekly-ish; `Persistent=true` catches a missed fire if the
-box was off. Check results with `journalctl -u posa-catalog-update.service`.
-
-Back up `posa_wiki.db` before the first real server run.
+Back up `posa_wiki.db` before first runs of anything new (`cp posa_wiki.db
+posa_wiki.db.bak.<reason>` — `*.bak*` is gitignored).
 
 ## What it does automate
 
@@ -230,9 +216,9 @@ where to look.
 
 ## What stays manual
 
-- **Medium-confidence series membership.** Day Hiking, Backyard Adventures and
-  Michigan Adventures are proposal-only; promote them by hand from
-  `data/series_review_candidates.json`.
+- **Medium-confidence series membership.** Day Hiking and Backyard Adventures
+  are proposal-only; approve them in `/admin/review/series` (Michigan
+  Adventures was retired as a series 2026-08-20 — location stays a tag).
 - **Multi-part trip membership.** A multi-part canoe trip with freeform titles
   will not be grouped automatically — assign it in the app or with
   `import_trips.py` / `separate_series_trips.py`.
