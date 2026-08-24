@@ -291,3 +291,15 @@ identified Funk (the person; YouTube/Parakeet heard "punk") and alone got
 best entity recovery and cadence — with two standing mitigations for the batch:
 (1) name-normalization pass against entity tables + known-Posaism lexicon;
 (2) treat transcripts as evidence, not gospel, anywhere wordplay matters.
+
+### 7b. Word-level WER against the human reference (rough, n=106 ref words)
+
+Normalization: lowercase, punctuation/fillers stripped, gimme=give me.
+Whisper 17.0% WER (~83% acc) · YouTube 18.9% (~81%) · Parakeet 32.1% (~68%).
+Per-passage: Whisper wins A (5.4%, sole error = the pun-flattening) and B
+(14.7%); **YouTube wins the C dog-chaos passage** (25.7% vs Whisper 31.4%);
+Parakeet hits 60% on C and is eliminated. CAVEATS: passages were selected as
+hard cases (this is a floor, not an average); tiny sample; chaotic-speech
+alignment is fuzzy. Implication: Whisper's batch value over the free
+YouTube ASR is mostly punctuation, word timestamps, prompt steering, and
+entity recovery — not a dramatic raw-WER gap on hard material.
