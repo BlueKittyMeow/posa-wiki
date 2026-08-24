@@ -24,6 +24,10 @@ mkdir -p "$DEST"
 
 echo "=== archive run started $(date -Is) ===" >> "$LOG"
 
+# Pacing: YouTube bot-flagged the Pi's IP after ~60 videos in one continuous
+# 5.5h session (2026-08-21, "Sign in to confirm you're not a bot"). Long
+# randomized sleeps between videos + a per-run cap + a daily timer stay under
+# the radar; the backfill takes ~a week instead of a day, which is fine.
 nice -n 15 ionice -c 3 "$YTDLP" \
     --download-archive "$DEST/.archive.txt" \
     --format 'bv*+ba/b' \
@@ -31,8 +35,10 @@ nice -n 15 ionice -c 3 "$YTDLP" \
     --write-info-json \
     --write-thumbnail \
     --write-subs --write-auto-subs --sub-langs 'en.*' \
-    --limit-rate 12M \
-    --sleep-requests 0.75 \
+    --limit-rate 10M \
+    --sleep-requests 1.5 \
+    --sleep-interval 20 --max-sleep-interval 90 \
+    --max-downloads 50 \
     --retries 10 \
     --ignore-errors \
     --no-overwrites \
@@ -40,6 +46,9 @@ nice -n 15 ionice -c 3 "$YTDLP" \
     "$CHANNEL_URL" >> "$LOG" 2>&1
 
 STATUS=$?
+# yt-dlp exits 101 when it stops because --max-downloads was reached — that is
+# a successful (partial) run for our purposes, not a failure.
+if [ "$STATUS" -eq 101 ]; then STATUS=0; fi
 COUNT=$(wc -l < "$DEST/.archive.txt" 2>/dev/null || echo 0)
 echo "=== archive run finished $(date -Is) exit=$STATUS archived_total=$COUNT ===" >> "$LOG"
 exit $STATUS
