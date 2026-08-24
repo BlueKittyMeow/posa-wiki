@@ -261,3 +261,33 @@ phrase-level damage in exactly the content this wiki cares about (dialogue with 
 **Factotum:** `/mnt/media/staging/zr_N8CDKUA.wav` (62 MB — delete when done with it).
 
 Local scratchpad copies of the WAV were cleaned up.
+
+---
+
+## 7. Human ground-truth validation (Lara, by ear, 2026-08-24)
+
+The agreement metrics in §2 compare engines against YouTube's own ASR — circular.
+Lara transcribed the three §3 passages from the actual audio:
+
+**(a)** "…today, we are targeting some **crap pie**, also known as **crappie**…"
+— it's the episode-title pun. Parakeet's "crap pie" was CORRECT; **Whisper
+normalized the joke away** ("crappie, also known as crappie"); YouTube missed
+both halves. **Caveat entered into the record: Whisper's fluency bias smooths
+wordplay into plausibility.** Posa says implausible things on purpose;
+Posaism detection must not treat Whisper text as gospel for puns.
+
+**(b)** "…I caught like… seven? crappies? ish? I let one or two go. Uh, Captain
+**Teeny Trout** gave me one…" — all three engines rendered the nickname wrong
+(truck / Tea Truck / T Truck), even with "Captain Teeny Trout" verbatim in
+Whisper's initial_prompt. Whisper alone preserved the "seven crappies ish"
+cadence. The post-ASR name-normalization pass (fuzzy match against wiki entity
+tables) is confirmed as REQUIRED, engine-independent.
+
+**(c)** "Say hi, **Funk**. Hi. Hah. **Go get it, Monty**…" — Whisper alone
+identified Funk (the person; YouTube/Parakeet heard "punk") and alone got
+"Go get it" (Parakeet: "Forget it"). Whisper dropped the "Say hi".
+
+**Human-validated verdict: faster-whisper large-v3 (prompted) confirmed** —
+best entity recovery and cadence — with two standing mitigations for the batch:
+(1) name-normalization pass against entity tables + known-Posaism lexicon;
+(2) treat transcripts as evidence, not gospel, anywhere wordplay matters.
