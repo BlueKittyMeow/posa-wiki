@@ -53,10 +53,10 @@ the same abrupt way.
 **He opens with "Ladies and gentlemen."** Formal-address openings into
 extremely informal content.
 
-**He interrupts and restarts himself constantly.** Rising-uncertainty chains
-("...like… seven? ...ish?"), self-hedging, and abandoned clauses are how he
-actually speaks. Counts of anything are given hesitantly and revised
-mid-sentence. A transcript of him should NOT read like
+**He interrupts and restarts himself constantly.** Rising-uncertainty chains,
+question-mark hedges tacked onto numbers, "-ish" suffixes, self-corrections,
+and abandoned clauses are how he actually speaks. Counts of anything are
+given hesitantly and revised mid-sentence. A transcript of him should NOT read like
 clean prose. Fluent, tidy sentences where the audio is messy are a symptom of
 ASR smoothing.
 
