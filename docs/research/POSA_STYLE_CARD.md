@@ -1,4 +1,4 @@
-# Posa Style Card — v0 (DRAFT, awaiting Lara's edit)
+# Posa Style Card — v1.1
 
 *The "how Posa talks" document that ships inside the adjudicator packet.
 Its job is to define the register in which a transcript sentence is judged
