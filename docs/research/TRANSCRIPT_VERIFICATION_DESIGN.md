@@ -108,3 +108,15 @@ right spans as beyond-its-pay-grade). Output: a results grid + the chosen
 production config (model + packet + witness set), with the runner-up config
 recorded as fallback. Runs on MarshLair after the E: reshuffle completes;
 local models make the whole matrix ~free, just GPU-time.
+
+**Adjudication unit (Lara, round 4):** word-level signals only LOCATE
+uncertainty; the judge always rules on the full sentence/utterance containing
+the flagged span, and its ruling must yield a sentence that reads as something
+a human actually said. Sentence-incoherence (e.g. Parakeet's "Give me Can you
+hear your little stinker") is itself evidence of transcription error — usable
+even without ground truth. Tension to hold: coherence is judged within POSA'S
+register (puns, songs, dog-directed speech are coherent for him) — the style
+card defines the register, so the coherence test never becomes a second
+smoothing pass. Tournament scoring: add sentence-coherence-of-output as a
+metric, but ONLY paired with false-correction rate so models can't win by
+prettifying.
