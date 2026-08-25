@@ -1,0 +1,171 @@
+{
+  "judge": "qwen2-audio",
+  "model": "Qwen/Qwen2-Audio-7B-Instruct",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "withClip",
+  "prompt_chars": 10860,
+  "load_s": 45.8,
+  "raw": "[{'span': 'Ladies and gentlemen', 'verdict': 'confirm'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': '",
+  "rulings": [
+    {
+      "span": "Ladies and gentlemen",
+      "verdict": "confirm"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct"
+    }
+  ],
+  "parse_note": "recovered-objects",
+  "timed_out": false,
+  "elapsed": 562.9
+}

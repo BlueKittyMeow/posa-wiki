@@ -1,0 +1,59 @@
+{
+  "judge": "qwen2-audio",
+  "model": "Qwen/Qwen2-Audio-7B-Instruct",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "noClip",
+  "quant": "8bit",
+  "prompt_chars": 10860,
+  "load_s": 98.6,
+  "raw": "{ \"span\": \"Ladies and gentlemen\", \"verdict\": \"confirm\", \"correction\": \"Ladies and gentlemen\", \"reasoning\": \"No need to change the word order as it is a common greeting phrase used in English.\" }, { \"span\": \"and\", \"verdict\": \"confirm\", \"correction\": \"and\", \"reasoning\": \"No need to change the word order as it is a conjunction used to connect two statements.\" }, { \"span\": \"crappie\", \"verdict\": \"confirm\", \"correction\": \"crappie\", \"reasoning\": \"No need to change the word as it is the correct spelling of the word mentioned in the transcript.\" }, { \"span\": \"(nothing)\", \"verdict\": \"confirm\", \"correction\": \"(nothing)\", \"reasoning\": \"No need to change the word as it is a placeholder for a missing word or phrase in the transcript.\" }, { \"span\": \"SS\", \"verdict\": \"confirm\", \"correction\": \"SS\", \"reasoning\": \"No need to change the word as it is the correct abbreviation for the word 'submarine' mentioned in the transcript.\" }, { \"span\": \"Tin\", \"verdict\": \"confirm\", \"correction\": \"Tin\", \"reasoning\": \"No need to change the word as it is the correct abbreviation for the word 'tin' mentioned in the transcript.\" }, { \"span\": \"3.0\", \"verdict\": \"confirm\", \"correction\": \"3.0\", \"reasoning\": \"No need to change the number as it is the correct representation of the version number of the boat mentioned in the transcript.\" }",
+  "rulings": [
+    {
+      "span": "Ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": "Ladies and gentlemen",
+      "reasoning": "No need to change the word order as it is a common greeting phrase used in English."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": "and",
+      "reasoning": "No need to change the word order as it is a conjunction used to connect two statements."
+    },
+    {
+      "span": "crappie",
+      "verdict": "confirm",
+      "correction": "crappie",
+      "reasoning": "No need to change the word as it is the correct spelling of the word mentioned in the transcript."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "confirm",
+      "correction": "(nothing)",
+      "reasoning": "No need to change the word as it is a placeholder for a missing word or phrase in the transcript."
+    },
+    {
+      "span": "SS",
+      "verdict": "confirm",
+      "correction": "SS",
+      "reasoning": "No need to change the word as it is the correct abbreviation for the word 'submarine' mentioned in the transcript."
+    },
+    {
+      "span": "Tin",
+      "verdict": "confirm",
+      "correction": "Tin",
+      "reasoning": "No need to change the word as it is the correct abbreviation for the word 'tin' mentioned in the transcript."
+    },
+    {
+      "span": "3.0",
+      "verdict": "confirm",
+      "correction": "3.0",
+      "reasoning": "No need to change the number as it is the correct representation of the version number of the boat mentioned in the transcript."
+    }
+  ],
+  "parse_note": "recovered-objects",
+  "timed_out": false,
+  "demoted_to_escalate": 0,
+  "elapsed": 74.1
+}

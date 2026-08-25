@@ -1,0 +1,63 @@
+{
+  "judge": "qwen2-audio",
+  "model": "Qwen/Qwen2-Audio-7B-Instruct",
+  "passage": "c",
+  "witness_set": "W+YT",
+  "ablation": "withClip",
+  "quant": "8bit",
+  "prompt_chars": 10211,
+  "load_s": 96.5,
+  "raw": "Based on the information provided, the judge's ruling on the disputed clip would be:\n```json\n[\n    {\"span\": \"it monty\", \"verdict\": \"confirm\"},\n    {\"span\": \"funk\", \"verdict\": \"correct\"},\n    {\"span\": \"look at him\", \"verdict\": \"correct\"},\n    {\"span\": \"(nothing)\", \"verdict\": \"confirm\"},\n    {\"span\": \"it\", \"verdict\": \"correct\"},\n    {\"span\": \"(nothing)\", \"verdict\": \"confirm\"},\n    {\"span\": \"that\", \"verdict\": \"correct\"},\n    {\"span\": \"i'll\", \"verdict\": \"correct\"},\n    {\"span\": \"i'm\", \"verdict\": \"correct\"}\n]\n```\n\nThis ruling indicates that the original transcript is accurate and there are no errors. The judge has confirmed the word choices and sentence structure of the transcript, indicating that it accurately reflects what was said in the video.",
+  "rulings": [
+    {
+      "span": "it monty",
+      "verdict": "confirm"
+    },
+    {
+      "span": "funk",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "look at him",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "confirm"
+    },
+    {
+      "span": "it",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "confirm"
+    },
+    {
+      "span": "that",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "i'll",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "i'm",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    }
+  ],
+  "parse_note": null,
+  "timed_out": false,
+  "repair_attempted": true,
+  "raw_repair": "Based on the information provided, the judge's ruling on the disputed clip would be:\n```json\n[\n    {\"span\": \"it monty\", \"verdict\": \"confirm\"},\n    {\"span\": \"funk\", \"verdict\": \"correct\"},\n    {\"span\": \"look at him\", \"verdict\": \"correct\"},\n    {\"span\": \"(nothing)\", \"verdict\": \"confirm\"},\n    {\"span\": \"it\", \"verdict\": \"correct\"},\n    {\"span\": \"(nothing)\", \"verdict\": \"confirm\"},\n    {\"span\": \"that\", \"verdict\": \"correct\"},\n    {\"span\": \"i'll\", \"verdict\": \"correct\"},\n    {\"span\": \"i'm\", \"verdict\": \"correct\"}\n]\n```\n\nThis ruling indicates that the original transcript is accurate and there are no errors. The judge has confirmed the word choices and sentence structure of the transcript, indicating that it accurately reflects what was said in the video.",
+  "parse_note_repair": null,
+  "timed_out_repair": false,
+  "demoted_to_escalate": 6,
+  "elapsed": 84.9
+}

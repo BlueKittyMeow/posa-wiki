@@ -1,0 +1,16 @@
+{
+  "judge": "qwen2-audio",
+  "model": "Qwen/Qwen2-Audio-7B-Instruct",
+  "passage": "c",
+  "witness_set": "W+YT",
+  "ablation": "noClip",
+  "quant": "8bit",
+  "prompt_chars": 10211,
+  "load_s": 98.6,
+  "raw": "Based on the information provided, my ruling on this case would be to escalate the dispute on the following spans:\n\n  * \"it monty\" (context: ...get it monty say hi funk...) -> youtube heard \"ready get\"\n  * \"funk\" (context: ...monty say hi funk hi look at...) -> youtube heard \"punk\"\n  * \"look at him\" (context: ...hi funk hi look at him monty help him...) -> youtube heard \"we got a\"\n  * \"(nothing)\" (context: ...him see it go get it...) -> youtube heard \"come here buddy\"\n  * \"it\" (context: ...it go get it monty give me...) -> youtube heard \"him\"\n  * \"(nothing)\" (context: ...get it monty give me that...) -> youtube heard \"give me\"\n  * \"that\" (context: ...that give me that you little stinker...) -> youtube heard \"here\"\n  * \"i'll\" (context: ...it here monty i'll get you i'm...) -> youtube heard \"let me\"\n  * \"i'm\" (context: ...i'll get you i'm fine you can...) -> youtube heard \"(nothing)\"\n\nThese spans contain words that were not recognized by both witnesses, and therefore require further investigation to determine the correct reading. My ruling is to escalate these disputes so that a human can review the audio and make a final decision.",
+  "rulings": null,
+  "parse_note": "unparseable",
+  "timed_out": false,
+  "demoted_to_escalate": 0,
+  "elapsed": 60.4
+}

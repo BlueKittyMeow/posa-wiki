@@ -1,0 +1,16 @@
+{
+  "judge": "qwen2-audio",
+  "model": "Qwen/Qwen2-Audio-7B-Instruct",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "noClip",
+  "quant": "8bit",
+  "prompt_chars": 12010,
+  "load_s": 98.6,
+  "raw": "Based on the information provided, it appears that there are two conflicting witness statements regarding the number of crappies caught by the speaker. Witness 1 states that the speaker caught seven crappies, while witness 2 states that the speaker caught five crappies.\nGiven the conflicting testimony, it is difficult to determine the exact number of crappies caught by the speaker. However, it is clear that both witnesses agree that the speaker caught some crappies.\nIn light of this, my ruling is to confirm the existence of the crappies mentioned by the speaker, but to escalate the uncertainty surrounding the exact number of crappies caught.",
+  "rulings": null,
+  "parse_note": "unparseable",
+  "timed_out": false,
+  "demoted_to_escalate": 0,
+  "elapsed": 27.0
+}

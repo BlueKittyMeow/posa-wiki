@@ -1,0 +1,51 @@
+{
+  "judge": "qwen2-audio",
+  "model": "Qwen/Qwen2-Audio-7B-Instruct",
+  "passage": "c",
+  "witness_set": "W+YT",
+  "ablation": "withClip",
+  "prompt_chars": 10211,
+  "load_s": 45.8,
+  "raw": "Based on the information provided, the judge's ruling on the disputed clip would be:\n```json\n[\n    {\"span\": \"Funk.\", \"verdict\": \"confirm\"},\n    {\"span\": \"Monty\", \"verdict\": \"correct\"},\n    {\"span\": \"help him see it\", \"verdict\": \"correct\"},\n    {\"span\": \"go get him\", \"verdict\": \"correct\"},\n    {\"span\": \"give me that\", \"verdict\": \"correct\"},\n    {\"span\": \"you little stinker\", \"verdict\": \"correct\"},\n    {\"span\": \"I'll get you\", \"verdict\": \"correct\"},\n    {\"span\": \"I'm fine\", \"verdict\": \"correct\"},\n    {\"span\": \"You can have it\", \"verdict\": \"correct\"}\n]\n```\n\nThis ruling indicates that all of the disputed words in the clip were correctly transcribed, and there is no need for further investigation or escalation.",
+  "rulings": [
+    {
+      "span": "Funk.",
+      "verdict": "confirm"
+    },
+    {
+      "span": "Monty",
+      "verdict": "correct"
+    },
+    {
+      "span": "help him see it",
+      "verdict": "correct"
+    },
+    {
+      "span": "go get him",
+      "verdict": "correct"
+    },
+    {
+      "span": "give me that",
+      "verdict": "correct"
+    },
+    {
+      "span": "you little stinker",
+      "verdict": "correct"
+    },
+    {
+      "span": "I'll get you",
+      "verdict": "correct"
+    },
+    {
+      "span": "I'm fine",
+      "verdict": "correct"
+    },
+    {
+      "span": "You can have it",
+      "verdict": "correct"
+    }
+  ],
+  "parse_note": null,
+  "timed_out": false,
+  "elapsed": 199.0
+}

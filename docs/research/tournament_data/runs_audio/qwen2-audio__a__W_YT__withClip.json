@@ -1,0 +1,266 @@
+{
+  "judge": "qwen2-audio",
+  "model": "Qwen/Qwen2-Audio-7B-Instruct",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "withClip",
+  "quant": "8bit",
+  "prompt_chars": 10860,
+  "load_s": 96.5,
+  "raw": "[{'span': 'Ladies and gentlemen', 'verdict': 'confirm'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span': 'crappie', 'verdict': 'correct'}, {'span':",
+  "rulings": [
+    {
+      "span": "Ladies and gentlemen",
+      "verdict": "confirm"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    },
+    {
+      "span": "crappie",
+      "verdict": "escalate",
+      "_demoted": "correct-without-correction"
+    }
+  ],
+  "parse_note": "recovered-objects",
+  "timed_out": false,
+  "repair_attempted": true,
+  "raw_repair": "```json\n[\n    {\"span\": \"Ladies and gentlemen\", \"verdict\": \"confirm\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie\", \"ver",
+  "parse_note_repair": "recovered-objects",
+  "timed_out_repair": false,
+  "repair_used": true,
+  "demoted_to_escalate": 48,
+  "elapsed": 347.1
+}

@@ -1,0 +1,14 @@
+{
+  "judge": "qwen2-audio",
+  "model": "Qwen/Qwen2-Audio-7B-Instruct",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "withClip",
+  "prompt_chars": 12010,
+  "load_s": 45.8,
+  "raw": "{'span': 'crappies', 'verdict': 'confirm', 'correction': 'crappies', 'reasoning': \\\"The word 'crappies' appears multiple times in the transcript and is spelled correctly.\\\"}",
+  "rulings": null,
+  "parse_note": "unparseable",
+  "timed_out": false,
+  "elapsed": 55.4
+}

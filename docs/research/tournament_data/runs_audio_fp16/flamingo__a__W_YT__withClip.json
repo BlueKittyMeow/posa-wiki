@@ -1,0 +1,14 @@
+{
+  "judge": "flamingo",
+  "model": "nvidia/audio-flamingo-3-hf",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "withClip",
+  "prompt_chars": 10860,
+  "load_s": 45.4,
+  "raw": "[]",
+  "rulings": [],
+  "parse_note": null,
+  "timed_out": false,
+  "elapsed": 4.9
+}

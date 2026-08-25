@@ -1,0 +1,16 @@
+{
+  "judge": "flamingo",
+  "model": "nvidia/audio-flamingo-3-hf",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "withClip",
+  "quant": "8bit",
+  "prompt_chars": 12010,
+  "load_s": 95.8,
+  "raw": "[[], { \"for when\"  [context: ...for when I'm in by myself because it's just riding so high], \"youtube heard \"(nothing)\"], \"verdict\": \"correct\", \"correction\": \"for when I'm in by myself because it's just riding so high\", \"reasoning\": \"The transcript reading is correct as it stands.\"} , \"span\": \"because\"  [context: ...in by myself because it's just riding so high], \"youtube heard\": \"cuz,\" \"verdict\": \"correct\", \"correction\": \"because\", \"reasoning\": \"The transcript reading is correct as it stands.\"} , \"span\": \"gotta\"  [context: ...rock so I gotta be careful alright], \"youtube heard\": \"got to,\" \"verdict\": \"correct\", \"correction\": \"gotta\", \"reasoning\": \"The transcript reading is correct as it stands.\"} , \"span\": \"alright\"  [context: ...gotta be careful alright so I caught], \"youtube heard\": \"all right,\" \"verdict\": \"correct\", \"correction\": \"alright\", \"reasoning\": \"The transcript reading is correct as it stands.\"} , \"span\": \"ish\"  [context: ...like seven crappies ish i let one], \"youtube heard\": \"(nothing)\"], \"verdict\": \"correct\", \"correction\": \"ish\", \"reasoning\": \"The transcript reading is correct as it stands.\"} , \"span\": \"tea\"  [context: ...two go captain tea truck gave me], \"youtube heard\": \"(nothing)\"], \"verdict\": \"correct\", \"correction\": \"tea\", \"reasoning\": \"The transcript reading is correct as it stands.\"} , \"span\": \"was\"  [context: ...threw back there was some close ones], \"youtube heard\": \"are\", \"verdict\": \"correct\", \"correction\": \"was\", \"reasoning\": \"The transcript reading is correct as it stands.\"} , \"span\": \"blue gills\"  [context: ...but with the blue gills i like them], \"youtube heard\": \"bluegills\", \"verdict\": \"correct\", \"correction\": \"blue gills\", \"reasoning\": \"The transcript reading is correct as it stands.\"} , \"span\": \"small\"  [context: ...days you just small fish but man], \"youtube heard\": \"smaller\", \"verdict\": \"correct\", \"correction\": \"small\", \"reasoning\": \"The transcript reading is correct as it stands.\"} , \"span\": \"having it\"  [context: ...they just weren't having it], \"youtube heard\": \"(nothing)\"], \"verdict\": \"correct\", \"correction\": \"having it\", \"reasoning\": \"The transcript reading is correct as it stands.\"} , \"span\": \"it\"  [context: ...they just weren't having it], \"youtube heard\": \"it\", \"verdict\": \"correct\", \"correction\": \"it\", \"reasoning\": \"The transcript reading is correct as it stands.\"] }",
+  "rulings": [],
+  "parse_note": null,
+  "timed_out": false,
+  "demoted_to_escalate": 0,
+  "elapsed": 120.1
+}

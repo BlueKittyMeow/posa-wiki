@@ -79,6 +79,17 @@ def strip_think(t):
     return t.strip()
 
 
+def _loads(s):
+    """JSON first; fall back to a Python literal (models emit single-quoted
+    dicts often enough that failing on it would misreport a model as broken)."""
+    try:
+        return json.loads(s)
+    except Exception:
+        pass
+    import ast
+    return ast.literal_eval(s)
+
+
 def parse_rulings(text):
     """Best-effort extraction of the JSON array of rulings."""
     t = strip_think(text)
@@ -94,7 +105,7 @@ def parse_rulings(text):
                 depth -= 1
                 if depth == 0:
                     try:
-                        v = json.loads(t[start:i + 1])
+                        v = _loads(t[start:i + 1])
                         if isinstance(v, list):
                             return v, None
                     except Exception:
@@ -105,7 +116,9 @@ def parse_rulings(text):
     objs = []
     for m in re.finditer(r"\{[^{}]*\}", t):
         try:
-            objs.append(json.loads(m.group()))
+            o = _loads(m.group())
+            if isinstance(o, dict):
+                objs.append(o)
         except Exception:
             pass
     if objs:

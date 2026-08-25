@@ -1,0 +1,12 @@
+{
+  "judge": "flamingo",
+  "model": "nvidia/audio-flamingo-3-hf",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "withClip",
+  "prompt_chars": 12010,
+  "load_s": 45.9,
+  "error": "RuntimeError: Input type (float) and bias type (c10::Half) should be the same",
+  "rulings": null,
+  "elapsed": 0.0
+}

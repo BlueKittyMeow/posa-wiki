@@ -1,0 +1,13 @@
+{
+  "judge": "moss-thinking",
+  "model": "OpenMOSS-Team/MOSS-Audio-8B-Thinking",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "withClip",
+  "quant": "8bit",
+  "prompt_chars": 10860,
+  "load_s": 105.2,
+  "error": "RuntimeError: The size of tensor a (50) must match the size of tensor b (20) at non-singleton dimension 1",
+  "rulings": null,
+  "elapsed": 2.2
+}
