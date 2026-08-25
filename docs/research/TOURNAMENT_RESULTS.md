@@ -150,73 +150,82 @@ judge with a meaningfully negative overall WER Δ and 0 false corrections).
 
 
 
-## Ablation grid — partial (2 of 3 finalists complete)
+## Ablation grid — final
 
-`qwen3.5:35b-a3b` and `mistral-small3.2`, full grid: 3 passages x 3 witness sets
-x 5 packet variants, minus the two combinations that are undefined for a single
-witness (W has no disagreement flags, so `noFlags`/`bare` collapse into `full`).
-39 cells each, 78 total, **0 parse failures**. `qwen3.5:27b` is still running.
+Three finalists, grid = 3 passages x 3 witness sets x 5 packet variants, minus
+the two combinations undefined for a single witness (W has no disagreement
+flags, so `noFlags`/`bare` collapse into `full`). 39 cells per judge.
+
+**Coverage caveat:** `qwen3.5:27b` completed 20 of 39 cells (all of passage a,
+most of b). Its first attempt lost 31 cells to an SSH-tunnel drop, not to model
+failure — those were re-run, and the run was stopped at 20 to leave GPU time for
+the audio bracket. Its column below is therefore a smaller, passage-a-weighted
+sample and should not be compared head-to-head with the other two.
+98 usable cells, **0 parse failures** in the entire grid.
+
+### By judge (usable cells)
+
+| judge | n | score | WER Δ | errors fixed | pun | Teeny | Funk | false corr | null corr | escalations (on-hard) | parse fail | avg s |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| qwen3.5-27b | 20 | 2.42 | +0.042 | 6/20 | 11 | 6 | 0 | 6 | 13 | 3 (0) | 0 | 74.0 |
+| mistral-small3.2 | 39 | 2.28 | -0.004 | 18/39 | 4 | 7 | 10 | 17 | 9 | 111 (5) | 0 | 34.7 |
+| qwen3.5-35b-a3b | 39 | 1.81 | +0.040 | 16/39 | 10 | 7 | 8 | 26 | 12 | 135 (6) | 0 | 22.7 |
 
 ### By witness set
 
 | witness set | n | score | WER Δ | errors fixed | pun | Teeny | Funk | false corr | null corr | escalations (on-hard) | parse fail | avg s |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| W | 18 | 3.1 | -0.030 | 11/18 | 0 | 6 | 5 | 6 | 0 | 14 (0) | 0 | 15.4 |
-| W+YT | 30 | 2.33 | +0.036 | 14/30 | 7 | 6 | 8 | 16 | 13 | 73 (5) | 0 | 23.5 |
-| W+YT+P | 30 | 1.13 | +0.029 | 9/30 | 7 | 2 | 5 | 21 | 8 | 159 (6) | 0 | 41.9 |
+| W | 24 | 2.66 | -0.019 | 13/24 | 1 | 8 | 5 | 10 | 4 | 14 (0) | 0 | 23.9 |
+| W+YT | 39 | 2.6 | +0.035 | 18/39 | 12 | 10 | 8 | 17 | 18 | 76 (5) | 0 | 38.4 |
+| W+YT+P | 35 | 1.21 | +0.038 | 9/35 | 12 | 2 | 5 | 22 | 12 | 159 (6) | 0 | 47.1 |
 
 ### By packet ablation
 
 | packet | n | score | WER Δ | errors fixed | pun | Teeny | Funk | false corr | null corr | escalations (on-hard) | parse fail | avg s |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| noFlags | 12 | 3.29 | -0.015 | 8/12 | 3 | 3 | 4 | 7 | 5 | 17 (0) | 0 | 22.0 |
-| noLex | 18 | 3.02 | -0.024 | 10/18 | 2 | 5 | 5 | 6 | 2 | 53 (2) | 0 | 30.7 |
-| full | 18 | 2.73 | -0.018 | 9/18 | 3 | 4 | 5 | 7 | 1 | 78 (3) | 0 | 35.0 |
-| noStyle | 18 | 1.91 | +0.003 | 6/18 | 3 | 2 | 4 | 6 | 4 | 80 (6) | 0 | 30.3 |
-| bare | 12 | -1.5 | +0.190 | 1/12 | 3 | 0 | 0 | 17 | 9 | 18 (0) | 0 | 20.7 |
-
-### By judge
-
-| judge | n | score | WER Δ | errors fixed | pun | Teeny | Funk | false corr | null corr | escalations (on-hard) | parse fail | avg s |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| mistral-small3.2 | 39 | 2.28 | -0.004 | 18/39 | 4 | 7 | 10 | 17 | 9 | 111 (5) | 0 | 34.7 |
-| qwen3.5-35b-a3b | 39 | 1.81 | +0.040 | 16/39 | 10 | 7 | 8 | 26 | 12 | 135 (6) | 0 | 22.7 |
+| noFlags | 15 | 3.31 | -0.008 | 9/15 | 5 | 4 | 4 | 7 | 5 | 19 (0) | 0 | 26.1 |
+| noLex | 23 | 3.09 | -0.017 | 12/23 | 5 | 7 | 5 | 7 | 8 | 54 (2) | 0 | 41.3 |
+| full | 23 | 2.78 | -0.016 | 11/23 | 5 | 6 | 5 | 8 | 5 | 78 (3) | 0 | 47.5 |
+| noStyle | 23 | 1.6 | +0.027 | 7/23 | 5 | 3 | 4 | 10 | 7 | 80 (6) | 0 | 41.7 |
+| bare | 14 | -0.99 | +0.176 | 1/14 | 5 | 0 | 0 | 17 | 9 | 18 (0) | 0 | 23.2 |
 
 ### Reading the ablations
 
 **The style card earns its place.** `noStyle` is the worst non-degenerate
-variant: it fixes 6/18 hard errors where `full` fixes 9/18, at the same
-false-correction cost. Removing the register definition costs recall, exactly
-as the design predicted — the judge stops recognising that odd-sounding text
-can be right, and stops looking.
+variant: 7/23 hard errors fixed against `full`'s 11/23, at a *higher* false-
+correction count (10 vs 8). Removing the register definition costs recall
+exactly as the design predicted — the judge stops recognising that odd-sounding
+text can be right, and stops looking.
 
-**`bare` is a disaster and that is the useful result.** With no card, no
-lexicon and no flags: 1/12 errors fixed, 17 false corrections, WER **+0.190** —
-it actively damages the transcript. A judge handed a raw transcript and told to
-find errors will invent them. The packet is not decoration; it is what makes
-the difference between adjudication and vandalism.
+**`bare` is a disaster, and that is the most useful single result.** No card, no
+lexicon, no flags: 1/14 errors fixed, 17 false corrections, WER **+0.176** — it
+actively damages the transcript. A judge handed a raw transcript and told to
+find errors will invent them. The packet is not decoration; it is the difference
+between adjudication and vandalism.
 
-**More witnesses scored *worse*, which was not the expected result.**
-W 3.10 > W+YT 2.33 > W+YT+P 1.13, with false corrections rising 6 -> 16 -> 21
-and escalations 14 -> 73 -> 159. Two honest caveats before anyone acts on this:
+**More witnesses scored worse, and the reason is Parakeet.**
+W 2.66 ≈ W+YT 2.60 >> W+YT+P 1.21, with false corrections 10 -> 17 -> 22 and
+escalations 14 -> 76 -> 159. Two caveats before anyone acts on this:
 
-1. **My composite rewards inaction.** A W-only packet contains no disagreement
-   flags, so the judge has little to react to and mostly leaves the draft alone.
-   Under a metric that penalises false corrections heavily, silence scores well.
-   This is the same artefact that let `minicpm-v` place mid-table in screening.
-2. **The `funk` name-recovery column is not measuring recovery.** Whisper's
-   draft already reads "Funk", so any cell that leaves it alone scores a hit.
-   Only `errors fixed` (the dropped "Say hi") measures real work on passage c.
+1. **My composite rewards inaction.** A W-only packet has no disagreement flags,
+   so the judge has little to react to and mostly leaves the draft alone. Under
+   a metric that penalises false corrections heavily, silence scores well. This
+   is the same artefact that let `minicpm-v` place mid-table in screening.
+2. **The `funk` column is not measuring recovery.** Whisper's draft already
+   reads "Funk", so any cell that leaves it alone scores a hit.
 
-Corrected for that, the picture is subtler: W+YT fixes 14/30 hard errors against
-W's 11/18 — comparable rates — while W+YT+P drops to 9/30. **Parakeet is the
-problem.** It is the witness that shreds passages (ASR_SHOWDOWN §3 documents it
-inventing "Can you hear your little stinker"), and adding it gives the judge
-plausible-looking garbage to be seduced by. The third witness earns its keep on
-passage c and costs elsewhere.
+Correcting for both, the honest comparison is the **hard-error fix rate**:
+W 13/24 (54%), W+YT 18/39 (46%), W+YT+P 9/35 (26%). W+YT also recovers the
+nickname most often (10). W+YT+P collapses. Parakeet is the witness that shreds
+passages — ASR_SHOWDOWN §3 records it inventing "Can you hear your little
+stinker" — and adding it hands the judge confident garbage to be seduced by.
 
-**Flags are double-edged.** `noFlags` scores highest of all variants (3.29) and
-generates 17 escalations against `full`'s 78. Being shown every disagreement
-makes judges anxious and escalation-happy without improving the fix rate much
-(8/12 vs 9/18). Flags are worth keeping for *locating* work, but the escalation
-threshold needs to be a lot less twitchy than it currently is.
+**Flags are double-edged.** `noFlags` scores highest of all variants (3.31) with
+19 escalations against `full`'s 78, at a comparable fix rate (9/15 vs 11/23).
+Being shown every disagreement makes judges anxious and escalation-happy without
+buying much accuracy. Keep flags for *locating* work; the escalation threshold
+needs to be far less twitchy.
+
+**Escalation is not calibrated in any model.** 159 escalations at the full
+witness set, 6 of them on a genuinely hard span. Models escalate on disfluency —
+the one thing that is reliably *not* an error.
