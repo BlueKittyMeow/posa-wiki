@@ -120,10 +120,15 @@ def build(datadir, outdir):
         except Exception:
             al = [a.strip() for a in str(al).split(",") if a.strip()]
         people.append({"name": p["canonical_name"], "aliases": al})
+    # "Captain Teeny Trout" is Lucas's standing, cross-episode nickname (Lara,
+    # 2026-08-24) — i.e. legitimate entity-table content, not a hint planted for
+    # this test. It rides in the roster so the +/-lexicon ablation can measure
+    # whether having the alias is what lets a judge recover the name.
+    for p in people:
+        if p["name"] == "Lucas" and "Captain Teeny Trout" not in p["aliases"]:
+            p["aliases"] = list(p["aliases"]) + ["Captain Teeny Trout", "Teeny Trout"]
     roster = {
         "people": people,
-        # nickname used in this episode for the second angler; not a DB row
-        "nicknames_in_play": ["Captain Teeny Trout"],
         "dogs": [{"name": d["name"], "breed": d.get("breed_primary")} for d in fact["dogs"]],
         "domain_terms": ["crappie", "crappies", "bluegill", "bluegills", "gills",
                          "Boundary Waters", "steel eater", "SS Tin Can"],
