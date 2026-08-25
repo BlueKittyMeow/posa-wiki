@@ -61,3 +61,28 @@ nights facet → Whisper+Parakeet batch pipeline (signals 1–3 built in) →
 model tournament (MarshLair, after the E: reshuffle finishes — box is busy)
 → signal 4 wired with the winner → review dashboard → then CRUD (Phase 2B
 Step 3, explicitly next per Lara).
+
+## Amendments (Lara, 2026-08-24, round 2)
+
+**Court metaphor, to keep roles straight:** YouTube/Whisper/Parakeet are
+WITNESSES (independent transcripts; independence matters, brilliance doesn't).
+The text-LLM is the JUDGE (never transcribes; reads conflicting testimony +
+context and rules). An audio-capable LLM is the APPELLATE JUDGE (re-listens to
+the actual disputed clip when text-jurors deadlock). Lara is the supreme court.
+
+**Dashboard additions:** playback speed toggle (IFrame setPlaybackRate,
+0.25x–2x) and an A–B section loop (timer on getCurrentTime → seekTo(start))
+per flagged span — looping dog-chaos at 0.75x is how humans win.
+
+**Style card for the judge:** a validated "how Posa talks" doc in the
+adjudicator packet — speech patterns, domain lexicons (fishing incl.
+real-but-odd terms e.g. "steel eater"; camping/bushcraft; dog-directed
+speech), and the explicit instruction that HE MAKES PUNS AND SINGS —
+implausible is not evidence of error (the anti-crap-pie inoculation).
+Seeded from validated sections + Lara's descriptions; grows with validation.
+
+**Audio bracket in the tournament:** local audio-multimodal models that fit
+16 GB (Voxtral, Qwen2-Audio/Qwen2.5-Omni, Phi-4-multimodal, Gemma 3n) compete
+on the same blind passages WITH the audio clips. Winner becomes the appellate
+tier: flagged span → judge rules on text → deadlock → audio judge re-listens
+→ still unsure → human, with speed/loop controls waiting.
