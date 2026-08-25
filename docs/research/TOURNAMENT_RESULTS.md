@@ -229,3 +229,101 @@ needs to be far less twitchy.
 **Escalation is not calibrated in any model.** 159 escalations at the full
 witness set, 6 of them on a genuinely hard span. Models escalate on disfluency —
 the one thing that is reliably *not* an error.
+
+
+## Audio bracket (appellate judge)
+
+Entrants were restricted to models already fully present in `/mnt/d/ai/hf_cache`.
+Each was run in a fresh process, one at a time, `device_map="auto"` with a
+12 GiB GPU cap and CPU offload for the remainder.
+
+| Entrant | Status | Why |
+|---|---|---|
+| **Qwen2-Audio-7B-Instruct** | **partial — passage a only** | Ran. ~16 GB fp16 vs ~14.5 GB free VRAM, so the tail sits on CPU: 199 s for passage a (37 s clip), then >40 min on passage b (50 s clip) without completing. Stopped. |
+| MOSS-Audio-8B-Thinking | **not run** | Time. 17 GB, same offload penalty; ready to run. |
+| MOSS-Audio-8B-Instruct | **not run** | Time. 17 GB, ready to run. |
+| Audio Flamingo 3 | **not run** | Download completed late (33 GB, fp32 weights → ~17 GB half-precision). Never reached. |
+| Ultravox v0.6 | **skipped** | Only the 1.3 GB adapter is cached; `UltravoxModel` pulls Llama-3.1-8B at load, which is absent and gated. |
+| Voxtral Mini / Small-24B-Q4 | **skipped** | Not present in the cache at all. |
+| MOSS-Transcribe-Diarize, VibeVoice-ASR | **out of scope** | Witnesses, not judges (future witness eval). |
+
+### Does an audio judge get the pun DIRECTION right?
+
+**Unresolved — but the one data point is interesting.** Ground truth is
+"targeting some **crap pie**, also known as **crappie**". Qwen2-Audio, with the
+clip in hand, returned:
+
+```json
+{"span": "crappie, also known as crappie.", "verdict": "correct"}
+```
+
+It **localises the error precisely** — it is the only judge in the tournament to
+name that exact span as wrong without also churning unrelated text (5 rulings
+total, 3 of them `confirm`, no false corrections). But it **omitted the
+`correction` field entirely**, so it never states which side carries the joke.
+
+So the question the bracket exists to answer is still open. What we know:
+
+- From text alone, the good judges detect the pun and get the direction
+  **backwards** ("crappie, also known as crap-pie").
+- With audio, the one entrant that ran became *more* precise about where the
+  error is and *less* willing to assert a fix.
+
+That is consistent with audio helping localisation, and with the direction being
+genuinely hard. It is one cell from one model and must not be read as more.
+
+**Schema lesson for the pipeline:** the judge prompt must reject a `correct`
+verdict that carries no `correction`. Qwen2-Audio's output would have passed a
+naive parser and silently contributed nothing.
+
+## Production recommendation
+
+**Adjudicator:** `mistral-small3.2:24b` — highest hard-error fix rate across a
+complete grid (18/39), the only finalist with a negative overall WER Δ
+(-0.004), 7 nickname recoveries, and it never damaged the transcript.
+
+**Runner-up / fallback:** `qwen3.5:35b-a3b` — near-identical fix rate (16/39)
+at **35 % of the wall time** (22.7 s vs 34.7 s per cell) because it is MoE. If
+throughput matters more than the last few points of accuracy at batch scale,
+this is the pick. It is also the model that most often protected a crap/pie
+split (10 cells).
+
+`qwen3.5:27b` is not recommended: 74 s/cell for a fix rate no better than the
+alternatives, on an incomplete sample.
+
+**Witness set: Whisper + YouTube. Drop Parakeet from adjudication.**
+Fix rate 46 % (W+YT) vs 26 % (W+YT+P), with fewer false corrections and half the
+escalations. **Batch-cost implication: this removes the ~19 GPU-hour Parakeet
+pass from the pipeline budget entirely** — YouTube ASR is already ingested and
+free. The three-witness assumption in the design doc does not survive contact
+with the data. Caveat: passage c (dog chaos) is the one place the third witness
+demonstrably helped, so Parakeet may still be worth running *selectively* on
+spans Whisper flags as low-confidence.
+
+**Packet: style card + entity lexicon + flags, with a much higher escalation
+bar.** Never `bare`. The style card is load-bearing; the lexicon is what
+recovers nicknames; flags locate work but currently drive 10x over-escalation.
+
+## What remains untested
+
+- **The audio bracket is essentially unrun** — 1 of 3 passages on 1 of 4 viable
+  entrants. The pun-direction question is unanswered. MOSS-Audio-8B (both
+  variants) and Audio Flamingo 3 are downloaded and ready.
+- **The ±clip control never ran.** Every audio cell needs its `--no-audio` twin
+  to separate "the model heard it" from "the model is just a better reader".
+  Without that control the bracket cannot attribute anything to the audio.
+- **`qwen3.5:27b` grid is 20/39.**
+- **One video, three passages, chosen as hard cases.** n is tiny; the passages
+  were selected *because* the engines failed on them, so every number here is a
+  floor, not an average.
+- **The composite score is unvalidated.** I built it; it demonstrably rewards
+  abstention (two screening models placed mid-table by emitting ~1 ruling). The
+  per-metric columns — fix rate, false corrections — are more trustworthy than
+  the composite, and the production recommendation above is made on those.
+- **Scorer bugs were found by inspection, not by test.** Two were caught and
+  fixed mid-run (a regex where `crap[\s-]?pie` silently matched "crappie"; a
+  correction-applier that scrambled text when models emitted one-word spans).
+  There is no test suite; others may remain.
+- **marshlair-chat's qwen never entered** — unreachable on every probed port.
+- **No cheap-Claude-tier ceiling reference** was run, so there is no
+  upper bound to compare the local models against.
