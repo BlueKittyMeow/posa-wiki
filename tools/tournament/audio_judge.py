@@ -1,48 +1,58 @@
 #!/usr/bin/env python3
 """Audio bracket (appellate judge) — runs INSIDE WSL on MarshLair.
 
-Qwen2-Audio-7B-Instruct is the only audio-multimodal model fully present in
-/mnt/d/ai/hf_cache, so it is the only entrant. It receives the same sealed
-packet as the text judges, plus (optionally) the actual disputed clip.
+Entrants are limited to models already fully present in /mnt/d/ai/hf_cache.
+Each receives the same sealed packet as the text judges, plus (optionally) the
+actual disputed clip.
 
-Model is ~16 GB bf16 against ~14.8 GB of free VRAM, so it is loaded with
-device_map="auto" and a GPU cap, letting the tail of the model sit on CPU.
-One model at a time; the process exits (freeing VRAM) when done.
+Every entrant is ~16 GB bf16 against ~14.8 GB of free VRAM, so all are loaded
+with device_map="auto" and a GPU cap, letting the tail sit on CPU. ONE model at
+a time; the process exits (freeing VRAM) between entrants.
 
 Usage (in the lingbot-map conda env):
-  audio_judge.py <packetdir> <clipdir> <outdir> [--no-audio]
+  audio_judge.py <packetdir> <clipdir> <outdir> <entrant> [--no-audio]
+    entrant: qwen2-audio | moss-thinking | moss-instruct
 """
 import json, os, sys, time
 from pathlib import Path
 
 os.environ.setdefault("HF_HOME", "/mnt/d/ai/hf_cache")
 
+ENTRANTS = {
+    "qwen2-audio":   ("Qwen/Qwen2-Audio-7B-Instruct", False),
+    "moss-thinking": ("OpenMOSS-Team/MOSS-Audio-8B-Thinking", True),
+    "moss-instruct": ("OpenMOSS-Team/MOSS-Audio-8B-Instruct", True),
+}
 MODEL = "Qwen/Qwen2-Audio-7B-Instruct"
 
 
 def main():
     packetdir, clipdir, outdir = sys.argv[1], sys.argv[2], sys.argv[3]
+    entrant = sys.argv[4] if len(sys.argv) > 4 and not sys.argv[4].startswith("-") \
+        else "qwen2-audio"
+    model_id, remote = ENTRANTS[entrant]
     use_audio = "--no-audio" not in sys.argv
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from judge_prompt import build_prompt
 
     import librosa, torch
-    from transformers import AutoProcessor, Qwen2AudioForConditionalGeneration
+    from transformers import AutoProcessor, AutoModel, Qwen2AudioForConditionalGeneration
 
-    proc = AutoProcessor.from_pretrained(MODEL)
+    proc = AutoProcessor.from_pretrained(model_id, trust_remote_code=remote)
     t0 = time.time()
-    model = Qwen2AudioForConditionalGeneration.from_pretrained(
-        MODEL, dtype=torch.float16, device_map="auto",
-        max_memory={0: "12GiB", "cpu": "24GiB"})
+    cls = AutoModel if remote else Qwen2AudioForConditionalGeneration
+    model = cls.from_pretrained(
+        model_id, dtype=torch.float16, device_map="auto",
+        trust_remote_code=remote, max_memory={0: "12GiB", "cpu": "24GiB"})
     model.eval()
-    print(f"model loaded in {time.time()-t0:.1f}s", flush=True)
+    print(f"{entrant} loaded in {time.time()-t0:.1f}s", flush=True)
 
     out = Path(outdir); out.mkdir(parents=True, exist_ok=True)
     for pid in ["a", "b", "c"]:
         pk = json.loads((Path(packetdir) / f"{pid}__W_YT_P.json").read_text())
         prompt = build_prompt(pk, style=True, lex=True, flags=True)
         tag = "withClip" if use_audio else "noClip"
-        key = f"qwen2-audio__{pid}__W_YT_P__{tag}"
+        key = f"{entrant}__{pid}__W_YT_P__{tag}"
         if (out / f"{key}.json").exists():
             print("cached", key); continue
 
@@ -70,7 +80,7 @@ def main():
             gen = model.generate(**inputs, max_new_tokens=1200, do_sample=False)
         gen = gen[:, inputs["input_ids"].shape[1]:]
         raw = proc.batch_decode(gen, skip_special_tokens=True)[0]
-        rec = {"judge": "qwen2-audio", "model": MODEL, "passage": pid,
+        rec = {"judge": entrant, "model": model_id, "passage": pid,
                "witness_set": "W+YT+P", "ablation": tag, "raw": raw,
                "elapsed": round(time.time() - t1, 1)}
         (out / f"{key}.json").write_text(json.dumps(rec, indent=2))
