@@ -86,3 +86,25 @@ Seeded from validated sections + Lara's descriptions; grows with validation.
 on the same blind passages WITH the audio clips. Winner becomes the appellate
 tier: flagged span → judge rules on text → deadlock → audio judge re-listens
 → still unsure → human, with speed/loop controls waiting.
+
+## Tournament protocol: the adjudicator matrix (Lara, 2026-08-24, round 3)
+
+Not a single-winner bake-off — a full configuration matrix over the three
+human-validated passages (ASR_SHOWDOWN §7 ground truth, sealed from all
+contestants). Dimensions:
+
+- **Adjudicator**: each viable local text model (all ollama stores +
+  marshlair-chat stack) · each audio-capable model (audio bracket) ·
+  optionally one cheap Claude tier as ceiling reference.
+- **Witness set**: Whisper-only · Whisper+YouTube · Whisper+YouTube+Parakeet
+  (does the third witness actually help the judge?).
+- **Packet ablations**: ± style card · ± entity lexicon · ± disagreement
+  flags (vs raw transcript) · audio bracket: ± the actual clip.
+- **Passage**: a (pun) · b (nickname+counts) · c (dog chaos).
+
+Per-cell metrics: WER delta vs raw Whisper · name recovery · pun preservation
+· false-correction rate (heavily penalized) · escalation quality (flags the
+right spans as beyond-its-pay-grade). Output: a results grid + the chosen
+production config (model + packet + witness set), with the runner-up config
+recorded as fallback. Runs on MarshLair after the E: reshuffle completes;
+local models make the whole matrix ~free, just GPU-time.
