@@ -5,9 +5,12 @@ Its job is to define the register in which a transcript sentence is judged
 coherent, so that the coherence test never becomes a second smoothing pass
 (TRANSCRIPT_VERIFICATION_DESIGN, amendment round 4).*
 
-**Status:** v0, machine-drafted 2026-08-24 from validated evidence only
-(`POSAISM_EXAMPLES.md`, ASR_SHOWDOWN §3/§7 human transcriptions, wiki entity
-tables). Lara to edit — everything below is a candidate, not canon.
+**Status:** v1, 2026-08-24 — Lara's corrections applied (Funk is Matthew's
+partner; Captain Teeny Trout is a CONSISTENT nickname) and **decontaminated
+for evaluation use**: v0 quoted the tournament's test passages verbatim,
+handing judges the answer key. v1 keeps the principles and swaps examples to
+non-test validated material. Rule: this card must NEVER quote a span that is
+under active evaluation.
 
 **Provenance rule for growth:** a line only enters this card once the claim is
 backed by a human-validated transcript span or by Lara's direct description.
@@ -25,11 +28,11 @@ camera he treats as a companion, not an audience of strangers.
 
 ## 2. Register — the load-bearing facts
 
-**He makes puns, and the pun is usually the point.** Episode titles are puns
-and the pun gets said out loud in the episode. *Crap-Pie* (episode 15) is
-literally the crappie/crap-pie joke: "we are targeting some **crap pie**, also
-known as **crappie**." A transcript that renders both halves identically has
-destroyed the joke, not cleaned up an error.
+**He makes puns, and the pun is usually the point.** Episode titles are often
+puns, and the title pun typically gets said out loud in the episode — so the
+video's title is evidence about what he actually said. A transcript that
+flattens a title-pun into its ordinary homophone has destroyed the joke, not
+cleaned up an error.
 
 **He sings.** Original campfire songs, recurring and sequelised ("Chopping
 Wood", "Still Chopping Wood"). Sung lines are not transcription noise.
@@ -41,17 +44,19 @@ recurring deliberate deformation. Odd phonology is a stylistic signature.
 (a log). "The SS Tin Can 3.0" (a boat, versioned). Boats, logs, and gear get
 proper nouns and personalities.
 
-**He talks to his dog as a conversation partner**, mid-narration, without
-marking the switch: "Say hi, Funk. Hi. Hah. Go get it, Monty." Second-person
-imperatives and greetings addressed to a dog are normal sentences here, and
-they interleave with camera-directed narration at speed.
+**He talks to his dogs as conversation partners**, mid-narration, without
+marking the switch — second-person imperatives, greetings, and mock-scolding
+addressed to a dog are normal sentences here, and they interleave with
+camera-directed narration at speed. People present off-camera get addressed
+the same abrupt way.
 
 **He opens with "Ladies and gentlemen."** Formal-address openings into
 extremely informal content.
 
-**He interrupts and restarts himself constantly.** "I caught like… seven?
-crappies? ish?" — rising-uncertainty chains, self-hedging, and abandoned
-clauses are how he actually speaks. A transcript of him should NOT read like
+**He interrupts and restarts himself constantly.** Rising-uncertainty chains
+("...like… seven? ...ish?"), self-hedging, and abandoned clauses are how he
+actually speaks. Counts of anything are given hesitantly and revised
+mid-sentence. A transcript of him should NOT read like
 clean prose. Fluent, tidy sentences where the audio is messy are a symptom of
 ASR smoothing.
 
@@ -84,14 +89,17 @@ you're successful").
 ## 4. People and dogs
 
 - **Matthew Posa** — the speaker. Rarely names himself.
-- **Funk** — a real person (friend). ASR engines routinely hear "punk".
-  Human-validated: in the *Crap-Pie* dog-play passage he says "Say hi, **Funk**."
-- **Lucas, Erin, Jake, Ken**, and family (Mom, Dad, Brother) — recurring people.
+- **Funk** — Matthew's partner. A real person, present in many videos.
+- **Lucas** — recurring friend and fellow angler; his CONSISTENT standing
+  nickname is **"Captain Teeny Trout"** (also just "Teeny Trout"), used across
+  episodes — it is a stable entity alias, not a one-off joke. He has his own
+  channel (Teeny Trout).
+- **Erin, Jake, Ken**, and family (Mom, Dad, Brother) — recurring people.
 - **Monty**, **Rueger**, **Layla** — the dogs. Monty is the constant companion.
-- **Nicknames are invented on the fly and are not in any lexicon.** "Captain
-  Teeny Trout" is a whole-episode nickname for an unnamed second angler; all
-  three ASR engines render it wrong (Captain Trot / Captain Tea Truck /
-  Captain T Truck). Expect nicknames; expect ASR to fail on them.
+- **On-the-fly nicknames also happen** on top of the stable ones — expect
+  invented names for people, dogs, and objects, and expect ASR to mangle
+  names generally; check the entity roster (with aliases) before trusting any
+  engine's rendering of a name.
 
 ---
 
@@ -103,18 +111,17 @@ you're successful").
 > 1. **Implausible is not evidence of error.** This speaker puns, sings,
 >    mispronounces on purpose, names inanimate objects, and talks to his dog
 >    mid-sentence. A reading that sounds silly may be exactly right.
-> 2. **Never smooth wordplay.** If two witnesses disagree and one reading is a
+>  2. **Never smooth wordplay.** If witnesses disagree and one reading is a
 >    pun, a rhyme, or a deliberate mispronunciation that fits the episode title
 >    or the show's running jokes, that reading is *more* likely correct, not
->    less. Collapsing "crap pie, also known as crappie" into "crappie, also
->    known as crappie" is a transcription error, not a correction.
+>    less. The episode title is evidence: he says his title puns out loud.
 > 3. **Disfluency is signal.** Self-interruptions, "ish", trailing hedges, and
 >    repeated words are how he speaks. Do not delete them and do not repair
 >    them into grammatical sentences.
-> 4. **Coherence is judged inside his register.** A sentence must read as
+>  4. **Coherence is judged inside his register.** A sentence must read as
 >    something *this* man would plausibly have said aloud, including to a dog.
->    Genuine incoherence — a sentence no one would utter, e.g. "Give me Can you
->    hear your little stinker" — IS evidence of transcription error.
+>    Genuine incoherence — a word-salad sentence no human would utter in any
+>    register — IS evidence of transcription error.
 > 5. **When you cannot tell, escalate.** Guessing a plausible replacement for
 >    text that was already correct is the worst possible outcome. It is better
 >    to escalate ten spans than to invent one.
