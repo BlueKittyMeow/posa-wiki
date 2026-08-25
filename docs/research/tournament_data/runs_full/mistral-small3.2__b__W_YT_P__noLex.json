@@ -1,0 +1,157 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Context does not clearly support either reading.\"\n    },\n    {\n        \"span\": \"for when\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of hesitant and disfluent speech.\"\n    },\n    {\n        \"span\": \"because\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Both 'because' and 'cuz' are plausible in this context.\"\n    },\n    {\n        \"span\": \"and i might\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of self-interruptions and hesitant speech.\"\n    },\n    {\n        \"span\": \"gotta\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's casual and informal register.\"\n    },\n    {\n        \"span\": \"alright\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of abrupt transitions and informal speech.\"\n    },\n    {\n        \"span\": \"i caught\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of self-interruptions and hesitant speech.\"\n    },\n    {\n        \"span\": \"ish\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of hedging and uncertain speech.\"\n    },\n    {\n        \"span\": \"one or\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Both 'one or' and 'water' are plausible in this context.\"\n    },\n    {\n        \"span\": \"tea\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Both 'tea' and 't' are plausible, but 'Captain Tea Truck' is a consistent nickname.\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of abrupt transitions and informal speech.\"\n    },\n    {\n        \"span\": \"gills\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of naming objects and treating them as characters.\"\n    },\n    {\n        \"span\": \"there was\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of hesitant and disfluent speech.\"\n    },\n    {\n        \"span\": \"was\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Both 'was' and 'are' are plausible in this context.\"\n    },\n    {\n        \"span\": \"blue gills\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of naming objects and treating them as characters.\"\n    },\n    {\n        \"span\": \"like them\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of hesitant and disfluent speech.\"\n    },\n    {\n        \"span\": \"i\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of hesitant and disfluent speech.\"\n    },\n    {\n        \"span\": \"let them\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of hesitant and disfluent speech.\"\n    },\n    {\n        \"span\": \"unless\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of hesitant and disfluent speech.\"\n    },\n    {\n        \"span\": \"you\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Both 'you' and 'it's' are plausible in this context.\"\n    },\n    {\n        \"span\": \"small\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of hesitant and disfluent speech.\"\n    },\n    {\n        \"span\": \"like\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of hesitant and disfluent speech.\"\n    },\n    {\n        \"span\": \"having it\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of hesitant and disfluent speech.\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Both readings are plausible in this context.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Context does not clearly support either reading."
+    },
+    {
+      "span": "for when",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of hesitant and disfluent speech."
+    },
+    {
+      "span": "because",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'because' and 'cuz' are plausible in this context."
+    },
+    {
+      "span": "and i might",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of self-interruptions and hesitant speech."
+    },
+    {
+      "span": "gotta",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's casual and informal register."
+    },
+    {
+      "span": "alright",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of abrupt transitions and informal speech."
+    },
+    {
+      "span": "i caught",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of self-interruptions and hesitant speech."
+    },
+    {
+      "span": "ish",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of hedging and uncertain speech."
+    },
+    {
+      "span": "one or",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'one or' and 'water' are plausible in this context."
+    },
+    {
+      "span": "tea",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'tea' and 't' are plausible, but 'Captain Tea Truck' is a consistent nickname."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of abrupt transitions and informal speech."
+    },
+    {
+      "span": "gills",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of naming objects and treating them as characters."
+    },
+    {
+      "span": "there was",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of hesitant and disfluent speech."
+    },
+    {
+      "span": "was",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'was' and 'are' are plausible in this context."
+    },
+    {
+      "span": "blue gills",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of naming objects and treating them as characters."
+    },
+    {
+      "span": "like them",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of hesitant and disfluent speech."
+    },
+    {
+      "span": "i",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of hesitant and disfluent speech."
+    },
+    {
+      "span": "let them",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of hesitant and disfluent speech."
+    },
+    {
+      "span": "unless",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of hesitant and disfluent speech."
+    },
+    {
+      "span": "you",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'you' and 'it's' are plausible in this context."
+    },
+    {
+      "span": "small",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of hesitant and disfluent speech."
+    },
+    {
+      "span": "like",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of hesitant and disfluent speech."
+    },
+    {
+      "span": "having it",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of hesitant and disfluent speech."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both readings are plausible in this context."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 88.1,
+  "prompt_chars": 13964,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "b",
+  "witness_set": "W+YT+P",
+  "ablation": "noLex"
+}

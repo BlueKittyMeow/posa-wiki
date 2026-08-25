@@ -1,0 +1,55 @@
+{
+  "raw": "[\n  {\n    \"span\": \"ladies and gentlemen\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Style card confirms this is a recurring formal-address opening signature of the speaker.\"\n  },\n  {\n    \"span\": \"and\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The conjunction is required for the parallel structure of the show's tagline puns.\"\n  },\n  {\n    \"span\": \"crappie\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The episode title pun 'Crap-Pie' must be vocalized; 'crap high' is a phonetic mishearing of the intended wordplay.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The phrase 'also known as crap-pie' is the necessary completion of the title pun that YouTube missed.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Disagreement exists between 'I think I'm gonna have to tilt' and 'She's running a little rough'; the speaker may be describing the boat's state before or after tilting.\"\n  },\n  {\n    \"span\": \"gonna\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Disfluency and informal contractions like 'gonna' are characteristic of this speaker's register.\"\n  },\n  {\n    \"span\": \"there's one\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Conflicting readings between 'There's one reason' and 'for some reason'; both are plausible but the audio is ambiguous.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Style card confirms this is a recurring formal-address opening signature of the speaker."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The conjunction is required for the parallel structure of the show's tagline puns."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The episode title pun 'Crap-Pie' must be vocalized; 'crap high' is a phonetic mishearing of the intended wordplay."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The phrase 'also known as crap-pie' is the necessary completion of the title pun that YouTube missed."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Disagreement exists between 'I think I'm gonna have to tilt' and 'She's running a little rough'; the speaker may be describing the boat's state before or after tilting."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Disfluency and informal contractions like 'gonna' are characteristic of this speaker's register."
+    },
+    {
+      "span": "there's one",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Conflicting readings between 'There's one reason' and 'for some reason'; both are plausible but the audio is ambiguous."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 20.8,
+  "prompt_chars": 10315,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "noLex"
+}

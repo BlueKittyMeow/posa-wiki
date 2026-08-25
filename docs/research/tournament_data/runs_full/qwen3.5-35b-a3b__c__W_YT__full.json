@@ -1,0 +1,67 @@
+{
+  "raw": "[{\"span\": \"it monty\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The speaker is addressing the dog Monty directly with a command, consistent with his style of talking to dogs.\"}, {\"span\": \"funk\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 hears 'Funk' (Matthew's partner) while Witness 2 hears 'punk'; without audio, it is impossible to distinguish between a name drop and a mispronounced exclamation.\"}, {\"span\": \"look at him\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 hears 'look at him' while Witness 2 hears 'we got a'; both are plausible in this context but the phonetic similarity makes them indistinguishable without listening.\"}, {\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 2 inserts 'come here buddy' which is absent in Witness 1; this could be a genuine interjection or ASR hallucination.\"}, {\"span\": \"it\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The command 'Go get it Monty' fits the context of playing with an object and aligns with the speaker's direct address style.\"}, {\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 2 inserts 'give me' which is absent in Witness 1; this could be a stutter or repetition that was missed by one system.\"}, {\"span\": \"that\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The phrase 'Give me that' is a standard command for an object and fits the flow better than the alternative 'here' in this specific context.\"}, {\"span\": \"i'll\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 hears 'I'll get you' while Witness 2 hears 'Let me get you'; both are semantically identical and phonetically similar, making a definitive ruling impossible without audio.\"}, {\"span\": \"i'm\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 hears 'I'm fine' while Witness 2 hears nothing; the presence of this self-correction or statement is ambiguous.\"}]",
+  "rulings": [
+    {
+      "span": "it monty",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The speaker is addressing the dog Monty directly with a command, consistent with his style of talking to dogs."
+    },
+    {
+      "span": "funk",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'Funk' (Matthew's partner) while Witness 2 hears 'punk'; without audio, it is impossible to distinguish between a name drop and a mispronounced exclamation."
+    },
+    {
+      "span": "look at him",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'look at him' while Witness 2 hears 'we got a'; both are plausible in this context but the phonetic similarity makes them indistinguishable without listening."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 inserts 'come here buddy' which is absent in Witness 1; this could be a genuine interjection or ASR hallucination."
+    },
+    {
+      "span": "it",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The command 'Go get it Monty' fits the context of playing with an object and aligns with the speaker's direct address style."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 inserts 'give me' which is absent in Witness 1; this could be a stutter or repetition that was missed by one system."
+    },
+    {
+      "span": "that",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The phrase 'Give me that' is a standard command for an object and fits the flow better than the alternative 'here' in this specific context."
+    },
+    {
+      "span": "i'll",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'I'll get you' while Witness 2 hears 'Let me get you'; both are semantically identical and phonetically similar, making a definitive ruling impossible without audio."
+    },
+    {
+      "span": "i'm",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'I'm fine' while Witness 2 hears nothing; the presence of this self-correction or statement is ambiguous."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 20.6,
+  "prompt_chars": 10211,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "c",
+  "witness_set": "W+YT",
+  "ablation": "full"
+}

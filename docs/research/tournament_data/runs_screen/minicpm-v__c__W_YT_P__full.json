@@ -1,0 +1,18 @@
+{
+  "raw": "{\n  \"span\": \"Get it Monty. Say hi Funk. Hi. Look at him Monty. Help him see it. Go get it Monty. Give me that. Give me that. You little stinker. Give me that. He's like, no. He won't give it to me. Give it here. Monty. I'll get you. I'm fine. You can have it.\",\n  \"verdict\": \"confirm\",\n  \"reasoning\": \"The draft reading is consistent with the context and the entities mentioned in the transcript. The sentence is coherent and fits the speaker's style.\"\n}",
+  "rulings": [
+    {
+      "span": "Get it Monty. Say hi Funk. Hi. Look at him Monty. Help him see it. Go get it Monty. Give me that. Give me that. You little stinker. Give me that. He's like, no. He won't give it to me. Give it here. Monty. I'll get you. I'm fine. You can have it.",
+      "verdict": "confirm",
+      "reasoning": "The draft reading is consistent with the context and the entities mentioned in the transcript. The sentence is coherent and fits the speaker's style."
+    }
+  ],
+  "parse_note": "recovered-objects",
+  "elapsed": 1.6,
+  "prompt_chars": 11521,
+  "judge": "minicpm-v",
+  "model": "minicpm-v:latest",
+  "passage": "c",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

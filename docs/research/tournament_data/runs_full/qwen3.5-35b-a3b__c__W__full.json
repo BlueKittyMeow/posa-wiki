@@ -1,0 +1,37 @@
+{
+  "raw": "[{\"span\": \"Say hi Funk\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Funk is a recurring partner and the speaker addresses him directly as per style card.\"}, {\"span\": \"Look at him Monty\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Low confidence on 'him' (0.296); could be 'Look at that Monty' or a specific object reference given the dog play context.\"}, {\"span\": \"Help him see it\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"High uncertainty on 'Help' and 'him'; likely a misheard imperative to the dog like 'Hold it' or 'Get it' given the rapid utterances of play.\"}, {\"span\": \"He's like, no\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Speaker rarely uses third-person narration for his own dog mid-play; likely a misheard direct address to Monty or a sound effect.\"}]",
+  "rulings": [
+    {
+      "span": "Say hi Funk",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Funk is a recurring partner and the speaker addresses him directly as per style card."
+    },
+    {
+      "span": "Look at him Monty",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Low confidence on 'him' (0.296); could be 'Look at that Monty' or a specific object reference given the dog play context."
+    },
+    {
+      "span": "Help him see it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "High uncertainty on 'Help' and 'him'; likely a misheard imperative to the dog like 'Hold it' or 'Get it' given the rapid utterances of play."
+    },
+    {
+      "span": "He's like, no",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Speaker rarely uses third-person narration for his own dog mid-play; likely a misheard direct address to Monty or a sound effect."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 12.0,
+  "prompt_chars": 8991,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "c",
+  "witness_set": "W",
+  "ablation": "full"
+}

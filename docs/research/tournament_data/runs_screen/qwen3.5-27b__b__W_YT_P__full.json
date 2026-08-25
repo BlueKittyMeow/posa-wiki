@@ -1,0 +1,43 @@
+{
+  "raw": "[\n  {\n    \"span\": \"for when I'm in by myself because it's just riding so high. I do have the motor tilted up a little bit because it's really shallow right here and i might last time I came through here I dinged a rock so I gotta be careful.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"for when I'm in by myself because it's just riding so high. I do have the motor tilted up a little bit because it's really shallow right here. Last time I came through here I dinged a rock so I gotta be careful.\",\n    \"reasoning\": \"The phrase 'and i might' is a clear ASR hallucination bridging two distinct thoughts; removing it restores the speaker's characteristic abrupt transition and self-correction style without smoothing.\"\n  },\n  {\n    \"span\": \"Alright, so I caught I caught like seven crappies ish. I let one or two go.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The repetition of 'I caught' and the hedge 'ish' are signature disfluencies for this speaker; Parakeet's 'it's kind of' and 'water' are likely misinterpretations of mumbled speech.\"\n  },\n  {\n    \"span\": \"Uh, Captain Tea Truck gave me one, then I got some five nice gills.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Uh, Captain Teeny Trout gave me one, then I got some five nice gills.\",\n    \"reasoning\": \"'Tea Truck' is a phonetic error for the canonical nickname 'Captain Teeny Trout' (Lucas), which is explicitly listed in the entity roster and style card as a consistent alias.\"\n  },\n  {\n    \"span\": \"Bunch of little gills that I threw back. There was some close ones, but with the blue gills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish, but man I could see like right at the end there I saw so many crappies like big fat crappies and they just did not care. Like one or two of them would like excitedly swim towards my jig, but they just weren't having it.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Bunch of little gills that I threw back. There were some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just get small fish, but man I could see like right at the end there I saw so many crappies like big fat crappies and they just did not care. Like one or two of them would like excitedly swim towards my jig, but they just weren't having it.\",\n    \"reasoning\": \"'Bluegills' is the standard spelling for the fish; 'there was' corrected to 'there were' for grammatical agreement with plural 'ones'; 'you just small fish' likely implies a missing verb like 'get' or 'catch' which fits the speaker's elliptical style, but 'smaller' (from YouTube) is also plausible; however, the core meaning remains intact in the draft, so only minor orthographic fixes are applied to standardize terms.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Parakeet hears a significant addition ('and we should have had some minnows...') at the end of the clip that Whisper and YouTube miss entirely; this requires human audio verification to determine if it was spoken or an ASR hallucination.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "for when I'm in by myself because it's just riding so high. I do have the motor tilted up a little bit because it's really shallow right here and i might last time I came through here I dinged a rock so I gotta be careful.",
+      "verdict": "correct",
+      "correction": "for when I'm in by myself because it's just riding so high. I do have the motor tilted up a little bit because it's really shallow right here. Last time I came through here I dinged a rock so I gotta be careful.",
+      "reasoning": "The phrase 'and i might' is a clear ASR hallucination bridging two distinct thoughts; removing it restores the speaker's characteristic abrupt transition and self-correction style without smoothing."
+    },
+    {
+      "span": "Alright, so I caught I caught like seven crappies ish. I let one or two go.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The repetition of 'I caught' and the hedge 'ish' are signature disfluencies for this speaker; Parakeet's 'it's kind of' and 'water' are likely misinterpretations of mumbled speech."
+    },
+    {
+      "span": "Uh, Captain Tea Truck gave me one, then I got some five nice gills.",
+      "verdict": "correct",
+      "correction": "Uh, Captain Teeny Trout gave me one, then I got some five nice gills.",
+      "reasoning": "'Tea Truck' is a phonetic error for the canonical nickname 'Captain Teeny Trout' (Lucas), which is explicitly listed in the entity roster and style card as a consistent alias."
+    },
+    {
+      "span": "Bunch of little gills that I threw back. There was some close ones, but with the blue gills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish, but man I could see like right at the end there I saw so many crappies like big fat crappies and they just did not care. Like one or two of them would like excitedly swim towards my jig, but they just weren't having it.",
+      "verdict": "correct",
+      "correction": "Bunch of little gills that I threw back. There were some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just get small fish, but man I could see like right at the end there I saw so many crappies like big fat crappies and they just did not care. Like one or two of them would like excitedly swim towards my jig, but they just weren't having it.",
+      "reasoning": "'Bluegills' is the standard spelling for the fish; 'there was' corrected to 'there were' for grammatical agreement with plural 'ones'; 'you just small fish' likely implies a missing verb like 'get' or 'catch' which fits the speaker's elliptical style, but 'smaller' (from YouTube) is also plausible; however, the core meaning remains intact in the draft, so only minor orthographic fixes are applied to standardize terms."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Parakeet hears a significant addition ('and we should have had some minnows...') at the end of the clip that Whisper and YouTube miss entirely; this requires human audio verification to determine if it was spoken or an ASR hallucination."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 131.8,
+  "prompt_chars": 14509,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "b",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

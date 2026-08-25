@@ -1,0 +1,43 @@
+{
+  "raw": "[{\"span\": \"Say hi Funk\", \"verdict\": \"correct\", \"correction\": \"Say hi, Rueger\", \"reasoning\": \"Funk is a human name in the roster but Rueger is a dog; context of 'Get it Monty' and dog play implies addressing another dog.\"}, {\"span\": \"Look at him Monty\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Low confidence on 'Look' (0.124); could be 'Look at him', 'Look at it', or a different verb entirely given the chaotic dog play context.\"}, {\"span\": \"Help him see it\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Low confidence on 'Help' (0.173) and 'him' (0.296); in rapid dog play, this is likely a misheard phrase like 'He's trying to get it' or similar.\"}, {\"span\": \"You little stinker\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Low confidence on 'You' (0.443); could be 'Little stinker' without the pronoun, or a different descriptor like 'little rascal'.\"}, {\"span\": \"He's like, no\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Low confidence on 'He' (0.502); in overlapping dog play, this could be 'No', 'Hey', or a different subject entirely.\"}]",
+  "rulings": [
+    {
+      "span": "Say hi Funk",
+      "verdict": "correct",
+      "correction": "Say hi, Rueger",
+      "reasoning": "Funk is a human name in the roster but Rueger is a dog; context of 'Get it Monty' and dog play implies addressing another dog."
+    },
+    {
+      "span": "Look at him Monty",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Low confidence on 'Look' (0.124); could be 'Look at him', 'Look at it', or a different verb entirely given the chaotic dog play context."
+    },
+    {
+      "span": "Help him see it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Low confidence on 'Help' (0.173) and 'him' (0.296); in rapid dog play, this is likely a misheard phrase like 'He's trying to get it' or similar."
+    },
+    {
+      "span": "You little stinker",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Low confidence on 'You' (0.443); could be 'Little stinker' without the pronoun, or a different descriptor like 'little rascal'."
+    },
+    {
+      "span": "He's like, no",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Low confidence on 'He' (0.502); in overlapping dog play, this could be 'No', 'Hey', or a different subject entirely."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 12.9,
+  "prompt_chars": 3000,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "c",
+  "witness_set": "W",
+  "ablation": "noStyle"
+}

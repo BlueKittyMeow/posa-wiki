@@ -1,0 +1,73 @@
+{
+  "raw": "[\n  {\n    \"span\": \"for when\",\n    \"verdict\": \"correct\",\n    \"correction\": \"I'm in by myself because it's just riding so high.\",\n    \"reasoning\": \"The phrase 'for when' is a transcription error for the start of the sentence 'I'm in by myself', as confirmed by Witness 2 and context.\"\n  },\n  {\n    \"span\": \"because\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'because' and 'cuz' are valid representations of the spoken word; the draft's full spelling is acceptable for a formal transcript.\"\n  },\n  {\n    \"span\": \"gotta\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Gotta' is the standard orthographic representation of the spoken contraction 'got to' in this context.\"\n  },\n  {\n    \"span\": \"alright\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'alright' and 'all right' are correct spellings; the draft's single-word form is standard.\"\n  },\n  {\n    \"span\": \"ish\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 1 hears 'ish' (low confidence) while Witness 2 hears nothing; the speaker likely said 'like seven crappies' or 'seven crappies ish', requiring audio verification.\"\n  },\n  {\n    \"span\": \"tea\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"'Captain Tea Truck' is nonsensical; the speaker likely said 'Captain Teeny Trout' or 'Teeny Trout', but the exact phonetic error requires audio verification.\"\n  },\n  {\n    \"span\": \"was\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 1 hears 'was' while Witness 2 hears 'are'; both are grammatically possible but phonetically distinct, requiring audio verification.\"\n  },\n  {\n    \"span\": \"blue gills\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The speaker likely said the two words 'blue gills' or the compound 'bluegills'; both spellings are acceptable representations of the speech.\"\n  },\n  {\n    \"span\": \"small\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 1 hears 'small' while Witness 2 hears 'smaller'; the comparative form is more likely in context but requires audio verification.\"\n  },\n  {\n    \"span\": \"having it\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 1 hears 'having it' while Witness 2 hears nothing; the sentence likely ends abruptly or with a different word, requiring audio verification.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "for when",
+      "verdict": "correct",
+      "correction": "I'm in by myself because it's just riding so high.",
+      "reasoning": "The phrase 'for when' is a transcription error for the start of the sentence 'I'm in by myself', as confirmed by Witness 2 and context."
+    },
+    {
+      "span": "because",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Both 'because' and 'cuz' are valid representations of the spoken word; the draft's full spelling is acceptable for a formal transcript."
+    },
+    {
+      "span": "gotta",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Gotta' is the standard orthographic representation of the spoken contraction 'got to' in this context."
+    },
+    {
+      "span": "alright",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Both 'alright' and 'all right' are correct spellings; the draft's single-word form is standard."
+    },
+    {
+      "span": "ish",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'ish' (low confidence) while Witness 2 hears nothing; the speaker likely said 'like seven crappies' or 'seven crappies ish', requiring audio verification."
+    },
+    {
+      "span": "tea",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "'Captain Tea Truck' is nonsensical; the speaker likely said 'Captain Teeny Trout' or 'Teeny Trout', but the exact phonetic error requires audio verification."
+    },
+    {
+      "span": "was",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'was' while Witness 2 hears 'are'; both are grammatically possible but phonetically distinct, requiring audio verification."
+    },
+    {
+      "span": "blue gills",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The speaker likely said the two words 'blue gills' or the compound 'bluegills'; both spellings are acceptable representations of the speech."
+    },
+    {
+      "span": "small",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'small' while Witness 2 hears 'smaller'; the comparative form is more likely in context but requires audio verification."
+    },
+    {
+      "span": "having it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'having it' while Witness 2 hears nothing; the sentence likely ends abruptly or with a different word, requiring audio verification."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 22.5,
+  "prompt_chars": 6019,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "noStyle"
+}

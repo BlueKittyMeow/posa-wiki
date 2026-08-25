@@ -1,0 +1,73 @@
+{
+  "raw": "```json\n[\n  {\n    \"span\": \"for when\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Fits the speaker's style of abrupt, disfluent phrasing.\"\n  },\n  {\n    \"span\": \"because\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Common contraction in casual speech, consistent with the speaker's register.\"\n  },\n  {\n    \"span\": \"gotta\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Common contraction in casual speech, consistent with the speaker's register.\"\n  },\n  {\n    \"span\": \"alright\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Fits the speaker's style of abrupt transitions and informal language.\"\n  },\n  {\n    \"span\": \"ish\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Fits the speaker's style of hesitant, uncertain phrasing.\"\n  },\n  {\n    \"span\": \"tea\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Uh, Captain Teeny Trout gave me one, then I got some five nice gills.\",\n    \"reasoning\": \"Consistent with the stable nickname 'Captain Teeny Trout' for Lucas.\"\n  },\n  {\n    \"span\": \"was\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Fits the speaker's style of past-tense narration.\"\n  },\n  {\n    \"span\": \"blue gills\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Consistent with the speaker's style of naming and treating objects as characters.\"\n  },\n  {\n    \"span\": \"small\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Fits the speaker's style of abrupt, disfluent phrasing.\"\n  },\n  {\n    \"span\": \"having it\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Fits the speaker's style of informal, conversational language.\"\n  }\n]\n```",
+  "rulings": [
+    {
+      "span": "for when",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of abrupt, disfluent phrasing."
+    },
+    {
+      "span": "because",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Common contraction in casual speech, consistent with the speaker's register."
+    },
+    {
+      "span": "gotta",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Common contraction in casual speech, consistent with the speaker's register."
+    },
+    {
+      "span": "alright",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of abrupt transitions and informal language."
+    },
+    {
+      "span": "ish",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of hesitant, uncertain phrasing."
+    },
+    {
+      "span": "tea",
+      "verdict": "correct",
+      "correction": "Uh, Captain Teeny Trout gave me one, then I got some five nice gills.",
+      "reasoning": "Consistent with the stable nickname 'Captain Teeny Trout' for Lucas."
+    },
+    {
+      "span": "was",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of past-tense narration."
+    },
+    {
+      "span": "blue gills",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Consistent with the speaker's style of naming and treating objects as characters."
+    },
+    {
+      "span": "small",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of abrupt, disfluent phrasing."
+    },
+    {
+      "span": "having it",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of informal, conversational language."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 36.6,
+  "prompt_chars": 11465,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "noLex"
+}

@@ -1,0 +1,85 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"Get it Monty.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear if 'Get it' is accurate or if it should be 'Get ready' as per Witness 2.\"\n    },\n    {\n        \"span\": \"Say hi Funk.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Witness 2 says 'Say hi, punk.' and Witness 3 says 'Say hi punk.' Unclear if 'Funk' is correct.\"\n    },\n    {\n        \"span\": \"Look at him Monty.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Witness 2 says 'We got a Monty.' and Witness 3 says 'Monty.' Unclear if 'Look at him' is accurate.\"\n    },\n    {\n        \"span\": \"Help him see it.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Witness 2 says 'Help him see it.' and Witness 3 says 'Help them see it.' Unclear if 'him' is correct.\"\n    },\n    {\n        \"span\": \"Go get it Monty.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Witness 2 says 'Go get him, Monty.' Unclear if 'it' is accurate.\"\n    },\n    {\n        \"span\": \"Give me that. Give me that.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Repetition is consistent with the speaker's style of rapid, overlapping utterances.\"\n    },\n    {\n        \"span\": \"You little stinker.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Consistent with the speaker's style of talking to his dog and using playful language.\"\n    },\n    {\n        \"span\": \"He's like, no. He won't give it to me.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Consistent with the speaker's style of imitating his dog's actions and using disfluencies.\"\n    },\n    {\n        \"span\": \"Give it here. Monty.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Witness 2 says 'Give it here, Monty.' and Witness 3 says 'it here.' Unclear if 'Give it here' is accurate.\"\n    },\n    {\n        \"span\": \"I'll get you.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Witness 2 says 'Let me get you.' and Witness 3 says 'Ooh. Yeah.' Unclear if 'I'll get you' is accurate.\"\n    },\n    {\n        \"span\": \"I'm fine.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Witness 2 says 'Oh, fine.' and Witness 3 says 'Oh, you can have it.' Unclear if 'I'm fine' is accurate.\"\n    },\n    {\n        \"span\": \"You can have it.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Consistent with the speaker's style of talking to his dog and using playful language.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "Get it Monty.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'Get it' is accurate or if it should be 'Get ready' as per Witness 2."
+    },
+    {
+      "span": "Say hi Funk.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 says 'Say hi, punk.' and Witness 3 says 'Say hi punk.' Unclear if 'Funk' is correct."
+    },
+    {
+      "span": "Look at him Monty.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 says 'We got a Monty.' and Witness 3 says 'Monty.' Unclear if 'Look at him' is accurate."
+    },
+    {
+      "span": "Help him see it.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 says 'Help him see it.' and Witness 3 says 'Help them see it.' Unclear if 'him' is correct."
+    },
+    {
+      "span": "Go get it Monty.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 says 'Go get him, Monty.' Unclear if 'it' is accurate."
+    },
+    {
+      "span": "Give me that. Give me that.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Repetition is consistent with the speaker's style of rapid, overlapping utterances."
+    },
+    {
+      "span": "You little stinker.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Consistent with the speaker's style of talking to his dog and using playful language."
+    },
+    {
+      "span": "He's like, no. He won't give it to me.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Consistent with the speaker's style of imitating his dog's actions and using disfluencies."
+    },
+    {
+      "span": "Give it here. Monty.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 says 'Give it here, Monty.' and Witness 3 says 'it here.' Unclear if 'Give it here' is accurate."
+    },
+    {
+      "span": "I'll get you.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 says 'Let me get you.' and Witness 3 says 'Ooh. Yeah.' Unclear if 'I'll get you' is accurate."
+    },
+    {
+      "span": "I'm fine.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 says 'Oh, fine.' and Witness 3 says 'Oh, you can have it.' Unclear if 'I'm fine' is accurate."
+    },
+    {
+      "span": "You can have it.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Consistent with the speaker's style of talking to his dog and using playful language."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 55.4,
+  "prompt_chars": 9329,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "c",
+  "witness_set": "W+YT+P",
+  "ablation": "noFlags"
+}

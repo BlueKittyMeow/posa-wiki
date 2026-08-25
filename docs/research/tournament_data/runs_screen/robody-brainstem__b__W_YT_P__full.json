@@ -1,0 +1,37 @@
+{
+  "raw": "[\n {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"for when I'm in by myself because it's just riding so high.\", \"reasoning\": \"The context indicates the speaker was alone and used 'I am,' which aligns with Parakeet TDT.\"},\n {\"span\": \"cuz\", \"verdict\": \"correct\", \"correction\": \"because\", \"reasoning\": \"Given disfluency rules, it should be a full word rather than an abbreviation in this context.\"},\n {\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"The intended meaning is unclear without hearing the audio. Request human review for clarification on silence represented by '(nothing)' from Witness 2 and Parakeet TDT.\"},\n {\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"'And' or another connecting word is implied but not heard due to disfluency. Human review needed for accurate correction.\"}\n]",
+  "rulings": [
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "for when I'm in by myself because it's just riding so high.",
+      "reasoning": "The context indicates the speaker was alone and used 'I am,' which aligns with Parakeet TDT."
+    },
+    {
+      "span": "cuz",
+      "verdict": "correct",
+      "correction": "because",
+      "reasoning": "Given disfluency rules, it should be a full word rather than an abbreviation in this context."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "The intended meaning is unclear without hearing the audio. Request human review for clarification on silence represented by '(nothing)' from Witness 2 and Parakeet TDT."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "'And' or another connecting word is implied but not heard due to disfluency. Human review needed for accurate correction."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 2.5,
+  "prompt_chars": 14537,
+  "judge": "robody-brainstem",
+  "model": "robody-brainstem:latest",
+  "passage": "b",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

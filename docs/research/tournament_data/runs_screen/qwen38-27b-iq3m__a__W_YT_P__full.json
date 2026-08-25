@@ -1,0 +1,61 @@
+{
+  "raw": "{\n  \"span\": \"ladies and gentlemen\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"The style card explicitly states he opens with 'Ladies and gentlemen', making Witness 1's reading the most plausible despite the other two engines missing it.\"\n},\n{\n  \"span\": \"and\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"Witness 1 provides the full grammatical structure of the tagline; the other witnesses likely dropped the conjunction due to audio overlap or speed, but the sentence requires it for coherence.\"\n},\n{\n  \"span\": \"crappie\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"Witnesses 2 and 3 heard 'crap high' and 'crap pie', which are phonetic approximations of 'crappie' (the show's central word); Witness 1's spelling is the correct domain term.\"\n},\n{\n  \"span\": \"(nothing)\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"The phrase 'also known as crappie' is a tautological joke; Witness 2's 'crap' is likely a fragment of the same word or a stutter, but the draft's omission of a distinct second word is consistent with the pun structure 'crappie, also known as crappie'.\"\n},\n{\n  \"span\": \"crappie\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"Witness 3's 'crap copy' is a phonetic distortion of 'crappie'; the repetition of the word is the point of the joke, so the draft is correct.\"\n},\n{\n  \"span\": \"(nothing)\",\n  \"verdict\": \"escalate\",\n  \"correction\": null,\n  \"reasoning\": \"Witness 2 claims a full sentence 'She's running a little rough' was said here, while Witness 3 heard 'Yeah' and Witness 1 heard nothing; the placement of this comment relative to the motor tilt is ambiguous.\"\n},\n{\n  \"span\": \"gonna\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"'Gonna' is a standard contraction for 'going to' in casual speech; Witness 2's 'going to' is the same content, and Witness 1's rendering is acceptable for this register.\"\n},\n{\n  \"span\": \"there's one\",\n  \"verdict\": \"correct\",\n  \"correction\": \"Hold on. Uh, yeah. For some reason she's running a little slow today.\",\n  \"reasoning\": \"Witnesses 2 and 3 both clearly heard 'for some reason', which is a common idiom; Witness 1's 'there's one reason' is a less likely mishearing of the phonetically similar 'for some reason'.\"\n}",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The style card explicitly states he opens with 'Ladies and gentlemen', making Witness 1's reading the most plausible despite the other two engines missing it."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Witness 1 provides the full grammatical structure of the tagline; the other witnesses likely dropped the conjunction due to audio overlap or speed, but the sentence requires it for coherence."
+    },
+    {
+      "span": "crappie",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Witnesses 2 and 3 heard 'crap high' and 'crap pie', which are phonetic approximations of 'crappie' (the show's central word); Witness 1's spelling is the correct domain term."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The phrase 'also known as crappie' is a tautological joke; Witness 2's 'crap' is likely a fragment of the same word or a stutter, but the draft's omission of a distinct second word is consistent with the pun structure 'crappie, also known as crappie'."
+    },
+    {
+      "span": "crappie",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Witness 3's 'crap copy' is a phonetic distortion of 'crappie'; the repetition of the word is the point of the joke, so the draft is correct."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 claims a full sentence 'She's running a little rough' was said here, while Witness 3 heard 'Yeah' and Witness 1 heard nothing; the placement of this comment relative to the motor tilt is ambiguous."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Gonna' is a standard contraction for 'going to' in casual speech; Witness 2's 'going to' is the same content, and Witness 1's rendering is acceptable for this register."
+    },
+    {
+      "span": "there's one",
+      "verdict": "correct",
+      "correction": "Hold on. Uh, yeah. For some reason she's running a little slow today.",
+      "reasoning": "Witnesses 2 and 3 both clearly heard 'for some reason', which is a common idiom; Witness 1's 'there's one reason' is a less likely mishearing of the phonetically similar 'for some reason'."
+    }
+  ],
+  "parse_note": "recovered-objects",
+  "elapsed": 32.1,
+  "prompt_chars": 11624,
+  "judge": "qwen38-27b-iq3m",
+  "model": "marshlair-qwen38-27b-uncensored:iq3_m-text",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

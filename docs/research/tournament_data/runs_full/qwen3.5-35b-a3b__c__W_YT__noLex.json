@@ -1,0 +1,67 @@
+{
+  "raw": "[{\"span\": \"it monty\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The speaker addresses his dog Monty directly with a command 'Get it', which aligns with the style of talking to dogs as conversation partners.\"}, {\"span\": \"funk\", \"verdict\": \"correct\", \"correction\": \"Say hi Funk.\", \"reasoning\": \"Funk is Matthew's partner and a recurring named entity; 'punk' is an ASR error misinterpreting the name in a context where he addresses people directly.\"}, {\"span\": \"look at him\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 hears 'look at him' while Witness 2 hears 'we got a'; without audio, it is impossible to determine if the speaker is describing an object or introducing Monty.\"}, {\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 has no text here while Witness 2 inserts 'come here buddy'; this could be a missing imperative command or ASR hallucination of filler words.\"}, {\"span\": \"it\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The phrase 'Go get it' is consistent with the speaker's style of giving commands to his dog regarding an object.\"}, {\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 has no text here while Witness 2 inserts 'give me'; this could be a repeated command or ASR noise.\"}, {\"span\": \"that\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The speaker is likely referring to the object in question ('Give me that') rather than a location ('here'), fitting the context of retrieving an item from a dog.\"}, {\"span\": \"i'll\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 hears 'I'll get you' while Witness 2 hears 'Let me get you'; both are plausible self-corrections or promises in this register.\"}, {\"span\": \"i'm\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 hears 'I'm fine' while Witness 2 has no text; the speaker often uses self-talk like 'I'm fine' but could also be a stutter or filler.\"}]",
+  "rulings": [
+    {
+      "span": "it monty",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The speaker addresses his dog Monty directly with a command 'Get it', which aligns with the style of talking to dogs as conversation partners."
+    },
+    {
+      "span": "funk",
+      "verdict": "correct",
+      "correction": "Say hi Funk.",
+      "reasoning": "Funk is Matthew's partner and a recurring named entity; 'punk' is an ASR error misinterpreting the name in a context where he addresses people directly."
+    },
+    {
+      "span": "look at him",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'look at him' while Witness 2 hears 'we got a'; without audio, it is impossible to determine if the speaker is describing an object or introducing Monty."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 has no text here while Witness 2 inserts 'come here buddy'; this could be a missing imperative command or ASR hallucination of filler words."
+    },
+    {
+      "span": "it",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The phrase 'Go get it' is consistent with the speaker's style of giving commands to his dog regarding an object."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 has no text here while Witness 2 inserts 'give me'; this could be a repeated command or ASR noise."
+    },
+    {
+      "span": "that",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The speaker is likely referring to the object in question ('Give me that') rather than a location ('here'), fitting the context of retrieving an item from a dog."
+    },
+    {
+      "span": "i'll",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'I'll get you' while Witness 2 hears 'Let me get you'; both are plausible self-corrections or promises in this register."
+    },
+    {
+      "span": "i'm",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'I'm fine' while Witness 2 has no text; the speaker often uses self-talk like 'I'm fine' but could also be a stutter or filler."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 20.4,
+  "prompt_chars": 9666,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "c",
+  "witness_set": "W+YT",
+  "ablation": "noLex"
+}

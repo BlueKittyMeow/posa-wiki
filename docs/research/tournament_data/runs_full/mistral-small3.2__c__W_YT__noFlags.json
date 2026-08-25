@@ -1,0 +1,49 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"Get it Monty.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear if 'Get it' is correct or should be 'Get ready'.\"\n    },\n    {\n        \"span\": \"Say hi Funk.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear if 'Funk' is correct or should be 'punk'.\"\n    },\n    {\n        \"span\": \"Look at him Monty.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear if 'Look at him' is correct or should be 'We got a'.\"\n    },\n    {\n        \"span\": \"Give me here, you little stinker.\",\n        \"verdict\": \"correct\",\n        \"correction\": \"Give me that, you little stinker.\",\n        \"reasoning\": \"Consistent with other instances of 'Give me that' in the draft.\"\n    },\n    {\n        \"span\": \"Give it here, Monty.\",\n        \"verdict\": \"correct\",\n        \"correction\": \"Give it to me, Monty.\",\n        \"reasoning\": \"More coherent and consistent with the context of the conversation.\"\n    },\n    {\n        \"span\": \"I'll get you.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear if 'I'll get you' is correct or should be 'Let me get you'.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "Get it Monty.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'Get it' is correct or should be 'Get ready'."
+    },
+    {
+      "span": "Say hi Funk.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'Funk' is correct or should be 'punk'."
+    },
+    {
+      "span": "Look at him Monty.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'Look at him' is correct or should be 'We got a'."
+    },
+    {
+      "span": "Give me here, you little stinker.",
+      "verdict": "correct",
+      "correction": "Give me that, you little stinker.",
+      "reasoning": "Consistent with other instances of 'Give me that' in the draft."
+    },
+    {
+      "span": "Give it here, Monty.",
+      "verdict": "correct",
+      "correction": "Give it to me, Monty.",
+      "reasoning": "More coherent and consistent with the context of the conversation."
+    },
+    {
+      "span": "I'll get you.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'I'll get you' is correct or should be 'Let me get you'."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 24.7,
+  "prompt_chars": 9112,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "c",
+  "witness_set": "W+YT",
+  "ablation": "noFlags"
+}

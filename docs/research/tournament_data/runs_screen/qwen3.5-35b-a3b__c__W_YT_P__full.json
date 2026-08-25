@@ -1,0 +1,97 @@
+{
+  "raw": "[{\"span\": \"get it monty\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The speaker is addressing his dog Monty with a command; the other witnesses' silence or 'ready get' are likely mishearings of the start of the phrase.\"}, {\"span\": \"say hi funk\", \"verdict\": \"correct\", \"correction\": \"Say hi Funk.\", \"reasoning\": \"Funk is Matthew's partner and a recurring entity in the roster; 'punk' is a phonetic error by other witnesses ignoring the established register.\"}, {\"span\": \"look at him\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witnesses disagree between 'look at him', 'we got a', and silence; without audio, it is impossible to distinguish if he is pointing at an object (him) or referring to the dog (them/him) versus a misheard phrase.\"}, {\"span\": \"him\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Disagreement between 'him' and 'them' regarding the antecedent of the pronoun; both are grammatically possible but contextually ambiguous without audio.\"}, {\"span\": \"go get it\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witnesses disagree between 'go get it', 'come here buddy', and 'forget'; the speaker's rapid speech and dog interaction make these distinct possibilities hard to distinguish.\"}, {\"span\": \"it\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Disagreement on whether the object of the command is 'it' or 'him'; both fit the context of playing with a dog but are phonetically similar in rapid speech.\"}, {\"span\": \"give me that\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witnesses disagree between 'give me that', 'can you hear your little stinker', and 'give me'; the speaker's overlapping commands to the dog make this sequence ambiguous.\"}, {\"span\": \"that give me that\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Disagreement on whether the phrase is a repetition of 'give me that' or a misheard 'can you hear your little stinker'; both fit the register but are mutually exclusive.\"}, {\"span\": \"that\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Disagreement between 'that' and 'here' in the phrase 'give me that/here'; phonetically similar and contextually interchangeable for a command.\"}, {\"span\": \"give me\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witnesses disagree between 'give me', 'you could hear', and silence; the rapid transition from scolding to commanding makes this span highly ambiguous.\"}, {\"span\": \"he won't give it to me give\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Disagreement on whether the speaker is narrating 'He's like no he won't give it to me' or a different phrase entirely; the other witnesses suggest significant divergence in this segment.\"}, {\"span\": \"monty i'll get you i'm fine\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witnesses disagree between 'I'll get you I'm fine', 'Ooh yeah', and 'Let me get you'; the speaker's self-correction or playful tone makes these distinct possibilities hard to distinguish.\"}, {\"span\": \"i'll\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Disagreement between 'I'll' and 'Let me' in the phrase 'I'll get you/Let me get you'; both are plausible commands to a dog but phonetically distinct enough to require audio verification.\"}, {\"span\": \"i'm\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Disagreement between 'I'm fine' and silence or 'Let me'; the speaker's rapid self-talk makes this segment ambiguous.\"}]",
+  "rulings": [
+    {
+      "span": "get it monty",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The speaker is addressing his dog Monty with a command; the other witnesses' silence or 'ready get' are likely mishearings of the start of the phrase."
+    },
+    {
+      "span": "say hi funk",
+      "verdict": "correct",
+      "correction": "Say hi Funk.",
+      "reasoning": "Funk is Matthew's partner and a recurring entity in the roster; 'punk' is a phonetic error by other witnesses ignoring the established register."
+    },
+    {
+      "span": "look at him",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree between 'look at him', 'we got a', and silence; without audio, it is impossible to distinguish if he is pointing at an object (him) or referring to the dog (them/him) versus a misheard phrase."
+    },
+    {
+      "span": "him",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Disagreement between 'him' and 'them' regarding the antecedent of the pronoun; both are grammatically possible but contextually ambiguous without audio."
+    },
+    {
+      "span": "go get it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree between 'go get it', 'come here buddy', and 'forget'; the speaker's rapid speech and dog interaction make these distinct possibilities hard to distinguish."
+    },
+    {
+      "span": "it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Disagreement on whether the object of the command is 'it' or 'him'; both fit the context of playing with a dog but are phonetically similar in rapid speech."
+    },
+    {
+      "span": "give me that",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree between 'give me that', 'can you hear your little stinker', and 'give me'; the speaker's overlapping commands to the dog make this sequence ambiguous."
+    },
+    {
+      "span": "that give me that",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Disagreement on whether the phrase is a repetition of 'give me that' or a misheard 'can you hear your little stinker'; both fit the register but are mutually exclusive."
+    },
+    {
+      "span": "that",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Disagreement between 'that' and 'here' in the phrase 'give me that/here'; phonetically similar and contextually interchangeable for a command."
+    },
+    {
+      "span": "give me",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree between 'give me', 'you could hear', and silence; the rapid transition from scolding to commanding makes this span highly ambiguous."
+    },
+    {
+      "span": "he won't give it to me give",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Disagreement on whether the speaker is narrating 'He's like no he won't give it to me' or a different phrase entirely; the other witnesses suggest significant divergence in this segment."
+    },
+    {
+      "span": "monty i'll get you i'm fine",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree between 'I'll get you I'm fine', 'Ooh yeah', and 'Let me get you'; the speaker's self-correction or playful tone makes these distinct possibilities hard to distinguish."
+    },
+    {
+      "span": "i'll",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Disagreement between 'I'll' and 'Let me' in the phrase 'I'll get you/Let me get you'; both are plausible commands to a dog but phonetically distinct enough to require audio verification."
+    },
+    {
+      "span": "i'm",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Disagreement between 'I'm fine' and silence or 'Let me'; the speaker's rapid self-talk makes this segment ambiguous."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 27.3,
+  "prompt_chars": 11493,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "c",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

@@ -1,0 +1,37 @@
+{
+  "raw": "[\n  {\n    \"span\": \"I might last time I came through here\",\n    \"verdict\": \"correct\",\n    \"correction\": \"last time I came through here\",\n    \"reasoning\": \"The word 'might' is a transcription error for the speaker's habitual disfluency or a misheard filler; removing it restores the coherent narrative about a past event.\"\n  },\n  {\n    \"span\": \"Captain Tea Truck gave me one\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Captain Teeny Trout gave me one\",\n    \"reasoning\": \"The Style Card explicitly identifies 'Captain Teeny Trout' as the consistent nickname for Lucas; 'Tea Truck' is a phonetic ASR error that destroys the established entity alias.\"\n  },\n  {\n    \"span\": \"then I got some five nice gills\",\n    \"verdict\": \"correct\",\n    \"correction\": \"then I got some, five nice gills\",\n    \"reasoning\": \"The speaker's style involves hesitant counts and self-corrections; adding a comma reflects the pause before revising or specifying the count of 'five'.\"\n  },\n  {\n    \"span\": \"unless like some days you just small fish\",\n    \"verdict\": \"correct\",\n    \"correction\": \"unless like some days you just get small fish\",\n    \"reasoning\": \"The sentence is grammatically incomplete without a verb; 'get' is the most likely intended word in this colloquial context, fitting the speaker's informal register.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "I might last time I came through here",
+      "verdict": "correct",
+      "correction": "last time I came through here",
+      "reasoning": "The word 'might' is a transcription error for the speaker's habitual disfluency or a misheard filler; removing it restores the coherent narrative about a past event."
+    },
+    {
+      "span": "Captain Tea Truck gave me one",
+      "verdict": "correct",
+      "correction": "Captain Teeny Trout gave me one",
+      "reasoning": "The Style Card explicitly identifies 'Captain Teeny Trout' as the consistent nickname for Lucas; 'Tea Truck' is a phonetic ASR error that destroys the established entity alias."
+    },
+    {
+      "span": "then I got some five nice gills",
+      "verdict": "correct",
+      "correction": "then I got some, five nice gills",
+      "reasoning": "The speaker's style involves hesitant counts and self-corrections; adding a comma reflects the pause before revising or specifying the count of 'five'."
+    },
+    {
+      "span": "unless like some days you just small fish",
+      "verdict": "correct",
+      "correction": "unless like some days you just get small fish",
+      "reasoning": "The sentence is grammatically incomplete without a verb; 'get' is the most likely intended word in this colloquial context, fitting the speaker's informal register."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 53.4,
+  "prompt_chars": 9628,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "b",
+  "witness_set": "W",
+  "ablation": "noLex"
+}

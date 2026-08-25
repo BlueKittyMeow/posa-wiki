@@ -1,0 +1,73 @@
+{
+  "raw": "[\n  {\n    \"span\": \"for when\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 1's 'for when' is syntactically incomplete and likely a transcription error for a preceding phrase or filler, but the exact missing words are unknown without audio.\"\n  },\n  {\n    \"span\": \"because\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Because' and 'cuz' are phonetically equivalent in this register; the draft's full form is acceptable for a transcript of spoken language.\"\n  },\n  {\n    \"span\": \"gotta\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The contraction 'gotta' accurately reflects the speaker's informal register and matches the meaning of 'got to' heard by Witness 2.\"\n  },\n  {\n    \"span\": \"alright\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The spelling 'alright' vs 'all right' is a minor orthographic variation; the draft's reading is coherent and standard.\"\n  },\n  {\n    \"span\": \"ish\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The '-ish' suffix is a documented stylistic signature of this speaker for hedging counts; removing it would violate the style card.\"\n  },\n  {\n    \"span\": \"tea\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Uh, Captain Teeny Trout gave me one.\",\n    \"reasoning\": \"The style card explicitly identifies 'Captain Teeny Trout' as a consistent nickname for Lucas; 'Tea Truck' is an ASR error.\"\n  },\n  {\n    \"span\": \"was\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 1 hears 'There was some close ones' (grammatically awkward but possible speech) while Witness 2 hears 'There are some close ones'; without audio, it is unclear if the speaker used a non-standard past tense or present tense.\"\n  },\n  {\n    \"span\": \"blue gills\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The style card notes that 'bluegill' is often shortened to 'gills' or written as two words; both readings are plausible in this register.\"\n  },\n  {\n    \"span\": \"small\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 1 hears 'just small fish' while Witness 2 hears 'just smaller fish'; the speaker's tendency to revise counts mid-sentence makes it impossible to distinguish between a comparative adjective and a descriptive one without audio.\"\n  },\n  {\n    \"span\": \"having it\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 1 hears the idiom 'weren't having it' while Witness 2 cuts off; the sentence may end abruptly or continue with a different phrase, requiring audio to resolve.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "for when",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1's 'for when' is syntactically incomplete and likely a transcription error for a preceding phrase or filler, but the exact missing words are unknown without audio."
+    },
+    {
+      "span": "because",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Because' and 'cuz' are phonetically equivalent in this register; the draft's full form is acceptable for a transcript of spoken language."
+    },
+    {
+      "span": "gotta",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The contraction 'gotta' accurately reflects the speaker's informal register and matches the meaning of 'got to' heard by Witness 2."
+    },
+    {
+      "span": "alright",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The spelling 'alright' vs 'all right' is a minor orthographic variation; the draft's reading is coherent and standard."
+    },
+    {
+      "span": "ish",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The '-ish' suffix is a documented stylistic signature of this speaker for hedging counts; removing it would violate the style card."
+    },
+    {
+      "span": "tea",
+      "verdict": "correct",
+      "correction": "Uh, Captain Teeny Trout gave me one.",
+      "reasoning": "The style card explicitly identifies 'Captain Teeny Trout' as a consistent nickname for Lucas; 'Tea Truck' is an ASR error."
+    },
+    {
+      "span": "was",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'There was some close ones' (grammatically awkward but possible speech) while Witness 2 hears 'There are some close ones'; without audio, it is unclear if the speaker used a non-standard past tense or present tense."
+    },
+    {
+      "span": "blue gills",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The style card notes that 'bluegill' is often shortened to 'gills' or written as two words; both readings are plausible in this register."
+    },
+    {
+      "span": "small",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'just small fish' while Witness 2 hears 'just smaller fish'; the speaker's tendency to revise counts mid-sentence makes it impossible to distinguish between a comparative adjective and a descriptive one without audio."
+    },
+    {
+      "span": "having it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears the idiom 'weren't having it' while Witness 2 cuts off; the sentence may end abruptly or continue with a different phrase, requiring audio to resolve."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 26.1,
+  "prompt_chars": 11465,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "noLex"
+}

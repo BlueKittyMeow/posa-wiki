@@ -1,0 +1,31 @@
+{
+  "raw": "[\n  {\n    \"span\": \"Captain Tea Truck gave me one\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Uh, Captain Teeny Trout gave me one, then I got some five nice gills.\",\n    \"reasoning\": \"The entity roster explicitly lists 'Captain Teeny Trout' as Lucas's consistent nickname; 'Tea Truck' is an ASR hallucination of the pun.\"\n  },\n  {\n    \"span\": \"I might last time I came through here\",\n    \"verdict\": \"correct\",\n    \"correction\": \"I do have the motor tilted up a little bit because it's really shallow right here and last time I came through here I dinged a rock so I gotta be careful.\",\n    \"reasoning\": \"The word 'might' is an ASR artifact; the speaker is stating a past event ('last time') as the reason for caution, fitting his style of self-correction but not requiring the filler 'might'.\"\n  },\n  {\n    \"span\": \"for when I'm in by myself because it's just riding so high\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"The phrase 'riding so high' is ambiguous; while Posa often uses puns, this could be a mishearing of 'running so high' (water level) or a specific joke about the boat's position that requires audio verification.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "Captain Tea Truck gave me one",
+      "verdict": "correct",
+      "correction": "Uh, Captain Teeny Trout gave me one, then I got some five nice gills.",
+      "reasoning": "The entity roster explicitly lists 'Captain Teeny Trout' as Lucas's consistent nickname; 'Tea Truck' is an ASR hallucination of the pun."
+    },
+    {
+      "span": "I might last time I came through here",
+      "verdict": "correct",
+      "correction": "I do have the motor tilted up a little bit because it's really shallow right here and last time I came through here I dinged a rock so I gotta be careful.",
+      "reasoning": "The word 'might' is an ASR artifact; the speaker is stating a past event ('last time') as the reason for caution, fitting his style of self-correction but not requiring the filler 'might'."
+    },
+    {
+      "span": "for when I'm in by myself because it's just riding so high",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "The phrase 'riding so high' is ambiguous; while Posa often uses puns, this could be a mishearing of 'running so high' (water level) or a specific joke about the boat's position that requires audio verification."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 51.6,
+  "prompt_chars": 10676,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "noFlags"
+}

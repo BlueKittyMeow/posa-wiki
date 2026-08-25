@@ -1,0 +1,139 @@
+{
+  "raw": "[\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 3 claims 'Put some cinder blocks up on the front though' while others have no text; without audio, it is impossible to distinguish between a missing intro phrase and a hallucination.\"\n  },\n  {\n    \"span\": \"for when\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 3 suggests the sentence starts with 'Put some cinder blocks up on the front though', while Witness 2 implies the start is missing or different; the true opening phrase is ambiguous.\"\n  },\n  {\n    \"span\": \"because\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Because' and 'cuz' are semantically identical in this context, and the draft reading is a valid transcription of the spoken word.\"\n  },\n  {\n    \"span\": \"and i might\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 3 hears 'Yeah' instead of 'and I might', creating a significant structural disagreement on the transition between clauses that cannot be resolved without audio.\"\n  },\n  {\n    \"span\": \"gotta\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Gotta' and 'got to' are phonetically identical in casual speech; the draft reading is acceptable.\"\n  },\n  {\n    \"span\": \"alright\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Alright' and 'all right' are interchangeable spellings for the same utterance; no correction needed.\"\n  },\n  {\n    \"span\": \"i caught\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 3 hears 'it's kind of like' instead of 'I caught', which fundamentally changes the subject and verb of the sentence.\"\n  },\n  {\n    \"span\": \"ish\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 2 omits 'ish' while Witness 3 includes it; determining if the speaker said 'seven crappies ish' or just 'seven crappies' requires audio verification.\"\n  },\n  {\n    \"span\": \"one or\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 3 hears 'let water two go' instead of 'let one or two go'; the word 'water' vs 'one' is a critical ambiguity.\"\n  },\n  {\n    \"span\": \"tea\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 2 and 3 suggest 'Captain Truck' or 'Captain T', while the draft has 'Tea'; given the entity roster includes 'Captain Teeny Trout', the correct name is likely 'Truck' or 'Teeny', making 'Tea' a probable error.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 3 inserts 'and' between 'gave me one' and 'then I got', which changes the flow of the sentence; without audio, it is unclear if this conjunction was spoken.\"\n  },\n  {\n    \"span\": \"gills\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 3 hears 'kills' instead of 'gills'; while 'gills' makes sense contextually for bluegill, 'kills' is a distinct phonetic possibility that requires verification.\"\n  },\n  {\n    \"span\": \"there was\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 3 hears 'There's' and Witness 2 hears 'are', while the draft has 'was'; the tense and subject-verb agreement are disputed.\"\n  },\n  {\n    \"span\": \"was\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 2 suggests 'are' instead of 'was', creating a grammatical disagreement ('There was some close ones' vs 'There are some close ones') that needs audio resolution.\"\n  },\n  {\n    \"span\": \"blue gills\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Witnesses 2 and 3 agree on 'bluegills' (one word), while the draft has 'blue gills'; this is a minor orthographic variation, not a transcription error.\"\n  },\n  {\n    \"span\": \"like them\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 3 hears 'likethem' as a single unit, but the draft correctly separates the words; no correction needed.\"\n  },\n  {\n    \"span\": \"i\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 3 hears 'I'd' (I would) instead of 'I', which changes the meaning of the sentence from a preference to a conditional action.\"\n  },\n  {\n    \"span\": \"let them\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 3 hears 'letthem' as a single unit, but the draft correctly separates the words; no correction needed.\"\n  },\n  {\n    \"span\": \"unless\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 3 hears 'in less' instead of 'unless'; this is a significant phonetic disagreement that alters the sentence structure.\"\n  },\n  {\n    \"span\": \"you\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 3 hears 'it's' instead of 'you', changing the phrase from 'days you just small fish' to 'days it's just smaller fish'.\"\n  },\n  {\n    \"span\": \"small\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witnesses 2 and 3 hear 'smaller' while the draft has 'small'; the comparative form is disputed.\"\n  },\n  {\n    \"span\": \"like\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 3 omits 'like' in the phrase 'saw so many crappies like big fat crappies', while the draft includes it; the filler word's presence is uncertain",
+  "rulings": [
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 claims 'Put some cinder blocks up on the front though' while others have no text; without audio, it is impossible to distinguish between a missing intro phrase and a hallucination."
+    },
+    {
+      "span": "for when",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 suggests the sentence starts with 'Put some cinder blocks up on the front though', while Witness 2 implies the start is missing or different; the true opening phrase is ambiguous."
+    },
+    {
+      "span": "because",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Because' and 'cuz' are semantically identical in this context, and the draft reading is a valid transcription of the spoken word."
+    },
+    {
+      "span": "and i might",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'Yeah' instead of 'and I might', creating a significant structural disagreement on the transition between clauses that cannot be resolved without audio."
+    },
+    {
+      "span": "gotta",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Gotta' and 'got to' are phonetically identical in casual speech; the draft reading is acceptable."
+    },
+    {
+      "span": "alright",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Alright' and 'all right' are interchangeable spellings for the same utterance; no correction needed."
+    },
+    {
+      "span": "i caught",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'it's kind of like' instead of 'I caught', which fundamentally changes the subject and verb of the sentence."
+    },
+    {
+      "span": "ish",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 omits 'ish' while Witness 3 includes it; determining if the speaker said 'seven crappies ish' or just 'seven crappies' requires audio verification."
+    },
+    {
+      "span": "one or",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'let water two go' instead of 'let one or two go'; the word 'water' vs 'one' is a critical ambiguity."
+    },
+    {
+      "span": "tea",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 and 3 suggest 'Captain Truck' or 'Captain T', while the draft has 'Tea'; given the entity roster includes 'Captain Teeny Trout', the correct name is likely 'Truck' or 'Teeny', making 'Tea' a probable error."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 inserts 'and' between 'gave me one' and 'then I got', which changes the flow of the sentence; without audio, it is unclear if this conjunction was spoken."
+    },
+    {
+      "span": "gills",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'kills' instead of 'gills'; while 'gills' makes sense contextually for bluegill, 'kills' is a distinct phonetic possibility that requires verification."
+    },
+    {
+      "span": "there was",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'There's' and Witness 2 hears 'are', while the draft has 'was'; the tense and subject-verb agreement are disputed."
+    },
+    {
+      "span": "was",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 suggests 'are' instead of 'was', creating a grammatical disagreement ('There was some close ones' vs 'There are some close ones') that needs audio resolution."
+    },
+    {
+      "span": "blue gills",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Witnesses 2 and 3 agree on 'bluegills' (one word), while the draft has 'blue gills'; this is a minor orthographic variation, not a transcription error."
+    },
+    {
+      "span": "like them",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'likethem' as a single unit, but the draft correctly separates the words; no correction needed."
+    },
+    {
+      "span": "i",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'I'd' (I would) instead of 'I', which changes the meaning of the sentence from a preference to a conditional action."
+    },
+    {
+      "span": "let them",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'letthem' as a single unit, but the draft correctly separates the words; no correction needed."
+    },
+    {
+      "span": "unless",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'in less' instead of 'unless'; this is a significant phonetic disagreement that alters the sentence structure."
+    },
+    {
+      "span": "you",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'it's' instead of 'you', changing the phrase from 'days you just small fish' to 'days it's just smaller fish'."
+    },
+    {
+      "span": "small",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses 2 and 3 hear 'smaller' while the draft has 'small'; the comparative form is disputed."
+    }
+  ],
+  "parse_note": "recovered-objects",
+  "elapsed": 56.6,
+  "prompt_chars": 8518,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "b",
+  "witness_set": "W+YT+P",
+  "ablation": "noStyle"
+}

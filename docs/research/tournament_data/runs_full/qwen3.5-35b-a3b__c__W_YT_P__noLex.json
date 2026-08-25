@@ -1,0 +1,97 @@
+{
+  "raw": "[\n{\"span\": \"get it monty\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The speaker addresses his dog Monty directly; 'Get it' is a plausible command in this context.\"},\n{\"span\": \"funk\", \"verdict\": \"correct\", \"correction\": \"Say hi punk.\", \"reasoning\": \"Witnesses 2 and 3 agree on 'punk', which fits the speaker's habit of addressing his dog with playful nicknames or mispronunciations, whereas 'Funk' is a human partner not present in this specific solo segment.\"},\n{\"span\": \"look at him\", \"verdict\": \"correct\", \"correction\": \"We got a Monty.\", \"reasoning\": \"Witness 2's reading 'We got a Monty' aligns with the speaker's tendency to introduce his dog as a character, whereas 'Look at him' is less likely given the low confidence scores and the flow of the scene.\"},\n{\"span\": \"him\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witnesses disagree between 'him', 'them', and '(nothing)'; without audio, it is impossible to determine if the speaker refers to a specific object or uses a generic pronoun.\"},\n{\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"Come here, buddy.\", \"reasoning\": \"Witness 2's 'Come here, buddy' fits the register of addressing a dog mid-narration better than the draft's silence, which creates a gap in the flow.\"},\n{\"span\": \"go get\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witnesses disagree between 'go get', 'forget', and '(nothing)'; 'Forget it' is possible but 'Go get it' is more consistent with the dog play context.\"},\n{\"span\": \"it\", \"verdict\": \"correct\", \"correction\": \"Give me that.\", \"reasoning\": \"The draft's 'Give me that' (repeated) is supported by Witness 1 and fits the repetitive, playful struggle over an object; Witness 2's 'him' is less likely for an inanimate object.\"},\n{\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witnesses disagree between 'that', 'here', and '(nothing)'; the repetition of 'Give me that' vs 'Give me here' is ambiguous without audio.\"},\n{\"span\": \"give me\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witnesses disagree between 'give me', 'hear your', and 'you could hear'; the phonetic similarity makes it impossible to rule without listening.\"},\n{\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witnesses disagree between 'he's like no' and 'and'; the transition word is critical for flow but ambiguous in the low-confidence region.\"},\n{\"span\": \"he won't give it to me give\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 heard '(nothing)' here, while Witness 1 has a full clause; the presence or absence of this specific phrase is uncertain.\"},\n{\"span\": \"monty i'll get you i'm fine\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witnesses disagree between 'Monty I'll get you I'm fine' and 'Ooh yeah'; the latter fits the speaker's emotional outbursts but the former is more descriptive of the action.\"},\n{\"span\": \"i'll\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witnesses disagree between 'I'll', 'Let me', and '(nothing)'; the specific verb phrase is unclear.\"},\n{\"span\": \"i'm\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witnesses disagree between 'I'm' and '(nothing)'; the speaker's self-correction or statement of state is ambiguous.\"}\n]",
+  "rulings": [
+    {
+      "span": "get it monty",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The speaker addresses his dog Monty directly; 'Get it' is a plausible command in this context."
+    },
+    {
+      "span": "funk",
+      "verdict": "correct",
+      "correction": "Say hi punk.",
+      "reasoning": "Witnesses 2 and 3 agree on 'punk', which fits the speaker's habit of addressing his dog with playful nicknames or mispronunciations, whereas 'Funk' is a human partner not present in this specific solo segment."
+    },
+    {
+      "span": "look at him",
+      "verdict": "correct",
+      "correction": "We got a Monty.",
+      "reasoning": "Witness 2's reading 'We got a Monty' aligns with the speaker's tendency to introduce his dog as a character, whereas 'Look at him' is less likely given the low confidence scores and the flow of the scene."
+    },
+    {
+      "span": "him",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree between 'him', 'them', and '(nothing)'; without audio, it is impossible to determine if the speaker refers to a specific object or uses a generic pronoun."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Come here, buddy.",
+      "reasoning": "Witness 2's 'Come here, buddy' fits the register of addressing a dog mid-narration better than the draft's silence, which creates a gap in the flow."
+    },
+    {
+      "span": "go get",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree between 'go get', 'forget', and '(nothing)'; 'Forget it' is possible but 'Go get it' is more consistent with the dog play context."
+    },
+    {
+      "span": "it",
+      "verdict": "correct",
+      "correction": "Give me that.",
+      "reasoning": "The draft's 'Give me that' (repeated) is supported by Witness 1 and fits the repetitive, playful struggle over an object; Witness 2's 'him' is less likely for an inanimate object."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree between 'that', 'here', and '(nothing)'; the repetition of 'Give me that' vs 'Give me here' is ambiguous without audio."
+    },
+    {
+      "span": "give me",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree between 'give me', 'hear your', and 'you could hear'; the phonetic similarity makes it impossible to rule without listening."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree between 'he's like no' and 'and'; the transition word is critical for flow but ambiguous in the low-confidence region."
+    },
+    {
+      "span": "he won't give it to me give",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 heard '(nothing)' here, while Witness 1 has a full clause; the presence or absence of this specific phrase is uncertain."
+    },
+    {
+      "span": "monty i'll get you i'm fine",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree between 'Monty I'll get you I'm fine' and 'Ooh yeah'; the latter fits the speaker's emotional outbursts but the former is more descriptive of the action."
+    },
+    {
+      "span": "i'll",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree between 'I'll', 'Let me', and '(nothing)'; the specific verb phrase is unclear."
+    },
+    {
+      "span": "i'm",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree between 'I'm' and '(nothing)'; the speaker's self-correction or statement of state is ambiguous."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 38.5,
+  "prompt_chars": 10948,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "c",
+  "witness_set": "W+YT+P",
+  "ablation": "noLex"
+}

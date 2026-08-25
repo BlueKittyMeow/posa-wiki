@@ -1,0 +1,73 @@
+{
+  "raw": "[\n  {\n    \"span\": \"for when\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 1's 'for when' is syntactically incomplete and likely a transcription error for a preceding phrase or filler, but the exact missing words are unknown without audio.\"\n  },\n  {\n    \"span\": \"because\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Because' is the standard written form of the speaker's colloquial 'cuz'; both represent the same utterance and neither is an error.\"\n  },\n  {\n    \"span\": \"gotta\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Gotta' accurately captures the speaker's rapid, colloquial contraction of 'got to' as per his informal register.\"\n  },\n  {\n    \"span\": \"alright\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The spelling 'alright' vs 'all right' is a minor orthographic variation; the word itself is correctly identified in both transcripts.\"\n  },\n  {\n    \"span\": \"ish\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The suffix '-ish' is a documented stylistic signature of this speaker for indicating approximate counts and should not be removed.\"\n  },\n  {\n    \"span\": \"tea\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Uh, Captain Teeny Trout gave me one.\",\n    \"reasoning\": \"'Tea Truck' is a phonetic mangle of the speaker's recurring nickname 'Captain Teeny Trout', which is explicitly defined in the entity roster and style card.\"\n  },\n  {\n    \"span\": \"was\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"The draft has 'There was some close ones' (singular verb with plural noun) while YouTube has 'There are some close ones'; the speaker likely used a disfluent or colloquial construction that is ambiguous without audio.\"\n  },\n  {\n    \"span\": \"blue gills\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The speaker often uses spaced variations like 'blue gills' as a stylistic choice or mispronunciation of the compound noun 'bluegills', fitting his register.\"\n  },\n  {\n    \"span\": \"small\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"The draft has 'just small fish' while YouTube has 'just smaller fish'; the speaker's speech is often fragmented and it is unclear if he said the adjective or comparative form.\"\n  },\n  {\n    \"span\": \"having it\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"The phrase 'weren't having it' is a common idiom, but Witness 2's omission suggests the audio may have been cut off or mumbled; without hearing the end of the sentence, we cannot confirm if the speaker finished the thought.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "for when",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1's 'for when' is syntactically incomplete and likely a transcription error for a preceding phrase or filler, but the exact missing words are unknown without audio."
+    },
+    {
+      "span": "because",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Because' is the standard written form of the speaker's colloquial 'cuz'; both represent the same utterance and neither is an error."
+    },
+    {
+      "span": "gotta",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Gotta' accurately captures the speaker's rapid, colloquial contraction of 'got to' as per his informal register."
+    },
+    {
+      "span": "alright",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The spelling 'alright' vs 'all right' is a minor orthographic variation; the word itself is correctly identified in both transcripts."
+    },
+    {
+      "span": "ish",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The suffix '-ish' is a documented stylistic signature of this speaker for indicating approximate counts and should not be removed."
+    },
+    {
+      "span": "tea",
+      "verdict": "correct",
+      "correction": "Uh, Captain Teeny Trout gave me one.",
+      "reasoning": "'Tea Truck' is a phonetic mangle of the speaker's recurring nickname 'Captain Teeny Trout', which is explicitly defined in the entity roster and style card."
+    },
+    {
+      "span": "was",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "The draft has 'There was some close ones' (singular verb with plural noun) while YouTube has 'There are some close ones'; the speaker likely used a disfluent or colloquial construction that is ambiguous without audio."
+    },
+    {
+      "span": "blue gills",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The speaker often uses spaced variations like 'blue gills' as a stylistic choice or mispronunciation of the compound noun 'bluegills', fitting his register."
+    },
+    {
+      "span": "small",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "The draft has 'just small fish' while YouTube has 'just smaller fish'; the speaker's speech is often fragmented and it is unclear if he said the adjective or comparative form."
+    },
+    {
+      "span": "having it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "The phrase 'weren't having it' is a common idiom, but Witness 2's omission suggests the audio may have been cut off or mumbled; without hearing the end of the sentence, we cannot confirm if the speaker finished the thought."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 24.4,
+  "prompt_chars": 12010,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "full"
+}

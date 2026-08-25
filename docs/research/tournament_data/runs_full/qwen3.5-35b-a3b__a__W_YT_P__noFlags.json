@@ -1,0 +1,25 @@
+{
+  "raw": "[\n  {\n    \"span\": \"Today we are targeting some crappie, also known as crappie.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crap-pie, also known as crappie.\",\n    \"reasoning\": \"The episode title pun 'Crap-Pie' must be rendered phonetically to preserve the joke, as per the style card's rule against flattening title puns.\"\n  },\n  {\n    \"span\": \"There's one reason she's running a little slow today.\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"The phrase 'There's one reason' is syntactically awkward and potentially a mishearing of a disfluent restart or different phrasing common to this speaker; audio verification required.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "Today we are targeting some crappie, also known as crappie.",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crap-pie, also known as crappie.",
+      "reasoning": "The episode title pun 'Crap-Pie' must be rendered phonetically to preserve the joke, as per the style card's rule against flattening title puns."
+    },
+    {
+      "span": "There's one reason she's running a little slow today.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "The phrase 'There's one reason' is syntactically awkward and potentially a mishearing of a disfluent restart or different phrasing common to this speaker; audio verification required."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 10.1,
+  "prompt_chars": 10410,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "noFlags"
+}

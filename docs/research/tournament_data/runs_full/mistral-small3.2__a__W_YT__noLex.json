@@ -1,0 +1,55 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"ladies and gentlemen\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Consistent with Posa's formal-address openings.\"\n    },\n    {\n        \"span\": \"and\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of interrupting and restarting himself.\"\n    },\n    {\n        \"span\": \"crappie\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"The pun 'crappie/crap-pie' is central to the episode title and show's style.\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear if 'crap' is part of the pun or a misheard word.\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Uncertain if 'she's running a little rough' is a separate statement or part of the previous sentence.\"\n    },\n    {\n        \"span\": \"gonna\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of casual, disfluent speech.\"\n    },\n    {\n        \"span\": \"there's one\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear if 'for some' is a misheard version of 'there's one' or a different phrase.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Consistent with Posa's formal-address openings."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of interrupting and restarting himself."
+    },
+    {
+      "span": "crappie",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The pun 'crappie/crap-pie' is central to the episode title and show's style."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'crap' is part of the pun or a misheard word."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Uncertain if 'she's running a little rough' is a separate statement or part of the previous sentence."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of casual, disfluent speech."
+    },
+    {
+      "span": "there's one",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'for some' is a misheard version of 'there's one' or a different phrase."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 26.8,
+  "prompt_chars": 10315,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "noLex"
+}

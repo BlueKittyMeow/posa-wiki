@@ -1,0 +1,121 @@
+{
+  "raw": "[{\"span\": \"get it monty\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Context of dog play and 'Get it' command fits the speaker's register; Witness 1 is correct.\"}, {\"span\": \"it monty\", \"verdict\": \"correct\", \"correction\": \"get it Monty.\", \"reasoning\": \"Witness 2's 'ready get' is a hallucination given the clear dog command context in Witness 1 and the style card's instruction to preserve commands like 'Get it'.\"}, {\"span\": \"funk\", \"verdict\": \"correct\", \"correction\": \"Say hi Funk.\", \"reasoning\": \"Funk is Matthew's partner per the Entity Roster; 'punk' is an ASR error common with names, and the speaker addresses his partner directly.\"}, {\"span\": \"look at him\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Witness 1's reading aligns with the style card's instruction to talk to dogs as conversation partners ('Look at him Monty'). Witness 2's 'we got a' is an unrelated hallucination.\"}, {\"span\": \"him\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"'Help him see it' (referring to the dog or object) is coherent within the register of talking to the dog. Parakeet's '(nothing)' is likely a failure to capture the pronoun.\"}, {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"Come here, buddy.\", \"reasoning\": \"Witness 2 fills the gap with 'Come here, buddy', which fits the rapid short utterances and dog play context better than silence or Parakeet's 'forget'.\"}, {\"span\": \"go get\", \"verdict\": \"correct\", \"correction\": \"Go get him,\", \"reasoning\": \"Witness 1 says 'Go get it Monty' but Witness 2 says 'Go get him, Monty'. Given the style card allows for object/personification and the specific target is likely the dog or another entity ('him'), 'Go get him' is a plausible correction that resolves the ambiguity better than silence.\"}, {\"span\": \"it\", \"verdict\": \"correct\", \"correction\": \"him,\", \"reasoning\": \"Consistent with the previous span, 'him' is the more likely object of the command in this chaotic dog-play context.\"}, {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"Give me that.\", \"reasoning\": \"Witness 1 has a repetition 'Give me that. Give me that.' Witness 2 fills the silence with 'Give me'. The style card allows for repetitions and self-interruptions, but the semantic content is clearly 'Give me that'.\"}, {\"span\": \"that give me that\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The repetition 'Give me that. Give me that.' is a valid disfluency per the style card ('interrupts and restarts himself constantly'). Parakeet's insertion of 'can' breaks the flow.\"}, {\"span\": \"that\", \"verdict\": \"correct\", \"correction\": \"Give me here,\", \"reasoning\": \"Witness 2's 'here' is a plausible correction for the repeated 'that', fitting the rapid-fire nature of the speech.\"}, {\"span\": \"(nothing)\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The draft has 'You little stinker. Give me that.' followed by silence before 'He's like'. Parakeet inserts 'hear your'. Silence is acceptable as a pause or transition to the next speaker/action.\"}, {\"span\": \"give me\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The draft reads 'Give it here. Monty. I'll get you.' The span in question is likely the transition or the phrase itself. Witness 1's 'Give me that' earlier was confirmed. Here, the context suggests a continuation of commands. Parakeet's 'you could hear' is too verbose for the rapid style.\"}, {\"span\": \"(nothing)\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The draft has 'He's like, no.' followed by silence before 'He won't give it to me'. Parakeet inserts 'and'. Silence is appropriate for the pause in the argument.\"}, {\"span\": \"he won't give it to me give\", \"verdict\": \"correct\", \"correction\": \"He won't give it to me.\", \"reasoning\": \"The draft contains a repetition error ('give' at the end). The style card allows self-corrections, but 'He won't give it to me.' is the clean sentence. Parakeet's '(nothing)' suggests the word was an error or filler.\"}, {\"span\": \"monty i'll get you i'm fine\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"This sequence of commands and statements ('Monty. I'll get you. I'm fine.') fits the rapid, overlapping dog play style perfectly. Parakeet's 'ooh yeah' is an interpretation not supported by the clear imperative structure.\"}, {\"span\": \"i'll\", \"verdict\": \"correct\", \"correction\": \"Let me\", \"reasoning\": \"Witness 2 suggests 'Let me'. Given the context of trying to retrieve something from a dog, 'Let me get you' is a very plausible alternative phrasing that fits the register.\"}, {\"span\": \"i'm\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"'I'm fine' is a standard response in this context. Witness 2's '(nothing)' implies silence, but 'I'm fine' provides necessary narrative closure to the conflict.\"}]",
+  "rulings": [
+    {
+      "span": "get it monty",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Context of dog play and 'Get it' command fits the speaker's register; Witness 1 is correct."
+    },
+    {
+      "span": "it monty",
+      "verdict": "correct",
+      "correction": "get it Monty.",
+      "reasoning": "Witness 2's 'ready get' is a hallucination given the clear dog command context in Witness 1 and the style card's instruction to preserve commands like 'Get it'."
+    },
+    {
+      "span": "funk",
+      "verdict": "correct",
+      "correction": "Say hi Funk.",
+      "reasoning": "Funk is Matthew's partner per the Entity Roster; 'punk' is an ASR error common with names, and the speaker addresses his partner directly."
+    },
+    {
+      "span": "look at him",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Witness 1's reading aligns with the style card's instruction to talk to dogs as conversation partners ('Look at him Monty'). Witness 2's 'we got a' is an unrelated hallucination."
+    },
+    {
+      "span": "him",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Help him see it' (referring to the dog or object) is coherent within the register of talking to the dog. Parakeet's '(nothing)' is likely a failure to capture the pronoun."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Come here, buddy.",
+      "reasoning": "Witness 2 fills the gap with 'Come here, buddy', which fits the rapid short utterances and dog play context better than silence or Parakeet's 'forget'."
+    },
+    {
+      "span": "go get",
+      "verdict": "correct",
+      "correction": "Go get him,",
+      "reasoning": "Witness 1 says 'Go get it Monty' but Witness 2 says 'Go get him, Monty'. Given the style card allows for object/personification and the specific target is likely the dog or another entity ('him'), 'Go get him' is a plausible correction that resolves the ambiguity better than silence."
+    },
+    {
+      "span": "it",
+      "verdict": "correct",
+      "correction": "him,",
+      "reasoning": "Consistent with the previous span, 'him' is the more likely object of the command in this chaotic dog-play context."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Give me that.",
+      "reasoning": "Witness 1 has a repetition 'Give me that. Give me that.' Witness 2 fills the silence with 'Give me'. The style card allows for repetitions and self-interruptions, but the semantic content is clearly 'Give me that'."
+    },
+    {
+      "span": "that give me that",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The repetition 'Give me that. Give me that.' is a valid disfluency per the style card ('interrupts and restarts himself constantly'). Parakeet's insertion of 'can' breaks the flow."
+    },
+    {
+      "span": "that",
+      "verdict": "correct",
+      "correction": "Give me here,",
+      "reasoning": "Witness 2's 'here' is a plausible correction for the repeated 'that', fitting the rapid-fire nature of the speech."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The draft has 'You little stinker. Give me that.' followed by silence before 'He's like'. Parakeet inserts 'hear your'. Silence is acceptable as a pause or transition to the next speaker/action."
+    },
+    {
+      "span": "give me",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The draft reads 'Give it here. Monty. I'll get you.' The span in question is likely the transition or the phrase itself. Witness 1's 'Give me that' earlier was confirmed. Here, the context suggests a continuation of commands. Parakeet's 'you could hear' is too verbose for the rapid style."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The draft has 'He's like, no.' followed by silence before 'He won't give it to me'. Parakeet inserts 'and'. Silence is appropriate for the pause in the argument."
+    },
+    {
+      "span": "he won't give it to me give",
+      "verdict": "correct",
+      "correction": "He won't give it to me.",
+      "reasoning": "The draft contains a repetition error ('give' at the end). The style card allows self-corrections, but 'He won't give it to me.' is the clean sentence. Parakeet's '(nothing)' suggests the word was an error or filler."
+    },
+    {
+      "span": "monty i'll get you i'm fine",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "This sequence of commands and statements ('Monty. I'll get you. I'm fine.') fits the rapid, overlapping dog play style perfectly. Parakeet's 'ooh yeah' is an interpretation not supported by the clear imperative structure."
+    },
+    {
+      "span": "i'll",
+      "verdict": "correct",
+      "correction": "Let me",
+      "reasoning": "Witness 2 suggests 'Let me'. Given the context of trying to retrieve something from a dog, 'Let me get you' is a very plausible alternative phrasing that fits the register."
+    },
+    {
+      "span": "i'm",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'I'm fine' is a standard response in this context. Witness 2's '(nothing)' implies silence, but 'I'm fine' provides necessary narrative closure to the conflict."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 19.6,
+  "prompt_chars": 11521,
+  "judge": "qwen3.5-9b",
+  "model": "qwen3.5:9b",
+  "passage": "c",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

@@ -1,0 +1,43 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"Say hi Funk.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the style of abrupt dog-directed speech and low-confidence 'Funk' is plausible given context.\"\n    },\n    {\n        \"span\": \"Look at him Monty.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Consistent with speaking to a dog and low-confidence 'Look' and 'him' are plausible.\"\n    },\n    {\n        \"span\": \"Help him see it.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the style of speaking to a dog and low-confidence 'Help' and 'him' are plausible.\"\n    },\n    {\n        \"span\": \"You little stinker.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the style of playful, abrupt dog-directed speech and low-confidence 'You' is plausible.\"\n    },\n    {\n        \"span\": \"He's like, no.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the style of playful, abrupt dog-directed speech and low-confidence 'He' is plausible.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "Say hi Funk.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the style of abrupt dog-directed speech and low-confidence 'Funk' is plausible given context."
+    },
+    {
+      "span": "Look at him Monty.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Consistent with speaking to a dog and low-confidence 'Look' and 'him' are plausible."
+    },
+    {
+      "span": "Help him see it.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the style of speaking to a dog and low-confidence 'Help' and 'him' are plausible."
+    },
+    {
+      "span": "You little stinker.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the style of playful, abrupt dog-directed speech and low-confidence 'You' is plausible."
+    },
+    {
+      "span": "He's like, no.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the style of playful, abrupt dog-directed speech and low-confidence 'He' is plausible."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 20.6,
+  "prompt_chars": 8446,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "c",
+  "witness_set": "W",
+  "ablation": "noLex"
+}

@@ -1,0 +1,67 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"it monty\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of talking to his dog.\"\n    },\n    {\n        \"span\": \"funk\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Consistent with the speaker's style of addressing people abruptly.\"\n    },\n    {\n        \"span\": \"look at him\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of talking to his dog and addressing him directly.\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Uncertain whether 'come here buddy' is a plausible addition.\"\n    },\n    {\n        \"span\": \"it\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of talking to his dog.\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Uncertain whether 'give me' is a plausible addition.\"\n    },\n    {\n        \"span\": \"that\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of talking to his dog.\"\n    },\n    {\n        \"span\": \"i'll\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of self-interruption and disfluency.\"\n    },\n    {\n        \"span\": \"i'm\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the speaker's style of self-interruption and disfluency.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "it monty",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of talking to his dog."
+    },
+    {
+      "span": "funk",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Consistent with the speaker's style of addressing people abruptly."
+    },
+    {
+      "span": "look at him",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of talking to his dog and addressing him directly."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Uncertain whether 'come here buddy' is a plausible addition."
+    },
+    {
+      "span": "it",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of talking to his dog."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Uncertain whether 'give me' is a plausible addition."
+    },
+    {
+      "span": "that",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of talking to his dog."
+    },
+    {
+      "span": "i'll",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of self-interruption and disfluency."
+    },
+    {
+      "span": "i'm",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the speaker's style of self-interruption and disfluency."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 30.8,
+  "prompt_chars": 9666,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "c",
+  "witness_set": "W+YT",
+  "ablation": "noLex"
+}

@@ -1,0 +1,55 @@
+{
+  "raw": "[\n  {\n    \"span\": \"Get it Monty.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Get ready. Get Say hi Funk.\",\n    \"reasoning\": \"Witness 2's 'Get ready' and 'Say hi Funk' align with the style card's instruction to address Funk, whereas Witness 1's 'Get it Monty' is a likely ASR smoothing error that misses the specific interaction.\"\n  },\n  {\n    \"span\": \"Look at him Monty.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Hi. We got a Monty.\",\n    \"reasoning\": \"Witness 2's 'We got a Monty' fits the register of introducing or identifying the dog as a character, while Witness 1's 'Look at him Monty' is a generic command that ignores the likely context of the dog entering the frame.\"\n  },\n  {\n    \"span\": \"Help him see it.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Come here, buddy.\",\n    \"reasoning\": \"Witness 2's 'Come here, buddy' is a natural command to a dog in play, whereas Witness 1's 'Help him see it' is semantically awkward for a dog and likely an ASR hallucination of the surrounding noise.\"\n  },\n  {\n    \"span\": \"Go get it Monty.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Go get him, Monty.\",\n    \"reasoning\": \"In the context of dog play with a toy or another animal, 'Go get him' is the standard phrase; Witness 1's 'Go get it' is a plausible but less likely smoothing of the audio.\"\n  },\n  {\n    \"span\": \"Give me that. Give me that.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Give me Give me that. Give me here, you little stinker.\",\n    \"reasoning\": \"Witness 2 captures the stuttered repetition 'Give me Give me' and the specific address 'you little stinker' which aligns with the speaker's playful scolding style, while Witness 1 misses the stutter and the specific phrasing.\"\n  },\n  {\n    \"span\": \"He's like, no. He won't give it to me.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"He's like, 'No. He won't give it to me. Give it here, Monty.'\",\n    \"reasoning\": \"Witness 2 includes the direct address 'Give it here, Monty' which is consistent with the speaker talking to the dog mid-sentence, whereas Witness 1 omits this crucial interaction.\"\n  },\n  {\n    \"span\": \"I'll get you. I'm fine.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Let me get you. Oh, fine.\",\n    \"reasoning\": \"Witness 2's 'Let me get you' and 'Oh, fine' reflect the speaker's self-correction and resignation style ('I'll get you' is less natural in this context), matching the disfluency patterns described in the style card.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "Get it Monty.",
+      "verdict": "correct",
+      "correction": "Get ready. Get Say hi Funk.",
+      "reasoning": "Witness 2's 'Get ready' and 'Say hi Funk' align with the style card's instruction to address Funk, whereas Witness 1's 'Get it Monty' is a likely ASR smoothing error that misses the specific interaction."
+    },
+    {
+      "span": "Look at him Monty.",
+      "verdict": "correct",
+      "correction": "Hi. We got a Monty.",
+      "reasoning": "Witness 2's 'We got a Monty' fits the register of introducing or identifying the dog as a character, while Witness 1's 'Look at him Monty' is a generic command that ignores the likely context of the dog entering the frame."
+    },
+    {
+      "span": "Help him see it.",
+      "verdict": "correct",
+      "correction": "Come here, buddy.",
+      "reasoning": "Witness 2's 'Come here, buddy' is a natural command to a dog in play, whereas Witness 1's 'Help him see it' is semantically awkward for a dog and likely an ASR hallucination of the surrounding noise."
+    },
+    {
+      "span": "Go get it Monty.",
+      "verdict": "correct",
+      "correction": "Go get him, Monty.",
+      "reasoning": "In the context of dog play with a toy or another animal, 'Go get him' is the standard phrase; Witness 1's 'Go get it' is a plausible but less likely smoothing of the audio."
+    },
+    {
+      "span": "Give me that. Give me that.",
+      "verdict": "correct",
+      "correction": "Give me Give me that. Give me here, you little stinker.",
+      "reasoning": "Witness 2 captures the stuttered repetition 'Give me Give me' and the specific address 'you little stinker' which aligns with the speaker's playful scolding style, while Witness 1 misses the stutter and the specific phrasing."
+    },
+    {
+      "span": "He's like, no. He won't give it to me.",
+      "verdict": "correct",
+      "correction": "He's like, 'No. He won't give it to me. Give it here, Monty.'",
+      "reasoning": "Witness 2 includes the direct address 'Give it here, Monty' which is consistent with the speaker talking to the dog mid-sentence, whereas Witness 1 omits this crucial interaction."
+    },
+    {
+      "span": "I'll get you. I'm fine.",
+      "verdict": "correct",
+      "correction": "Let me get you. Oh, fine.",
+      "reasoning": "Witness 2's 'Let me get you' and 'Oh, fine' reflect the speaker's self-correction and resignation style ('I'll get you' is less natural in this context), matching the disfluency patterns described in the style card."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 29.5,
+  "prompt_chars": 9329,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "c",
+  "witness_set": "W+YT+P",
+  "ablation": "noFlags"
+}

@@ -1,0 +1,49 @@
+{
+  "raw": "[{\"span\": \"Say hi Funk\", \"verdict\": \"correct\", \"correction\": \"Say hi, Monty\", \"reasoning\": \"Context indicates the dog's name is Monty, not Funk, and Witness 2/3 confirm this.\"}, {\"span\": \"Look at him Monty\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witnesses disagree on whether the speaker says 'Look at him' or 'Help him see it'; audio required to distinguish.\"}, {\"span\": \"Help him see it\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 suggests 'Help them see it' and Witness 2 suggests 'Come here, buddy'; the exact phrasing is ambiguous without audio.\"}, {\"span\": \"Give me Can you hear your little stinker?\", \"verdict\": \"correct\", \"correction\": \"Give me that. You little stinker.\", \"reasoning\": \"Witness 3's transcription of this section is nonsensical ('Can you hear your little stinker?'); Witness 1 and 2 agree on the phrase 'You little stinker' following a command to give an object.\"}, {\"span\": \"Give me that. He's like, no.\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 suggests 'And he's like, no' while Witness 1/2 say 'He's like, no'; the preceding clause and exact flow are unclear.\"}, {\"span\": \"I'll get you. I'm fine.\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 2 suggests 'Let me get you. Oh, fine.'; the speaker's intent (threat vs. resignation) is ambiguous without audio.\"}]",
+  "rulings": [
+    {
+      "span": "Say hi Funk",
+      "verdict": "correct",
+      "correction": "Say hi, Monty",
+      "reasoning": "Context indicates the dog's name is Monty, not Funk, and Witness 2/3 confirm this."
+    },
+    {
+      "span": "Look at him Monty",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree on whether the speaker says 'Look at him' or 'Help him see it'; audio required to distinguish."
+    },
+    {
+      "span": "Help him see it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 suggests 'Help them see it' and Witness 2 suggests 'Come here, buddy'; the exact phrasing is ambiguous without audio."
+    },
+    {
+      "span": "Give me Can you hear your little stinker?",
+      "verdict": "correct",
+      "correction": "Give me that. You little stinker.",
+      "reasoning": "Witness 3's transcription of this section is nonsensical ('Can you hear your little stinker?'); Witness 1 and 2 agree on the phrase 'You little stinker' following a command to give an object."
+    },
+    {
+      "span": "Give me that. He's like, no.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 suggests 'And he's like, no' while Witness 1/2 say 'He's like, no'; the preceding clause and exact flow are unclear."
+    },
+    {
+      "span": "I'll get you. I'm fine.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 suggests 'Let me get you. Oh, fine.'; the speaker's intent (threat vs. resignation) is ambiguous without audio."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 15.0,
+  "prompt_chars": 2793,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "c",
+  "witness_set": "W+YT+P",
+  "ablation": "bare"
+}

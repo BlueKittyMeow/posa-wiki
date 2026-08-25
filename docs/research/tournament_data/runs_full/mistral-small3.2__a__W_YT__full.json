@@ -1,0 +1,55 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"ladies and gentlemen\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Consistent with Posa's formal-address openings.\"\n    },\n    {\n        \"span\": \"and\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the show's tagline structure and Posa's disfluent style.\"\n    },\n    {\n        \"span\": \"crappie\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"The title pun is central to the show's identity and Posa's style.\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear if 'crap' is a transcription error or part of the pun.\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear if 'she's running a little rough' is a separate statement or part of the previous sentence.\"\n    },\n    {\n        \"span\": \"gonna\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits Posa's casual, disfluent speech style.\"\n    },\n    {\n        \"span\": \"there's one\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear if 'for some' is a transcription error or a valid alternative.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Consistent with Posa's formal-address openings."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the show's tagline structure and Posa's disfluent style."
+    },
+    {
+      "span": "crappie",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The title pun is central to the show's identity and Posa's style."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'crap' is a transcription error or part of the pun."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'she's running a little rough' is a separate statement or part of the previous sentence."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits Posa's casual, disfluent speech style."
+    },
+    {
+      "span": "there's one",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'for some' is a transcription error or a valid alternative."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 26.9,
+  "prompt_chars": 10860,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "full"
+}

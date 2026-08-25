@@ -1,0 +1,61 @@
+{
+  "raw": " \n\n```json\n[\n  {\"span\": \"ladies and gentlemen\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Opening formula consistent with style card.\"},\n  {\"span\": \"and\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Logical conjunction in the formula.\"},\n  {\"span\": \"crappie\", \"verdict\": \"correct\", \"correction\": \"crap pie\", \"reasoning\": \"Pun on episode title 'Crap-Pie'.\"},\n  {\"span\": \"crappie\", \"verdict\": \"correct\", \"correction\": \"crap pie\", \"reasoning\": \"Pun on episode title 'Crap-Pie'.\"},\n  {\"span\": \"there's one\", \"verdict\": \"correct\", \"correction\": \"for some reason\", \"reasoning\": \"Witness 2 and 3 align on 'for some reason'.\"},\n  {\"span\": \"gonna\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Casual contraction fits the style card.\"},\n  {\"span\": \"SS\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Proper noun for the boat, consistent with style card.\"},\n  {\"span\": \"Tin\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Proper noun for the boat, consistent with style card.\"}\n]\n``` \n\n**Reasoning Summary:**\n\n1. **Opening formula:** \"ladies and gentlemen\" is a consistent style.\n2. **Conjunction:** \"and\" is correct for logical flow.\n3. **Pun on title:** \"crappie\" should be \"crap pie\" to reflect the pun.\n4. **Reasoning consistency:** \"for some reason\" aligns with other witnesses.\n5. **Casual speech:** \"gonna\" is correct for Matthew's style.\n6. **Proper nouns:** \"SS\" and \"Tin\" are correct for the boat's name. \n\n**Escalate** is avoided due to clear pun and style card alignment. \n\n```json\n[\n  {\"span\": \"ladies and gentlemen\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Opening formula consistent with style card.\"},\n  {\"span\": \"and\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Logical conjunction in the formula.\"},\n  {\"span\": \"crappie\", \"verdict\": \"correct\", \"correction\": \"crap pie\", \"reasoning\": \"Pun on episode title 'Crap-Pie'.\"},\n  {\"span\": \"crappie\", \"verdict\": \"correct\", \"correction\": \"crap pie\", \"reasoning\": \"Pun on episode title 'Crap-Pie'.\"},\n  {\"span\": \"there's one\", \"verdict\": \"correct\", \"correction\": \"for some reason\", \"reasoning\": \"Witness 2 and 3 align on 'for some reason'.\"},\n  {\"span\": \"gonna\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Casual contraction fits the style card.\"},\n  {\"span\": \"SS\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Proper noun for the boat, consistent with style card.\"},\n  {\"span\": \"Tin\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Proper noun for the boat, consistent with style card.\"}\n]\n``` \n",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Opening formula consistent with style card."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Logical conjunction in the formula."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "crap pie",
+      "reasoning": "Pun on episode title 'Crap-Pie'."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "crap pie",
+      "reasoning": "Pun on episode title 'Crap-Pie'."
+    },
+    {
+      "span": "there's one",
+      "verdict": "correct",
+      "correction": "for some reason",
+      "reasoning": "Witness 2 and 3 align on 'for some reason'."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Casual contraction fits the style card."
+    },
+    {
+      "span": "SS",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Proper noun for the boat, consistent with style card."
+    },
+    {
+      "span": "Tin",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Proper noun for the boat, consistent with style card."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 26.7,
+  "prompt_chars": 11652,
+  "judge": "gutenberg-12b",
+  "model": "vanilj/mistral-nemo-gutenberg-12b-v2:Q8_0",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

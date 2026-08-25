@@ -1,0 +1,145 @@
+{
+  "raw": "[\n{\"span\": \"for when i'm in by myself because it's just riding so high\", \"verdict\": \"correct\", \"correction\": \"Put some cinder blocks up on the front though for when I'm in by myself because it's just riding so high.\", \"reasoning\": \"Witness 3 provides a complete, contextually logical opening phrase ('cinder blocks') that explains the 'riding high' issue, whereas Witness 1 and 2 start mid-sentence or with nonsense.\"},\n{\"span\": \"because\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The speaker uses formal register words like 'because' even when casual alternatives like 'cuz' are possible; the meaning is identical and fits the style card's note on register variance.\"},\n{\"span\": \"and i might\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 hears 'Yeah' while Witness 1 hears 'and I might'; without audio, it is impossible to determine if this is a filler word or a misheard clause about the boat's condition.\"},\n{\"span\": \"gotta\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Both 'gotta' and 'got to' are phonetically identical in rapid speech; the draft reading is acceptable as it matches the speaker's informal style.\"},\n{\"span\": \"alright\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The spelling variation between 'alright' and 'all right' does not affect meaning or transcription accuracy in this context.\"},\n{\"span\": \"i caught i caught like seven crappies ish\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 hears 'It's kind of like Seven' while Witness 1 hears a stuttered 'I caught I caught'; the speaker's known habit of hesitantly revising counts (Style Card) makes both plausible, but the exact phrasing is ambiguous.\"},\n{\"span\": \"ish\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The Style Card explicitly states that '-ish' suffixes and hedges are a signature of this speaker's counting style; its presence confirms the reading rather than indicating an error.\"},\n{\"span\": \"one or\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 hears 'water two' while Witness 1 hears 'one or'; 'let one or two go' is a standard phrase, but 'let water two go' could be a specific reference to the boat's water level or a severe mishearing of 'one or'.\"},\n{\"span\": \"tea\", \"verdict\": \"correct\", \"correction\": \"Uh, Captain Teeny Trout gave me one\", \"reasoning\": \"The Style Card establishes 'Captain Teeny Trout' as a consistent nickname for Lucas; 'Tea Truck' is a phonetic mangle of this name.\"},\n{\"span\": \"gills\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 hears 'kills' while Witness 1 hears 'gills'; given the context of fishing for bluegills ('gills'), 'gills' is semantically correct, but 'kills' could be a mishearing of the word or a specific slang term not in the standard lexicon.\"},\n{\"span\": \"there was\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 hears 'There's' while Witness 1 hears 'There was'; both are grammatically valid for this speaker's style, and the audio distinction between the contraction and full form is difficult to resolve without listening.\"},\n{\"span\": \"was\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 2 hears 'are' while Witness 1 hears 'was'; both fit the sentence structure ('There are some close ones' vs 'There was some close ones'), and the speaker's disfluent style makes the exact verb tense ambiguous.\"},\n{\"span\": \"blue gills\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The Style Card notes that 'gills' is a common shorthand for bluegill; the spacing variation between 'blue gills' and 'bluegills' is a minor orthographic difference that does not affect meaning.\"},\n{\"span\": \"like them\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Witness 3 hears 'likethem' (likely a tokenization error for 'like them'); the meaning and phrasing are identical.\"},\n{\"span\": \"i\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 hears 'I'd' while Witness 1 hears 'I'; both fit the context ('I usually let them go' vs 'I'd usually let them go'), and the contraction is often elided in speech.\"},\n{\"span\": \"let them\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Witness 3's 'letthem' is a tokenization artifact for 'let them'; the meaning is preserved.\"},\n{\"span\": \"unless\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 hears 'in less' while Witness 1 hears 'unless'; 'in less' is likely a mishearing of 'unless', but without audio, it is unclear if the speaker used a non-standard phrasing or if the ASR failed.\"},\n{\"span\": \"you\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 hears 'it's' while Witness 1 hears 'you'; both fit the sentence ('some days you just small fish' vs 'some days it's just smaller fish'), and the speaker's tendency to drop subjects or use hedges makes this ambiguous.\"},\n{\"span\": \"small\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 2 and 3 hear 'smaller' while Witness 1 hears 'small'; both are plausible in the context of comparing fish sizes, but the exact adjective is unclear.\"},\n{\"span\": \"like\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 omits 'like' while Witness 1 includes it; the speaker frequently uses 'like' as a filler word, so its presence or absence is hard to verify without audio.\"},\n{\"span\": \"having it\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 2 omits 'having it' while Witness 1 includes it; the phrase 'weren't having it' is a common idiom, but the ASR may have dropped the end of the sentence.\"},\n{\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"And we should have had some minnows. We really should have. But.\", \"reasoning\": \"Witness 3 captures a distinct, stylistic addition about minnows that fits the speaker's habit of self-interruption and commentary on bait; Witnesses 1 and 2 miss this entire segment.\"}\n]",
+  "rulings": [
+    {
+      "span": "for when i'm in by myself because it's just riding so high",
+      "verdict": "correct",
+      "correction": "Put some cinder blocks up on the front though for when I'm in by myself because it's just riding so high.",
+      "reasoning": "Witness 3 provides a complete, contextually logical opening phrase ('cinder blocks') that explains the 'riding high' issue, whereas Witness 1 and 2 start mid-sentence or with nonsense."
+    },
+    {
+      "span": "because",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The speaker uses formal register words like 'because' even when casual alternatives like 'cuz' are possible; the meaning is identical and fits the style card's note on register variance."
+    },
+    {
+      "span": "and i might",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'Yeah' while Witness 1 hears 'and I might'; without audio, it is impossible to determine if this is a filler word or a misheard clause about the boat's condition."
+    },
+    {
+      "span": "gotta",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Both 'gotta' and 'got to' are phonetically identical in rapid speech; the draft reading is acceptable as it matches the speaker's informal style."
+    },
+    {
+      "span": "alright",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The spelling variation between 'alright' and 'all right' does not affect meaning or transcription accuracy in this context."
+    },
+    {
+      "span": "i caught i caught like seven crappies ish",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'It's kind of like Seven' while Witness 1 hears a stuttered 'I caught I caught'; the speaker's known habit of hesitantly revising counts (Style Card) makes both plausible, but the exact phrasing is ambiguous."
+    },
+    {
+      "span": "ish",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The Style Card explicitly states that '-ish' suffixes and hedges are a signature of this speaker's counting style; its presence confirms the reading rather than indicating an error."
+    },
+    {
+      "span": "one or",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'water two' while Witness 1 hears 'one or'; 'let one or two go' is a standard phrase, but 'let water two go' could be a specific reference to the boat's water level or a severe mishearing of 'one or'."
+    },
+    {
+      "span": "tea",
+      "verdict": "correct",
+      "correction": "Uh, Captain Teeny Trout gave me one",
+      "reasoning": "The Style Card establishes 'Captain Teeny Trout' as a consistent nickname for Lucas; 'Tea Truck' is a phonetic mangle of this name."
+    },
+    {
+      "span": "gills",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'kills' while Witness 1 hears 'gills'; given the context of fishing for bluegills ('gills'), 'gills' is semantically correct, but 'kills' could be a mishearing of the word or a specific slang term not in the standard lexicon."
+    },
+    {
+      "span": "there was",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'There's' while Witness 1 hears 'There was'; both are grammatically valid for this speaker's style, and the audio distinction between the contraction and full form is difficult to resolve without listening."
+    },
+    {
+      "span": "was",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 hears 'are' while Witness 1 hears 'was'; both fit the sentence structure ('There are some close ones' vs 'There was some close ones'), and the speaker's disfluent style makes the exact verb tense ambiguous."
+    },
+    {
+      "span": "blue gills",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The Style Card notes that 'gills' is a common shorthand for bluegill; the spacing variation between 'blue gills' and 'bluegills' is a minor orthographic difference that does not affect meaning."
+    },
+    {
+      "span": "like them",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'likethem' (likely a tokenization error for 'like them'); the meaning and phrasing are identical."
+    },
+    {
+      "span": "i",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'I'd' while Witness 1 hears 'I'; both fit the context ('I usually let them go' vs 'I'd usually let them go'), and the contraction is often elided in speech."
+    },
+    {
+      "span": "let them",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Witness 3's 'letthem' is a tokenization artifact for 'let them'; the meaning is preserved."
+    },
+    {
+      "span": "unless",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'in less' while Witness 1 hears 'unless'; 'in less' is likely a mishearing of 'unless', but without audio, it is unclear if the speaker used a non-standard phrasing or if the ASR failed."
+    },
+    {
+      "span": "you",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 hears 'it's' while Witness 1 hears 'you'; both fit the sentence ('some days you just small fish' vs 'some days it's just smaller fish'), and the speaker's tendency to drop subjects or use hedges makes this ambiguous."
+    },
+    {
+      "span": "small",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 and 3 hear 'smaller' while Witness 1 hears 'small'; both are plausible in the context of comparing fish sizes, but the exact adjective is unclear."
+    },
+    {
+      "span": "like",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 omits 'like' while Witness 1 includes it; the speaker frequently uses 'like' as a filler word, so its presence or absence is hard to verify without audio."
+    },
+    {
+      "span": "having it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 omits 'having it' while Witness 1 includes it; the phrase 'weren't having it' is a common idiom, but the ASR may have dropped the end of the sentence."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "And we should have had some minnows. We really should have. But.",
+      "reasoning": "Witness 3 captures a distinct, stylistic addition about minnows that fits the speaker's habit of self-interruption and commentary on bait; Witnesses 1 and 2 miss this entire segment."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 58.1,
+  "prompt_chars": 13964,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "b",
+  "witness_set": "W+YT+P",
+  "ablation": "noLex"
+}

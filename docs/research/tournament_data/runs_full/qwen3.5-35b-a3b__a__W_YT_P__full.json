@@ -1,0 +1,61 @@
+{
+  "raw": "[\n  {\n    \"span\": \"ladies and gentlemen\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Style card confirms this is a recurring formal-address opening signature of the speaker.\"\n  },\n  {\n    \"span\": \"and\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The conjunction is required for the grammatical flow of the show's tagline and its absence in other transcripts is likely a smoothing error.\"\n  },\n  {\n    \"span\": \"crappie\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The episode title pun 'Crap-Pie' must be spoken to preserve the joke; 'crap pie' or 'crappie' alone flattens the wordplay.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The phrase 'also known as crap-pie' is the necessary completion of the pun; other witnesses missed this specific wordplay.\"\n  },\n  {\n    \"span\": \"crappie\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The second instance of the fish name in the draft is redundant and likely a misinterpretation of the pun 'crap-pie'.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witnesses disagree on whether the speaker says 'she's running a little rough' or 'yeah' before stating the motor is slow; both are plausible but conflicting.\"\n  },\n  {\n    \"span\": \"gonna\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The speaker's style includes informal contractions and disfluencies; 'gonna' fits the register better than the formal 'going to'.\"\n  },\n  {\n    \"span\": \"there's one\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witnesses disagree between 'there's one reason' and 'for some reason'; both are grammatically valid but the audio distinction is unclear.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Style card confirms this is a recurring formal-address opening signature of the speaker."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The conjunction is required for the grammatical flow of the show's tagline and its absence in other transcripts is likely a smoothing error."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The episode title pun 'Crap-Pie' must be spoken to preserve the joke; 'crap pie' or 'crappie' alone flattens the wordplay."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The phrase 'also known as crap-pie' is the necessary completion of the pun; other witnesses missed this specific wordplay."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The second instance of the fish name in the draft is redundant and likely a misinterpretation of the pun 'crap-pie'."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree on whether the speaker says 'she's running a little rough' or 'yeah' before stating the motor is slow; both are plausible but conflicting."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The speaker's style includes informal contractions and disfluencies; 'gonna' fits the register better than the formal 'going to'."
+    },
+    {
+      "span": "there's one",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree between 'there's one reason' and 'for some reason'; both are grammatically valid but the audio distinction is unclear."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 22.4,
+  "prompt_chars": 11624,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

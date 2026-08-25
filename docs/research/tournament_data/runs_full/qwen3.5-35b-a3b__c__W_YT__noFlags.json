@@ -1,0 +1,61 @@
+{
+  "raw": "[\n  {\n    \"span\": \"Get it Monty.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Get ready. Get Say hi Funk.\",\n    \"reasoning\": \"Witness 2's 'Get ready' and 'Say hi Funk' align with the style card's instruction to talk to dogs as conversation partners, whereas Witness 1's 'Get it Monty' is a likely ASR smoothing error that misses the imperative command structure.\"\n  },\n  {\n    \"span\": \"Hi. Look at him Monty.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Hi. We got a Monty.\",\n    \"reasoning\": \"The phrase 'We got a Monty' is a plausible introduction of the dog character consistent with the speaker's register, while 'Look at him Monty' is an unlikely stutter or misinterpretation of the audio flow.\"\n  },\n  {\n    \"span\": \"Help him see it.\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Both witnesses differ significantly ('Help him see it' vs 'Come here, buddy') and both are plausible commands to a dog; without audio, the specific phrasing cannot be verified.\"\n  },\n  {\n    \"span\": \"Go get it Monty.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Go get him, Monty.\",\n    \"reasoning\": \"Given the context of a dog playing with an object (implied by 'stinker' and 'give me that'), 'Go get him' is the standard command to retrieve a toy or another animal, whereas 'Go get it' is less specific and likely a transcription artifact.\"\n  },\n  {\n    \"span\": \"Give me Give me that.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Give me that. Give me that.\",\n    \"reasoning\": \"Witness 1's repetition of 'Give me that' is consistent with the speaker's habit of repeating phrases for emphasis or due to disfluency, whereas Witness 2's 'Give me Give me that' appears to be a stuttered transcription error.\"\n  },\n  {\n    \"span\": \"He's like, no.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The speaker frequently uses reported speech ('He's like') when narrating the dog's actions or thoughts, making this a stylistic feature rather than an error.\"\n  },\n  {\n    \"span\": \"I'll get you.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Let me get you.\",\n    \"reasoning\": \"In the context of play-fighting over a toy, 'Let me get you' is a more natural and common phrase than the threatening 'I'll get you', which fits the playful register better.\"\n  },\n  {\n    \"span\": \"I'm fine.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Oh, fine.\",\n    \"reasoning\": \"Witness 2's 'Oh, fine' represents a natural sigh of resignation or acceptance after the dog refuses to give up the toy, whereas 'I'm fine' is an unlikely self-declaration in this specific interaction.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "Get it Monty.",
+      "verdict": "correct",
+      "correction": "Get ready. Get Say hi Funk.",
+      "reasoning": "Witness 2's 'Get ready' and 'Say hi Funk' align with the style card's instruction to talk to dogs as conversation partners, whereas Witness 1's 'Get it Monty' is a likely ASR smoothing error that misses the imperative command structure."
+    },
+    {
+      "span": "Hi. Look at him Monty.",
+      "verdict": "correct",
+      "correction": "Hi. We got a Monty.",
+      "reasoning": "The phrase 'We got a Monty' is a plausible introduction of the dog character consistent with the speaker's register, while 'Look at him Monty' is an unlikely stutter or misinterpretation of the audio flow."
+    },
+    {
+      "span": "Help him see it.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both witnesses differ significantly ('Help him see it' vs 'Come here, buddy') and both are plausible commands to a dog; without audio, the specific phrasing cannot be verified."
+    },
+    {
+      "span": "Go get it Monty.",
+      "verdict": "correct",
+      "correction": "Go get him, Monty.",
+      "reasoning": "Given the context of a dog playing with an object (implied by 'stinker' and 'give me that'), 'Go get him' is the standard command to retrieve a toy or another animal, whereas 'Go get it' is less specific and likely a transcription artifact."
+    },
+    {
+      "span": "Give me Give me that.",
+      "verdict": "correct",
+      "correction": "Give me that. Give me that.",
+      "reasoning": "Witness 1's repetition of 'Give me that' is consistent with the speaker's habit of repeating phrases for emphasis or due to disfluency, whereas Witness 2's 'Give me Give me that' appears to be a stuttered transcription error."
+    },
+    {
+      "span": "He's like, no.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The speaker frequently uses reported speech ('He's like') when narrating the dog's actions or thoughts, making this a stylistic feature rather than an error."
+    },
+    {
+      "span": "I'll get you.",
+      "verdict": "correct",
+      "correction": "Let me get you.",
+      "reasoning": "In the context of play-fighting over a toy, 'Let me get you' is a more natural and common phrase than the threatening 'I'll get you', which fits the playful register better."
+    },
+    {
+      "span": "I'm fine.",
+      "verdict": "correct",
+      "correction": "Oh, fine.",
+      "reasoning": "Witness 2's 'Oh, fine' represents a natural sigh of resignation or acceptance after the dog refuses to give up the toy, whereas 'I'm fine' is an unlikely self-declaration in this specific interaction."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 29.4,
+  "prompt_chars": 9112,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "c",
+  "witness_set": "W+YT",
+  "ablation": "noFlags"
+}

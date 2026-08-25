@@ -1,0 +1,12 @@
+{
+  "raw": "[]",
+  "rulings": [],
+  "parse_note": null,
+  "elapsed": 4.7,
+  "prompt_chars": 8926,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "a",
+  "witness_set": "W",
+  "ablation": "noLex"
+}

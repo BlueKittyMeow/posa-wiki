@@ -1,0 +1,61 @@
+{
+  "raw": "[{\"span\": \"ladies and gentlemen\", \"verdict\": \"correct\", \"correction\": \"Welcome to another episode of the unsuccessful fishing show, where if you're successful you're unsuccessful, and if you're unsuccessful you're successful.\", \"reasoning\": \"Witnesses 2 and 3 omit 'Ladies and gentlemen', suggesting it is likely an hallucination by Witness 1 given the video title context.\"}, {\"span\": \"and\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The conjunction 'and' is grammatically required between the two contrasting clauses and is present in the draft while absent in other witnesses who likely missed it.\"}, {\"span\": \"crappie\", \"verdict\": \"correct\", \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\", \"reasoning\": \"The video title pun 'Crap-Pie' and the context of a fishing show confirm the speaker is making a pun on 'crappie', not saying 'crap high' or 'crap copy'.\"}, {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"Today we are targeting some crappie, also known as crap-pie. And if we can't catch those...\", \"reasoning\": \"The draft correctly includes the conjunction 'And' to start the next sentence, which is missing in the other witnesses' transcriptions.\"}, {\"span\": \"crappie\", \"verdict\": \"correct\", \"correction\": \"Today we are targeting some crappie, also known as crap-pie. And if we can't catch those...\", \"reasoning\": \"The phrase 'also known as crap copy' is nonsensical in this context; the pun requires 'crap-pie'.\"}, {\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 says 'I think I'm gonna have to tilt', Witness 2 says 'She's running a little rough. I think I'm going to have to tilt', and Witness 3 says 'Yeah, I think I'm gonna have to Tilt'; the presence of an intermediate sentence about the boat's condition is disputed.\"}, {\"span\": \"gonna\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Both the draft and Witness 3 use the colloquial 'gonna', while Witness 2 uses the formal 'going to'; 'gonna' is more likely for a casual fishing show host.\"}, {\"span\": \"there's one\", \"verdict\": \"correct\", \"correction\": \"Hold on. Uh, yeah. For some reason she's running a little slow today.\", \"reasoning\": \"Witnesses 2 and 3 agree on 'For some reason', which is a common phrase for this context, whereas 'There's one reason' is less idiomatic and likely an error by Witness 1.\"}]",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "correct",
+      "correction": "Welcome to another episode of the unsuccessful fishing show, where if you're successful you're unsuccessful, and if you're unsuccessful you're successful.",
+      "reasoning": "Witnesses 2 and 3 omit 'Ladies and gentlemen', suggesting it is likely an hallucination by Witness 1 given the video title context."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The conjunction 'and' is grammatically required between the two contrasting clauses and is present in the draft while absent in other witnesses who likely missed it."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The video title pun 'Crap-Pie' and the context of a fishing show confirm the speaker is making a pun on 'crappie', not saying 'crap high' or 'crap copy'."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie. And if we can't catch those...",
+      "reasoning": "The draft correctly includes the conjunction 'And' to start the next sentence, which is missing in the other witnesses' transcriptions."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie. And if we can't catch those...",
+      "reasoning": "The phrase 'also known as crap copy' is nonsensical in this context; the pun requires 'crap-pie'."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 says 'I think I'm gonna have to tilt', Witness 2 says 'She's running a little rough. I think I'm going to have to tilt', and Witness 3 says 'Yeah, I think I'm gonna have to Tilt'; the presence of an intermediate sentence about the boat's condition is disputed."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Both the draft and Witness 3 use the colloquial 'gonna', while Witness 2 uses the formal 'going to'; 'gonna' is more likely for a casual fishing show host."
+    },
+    {
+      "span": "there's one",
+      "verdict": "correct",
+      "correction": "Hold on. Uh, yeah. For some reason she's running a little slow today.",
+      "reasoning": "Witnesses 2 and 3 agree on 'For some reason', which is a common phrase for this context, whereas 'There's one reason' is less idiomatic and likely an error by Witness 1."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 24.1,
+  "prompt_chars": 5633,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "noStyle"
+}

@@ -1,0 +1,31 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"Um, as you can see, I'm in a new vessel.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Disfluency is signal; 'Um' is a natural hesitation.\"\n    },\n    {\n        \"span\": \"I think I'm gonna have to tilt the motor up a little bit.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Disfluency is signal; 'gonna' is a common casual contraction.\"\n    },\n    {\n        \"span\": \"This is the SS Tin Can 3.0.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Consistent naming of the boat; 'SS' and 'Tin' are part of the proper noun.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "Um, as you can see, I'm in a new vessel.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Disfluency is signal; 'Um' is a natural hesitation."
+    },
+    {
+      "span": "I think I'm gonna have to tilt the motor up a little bit.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Disfluency is signal; 'gonna' is a common casual contraction."
+    },
+    {
+      "span": "This is the SS Tin Can 3.0.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Consistent naming of the boat; 'SS' and 'Tin' are part of the proper noun."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 14.8,
+  "prompt_chars": 8926,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "a",
+  "witness_set": "W",
+  "ablation": "noLex"
+}

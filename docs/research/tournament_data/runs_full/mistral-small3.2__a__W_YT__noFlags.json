@@ -1,0 +1,25 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"Today we are targeting some crappie, also known as crappie.\",\n        \"verdict\": \"correct\",\n        \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n        \"reasoning\": \"The video description mentions the crappie/crap-pie pun, which is the point of the passage.\"\n    },\n    {\n        \"span\": \"There's one reason she's running a little slow today.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear if 'one reason' is correct or if it should be 'for some reason'.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "Today we are targeting some crappie, also known as crappie.",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The video description mentions the crappie/crap-pie pun, which is the point of the passage."
+    },
+    {
+      "span": "There's one reason she's running a little slow today.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'one reason' is correct or if it should be 'for some reason'."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 11.2,
+  "prompt_chars": 9880,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "noFlags"
+}

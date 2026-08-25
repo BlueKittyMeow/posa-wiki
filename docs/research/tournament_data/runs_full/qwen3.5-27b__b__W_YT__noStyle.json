@@ -1,0 +1,73 @@
+{
+  "raw": "[\n  {\n    \"span\": \"for when\",\n    \"verdict\": \"correct\",\n    \"correction\": \"I'm in by myself because it's just riding so high.\",\n    \"reasoning\": \"The phrase 'for when' is likely an ASR hallucination or mishearing of the start of the sentence; removing it creates a grammatically complete and natural opening.\"\n  },\n  {\n    \"span\": \"because\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Because' is the standard transcription for 'cuz'; both represent the same spoken word, so the draft's formal spelling is acceptable.\"\n  },\n  {\n    \"span\": \"gotta\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Gotta' is a standard colloquial contraction for 'got to'; the draft accurately reflects the spoken rhythm without needing correction.\"\n  },\n  {\n    \"span\": \"alright\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Alright' and 'all right' are interchangeable in this context; the single-word spelling is common in transcripts.\"\n  },\n  {\n    \"span\": \"ish\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Alright, so I caught like seven crappies. I let one or two go.\",\n    \"reasoning\": \"'Crappies ish' is likely a mishearing of 'crappies' followed by a pause or filler; removing 'ish' makes the count statement definitive and natural.\"\n  },\n  {\n    \"span\": \"tea\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Uh, Captain Teeny Trout gave me one, then I got some five nice gills.\",\n    \"reasoning\": \"'Captain Tea Truck' is a clear ASR error for the canonical nickname 'Captain Teeny Trout' listed in the entity roster.\"\n  },\n  {\n    \"span\": \"was\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'There was some close ones' is grammatically acceptable in informal speech; changing to 'are' alters the tense unnecessarily.\"\n  },\n  {\n    \"span\": \"blue gills\",\n    \"verdict\": \"correct\",\n    \"correction\": \"There were some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish.\",\n    \"reasoning\": \"'Bluegills' is the canonical domain term for the fish species; 'blue gills' (two words) is a common transcription error that should be corrected.\"\n  },\n  {\n    \"span\": \"small\",\n    \"verdict\": \"correct\",\n    \"correction\": \"There were some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just smaller fish.\",\n    \"reasoning\": \"'Smaller' fits the comparative context of 'big fat ones' better than 'small', and matches the alternative witness testimony.\"\n  },\n  {\n    \"span\": \"having it\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'They just weren't having it' is a common idiom meaning they were not interested; omitting it makes the sentence incomplete.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "for when",
+      "verdict": "correct",
+      "correction": "I'm in by myself because it's just riding so high.",
+      "reasoning": "The phrase 'for when' is likely an ASR hallucination or mishearing of the start of the sentence; removing it creates a grammatically complete and natural opening."
+    },
+    {
+      "span": "because",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Because' is the standard transcription for 'cuz'; both represent the same spoken word, so the draft's formal spelling is acceptable."
+    },
+    {
+      "span": "gotta",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Gotta' is a standard colloquial contraction for 'got to'; the draft accurately reflects the spoken rhythm without needing correction."
+    },
+    {
+      "span": "alright",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Alright' and 'all right' are interchangeable in this context; the single-word spelling is common in transcripts."
+    },
+    {
+      "span": "ish",
+      "verdict": "correct",
+      "correction": "Alright, so I caught like seven crappies. I let one or two go.",
+      "reasoning": "'Crappies ish' is likely a mishearing of 'crappies' followed by a pause or filler; removing 'ish' makes the count statement definitive and natural."
+    },
+    {
+      "span": "tea",
+      "verdict": "correct",
+      "correction": "Uh, Captain Teeny Trout gave me one, then I got some five nice gills.",
+      "reasoning": "'Captain Tea Truck' is a clear ASR error for the canonical nickname 'Captain Teeny Trout' listed in the entity roster."
+    },
+    {
+      "span": "was",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'There was some close ones' is grammatically acceptable in informal speech; changing to 'are' alters the tense unnecessarily."
+    },
+    {
+      "span": "blue gills",
+      "verdict": "correct",
+      "correction": "There were some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish.",
+      "reasoning": "'Bluegills' is the canonical domain term for the fish species; 'blue gills' (two words) is a common transcription error that should be corrected."
+    },
+    {
+      "span": "small",
+      "verdict": "correct",
+      "correction": "There were some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just smaller fish.",
+      "reasoning": "'Smaller' fits the comparative context of 'big fat ones' better than 'small', and matches the alternative witness testimony."
+    },
+    {
+      "span": "having it",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'They just weren't having it' is a common idiom meaning they were not interested; omitting it makes the sentence incomplete."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 120.5,
+  "prompt_chars": 6019,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "noStyle"
+}

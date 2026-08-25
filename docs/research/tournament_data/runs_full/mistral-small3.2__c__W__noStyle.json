@@ -1,0 +1,43 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"Say hi Funk.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Low confidence on 'Funk'; could be another name or misheard.\"\n    },\n    {\n        \"span\": \"Look at him Monty.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Low confidence on 'Look' and 'him'; could be misheard.\"\n    },\n    {\n        \"span\": \"Help him see it.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Low confidence on 'Help' and 'him'; could be misheard.\"\n    },\n    {\n        \"span\": \"He's like, no.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Low confidence on 'He'; could be misheard.\"\n    },\n    {\n        \"span\": \"You can have it.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Low confidence on 'You'; could be misheard.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "Say hi Funk.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Low confidence on 'Funk'; could be another name or misheard."
+    },
+    {
+      "span": "Look at him Monty.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Low confidence on 'Look' and 'him'; could be misheard."
+    },
+    {
+      "span": "Help him see it.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Low confidence on 'Help' and 'him'; could be misheard."
+    },
+    {
+      "span": "He's like, no.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Low confidence on 'He'; could be misheard."
+    },
+    {
+      "span": "You can have it.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Low confidence on 'You'; could be misheard."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 17.9,
+  "prompt_chars": 3000,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "c",
+  "witness_set": "W",
+  "ablation": "noStyle"
+}

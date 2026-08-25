@@ -1,0 +1,109 @@
+{
+  "raw": "[{\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"Put some cinder blocks up on the front though for when I'm in by myself because it's just riding so high.\", \"reasoning\": \"Parakeet's 'put some cinder blocks' is a specific, plausible action consistent with shallow water navigation and boat stability, whereas '(nothing)' creates an incomplete sentence fragment.\"}, {\"span\": \"for when\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The phrase 'for when I'm in by myself' provides logical context for the cinder blocks mentioned; it is coherent within the speaker's register.\"}, {\"span\": \"because\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"'Because' is standard grammar here; YouTube's 'cuz' is a valid stylistic variant but not an error requiring correction in this context.\"}, {\"span\": \"and I might\", \"verdict\": \"correct\", \"correction\": \"Yeah. Last time I came through here, I dinged a rock so I gotta be careful.\", \"reasoning\": \"Parakeet's 'Yeah' acts as a conversational filler/hedge typical of the speaker's style, while 'and I might' introduces an incoherent clause that doesn't fit the narrative flow.\"}, {\"span\": \"gotta\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"'Gotta' is a standard contraction for 'got to'; YouTube's separation into 'got to' is unnecessary smoothing and not a correction of an error.\"}, {\"span\": \"alright\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Both spellings are acceptable; the draft version is fine as it stands.\"}, {\"span\": \"I caught\", \"verdict\": \"correct\", \"correction\": \"It's kind of like seven.\", \"reasoning\": \"Parakeet's 'It's kind of like seven' aligns with the speaker's habit of hesitant, self-correcting counts ('ish', 'kind of'), whereas 'I caught I caught' is a stutter that Parakeet resolved.\"}, {\"span\": \"ish\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"'Ish' is a deliberate stylistic marker of uncertainty and hesitation; removing it (YouTube) flattens the speaker's voice. It is correct.\"}, {\"span\": \"one or\", \"verdict\": \"correct\", \"correction\": \"water two\", \"reasoning\": \"Parakeet's 'water two' is likely an ASR hallucination for 'one or', but given the low confidence on 'one' and the specific error pattern of Parakeet mishearing numbers/words, 'one or' is the intended phrase. However, looking closer at the transcript: 'I let one or two go'. Parakeet heard 'water two'. This is a severe hallucination. But wait, Witness 1 draft says 'one or'. Witness 2 says 'one or'. The prompt asks to rule on the FULL SENTENCE. If I must choose between 'one or' and 'water two', 'one or' makes sense. BUT, looking at the FLAGGED SPANS list item 9: draft 'one or' -> parakeet heard 'water'. This implies the draft is likely right. Wait, let me re-read the instruction. 'For EACH flagged span below, rule on the FULL SENTENCE...'. If I confirm 'one or', I am saying the draft is right. Is 'water two' plausible? No. So 'one or' is correct. Why did Parakeet hear 'water'? Maybe 'I let water two go' was heard as a mangled phrase. But 'one or' is the logical phrase. Let's look at the confidence scores. 'one' isn't flagged low. 'or' isn't flagged. The only low confidence words are specific nouns/verbs. I will stick with 'confirm' for 'one or' because 'water two' is gibberish in this context, and Parakeet often hallucinates completely wrong words. Wait, actually, looking at the pattern of errors, Parakeet hears 'water' when it should be 'one'. This suggests the audio was 'one' but ASR failed. So the draft 'one or' is correct. I will confirm.\", \"reasoning\": \"The phrase 'one or two' is standard English for an approximate count; Parakeet's 'water two' is a severe hallucination inconsistent with the context of releasing fish.\"}, {\"span\": \"tea\", \"verdict\": \"correct\", \"correction\": \"Captain Teeny Trout gave me one.\", \"reasoning\": \"The speaker consistently uses the nickname 'Captain Teeny Trout' for Lucas. Parakeet's 'T Truck' and YouTube's '(nothing)' are errors; 'Tea' is a phonetic slip but 'Teeny Trout' is the canonical name.\"}, {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"and then I got some five nice gills.\", \"reasoning\": \"Parakeet heard 'and', which connects the clauses logically. YouTube's '(nothing)' creates a disjointed sentence. The draft has no word here, but contextually 'and' or 'then' is needed. Parakeet's 'and' is better than nothing, but the draft is missing it. I will supply 'and then'.\"}, {\"span\": \"gills\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"'Gills' is a valid domain term for bluegills; Parakeet's 'kills' is an error, but the draft 'gills' is correct.\"}, {\"span\": \"there was\", \"verdict\": \"correct\", \"correction\": \"There were some close ones.\", \"reasoning\": \"The subject 'ones' is plural, requiring 'were'. Parakeet heard 'There's', which is also grammatically incorrect for 'ones', but the draft 'was' is also wrong. The correct form is 'were'. I will correct to 'There were'.\", \"reasoning\": \"The subject 'ones' is plural, so 'were' is required. Both witnesses have errors here; the draft 'was' is incorrect.\"}, {\"span\": \"blue gills\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"'Blue gills' is a valid variation of the domain term 'bluegill'; both witnesses agree on the concept, and the spacing is stylistic.\"}, {\"span\": \"like them\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The draft separates 'like' and 'them', which is standard grammar. Parakeet's 'likethem' is a smoothing error that removes natural pauses.\"}, {\"span\": \"i\", \"verdict\": \"correct\", \"correction\": \"I'd usually let them go unless like some days it's just smaller fish.\", \"reasoning\": \"Parakeet heard 'I'd' (would) and 'it's' (is), which fits the conditional logic of the sentence better than the draft's 'I usually... you just small'. The draft has a grammatical error ('you just small fish' -> 'it's just smaller/smaller fish'). Parakeet's corrections align with the speaker's register.\"}, {\"span\": \"let them\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\":",
+  "rulings": [
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Put some cinder blocks up on the front though for when I'm in by myself because it's just riding so high.",
+      "reasoning": "Parakeet's 'put some cinder blocks' is a specific, plausible action consistent with shallow water navigation and boat stability, whereas '(nothing)' creates an incomplete sentence fragment."
+    },
+    {
+      "span": "for when",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The phrase 'for when I'm in by myself' provides logical context for the cinder blocks mentioned; it is coherent within the speaker's register."
+    },
+    {
+      "span": "because",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Because' is standard grammar here; YouTube's 'cuz' is a valid stylistic variant but not an error requiring correction in this context."
+    },
+    {
+      "span": "and I might",
+      "verdict": "correct",
+      "correction": "Yeah. Last time I came through here, I dinged a rock so I gotta be careful.",
+      "reasoning": "Parakeet's 'Yeah' acts as a conversational filler/hedge typical of the speaker's style, while 'and I might' introduces an incoherent clause that doesn't fit the narrative flow."
+    },
+    {
+      "span": "gotta",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Gotta' is a standard contraction for 'got to'; YouTube's separation into 'got to' is unnecessary smoothing and not a correction of an error."
+    },
+    {
+      "span": "alright",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Both spellings are acceptable; the draft version is fine as it stands."
+    },
+    {
+      "span": "I caught",
+      "verdict": "correct",
+      "correction": "It's kind of like seven.",
+      "reasoning": "Parakeet's 'It's kind of like seven' aligns with the speaker's habit of hesitant, self-correcting counts ('ish', 'kind of'), whereas 'I caught I caught' is a stutter that Parakeet resolved."
+    },
+    {
+      "span": "ish",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Ish' is a deliberate stylistic marker of uncertainty and hesitation; removing it (YouTube) flattens the speaker's voice. It is correct."
+    },
+    {
+      "span": "one or",
+      "verdict": "correct",
+      "correction": "water two",
+      "reasoning": "The phrase 'one or two' is standard English for an approximate count; Parakeet's 'water two' is a severe hallucination inconsistent with the context of releasing fish."
+    },
+    {
+      "span": "tea",
+      "verdict": "correct",
+      "correction": "Captain Teeny Trout gave me one.",
+      "reasoning": "The speaker consistently uses the nickname 'Captain Teeny Trout' for Lucas. Parakeet's 'T Truck' and YouTube's '(nothing)' are errors; 'Tea' is a phonetic slip but 'Teeny Trout' is the canonical name."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "and then I got some five nice gills.",
+      "reasoning": "Parakeet heard 'and', which connects the clauses logically. YouTube's '(nothing)' creates a disjointed sentence. The draft has no word here, but contextually 'and' or 'then' is needed. Parakeet's 'and' is better than nothing, but the draft is missing it. I will supply 'and then'."
+    },
+    {
+      "span": "gills",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Gills' is a valid domain term for bluegills; Parakeet's 'kills' is an error, but the draft 'gills' is correct."
+    },
+    {
+      "span": "there was",
+      "verdict": "correct",
+      "correction": "There were some close ones.",
+      "reasoning": "The subject 'ones' is plural, so 'were' is required. Both witnesses have errors here; the draft 'was' is incorrect."
+    },
+    {
+      "span": "blue gills",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Blue gills' is a valid variation of the domain term 'bluegill'; both witnesses agree on the concept, and the spacing is stylistic."
+    },
+    {
+      "span": "like them",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The draft separates 'like' and 'them', which is standard grammar. Parakeet's 'likethem' is a smoothing error that removes natural pauses."
+    },
+    {
+      "span": "i",
+      "verdict": "correct",
+      "correction": "I'd usually let them go unless like some days it's just smaller fish.",
+      "reasoning": "Parakeet heard 'I'd' (would) and 'it's' (is), which fits the conditional logic of the sentence better than the draft's 'I usually... you just small'. The draft has a grammatical error ('you just small fish' -> 'it's just smaller/smaller fish'). Parakeet's corrections align with the speaker's register."
+    }
+  ],
+  "parse_note": "recovered-objects",
+  "elapsed": 19.1,
+  "prompt_chars": 14537,
+  "judge": "qwen3.5-9b",
+  "model": "qwen3.5:9b",
+  "passage": "b",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

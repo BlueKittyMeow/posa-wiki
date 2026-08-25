@@ -1,0 +1,67 @@
+{
+  "raw": "[{\"span\": \"it monty\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Context of playing with a dog named Monty supports 'Get it Monty' over the nonsensical 'Get ready get'.\"}, {\"span\": \"funk\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Disagreement between 'Funk' (a known person in roster) and 'punk' (plausible but unverified); low confidence score for Witness 1 requires human verification.\"}, {\"span\": \"look at him\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 2's 'we got a' is grammatically possible but contextually disjointed; 'Look at him' fits the dog play scenario better but needs audio confirmation.\"}, {\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Disagreement between no text and 'come here buddy'; both are plausible commands for a dog, requiring audio to distinguish.\"}, {\"span\": \"it\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"'Go get it' is the standard phrase for retrieving an object; 'Go get him' is less likely given the previous context of fetching an item.\"}, {\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Disagreement between no text and 'give me'; while 'Give me that' is standard, the repetition in Witness 1 ('Give me that. Give me that') suggests a stutter or emphasis that might be misheard as an extra phrase.\"}, {\"span\": \"that\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Disagreement between 'that' and 'here'; both are common demonstratives in this context, and the low confidence score for surrounding words increases uncertainty.\"}, {\"span\": \"i'll\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Disagreement between 'I'll get you' (threatening play) and 'Let me get you' (helpful); both fit the dog play context equally well without audio.\"}, {\"span\": \"i'm\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Disagreement between 'I'm fine' and no text; 'I'm fine' is a natural response to being bitten or grabbed by a dog, but the absence of text in Witness 2 suggests it might be mumbled or non-existent.\"}]",
+  "rulings": [
+    {
+      "span": "it monty",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Context of playing with a dog named Monty supports 'Get it Monty' over the nonsensical 'Get ready get'."
+    },
+    {
+      "span": "funk",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Disagreement between 'Funk' (a known person in roster) and 'punk' (plausible but unverified); low confidence score for Witness 1 requires human verification."
+    },
+    {
+      "span": "look at him",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2's 'we got a' is grammatically possible but contextually disjointed; 'Look at him' fits the dog play scenario better but needs audio confirmation."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Disagreement between no text and 'come here buddy'; both are plausible commands for a dog, requiring audio to distinguish."
+    },
+    {
+      "span": "it",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Go get it' is the standard phrase for retrieving an object; 'Go get him' is less likely given the previous context of fetching an item."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Disagreement between no text and 'give me'; while 'Give me that' is standard, the repetition in Witness 1 ('Give me that. Give me that') suggests a stutter or emphasis that might be misheard as an extra phrase."
+    },
+    {
+      "span": "that",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Disagreement between 'that' and 'here'; both are common demonstratives in this context, and the low confidence score for surrounding words increases uncertainty."
+    },
+    {
+      "span": "i'll",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Disagreement between 'I'll get you' (threatening play) and 'Let me get you' (helpful); both fit the dog play context equally well without audio."
+    },
+    {
+      "span": "i'm",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Disagreement between 'I'm fine' and no text; 'I'm fine' is a natural response to being bitten or grabbed by a dog, but the absence of text in Witness 2 suggests it might be mumbled or non-existent."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 19.1,
+  "prompt_chars": 4220,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "c",
+  "witness_set": "W+YT",
+  "ablation": "noStyle"
+}

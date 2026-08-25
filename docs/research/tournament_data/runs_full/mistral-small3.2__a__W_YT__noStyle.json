@@ -1,0 +1,55 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"ladies and gentlemen\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Common introductory phrase in fishing shows.\"\n    },\n    {\n        \"span\": \"and\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Grammatically correct and contextually appropriate.\"\n    },\n    {\n        \"span\": \"crappie\",\n        \"verdict\": \"correct\",\n        \"correction\": \"Welcome to another episode of the Unsuccessful Fishing Show, where if you're successful, you're unsuccessful. If you're unsuccessful, you're successful. Uh, today we are targeting some crap high, also known as crap crappie. Um, and if we can't catch those, we are going to go for some bluegills.\",\n        \"reasoning\": \"YouTube's 'crap high' and 'crap' make sense as a misheard version of 'crappie' and 'crappie'.\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"No significant meaning lost; likely a filler word or pause.\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"correct\",\n        \"correction\": \"I think I'm going to have to tilt the motor up a little bit. Hold on. Uh, yeah, for some reason she's running a little slow today.\",\n        \"reasoning\": \"YouTube's 'she's running a little rough' fits the context better.\"\n    },\n    {\n        \"span\": \"gonna\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Common casual speech; low-confidence but plausible.\"\n    },\n    {\n        \"span\": \"there's one\",\n        \"verdict\": \"correct\",\n        \"correction\": \"I think I'm going to have to tilt the motor up a little bit. Hold on. Uh, yeah, for some reason she's running a little slow today.\",\n        \"reasoning\": \"YouTube's 'for some' is more natural and fits the context.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Common introductory phrase in fishing shows."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Grammatically correct and contextually appropriate."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Welcome to another episode of the Unsuccessful Fishing Show, where if you're successful, you're unsuccessful. If you're unsuccessful, you're successful. Uh, today we are targeting some crap high, also known as crap crappie. Um, and if we can't catch those, we are going to go for some bluegills.",
+      "reasoning": "YouTube's 'crap high' and 'crap' make sense as a misheard version of 'crappie' and 'crappie'."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "No significant meaning lost; likely a filler word or pause."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "I think I'm going to have to tilt the motor up a little bit. Hold on. Uh, yeah, for some reason she's running a little slow today.",
+      "reasoning": "YouTube's 'she's running a little rough' fits the context better."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Common casual speech; low-confidence but plausible."
+    },
+    {
+      "span": "there's one",
+      "verdict": "correct",
+      "correction": "I think I'm going to have to tilt the motor up a little bit. Hold on. Uh, yeah, for some reason she's running a little slow today.",
+      "reasoning": "YouTube's 'for some' is more natural and fits the context."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 33.7,
+  "prompt_chars": 4869,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "noStyle"
+}

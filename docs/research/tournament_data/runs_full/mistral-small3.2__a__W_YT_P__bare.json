@@ -1,0 +1,25 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"crappie, also known as crappie\",\n        \"verdict\": \"correct\",\n        \"correction\": \"crap-pie, also known as crappie\",\n        \"reasoning\": \"The video description mentions the 'crap-pie' pun.\"\n    },\n    {\n        \"span\": \"There's one reason she's running a little slow today\",\n        \"verdict\": \"correct\",\n        \"correction\": \"For some reason she's running a little slow today\",\n        \"reasoning\": \"Consistent with Witnesses 2 and 3.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "crappie, also known as crappie",
+      "verdict": "correct",
+      "correction": "crap-pie, also known as crappie",
+      "reasoning": "The video description mentions the 'crap-pie' pun."
+    },
+    {
+      "span": "There's one reason she's running a little slow today",
+      "verdict": "correct",
+      "correction": "For some reason she's running a little slow today",
+      "reasoning": "Consistent with Witnesses 2 and 3."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 9.6,
+  "prompt_chars": 3874,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "bare"
+}

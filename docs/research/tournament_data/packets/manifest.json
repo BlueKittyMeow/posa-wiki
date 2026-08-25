@@ -1,0 +1,65 @@
+[
+  {
+    "packet_id": "a__W",
+    "passage": "a",
+    "witness_set": "W",
+    "n_flags": 0,
+    "n_lowconf": 4
+  },
+  {
+    "packet_id": "a__W_YT",
+    "passage": "a",
+    "witness_set": "W+YT",
+    "n_flags": 7,
+    "n_lowconf": 4
+  },
+  {
+    "packet_id": "a__W_YT_P",
+    "passage": "a",
+    "witness_set": "W+YT+P",
+    "n_flags": 8,
+    "n_lowconf": 4
+  },
+  {
+    "packet_id": "b__W",
+    "passage": "b",
+    "witness_set": "W",
+    "n_flags": 0,
+    "n_lowconf": 12
+  },
+  {
+    "packet_id": "b__W_YT",
+    "passage": "b",
+    "witness_set": "W+YT",
+    "n_flags": 10,
+    "n_lowconf": 12
+  },
+  {
+    "packet_id": "b__W_YT_P",
+    "passage": "b",
+    "witness_set": "W+YT+P",
+    "n_flags": 24,
+    "n_lowconf": 12
+  },
+  {
+    "packet_id": "c__W",
+    "passage": "c",
+    "witness_set": "W",
+    "n_flags": 0,
+    "n_lowconf": 6
+  },
+  {
+    "packet_id": "c__W_YT",
+    "passage": "c",
+    "witness_set": "W+YT",
+    "n_flags": 9,
+    "n_lowconf": 6
+  },
+  {
+    "packet_id": "c__W_YT_P",
+    "passage": "c",
+    "witness_set": "W+YT+P",
+    "n_flags": 18,
+    "n_lowconf": 6
+  }
+]

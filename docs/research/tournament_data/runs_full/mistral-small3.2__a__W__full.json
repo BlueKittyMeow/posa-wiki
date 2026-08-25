@@ -1,0 +1,31 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"Um, as you can see, I'm in a new vessel.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Disfluency is consistent with the speaker's style.\"\n    },\n    {\n        \"span\": \"I think I'm gonna have to tilt the motor up a little bit.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"The use of 'gonna' and the hesitant phrasing fit the speaker's register.\"\n    },\n    {\n        \"span\": \"This is the SS Tin Can 3.0.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"The naming of the boat as a character is consistent with the speaker's style.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "Um, as you can see, I'm in a new vessel.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Disfluency is consistent with the speaker's style."
+    },
+    {
+      "span": "I think I'm gonna have to tilt the motor up a little bit.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The use of 'gonna' and the hesitant phrasing fit the speaker's register."
+    },
+    {
+      "span": "This is the SS Tin Can 3.0.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The naming of the boat as a character is consistent with the speaker's style."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 38.8,
+  "prompt_chars": 9471,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "a",
+  "witness_set": "W",
+  "ablation": "full"
+}

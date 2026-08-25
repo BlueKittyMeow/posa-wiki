@@ -1,0 +1,37 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"for when I'm in by myself because it's just riding so high.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear if 'riding so high' is accurate or a mishearing.\"\n    },\n    {\n        \"span\": \"I might last time I came through here I dinged a rock\",\n        \"verdict\": \"correct\",\n        \"correction\": \"I might last time I came through here I dinged a rock so\",\n        \"reasoning\": \"Missing 'so' before 'I gotta be careful'.\"\n    },\n    {\n        \"span\": \"Captain Tea Truck gave me one\",\n        \"verdict\": \"correct\",\n        \"correction\": \"Captain Truck gave me one\",\n        \"reasoning\": \"Consistent with other witnesses, 'Tea' seems to be a mishearing.\"\n    },\n    {\n        \"span\": \"I usually let them go unless like some days you just small fish\",\n        \"verdict\": \"correct\",\n        \"correction\": \"I usually let them go unless like some days you just small fish,\",\n        \"reasoning\": \"Missing comma after 'fish'.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "for when I'm in by myself because it's just riding so high.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'riding so high' is accurate or a mishearing."
+    },
+    {
+      "span": "I might last time I came through here I dinged a rock",
+      "verdict": "correct",
+      "correction": "I might last time I came through here I dinged a rock so",
+      "reasoning": "Missing 'so' before 'I gotta be careful'."
+    },
+    {
+      "span": "Captain Tea Truck gave me one",
+      "verdict": "correct",
+      "correction": "Captain Truck gave me one",
+      "reasoning": "Consistent with other witnesses, 'Tea' seems to be a mishearing."
+    },
+    {
+      "span": "I usually let them go unless like some days you just small fish",
+      "verdict": "correct",
+      "correction": "I usually let them go unless like some days you just small fish,",
+      "reasoning": "Missing comma after 'fish'."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 18.4,
+  "prompt_chars": 5076,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "b",
+  "witness_set": "W+YT+P",
+  "ablation": "bare"
+}

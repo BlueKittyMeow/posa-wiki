@@ -1,0 +1,73 @@
+{
+  "raw": "```json\n[\n  {\n    \"span\": \"for when\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Common disfluency in his speech pattern.\"\n  },\n  {\n    \"span\": \"because\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Common contraction in casual speech.\"\n  },\n  {\n    \"span\": \"gotta\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Common contraction in casual speech.\"\n  },\n  {\n    \"span\": \"alright\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Common usage in his speech pattern.\"\n  },\n  {\n    \"span\": \"ish\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Common hedging word in his speech.\"\n  },\n  {\n    \"span\": \"tea\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Uh, Captain Teeny Trout gave me one, then I got some five nice gills.\",\n    \"reasoning\": \"Consistent nickname for Lucas, 'Captain Teeny Trout'.\"\n  },\n  {\n    \"span\": \"was\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Common past tense usage in his speech.\"\n  },\n  {\n    \"span\": \"blue gills\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Consistent with his style of separating compound words.\"\n  },\n  {\n    \"span\": \"small\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Common comparative usage in his speech.\"\n  },\n  {\n    \"span\": \"having it\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Common idiomatic expression in his speech.\"\n  }\n]\n```",
+  "rulings": [
+    {
+      "span": "for when",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Common disfluency in his speech pattern."
+    },
+    {
+      "span": "because",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Common contraction in casual speech."
+    },
+    {
+      "span": "gotta",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Common contraction in casual speech."
+    },
+    {
+      "span": "alright",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Common usage in his speech pattern."
+    },
+    {
+      "span": "ish",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Common hedging word in his speech."
+    },
+    {
+      "span": "tea",
+      "verdict": "correct",
+      "correction": "Uh, Captain Teeny Trout gave me one, then I got some five nice gills.",
+      "reasoning": "Consistent nickname for Lucas, 'Captain Teeny Trout'."
+    },
+    {
+      "span": "was",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Common past tense usage in his speech."
+    },
+    {
+      "span": "blue gills",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Consistent with his style of separating compound words."
+    },
+    {
+      "span": "small",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Common comparative usage in his speech."
+    },
+    {
+      "span": "having it",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Common idiomatic expression in his speech."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 33.6,
+  "prompt_chars": 12010,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "full"
+}

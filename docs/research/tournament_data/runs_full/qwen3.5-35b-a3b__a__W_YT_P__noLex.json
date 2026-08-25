@@ -1,0 +1,61 @@
+{
+  "raw": "[{\"span\": \"ladies and gentlemen\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Style card explicitly states he opens with 'Ladies and gentlemen' as a recurring formulaic signature.\"}, {\"span\": \"and\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witnesses disagree on the presence of the conjunction in the tagline; audio likely contains a pause or stutter that ASRs interpret differently, but the draft's inclusion is plausible given his disfluent style.\"}, {\"span\": \"crappie\", \"verdict\": \"correct\", \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\", \"reasoning\": \"The episode title pun 'Crap-Pie' must be spoken; Witness 1's 'also known as crappie' flattens the joke, while Witness 3's 'crap pie' captures the intended wordplay.\"}, {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"Today we are targeting some crappie, also known as crap-pie. And if we can't catch those...\", \"reasoning\": \"The conjunction 'And' is required to connect the pun explanation to the conditional clause about bluegills; Witness 2's omission creates a run-on sentence.\"}, {\"span\": \"crappie\", \"verdict\": \"correct\", \"correction\": \"Today we are targeting some crappie, also known as crap-pie. And if we can't catch those...\", \"reasoning\": \"Witness 3's 'crap copy' is a phonetic mishearing of the pun; the draft correctly identifies the fish name but misses the specific pun spelling in the previous clause.\"}, {\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witnesses disagree on whether the speaker says 'she's running a little rough' or just 'yeah'; the draft's omission of the roughness comment is plausible if he skips to the slow motor explanation.\"}, {\"span\": \"gonna\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Both 'gonna' and 'going to' are phonetically similar; the draft's colloquialism fits the register, and there is no evidence of a specific correction needed.\"}, {\"span\": \"there's one\", \"verdict\": \"correct\", \"correction\": \"Hold on. Uh, yeah. For some reason she's running a little slow today.\", \"reasoning\": \"Witnesses 2 and 3 agree on 'for some reason'; the draft's 'there's one' is likely a mishearing of the filler phrase or a stutter that was corrected by the speaker.\"}]",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Style card explicitly states he opens with 'Ladies and gentlemen' as a recurring formulaic signature."
+    },
+    {
+      "span": "and",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree on the presence of the conjunction in the tagline; audio likely contains a pause or stutter that ASRs interpret differently, but the draft's inclusion is plausible given his disfluent style."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The episode title pun 'Crap-Pie' must be spoken; Witness 1's 'also known as crappie' flattens the joke, while Witness 3's 'crap pie' captures the intended wordplay."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie. And if we can't catch those...",
+      "reasoning": "The conjunction 'And' is required to connect the pun explanation to the conditional clause about bluegills; Witness 2's omission creates a run-on sentence."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie. And if we can't catch those...",
+      "reasoning": "Witness 3's 'crap copy' is a phonetic mishearing of the pun; the draft correctly identifies the fish name but misses the specific pun spelling in the previous clause."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses disagree on whether the speaker says 'she's running a little rough' or just 'yeah'; the draft's omission of the roughness comment is plausible if he skips to the slow motor explanation."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Both 'gonna' and 'going to' are phonetically similar; the draft's colloquialism fits the register, and there is no evidence of a specific correction needed."
+    },
+    {
+      "span": "there's one",
+      "verdict": "correct",
+      "correction": "Hold on. Uh, yeah. For some reason she's running a little slow today.",
+      "reasoning": "Witnesses 2 and 3 agree on 'for some reason'; the draft's 'there's one' is likely a mishearing of the filler phrase or a stutter that was corrected by the speaker."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 24.8,
+  "prompt_chars": 11079,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "noLex"
+}

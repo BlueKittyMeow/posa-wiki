@@ -1,0 +1,55 @@
+{
+  "raw": "[\n  {\n    \"span\": \"ladies and gentlemen\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Welcome to another episode of the unsuccessful fishing show, where if you're successful you're unsuccessful, and if you're unsuccessful you're successful.\",\n    \"reasoning\": \"Witness 2 omits the phrase entirely, and 'Ladies and gentlemen' is a common ASR hallucination for generic greetings; removing it aligns with the more concise testimony.\"\n  },\n  {\n    \"span\": \"and\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The conjunction 'and' is necessary to connect the two clauses of the paradoxical statement and flows naturally in speech.\"\n  },\n  {\n    \"span\": \"crappie\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"Witness 2's 'crap high' is a clear phonetic error; the video title and description confirm the pun on 'crappie' and 'crap-pie', making 'also known as crap-pie' the intended joke.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The phrase 'also known as crappie' is redundant and misses the pun; Witness 2's fragment 'crap' supports the intended wordplay 'crap-pie' found in the video title.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"correct\",\n    \"correction\": \"This is the SS Tin Can 3.0. She's running a little rough. I think I'm gonna have to tilt the motor up a little bit.\",\n    \"reasoning\": \"Witness 2 inserts 'She's running a little rough' before mentioning tilting the motor, which provides the logical cause for the action and explains why the boat is running slow later.\"\n  },\n  {\n    \"span\": \"gonna\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Gonna' is a standard colloquial contraction in casual speech; changing it to 'going to' alters the natural rhythm without adding clarity.\"\n  },\n  {\n    \"span\": \"there's one\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Hold on. Uh, yeah. For some reason she's running a little slow today.\",\n    \"reasoning\": \"Witness 2's 'for some' is more idiomatic in this context than 'there's one', and the phrase 'for some reason' naturally introduces an unexplained mechanical issue.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "correct",
+      "correction": "Welcome to another episode of the unsuccessful fishing show, where if you're successful you're unsuccessful, and if you're unsuccessful you're successful.",
+      "reasoning": "Witness 2 omits the phrase entirely, and 'Ladies and gentlemen' is a common ASR hallucination for generic greetings; removing it aligns with the more concise testimony."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The conjunction 'and' is necessary to connect the two clauses of the paradoxical statement and flows naturally in speech."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "Witness 2's 'crap high' is a clear phonetic error; the video title and description confirm the pun on 'crappie' and 'crap-pie', making 'also known as crap-pie' the intended joke."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The phrase 'also known as crappie' is redundant and misses the pun; Witness 2's fragment 'crap' supports the intended wordplay 'crap-pie' found in the video title."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "This is the SS Tin Can 3.0. She's running a little rough. I think I'm gonna have to tilt the motor up a little bit.",
+      "reasoning": "Witness 2 inserts 'She's running a little rough' before mentioning tilting the motor, which provides the logical cause for the action and explains why the boat is running slow later."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Gonna' is a standard colloquial contraction in casual speech; changing it to 'going to' alters the natural rhythm without adding clarity."
+    },
+    {
+      "span": "there's one",
+      "verdict": "correct",
+      "correction": "Hold on. Uh, yeah. For some reason she's running a little slow today.",
+      "reasoning": "Witness 2's 'for some' is more idiomatic in this context than 'there's one', and the phrase 'for some reason' naturally introduces an unexplained mechanical issue."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 95.8,
+  "prompt_chars": 4869,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "noStyle"
+}

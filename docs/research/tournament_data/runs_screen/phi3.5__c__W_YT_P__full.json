@@ -1,0 +1,103 @@
+{
+  "raw": "[\n  {\n    \"span\": \"get it monty\",\n    \"verdict\": \"correct\",\n    \"correction\": \"get Monty\",\n    \"reasoning\": \"The speaker addresses Monty directly, and the possessive 's' is typically omitted in casual speech.\"\n  },\n  {\n    \"span\": \"it monty\",\n    \"verdict\": \"correct\",\n    \"correction\": \"it's Monty\",\n    \"reasoning\": \"The draft should use 'it's' to indicate the contraction of 'it is,' matching the informal speech pattern.\"\n  },\n  {\n    \"span\": \"funk\",\n    \"verdict\": \"confirm\",\n    \"correction\": \"null\",\n    \"reasoning\": \"The witness self-reported 'Funk' with a low confidence level, but it fits the speech pattern and context.\"\n  },\n  {\n    \"span\": \"look\",\n    \"verdict\": \"confirm\",\n    \"correction\": \"null\",\n    \"reasoning\": \"The word 'look' is used correctly in context and matches the informal speech pattern.\"\n  },\n  {\n    \"span\": \"him\",\n    \"verdict\": \"confirm\",\n    \"correction\": \"null\",\n    \"reasoning\": \"The pronoun 'him' is appropriate here, matching the informal speech pattern.\"\n  },\n  {\n    \"span\": \"you little stinker\",\n    \"verdict\": \"confirm\",\n    \"correction\": \"null\",\n    \"reasoning\": \"This is a colloquial and informal way of addressing someone, fitting the speech pattern.\"\n  },\n  {\n    \"span\": \"he won't give it to me\",\n    \"verdict\": \"confirm\",\n    \"correction\": \"null\",\n    \"reasoning\": \"The sentence structure and informal speech pattern are consistent with the witness's style.\"\n  },\n  {\n    \"span\": \"give it here\",\n    \"verdict\": \"confirm\",\n    \"correction\": \"null\",\n    \"reasoning\": \"The sentence is grammatically correct and fits the speech pattern.\"\n  },\n  {\n    \"span\": \"monty i'll get you\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Monty, I'll get you\",\n    \"reasoning\": \"The draft should use the speaker's name for direct address, matching the informal speech pattern.\"\n  },\n  {\n    \"span\": \"i'm fine\",\n    \"verdict\": \"correct\",\n    \"correction\": \"null\",\n    \"reasoning\": \"The sentence is grammatically correct and fits the speech pattern.\"\n  },\n  {\n    \"span\": \"you can have it\",\n    \"verdict\": \"confirm\",\n    \"correction\": \"null\",\n    \"reasoning\": \"The sentence is grammatically correct and fits the speech pattern.\"\n  },\n  {\n    \"span\": \"ooh yeah\",\n    \"verdict\": \"confirm\",\n    \"correction\": \"null\",\n    \"reasoning\": \"The colloquial expression fits the speech pattern and context.\"\n  },\n  {\n    \"span\": \"hear your\",\n    \"verdict\": \"correct\",\n    \"correction\": \"hear you\",\n    \"reasoning\": \"The correct phrasing is 'hear you,' matching the informal speech pattern.\"\n  },\n  {\n    \"span\": \"can\",\n    \"verdict\": \"confirm\",\n    \"correction\": \"null\",\n    \"reasoning\": \"The word 'can' is used correctly in context and matches the informal speech pattern.\"\n  },\n  {\n    \"span\": \"and\",\n    \"verdict\": \"confirm\",\n    \"correction\": \"null\",\n    \"reasoning\": \"The conjunction 'and' is used correctly in context and matches the informal speech pattern.\"\n  }\n]\n\nIn this case, most flags can be confirmed as correct based on the speaker's style and context, with minor corrections where necessary. There are no instances where escalation is required due to the clear context and speaker's style.",
+  "rulings": [
+    {
+      "span": "get it monty",
+      "verdict": "correct",
+      "correction": "get Monty",
+      "reasoning": "The speaker addresses Monty directly, and the possessive 's' is typically omitted in casual speech."
+    },
+    {
+      "span": "it monty",
+      "verdict": "correct",
+      "correction": "it's Monty",
+      "reasoning": "The draft should use 'it's' to indicate the contraction of 'it is,' matching the informal speech pattern."
+    },
+    {
+      "span": "funk",
+      "verdict": "confirm",
+      "correction": "null",
+      "reasoning": "The witness self-reported 'Funk' with a low confidence level, but it fits the speech pattern and context."
+    },
+    {
+      "span": "look",
+      "verdict": "confirm",
+      "correction": "null",
+      "reasoning": "The word 'look' is used correctly in context and matches the informal speech pattern."
+    },
+    {
+      "span": "him",
+      "verdict": "confirm",
+      "correction": "null",
+      "reasoning": "The pronoun 'him' is appropriate here, matching the informal speech pattern."
+    },
+    {
+      "span": "you little stinker",
+      "verdict": "confirm",
+      "correction": "null",
+      "reasoning": "This is a colloquial and informal way of addressing someone, fitting the speech pattern."
+    },
+    {
+      "span": "he won't give it to me",
+      "verdict": "confirm",
+      "correction": "null",
+      "reasoning": "The sentence structure and informal speech pattern are consistent with the witness's style."
+    },
+    {
+      "span": "give it here",
+      "verdict": "confirm",
+      "correction": "null",
+      "reasoning": "The sentence is grammatically correct and fits the speech pattern."
+    },
+    {
+      "span": "monty i'll get you",
+      "verdict": "correct",
+      "correction": "Monty, I'll get you",
+      "reasoning": "The draft should use the speaker's name for direct address, matching the informal speech pattern."
+    },
+    {
+      "span": "i'm fine",
+      "verdict": "correct",
+      "correction": "null",
+      "reasoning": "The sentence is grammatically correct and fits the speech pattern."
+    },
+    {
+      "span": "you can have it",
+      "verdict": "confirm",
+      "correction": "null",
+      "reasoning": "The sentence is grammatically correct and fits the speech pattern."
+    },
+    {
+      "span": "ooh yeah",
+      "verdict": "confirm",
+      "correction": "null",
+      "reasoning": "The colloquial expression fits the speech pattern and context."
+    },
+    {
+      "span": "hear your",
+      "verdict": "correct",
+      "correction": "hear you",
+      "reasoning": "The correct phrasing is 'hear you,' matching the informal speech pattern."
+    },
+    {
+      "span": "can",
+      "verdict": "confirm",
+      "correction": "null",
+      "reasoning": "The word 'can' is used correctly in context and matches the informal speech pattern."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": "null",
+      "reasoning": "The conjunction 'and' is used correctly in context and matches the informal speech pattern."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 8.3,
+  "prompt_chars": 11521,
+  "judge": "phi3.5",
+  "model": "phi3.5:latest",
+  "passage": "c",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

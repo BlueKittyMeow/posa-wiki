@@ -1,0 +1,61 @@
+{
+  "raw": "```json\n[\n  {\n    \"span\": \"ladies and gentlemen\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Consistent with Posa's formal-address openings.\"\n  },\n  {\n    \"span\": \"and\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Consistent with Posa's interruptive and disfluent speech style.\"\n  },\n  {\n    \"span\": \"crappie\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Welcome to another episode of the Unsuccessful Fishing Show, where if you're successful, you're unsuccessful. If you're unsuccessful, you're successful. Uh today we are targeting some crap pie. Also known as crap copy. And if we can't catch those. Mm-hmm. We are going to go for some bluegills. Um As you can see, I'm in a new vessel. This is the SS Tin Can 3.0. Yeah, I think I'm gonna have to Tilt the motor up a little bit. Hold on. Uh yeah. For some reason she's running a little slow today.\",\n    \"reasoning\": \"The pun 'crap-pie' is the point of the episode title and fits Posa's style of making puns.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Unclear if 'crap' is part of the sentence or a separate utterance.\"\n  },\n  {\n    \"span\": \"crappie\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Welcome to another episode of the Unsuccessful Fishing Show, where if you're successful, you're unsuccessful. If you're unsuccessful, you're successful. Uh today we are targeting some crap pie. Also known as crap copy. And if we can't catch those. Mm-hmm. We are going to go for some bluegills. Um As you can see, I'm in a new vessel. This is the SS Tin Can 3.0. Yeah, I think I'm gonna have to Tilt the motor up a little bit. Hold on. Uh yeah. For some reason she's running a little slow today.\",\n    \"reasoning\": \"The pun 'crap-pie' is the point of the episode title and fits Posa's style of making puns.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Unclear if 'she's running a little rough' or 'yeah' is the correct continuation.\"\n  },\n  {\n    \"span\": \"gonna\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Consistent with Posa's disfluent speech style.\"\n  },\n  {\n    \"span\": \"there's one\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Unclear if 'there's one reason' or 'for some reason' is the correct continuation.\"\n  }\n]\n```",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Consistent with Posa's formal-address openings."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Consistent with Posa's interruptive and disfluent speech style."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Welcome to another episode of the Unsuccessful Fishing Show, where if you're successful, you're unsuccessful. If you're unsuccessful, you're successful. Uh today we are targeting some crap pie. Also known as crap copy. And if we can't catch those. Mm-hmm. We are going to go for some bluegills. Um As you can see, I'm in a new vessel. This is the SS Tin Can 3.0. Yeah, I think I'm gonna have to Tilt the motor up a little bit. Hold on. Uh yeah. For some reason she's running a little slow today.",
+      "reasoning": "The pun 'crap-pie' is the point of the episode title and fits Posa's style of making puns."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'crap' is part of the sentence or a separate utterance."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Welcome to another episode of the Unsuccessful Fishing Show, where if you're successful, you're unsuccessful. If you're unsuccessful, you're successful. Uh today we are targeting some crap pie. Also known as crap copy. And if we can't catch those. Mm-hmm. We are going to go for some bluegills. Um As you can see, I'm in a new vessel. This is the SS Tin Can 3.0. Yeah, I think I'm gonna have to Tilt the motor up a little bit. Hold on. Uh yeah. For some reason she's running a little slow today.",
+      "reasoning": "The pun 'crap-pie' is the point of the episode title and fits Posa's style of making puns."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'she's running a little rough' or 'yeah' is the correct continuation."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Consistent with Posa's disfluent speech style."
+    },
+    {
+      "span": "there's one",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'there's one reason' or 'for some reason' is the correct continuation."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 51.6,
+  "prompt_chars": 11624,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

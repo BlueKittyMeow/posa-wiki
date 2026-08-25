@@ -1,0 +1,121 @@
+{
+  "raw": " \n\n```json\n[\n  {\"span\": \"get it monty\", \"verdict\": \"correct\", \"correction\": \"Get ready, Monty.\", \"reasoning\": \"Witness 2's 'Get ready' fits the context better.\"},\n  {\"span\": \"it monty\", \"verdict\": \"correct\", \"correction\": \"Say hi, punk. Hi. Monty.\", \"reasoning\": \"Witness 2's 'Say hi, punk' aligns with the greeting context.\"},\n  {\"span\": \"funk\", \"verdict\": \"correct\", \"correction\": \"punk\", \"reasoning\": \"Witness 2 and 3 consistently heard 'punk'.\"},\n  {\"span\": \"look at him\", \"verdict\": \"correct\", \"correction\": \"We got a Monty.\", \"reasoning\": \"Witness 2's 'We got a Monty' fits the context better.\"},\n  {\"span\": \"him\", \"verdict\": \"correct\", \"correction\": \"them\", \"reasoning\": \"Parakeet's 'them' aligns with the plural context.\"},\n  {\"span\": \"go get\", \"verdict\": \"correct\", \"correction\": \"Forget it, Monty.\", \"reasoning\": \"Parakeet's 'Forget' fits the context of addressing Monty.\"},\n  {\"span\": \"that give me that\", \"verdict\": \"correct\", \"correction\": \"Give me that. Give me here, you little stinker.\", \"reasoning\": \"Combining Witness 2's and 3's readings for clarity.\"},\n  {\"span\": \"he won't give it to me give\", \"verdict\": \"correct\", \"correction\": \"He's like, 'No. He won't give it to me. Give it here, Monty.'\", \"reasoning\": \"Restores the natural flow and intent.\"},\n  {\"span\": \"i'll get you i'm fine\", \"verdict\": \"correct\", \"correction\": \"Let me get you. Oh, fine. You can have it.\", \"reasoning\": \"Combines Witness 2's and 3's more coherent phrasing.\"},\n  {\"span\": \"i'm\", \"verdict\": \"correct\", \"correction\": \"Oh, fine.\", \"reasoning\": \"Witness 2's 'Oh, fine' fits the context better.\"},\n  {\"span\": \"funk\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Already corrected to 'punk'.\"},\n  {\"span\": \"look at him\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Already corrected to 'We got a Monty'.\"},\n  {\"span\": \"him\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Already corrected to 'them'.\"},\n  {\"span\": \"go get\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Already corrected to 'Forget it, Monty'.\"},\n  {\"span\": \"that give me that\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Already corrected.\"},\n  {\"span\": \"he won't give it to me give\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Already corrected.\"},\n  {\"span\": \"i'll get you i'm fine\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Already corrected.\"},\n  {\"span\": \"i'm\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Already corrected.\"}\n]\n``` \n\n**Explanation:**\n\n1. **Contextual Fit:** Prioritize readings that align with Matthew's known style (greetings, addressing dogs, informal tone).\n2. **Consistency with Episode Title:** Given the playful nature, \"punk\" fits better than \"funk\" (a known nickname).\n3. **Disfluency and Interruptions:** Restored natural flow and interruptions (e.g., \"Forget it, Monty\" fits his conversational style).\n4. **Combining Readings:** When multiple witnesses offer plausible parts, combining them preserves the natural speech pattern.\n5. **Already Corrected:** Marked spans where previous corrections already addressed the issue.\n\nThis approach ensures the transcript reflects Matthew's unique speaking style accurately. \n\n```json\n[\n  {\"span\": \"get it monty\", \"verdict\": \"correct\", \"correction\": \"Get ready, Monty.\", \"reasoning\": \"Witness 2's 'Get ready' fits the context better.\"},\n  {\"span\": \"it monty\", \"verdict\": \"correct\", \"correction\": \"Say hi, punk. Hi. Monty.\", \"reasoning\": \"Witness 2's 'Say hi, punk' aligns with the greeting context.\"},\n  {\"span\": \"funk\", \"verdict\": \"correct\", \"correction\": \"punk\", \"reasoning\": \"Witness 2 and 3 consistently heard 'punk'.\"},\n  {\"span\": \"look at him\", \"verdict\": \"correct\", \"correction\": \"We got a Monty.\", \"reasoning\": \"Witness 2's 'We got a Monty' fits the context better.\"},\n  {\"span\": \"him\", \"verdict\": \"correct\", \"correction\": \"them\", \"reasoning\": \"Parakeet's 'them' aligns with the plural context.\"},\n  {\"span\": \"go get\", \"verdict\": \"correct\", \"correction\": \"Forget it, Monty.\", \"reasoning\": \"Parakeet's 'Forget' fits the context of addressing Monty.\"},\n  {\"span\": \"that give me that\", \"verdict\": \"correct\", \"correction\": \"Give me that. Give me here, you little stinker.\", \"reasoning\": \"Combining Witness 2's and 3's readings for clarity.\"},\n  {\"span\": \"he won't give it to me give\", \"verdict\": \"correct\", \"correction\": \"He's like, 'No. He won't give it to me. Give it here, Monty.'\", \"reasoning\": \"Restores the natural flow and intent.\"},\n  {\"span\": \"i'll get you i'm fine\", \"verdict\": \"correct\", \"correction\": \"Let me get you. Oh, fine. You can have it.\", \"reasoning\": \"Combines Witness 2's and 3's more coherent phrasing.\"},\n  {\"span\": \"i'm\", \"verdict\": \"correct\", \"correction\": \"Oh, fine.\", \"reasoning\": \"Witness 2's 'Oh, fine' fits the context better.\"},\n  {\"span\": \"funk\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Already corrected to 'punk'.\"},\n  {\"span\": \"look at him\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Already corrected to 'We got a Monty'.\"},\n  {\"span\": \"him\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Already corrected to 'them'.\"},\n  {\"span\": \"go get\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Already corrected to 'Forget it",
+  "rulings": [
+    {
+      "span": "get it monty",
+      "verdict": "correct",
+      "correction": "Get ready, Monty.",
+      "reasoning": "Witness 2's 'Get ready' fits the context better."
+    },
+    {
+      "span": "it monty",
+      "verdict": "correct",
+      "correction": "Say hi, punk. Hi. Monty.",
+      "reasoning": "Witness 2's 'Say hi, punk' aligns with the greeting context."
+    },
+    {
+      "span": "funk",
+      "verdict": "correct",
+      "correction": "punk",
+      "reasoning": "Witness 2 and 3 consistently heard 'punk'."
+    },
+    {
+      "span": "look at him",
+      "verdict": "correct",
+      "correction": "We got a Monty.",
+      "reasoning": "Witness 2's 'We got a Monty' fits the context better."
+    },
+    {
+      "span": "him",
+      "verdict": "correct",
+      "correction": "them",
+      "reasoning": "Parakeet's 'them' aligns with the plural context."
+    },
+    {
+      "span": "go get",
+      "verdict": "correct",
+      "correction": "Forget it, Monty.",
+      "reasoning": "Parakeet's 'Forget' fits the context of addressing Monty."
+    },
+    {
+      "span": "that give me that",
+      "verdict": "correct",
+      "correction": "Give me that. Give me here, you little stinker.",
+      "reasoning": "Combining Witness 2's and 3's readings for clarity."
+    },
+    {
+      "span": "he won't give it to me give",
+      "verdict": "correct",
+      "correction": "He's like, 'No. He won't give it to me. Give it here, Monty.'",
+      "reasoning": "Restores the natural flow and intent."
+    },
+    {
+      "span": "i'll get you i'm fine",
+      "verdict": "correct",
+      "correction": "Let me get you. Oh, fine. You can have it.",
+      "reasoning": "Combines Witness 2's and 3's more coherent phrasing."
+    },
+    {
+      "span": "i'm",
+      "verdict": "correct",
+      "correction": "Oh, fine.",
+      "reasoning": "Witness 2's 'Oh, fine' fits the context better."
+    },
+    {
+      "span": "funk",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Already corrected to 'punk'."
+    },
+    {
+      "span": "look at him",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Already corrected to 'We got a Monty'."
+    },
+    {
+      "span": "him",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Already corrected to 'them'."
+    },
+    {
+      "span": "go get",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Already corrected to 'Forget it, Monty'."
+    },
+    {
+      "span": "that give me that",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Already corrected."
+    },
+    {
+      "span": "he won't give it to me give",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Already corrected."
+    },
+    {
+      "span": "i'll get you i'm fine",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Already corrected."
+    },
+    {
+      "span": "i'm",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Already corrected."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 30.6,
+  "prompt_chars": 11493,
+  "judge": "gutenberg-12b",
+  "model": "vanilj/mistral-nemo-gutenberg-12b-v2:Q8_0",
+  "passage": "c",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

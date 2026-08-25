@@ -1,0 +1,25 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"Captain Tea Truck\",\n        \"verdict\": \"correct\",\n        \"correction\": \"Uh, Captain Teeny Trout gave me one, then I got some five nice gills.\",\n        \"reasoning\": \"Entity roster indicates 'Captain Teeny Trout' is the correct name.\"\n    },\n    {\n        \"span\": \"I like them either to be big fat ones or I usually let them go unless like some days you just small fish\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear phrasing; possible mishearing of 'unless like some days you just small fish'\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "Captain Tea Truck",
+      "verdict": "correct",
+      "correction": "Uh, Captain Teeny Trout gave me one, then I got some five nice gills.",
+      "reasoning": "Entity roster indicates 'Captain Teeny Trout' is the correct name."
+    },
+    {
+      "span": "I like them either to be big fat ones or I usually let them go unless like some days you just small fish",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear phrasing; possible mishearing of 'unless like some days you just small fish'"
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 11.2,
+  "prompt_chars": 4182,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "b",
+  "witness_set": "W",
+  "ablation": "noStyle"
+}

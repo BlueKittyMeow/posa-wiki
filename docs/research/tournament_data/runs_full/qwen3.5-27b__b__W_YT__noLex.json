@@ -1,0 +1,73 @@
+{
+  "raw": "[{\"span\": \"for when\", \"verdict\": \"correct\", \"correction\": \"I'm in by myself because it's just riding so high.\", \"reasoning\": \"The phrase 'for when' is syntactically broken at the start of the sentence; Witness 2 correctly identifies that no filler word precedes 'I'm', and the context implies a direct statement of current status.\"}, {\"span\": \"because\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The speaker uses standard phonology here; 'cuz' is an informal contraction but 'because' is not an error in this register.\"}, {\"span\": \"gotta\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"'Gotta' is the natural spoken contraction for 'got to' in this casual register; no correction needed.\"}, {\"span\": \"alright\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"One-word vs two-word spelling of 'all right'/'alright' is a stylistic choice; the audio likely contains the same phonemes for both.\"}, {\"span\": \"ish\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The Style Card explicitly states that '-ish' suffixes and hedges on numbers are signature disfluencies of this speaker; removing it smooths the text incorrectly.\"}, {\"span\": \"tea\", \"verdict\": \"correct\", \"correction\": \"Uh, Captain Teeny Trout gave me one, then I got some five nice gills.\", \"reasoning\": \"The Style Card identifies 'Captain Teeny Trout' as a consistent nickname for Lucas; 'Tea Truck' is an ASR hallucination of the pun/phrase.\"}, {\"span\": \"was\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"'There was some close ones' reflects the speaker's colloquial grammar and past-tense narrative flow; changing to 'are' imposes standard grammar on a casual utterance.\"}, {\"span\": \"blue gills\", \"verdict\": \"correct\", \"correction\": \"but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish\", \"reasoning\": \"'Bluegill' is a single compound noun in fishing lexicon; splitting it into 'blue gills' is a transcription error that breaks the domain term.\"}, {\"span\": \"small\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 says 'small fish' while Witness 2 says 'smaller fish'; without audio, it is unclear if the speaker used the comparative form or a truncated adjective phrase typical of his disfluent style.\"}, {\"span\": \"having it\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"'They just weren't having it' is a common idiom meaning they were not interested; Witness 2's truncation removes the punchline of the sentence.\"}]",
+  "rulings": [
+    {
+      "span": "for when",
+      "verdict": "correct",
+      "correction": "I'm in by myself because it's just riding so high.",
+      "reasoning": "The phrase 'for when' is syntactically broken at the start of the sentence; Witness 2 correctly identifies that no filler word precedes 'I'm', and the context implies a direct statement of current status."
+    },
+    {
+      "span": "because",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The speaker uses standard phonology here; 'cuz' is an informal contraction but 'because' is not an error in this register."
+    },
+    {
+      "span": "gotta",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Gotta' is the natural spoken contraction for 'got to' in this casual register; no correction needed."
+    },
+    {
+      "span": "alright",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "One-word vs two-word spelling of 'all right'/'alright' is a stylistic choice; the audio likely contains the same phonemes for both."
+    },
+    {
+      "span": "ish",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The Style Card explicitly states that '-ish' suffixes and hedges on numbers are signature disfluencies of this speaker; removing it smooths the text incorrectly."
+    },
+    {
+      "span": "tea",
+      "verdict": "correct",
+      "correction": "Uh, Captain Teeny Trout gave me one, then I got some five nice gills.",
+      "reasoning": "The Style Card identifies 'Captain Teeny Trout' as a consistent nickname for Lucas; 'Tea Truck' is an ASR hallucination of the pun/phrase."
+    },
+    {
+      "span": "was",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'There was some close ones' reflects the speaker's colloquial grammar and past-tense narrative flow; changing to 'are' imposes standard grammar on a casual utterance."
+    },
+    {
+      "span": "blue gills",
+      "verdict": "correct",
+      "correction": "but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish",
+      "reasoning": "'Bluegill' is a single compound noun in fishing lexicon; splitting it into 'blue gills' is a transcription error that breaks the domain term."
+    },
+    {
+      "span": "small",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 says 'small fish' while Witness 2 says 'smaller fish'; without audio, it is unclear if the speaker used the comparative form or a truncated adjective phrase typical of his disfluent style."
+    },
+    {
+      "span": "having it",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'They just weren't having it' is a common idiom meaning they were not interested; Witness 2's truncation removes the punchline of the sentence."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 103.3,
+  "prompt_chars": 11465,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "noLex"
+}

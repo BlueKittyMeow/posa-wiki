@@ -1,0 +1,25 @@
+{
+  "raw": "[{\"span\": \"Today we are targeting some crappie, also known as crappie.\", \"verdict\": \"correct\", \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\", \"reasoning\": \"The episode title is 'Crap-Pie' and the style card mandates that title puns are spoken aloud; repeating 'crappie' destroys the joke.\"}, {\"span\": \"This is the SS Tin Can 3.0.\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The video description explicitly names the boat 'S.S. Tin Can 3.0', and the style card confirms he versioned boats as proper nouns.\"}]",
+  "rulings": [
+    {
+      "span": "Today we are targeting some crappie, also known as crappie.",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The episode title is 'Crap-Pie' and the style card mandates that title puns are spoken aloud; repeating 'crappie' destroys the joke."
+    },
+    {
+      "span": "This is the SS Tin Can 3.0.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The video description explicitly names the boat 'S.S. Tin Can 3.0', and the style card confirms he versioned boats as proper nouns."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 25.3,
+  "prompt_chars": 8926,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "a",
+  "witness_set": "W",
+  "ablation": "noLex"
+}

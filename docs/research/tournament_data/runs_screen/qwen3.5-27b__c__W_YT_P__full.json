@@ -1,0 +1,67 @@
+{
+  "raw": "[\n  {\n    \"span\": \"Get it Monty. Say hi Funk.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Get it, Monty. Say hi, Funk.\",\n    \"reasoning\": \"Funk is a confirmed entity (Matthew's partner) in the roster; 'punk' and 'ready get' are ASR errors for the name and the command.\"\n  },\n  {\n    \"span\": \"Look at him Monty. Help him see it.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Consistent with Posa's style of addressing the dog (Monty) and narrating the interaction; 'we got a' and 'them' are less coherent in this specific command context.\"\n  },\n  {\n    \"span\": \"Go get it Monty.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Forget it' (Parakeet) contradicts the active play described; 'him' (YouTube) is less likely than 'it' referring to an object in a tug-of-war.\"\n  },\n  {\n    \"span\": \"Give me that. Give me that.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Repetition of the command is typical for Posa's rapid-fire dog interaction; 'can' and 'hear your' are incoherent ASR hallucinations.\"\n  },\n  {\n    \"span\": \"You little stinker.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"A standard affectionate scolding phrase for a dog; 'hear your' and 'you could hear' are nonsensical in this context.\"\n  },\n  {\n    \"span\": \"He's like, no. He won't give it to me.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Posa frequently narrates the dog's internal state or actions as if they are speech; 'and' and missing text in Parakeet are errors.\"\n  },\n  {\n    \"span\": \"Give it here. Monty.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Direct command to the dog by name; consistent with the flow of the tug-of-war.\"\n  },\n  {\n    \"span\": \"I'll get you. I'm fine.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"I'll get you. Oh, fine.\",\n    \"reasoning\": \"'Oh, fine' is a common conversational filler when conceding to a dog; 'I'm fine' is likely an ASR misinterpretation of the phonetic similarity in rapid speech.\"\n  },\n  {\n    \"span\": \"You can have it.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Logical conclusion to the interaction where the speaker yields the object to the dog; 'ooh yeah' is a misinterpretation of the final phrase.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "Get it Monty. Say hi Funk.",
+      "verdict": "correct",
+      "correction": "Get it, Monty. Say hi, Funk.",
+      "reasoning": "Funk is a confirmed entity (Matthew's partner) in the roster; 'punk' and 'ready get' are ASR errors for the name and the command."
+    },
+    {
+      "span": "Look at him Monty. Help him see it.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Consistent with Posa's style of addressing the dog (Monty) and narrating the interaction; 'we got a' and 'them' are less coherent in this specific command context."
+    },
+    {
+      "span": "Go get it Monty.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Forget it' (Parakeet) contradicts the active play described; 'him' (YouTube) is less likely than 'it' referring to an object in a tug-of-war."
+    },
+    {
+      "span": "Give me that. Give me that.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Repetition of the command is typical for Posa's rapid-fire dog interaction; 'can' and 'hear your' are incoherent ASR hallucinations."
+    },
+    {
+      "span": "You little stinker.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "A standard affectionate scolding phrase for a dog; 'hear your' and 'you could hear' are nonsensical in this context."
+    },
+    {
+      "span": "He's like, no. He won't give it to me.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Posa frequently narrates the dog's internal state or actions as if they are speech; 'and' and missing text in Parakeet are errors."
+    },
+    {
+      "span": "Give it here. Monty.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Direct command to the dog by name; consistent with the flow of the tug-of-war."
+    },
+    {
+      "span": "I'll get you. I'm fine.",
+      "verdict": "correct",
+      "correction": "I'll get you. Oh, fine.",
+      "reasoning": "'Oh, fine' is a common conversational filler when conceding to a dog; 'I'm fine' is likely an ASR misinterpretation of the phonetic similarity in rapid speech."
+    },
+    {
+      "span": "You can have it.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Logical conclusion to the interaction where the speaker yields the object to the dog; 'ooh yeah' is a misinterpretation of the final phrase."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 112.5,
+  "prompt_chars": 11493,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "c",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

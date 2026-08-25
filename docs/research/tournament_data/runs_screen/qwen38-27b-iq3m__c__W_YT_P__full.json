@@ -1,0 +1,121 @@
+{
+  "raw": "{\n  \"span\": \"get it monty\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"Whisper and YouTube agree on the core command 'get' and 'Monty'; Parakeet's silence is likely a missed short utterance.\"\n},\n{\n  \"span\": \"it monty\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"YouTube's 'ready get' is a common ASR hallucination for 'get it'; 'get it Monty' is a standard command in this context.\"\n},\n{\n  \"span\": \"funk\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"Funk is a known entity (Matthew's partner) in the roster; 'punk' is a phonetic mishearing of 'Funk' by the other engines.\"\n},\n{\n  \"span\": \"look at him\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"Whisper's 'Look at him' is coherent with the visual context of a dog; YouTube's 'We got a' is a generic filler phrase less likely to be specific here.\"\n},\n{\n  \"span\": \"him\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"Singular 'him' refers to the specific dog Monty; Parakeet's 'them' is a common ASR error for singular pronouns in noisy audio.\"\n},\n{\n  \"span\": \"(nothing)\",\n  \"verdict\": \"escalate\",\n  \"correction\": null,\n  \"reasoning\": \"YouTube hears 'Come here, buddy' which fits the register, but Whisper and Parakeet miss it entirely; cannot confirm without audio.\"\n},\n{\n  \"span\": \"go get\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"'Go get it' is a standard dog command; Parakeet's 'forget' is a phonetic distortion of 'go get'.\"\n},\n{\n  \"span\": \"it\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"Whisper's 'it' is the standard object for 'go get'; YouTube's 'him' is a plausible alternative but 'it' is more common for retrieving objects.\"\n},\n{\n  \"span\": \"(nothing)\",\n  \"verdict\": \"escalate\",\n  \"correction\": null,\n  \"reasoning\": \"YouTube hears a repeated 'Give me' which fits the repetitive nature of the scene, but Whisper and Parakeet do not clearly capture it.\"\n},\n{\n  \"span\": \"that give me that\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"The repetition of 'Give me that' is consistent with the speaker's style of persistent, repetitive commands to the dog.\"\n},\n{\n  \"span\": \"that\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"Whisper's 'that' is the standard object; YouTube's 'here' is a possible mishearing but 'that' is more likely in this context.\"\n},\n{\n  \"span\": \"(nothing)\",\n  \"verdict\": \"escalate\",\n  \"correction\": null,\n  \"reasoning\": \"Parakeet hears 'hear your' which is incoherent; Whisper and YouTube miss it; likely a short interjection or noise.\"\n},\n{\n  \"span\": \"give me\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"Whisper's 'Give me' is the clear command; Parakeet's 'you could hear' is a significant distortion.\"\n},\n{\n  \"span\": \"(nothing)\",\n  \"verdict\": \"escalate\",\n  \"correction\": null,\n  \"reasoning\": \"Parakeet hears 'and' which is a common filler; Whisper and YouTube miss it; likely a short conjunction or noise.\"\n},\n{\n  \"span\": \"he won't give it to me give\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"Whisper's narrative 'He won't give it to me' is coherent and fits the speaker's habit of narrating the dog's actions.\"\n},\n{\n  \"span\": \"monty i'll get you i'm fine\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"Whisper's 'I'll get you. I'm fine.' is a plausible self-correction or reaction to the dog's behavior; Parakeet's 'Ooh yeah' is less specific.\"\n},\n{\n  \"span\": \"i'll\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"Whisper's 'I'll' is a standard contraction; YouTube's 'let me' is a possible alternative but 'I'll' is more likely in this context.\"\n},\n{\n  \"span\": \"i'm\",\n  \"verdict\": \"confirm\",\n  \"correction\": null,\n  \"reasoning\": \"Whisper's 'I'm fine' is a coherent phrase; YouTube's silence is likely a missed short utterance.\"\n}",
+  "rulings": [
+    {
+      "span": "get it monty",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Whisper and YouTube agree on the core command 'get' and 'Monty'; Parakeet's silence is likely a missed short utterance."
+    },
+    {
+      "span": "it monty",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "YouTube's 'ready get' is a common ASR hallucination for 'get it'; 'get it Monty' is a standard command in this context."
+    },
+    {
+      "span": "funk",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Funk is a known entity (Matthew's partner) in the roster; 'punk' is a phonetic mishearing of 'Funk' by the other engines."
+    },
+    {
+      "span": "look at him",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Whisper's 'Look at him' is coherent with the visual context of a dog; YouTube's 'We got a' is a generic filler phrase less likely to be specific here."
+    },
+    {
+      "span": "him",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Singular 'him' refers to the specific dog Monty; Parakeet's 'them' is a common ASR error for singular pronouns in noisy audio."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "YouTube hears 'Come here, buddy' which fits the register, but Whisper and Parakeet miss it entirely; cannot confirm without audio."
+    },
+    {
+      "span": "go get",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Go get it' is a standard dog command; Parakeet's 'forget' is a phonetic distortion of 'go get'."
+    },
+    {
+      "span": "it",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Whisper's 'it' is the standard object for 'go get'; YouTube's 'him' is a plausible alternative but 'it' is more common for retrieving objects."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "YouTube hears a repeated 'Give me' which fits the repetitive nature of the scene, but Whisper and Parakeet do not clearly capture it."
+    },
+    {
+      "span": "that give me that",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The repetition of 'Give me that' is consistent with the speaker's style of persistent, repetitive commands to the dog."
+    },
+    {
+      "span": "that",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Whisper's 'that' is the standard object; YouTube's 'here' is a possible mishearing but 'that' is more likely in this context."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Parakeet hears 'hear your' which is incoherent; Whisper and YouTube miss it; likely a short interjection or noise."
+    },
+    {
+      "span": "give me",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Whisper's 'Give me' is the clear command; Parakeet's 'you could hear' is a significant distortion."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Parakeet hears 'and' which is a common filler; Whisper and YouTube miss it; likely a short conjunction or noise."
+    },
+    {
+      "span": "he won't give it to me give",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Whisper's narrative 'He won't give it to me' is coherent and fits the speaker's habit of narrating the dog's actions."
+    },
+    {
+      "span": "monty i'll get you i'm fine",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Whisper's 'I'll get you. I'm fine.' is a plausible self-correction or reaction to the dog's behavior; Parakeet's 'Ooh yeah' is less specific."
+    },
+    {
+      "span": "i'll",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Whisper's 'I'll' is a standard contraction; YouTube's 'let me' is a possible alternative but 'I'll' is more likely in this context."
+    },
+    {
+      "span": "i'm",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Whisper's 'I'm fine' is a coherent phrase; YouTube's silence is likely a missed short utterance."
+    }
+  ],
+  "parse_note": "recovered-objects",
+  "elapsed": 32.8,
+  "prompt_chars": 11493,
+  "judge": "qwen38-27b-iq3m",
+  "model": "marshlair-qwen38-27b-uncensored:iq3_m-text",
+  "passage": "c",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

@@ -1,0 +1,31 @@
+{
+  "raw": "[{\"span\": \"also known as crappie\", \"verdict\": \"correct\", \"correction\": \"also known as crap-pie\", \"reasoning\": \"The episode title pun 'Crap-Pie' must be preserved; flattening it to 'crappie' destroys the joke and ignores the speaker's style of vocalizing title puns.\"}, {\"span\": \"targeting some crap high, also known as crap crappie\", \"verdict\": \"correct\", \"correction\": \"targeting some crappie, also known as crap-pie\", \"reasoning\": \"Witness 2's 'crap high' is a phonetic mangle of the pun; the correct rendering must reflect the title pun 'Crap-Pie' rather than standard fish terminology.\"}, {\"span\": \"There's one reason she's running a little slow today.\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"The phrase 'There's one reason' is syntactically awkward and potentially a mishearing of a disfluent restart or hedge common to this speaker; without audio confirmation, it is safer to escalate than to invent a correction.\"}]",
+  "rulings": [
+    {
+      "span": "also known as crappie",
+      "verdict": "correct",
+      "correction": "also known as crap-pie",
+      "reasoning": "The episode title pun 'Crap-Pie' must be preserved; flattening it to 'crappie' destroys the joke and ignores the speaker's style of vocalizing title puns."
+    },
+    {
+      "span": "targeting some crap high, also known as crap crappie",
+      "verdict": "correct",
+      "correction": "targeting some crappie, also known as crap-pie",
+      "reasoning": "Witness 2's 'crap high' is a phonetic mangle of the pun; the correct rendering must reflect the title pun 'Crap-Pie' rather than standard fish terminology."
+    },
+    {
+      "span": "There's one reason she's running a little slow today.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "The phrase 'There's one reason' is syntactically awkward and potentially a mishearing of a disfluent restart or hedge common to this speaker; without audio confirmation, it is safer to escalate than to invent a correction."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 12.6,
+  "prompt_chars": 9880,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "noFlags"
+}

@@ -1,0 +1,43 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"Captain Tea Truck gave me one\",\n        \"verdict\": \"correct\",\n        \"correction\": \"Captain Teeny Trout gave me one\",\n        \"reasoning\": \"Consistent nickname for Lucas, per style card.\"\n    },\n    {\n        \"span\": \"I caught I caught like seven crappies ish\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Disfluency and hedging are consistent with speaker's style.\"\n    },\n    {\n        \"span\": \"I let one or two go. Uh,\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Filler word and abrupt transition are consistent with speaker's style.\"\n    },\n    {\n        \"span\": \"There was some close ones, but with the blue gills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish,\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Disfluency and hedging are consistent with speaker's style.\"\n    },\n    {\n        \"span\": \"but man I could see like right at the end there I saw so many crappies like big fat crappies and they just did not care. Like one or two of them would like excitedly swim towards my jig, but they just weren't having it.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Repetition and informal phrasing are consistent with speaker's style.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "Captain Tea Truck gave me one",
+      "verdict": "correct",
+      "correction": "Captain Teeny Trout gave me one",
+      "reasoning": "Consistent nickname for Lucas, per style card."
+    },
+    {
+      "span": "I caught I caught like seven crappies ish",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Disfluency and hedging are consistent with speaker's style."
+    },
+    {
+      "span": "I let one or two go. Uh,",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Filler word and abrupt transition are consistent with speaker's style."
+    },
+    {
+      "span": "There was some close ones, but with the blue gills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish,",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Disfluency and hedging are consistent with speaker's style."
+    },
+    {
+      "span": "but man I could see like right at the end there I saw so many crappies like big fat crappies and they just did not care. Like one or two of them would like excitedly swim towards my jig, but they just weren't having it.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Repetition and informal phrasing are consistent with speaker's style."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 26.8,
+  "prompt_chars": 10173,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "b",
+  "witness_set": "W",
+  "ablation": "full"
+}

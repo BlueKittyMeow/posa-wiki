@@ -1,0 +1,25 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"Today we are targeting some crappie, also known as crappie.\",\n        \"verdict\": \"correct\",\n        \"correction\": \"Today we are targeting some crappie, also known as crappie. And if we can't catch those, we are going to go for some bluegills.\",\n        \"reasoning\": \"The pun 'crap-pie' is the point of the episode title, and the draft flattens it into 'crappie'.\"\n    },\n    {\n        \"span\": \"There's one reason she's running a little slow today.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear if 'There's one reason' is accurate or if it should be 'For some reason'.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "Today we are targeting some crappie, also known as crappie.",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crappie. And if we can't catch those, we are going to go for some bluegills.",
+      "reasoning": "The pun 'crap-pie' is the point of the episode title, and the draft flattens it into 'crappie'."
+    },
+    {
+      "span": "There's one reason she's running a little slow today.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'There's one reason' is accurate or if it should be 'For some reason'."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 13.4,
+  "prompt_chars": 10410,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "noFlags"
+}

@@ -1,0 +1,55 @@
+{
+  "raw": "[{\"span\": \"ladies and gentlemen\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The phrase is a standard show opening consistent with the video title and context, despite YouTube's silence.\"}, {\"span\": \"and\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Grammatically required to connect the parallel clauses in the show's tagline; YouTube likely missed the conjunction.\"}, {\"span\": \"crappie\", \"verdict\": \"correct\", \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\", \"reasoning\": \"The video title explicitly mentions a 'crappie/crap-pie pun', making 'crap-pie' the intended word rather than 'crap high' or just 'crappie'.\"}, {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\", \"reasoning\": \"The pun requires the second term 'crap-pie' to be present; YouTube's 'crap' is a partial capture of the pun.\"}, {\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 has no text here while Witness 2 claims 'she's running a little rough'; without audio, it is impossible to determine if the speaker described the boat as 'rough' or simply paused before mentioning the slow speed.\"}, {\"span\": \"gonna\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Colloquial contraction 'gonna' fits the informal tone of a fishing show; 'going to' is less likely given the low confidence score on 'gonna' in Witness 1.\"}, {\"span\": \"there's one\", \"verdict\": \"correct\", \"correction\": \"Hold on. Uh, yeah. There's one reason she's running a little slow today.\", \"reasoning\": \"The phrase 'There's one reason' is a logical explanation for the boat's behavior, whereas 'for some reason' (Witness 2) contradicts the specific phrasing of 'one reason' in Witness 1.\"}]",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The phrase is a standard show opening consistent with the video title and context, despite YouTube's silence."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Grammatically required to connect the parallel clauses in the show's tagline; YouTube likely missed the conjunction."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The video title explicitly mentions a 'crappie/crap-pie pun', making 'crap-pie' the intended word rather than 'crap high' or just 'crappie'."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The pun requires the second term 'crap-pie' to be present; YouTube's 'crap' is a partial capture of the pun."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 has no text here while Witness 2 claims 'she's running a little rough'; without audio, it is impossible to determine if the speaker described the boat as 'rough' or simply paused before mentioning the slow speed."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Colloquial contraction 'gonna' fits the informal tone of a fishing show; 'going to' is less likely given the low confidence score on 'gonna' in Witness 1."
+    },
+    {
+      "span": "there's one",
+      "verdict": "correct",
+      "correction": "Hold on. Uh, yeah. There's one reason she's running a little slow today.",
+      "reasoning": "The phrase 'There's one reason' is a logical explanation for the boat's behavior, whereas 'for some reason' (Witness 2) contradicts the specific phrasing of 'one reason' in Witness 1."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 17.3,
+  "prompt_chars": 4869,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "noStyle"
+}

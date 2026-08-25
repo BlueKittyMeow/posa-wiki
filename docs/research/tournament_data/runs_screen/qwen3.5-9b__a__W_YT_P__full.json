@@ -1,0 +1,61 @@
+{
+  "raw": "[{\"span\": \"ladies and gentlemen\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The style card explicitly states he opens with 'Ladies and gentlemen' into informal content; Witness 1 is correct.\"}, {\"span\": \"and\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The tagline includes the conjunction 'and' connecting the two clauses; removing it creates a grammatical error inconsistent with his register.\"}, {\"span\": \"crappie\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The episode title pun is 'Crap-Pie', but the speaker says the fish name 'crappie' first. Witness 1 correctly transcribes the fish name before the pun explanation.\"}, {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"also known as crappie\", \"reasoning\": \"Witness 2's 'crap high' and Witness 3's 'crap copy' are ASR hallucinations. The speaker says 'crappie' (the fish) then explains the pun 'crappie/crap-pie'. The draft correctly fills the silence with the repeated word 'crappie' as part of the explanation.\"}, {\"span\": \"crappie\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Continuation of the phrase 'also known as crappie'; Witness 3's 'crap copy' is an error. The draft is correct.\"}, {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"She's running a little rough\", \"reasoning\": \"Witness 2 provides the coherent audio description 'running a little rough' which fits the context of a boat engine issue, whereas Witness 3's 'yeah' is a filler. The draft's '(nothing)' is an error.\"}, {\"span\": \"gonna\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The style card notes he interrupts and restarts constantly; 'gonna' is standard informal speech for him. Witness 2's 'going to' is a smoothing correction that loses his register.\"}, {\"span\": \"there's one\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Witness 1's 'There's one reason' fits the narrative flow of identifying a specific cause. Witness 2/3's 'for some' is a generic hedge that loses the specific count he likely used before correcting himself or stating it definitively.\"}]",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The style card explicitly states he opens with 'Ladies and gentlemen' into informal content; Witness 1 is correct."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The tagline includes the conjunction 'and' connecting the two clauses; removing it creates a grammatical error inconsistent with his register."
+    },
+    {
+      "span": "crappie",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The episode title pun is 'Crap-Pie', but the speaker says the fish name 'crappie' first. Witness 1 correctly transcribes the fish name before the pun explanation."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "also known as crappie",
+      "reasoning": "Witness 2's 'crap high' and Witness 3's 'crap copy' are ASR hallucinations. The speaker says 'crappie' (the fish) then explains the pun 'crappie/crap-pie'. The draft correctly fills the silence with the repeated word 'crappie' as part of the explanation."
+    },
+    {
+      "span": "crappie",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Continuation of the phrase 'also known as crappie'; Witness 3's 'crap copy' is an error. The draft is correct."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "She's running a little rough",
+      "reasoning": "Witness 2 provides the coherent audio description 'running a little rough' which fits the context of a boat engine issue, whereas Witness 3's 'yeah' is a filler. The draft's '(nothing)' is an error."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The style card notes he interrupts and restarts constantly; 'gonna' is standard informal speech for him. Witness 2's 'going to' is a smoothing correction that loses his register."
+    },
+    {
+      "span": "there's one",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Witness 1's 'There's one reason' fits the narrative flow of identifying a specific cause. Witness 2/3's 'for some' is a generic hedge that loses the specific count he likely used before correcting himself or stating it definitively."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 15.9,
+  "prompt_chars": 11652,
+  "judge": "qwen3.5-9b",
+  "model": "qwen3.5:9b",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

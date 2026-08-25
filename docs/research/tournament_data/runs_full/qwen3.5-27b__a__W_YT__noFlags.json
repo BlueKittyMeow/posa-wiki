@@ -1,0 +1,25 @@
+{
+  "raw": "[\n  {\n    \"span\": \"Today we are targeting some crappie, also known as crappie.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The episode title is 'Crap-Pie' and the style card mandates that title puns are spoken aloud; repeating 'crappie' destroys the joke.\"\n  },\n  {\n    \"span\": \"There's one reason she's running a little slow today.\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 1 says 'one reason' while Witness 2 says 'for some reason'; without audio it is impossible to distinguish between the specific count and the idiomatic phrase.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "Today we are targeting some crappie, also known as crappie.",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The episode title is 'Crap-Pie' and the style card mandates that title puns are spoken aloud; repeating 'crappie' destroys the joke."
+    },
+    {
+      "span": "There's one reason she's running a little slow today.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 says 'one reason' while Witness 2 says 'for some reason'; without audio it is impossible to distinguish between the specific count and the idiomatic phrase."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 41.6,
+  "prompt_chars": 9880,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "noFlags"
+}

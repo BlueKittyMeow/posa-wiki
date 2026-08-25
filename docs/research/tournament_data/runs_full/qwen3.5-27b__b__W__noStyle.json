@@ -1,0 +1,43 @@
+{
+  "raw": "[\n  {\n    \"span\": \"I might last time I came through here\",\n    \"verdict\": \"correct\",\n    \"correction\": \"the last time I came through here\",\n    \"reasoning\": \"The phrase 'I might' is a phonetic error for 'the'; the context requires a reference to a previous event, not a modal verb.\"\n  },\n  {\n    \"span\": \"Captain Tea Truck gave me one\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Captain Teeny Trout gave me one\",\n    \"reasoning\": \"'Tea Truck' is an ASR hallucination; the entity roster confirms the nickname is 'Captain Teeny Trout'.\"\n  },\n  {\n    \"span\": \"then I got some five nice gills\",\n    \"verdict\": \"correct\",\n    \"correction\": \"then I got some five nice bluegills\",\n    \"reasoning\": \"'Gills' is a partial transcription error; the speaker refers to the fish species 'bluegill' as confirmed by the domain terms and subsequent context.\"\n  },\n  {\n    \"span\": \"Bunch of little gills that I threw back\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Bunch of little bluegills that I threw back\",\n    \"reasoning\": \"Consistent with the previous correction, 'gills' should be the full species name 'bluegills'.\"\n  },\n  {\n    \"span\": \"but with the blue gills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish\",\n    \"verdict\": \"correct\",\n    \"correction\": \"but with the bluegills, I like them either to be big fat ones or I usually let them go unless it's like some days you just want small fish\",\n    \"reasoning\": \"'Blue gills' should be one word 'bluegills'; the phrase 'you just small fish' is grammatically incomplete and likely missing the verb 'want' or similar, which fits the colloquial speech pattern.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "I might last time I came through here",
+      "verdict": "correct",
+      "correction": "the last time I came through here",
+      "reasoning": "The phrase 'I might' is a phonetic error for 'the'; the context requires a reference to a previous event, not a modal verb."
+    },
+    {
+      "span": "Captain Tea Truck gave me one",
+      "verdict": "correct",
+      "correction": "Captain Teeny Trout gave me one",
+      "reasoning": "'Tea Truck' is an ASR hallucination; the entity roster confirms the nickname is 'Captain Teeny Trout'."
+    },
+    {
+      "span": "then I got some five nice gills",
+      "verdict": "correct",
+      "correction": "then I got some five nice bluegills",
+      "reasoning": "'Gills' is a partial transcription error; the speaker refers to the fish species 'bluegill' as confirmed by the domain terms and subsequent context."
+    },
+    {
+      "span": "Bunch of little gills that I threw back",
+      "verdict": "correct",
+      "correction": "Bunch of little bluegills that I threw back",
+      "reasoning": "Consistent with the previous correction, 'gills' should be the full species name 'bluegills'."
+    },
+    {
+      "span": "but with the blue gills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish",
+      "verdict": "correct",
+      "correction": "but with the bluegills, I like them either to be big fat ones or I usually let them go unless it's like some days you just want small fish",
+      "reasoning": "'Blue gills' should be one word 'bluegills'; the phrase 'you just small fish' is grammatically incomplete and likely missing the verb 'want' or similar, which fits the colloquial speech pattern."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 71.8,
+  "prompt_chars": 4182,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "b",
+  "witness_set": "W",
+  "ablation": "noStyle"
+}

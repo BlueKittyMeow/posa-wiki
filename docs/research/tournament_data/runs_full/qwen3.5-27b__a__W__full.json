@@ -1,0 +1,37 @@
+{
+  "raw": "[{\"span\": \"Um,\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Disfluency is a stylistic signature of this speaker; the low confidence score reflects ASR uncertainty about filler words, not an error in the transcript.\"}, {\"span\": \"gonna\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Colloquial contraction fits the speaker's informal register and is phonetically distinct from 'going to' in this context.\"}, {\"span\": \"SS\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Matches the canonical entity name 'SS Tin Can 3.0' established in the video description and style card; low confidence is likely due to ASR hesitation on abbreviations.\"}, {\"span\": \"Tin\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Part of the consistent boat nickname 'SS Tin Can 3.0'; the low confidence score does not override the strong contextual evidence from the video title and description.\"}]",
+  "rulings": [
+    {
+      "span": "Um,",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Disfluency is a stylistic signature of this speaker; the low confidence score reflects ASR uncertainty about filler words, not an error in the transcript."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Colloquial contraction fits the speaker's informal register and is phonetically distinct from 'going to' in this context."
+    },
+    {
+      "span": "SS",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Matches the canonical entity name 'SS Tin Can 3.0' established in the video description and style card; low confidence is likely due to ASR hesitation on abbreviations."
+    },
+    {
+      "span": "Tin",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Part of the consistent boat nickname 'SS Tin Can 3.0'; the low confidence score does not override the strong contextual evidence from the video title and description."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 59.2,
+  "prompt_chars": 9471,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "a",
+  "witness_set": "W",
+  "ablation": "full"
+}

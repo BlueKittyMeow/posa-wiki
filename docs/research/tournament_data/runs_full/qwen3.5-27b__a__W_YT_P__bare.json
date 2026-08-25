@@ -1,0 +1,25 @@
+{
+  "raw": "[\n  {\n    \"span\": \"Today we are targeting some crappie, also known as crappie.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The video title and description explicitly feature the 'crappie/crap-pie' pun, which is confirmed by Witness 3's transcription of 'crap pie'.\"\n  },\n  {\n    \"span\": \"There's one reason she's running a little slow today.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"For some reason she's running a little slow today.\",\n    \"reasoning\": \"Witnesses 2 and 3 agree on 'for some reason', which is a standard idiom, whereas 'there's one reason' contradicts the context of an unexplained mechanical issue.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "Today we are targeting some crappie, also known as crappie.",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The video title and description explicitly feature the 'crappie/crap-pie' pun, which is confirmed by Witness 3's transcription of 'crap pie'."
+    },
+    {
+      "span": "There's one reason she's running a little slow today.",
+      "verdict": "correct",
+      "correction": "For some reason she's running a little slow today.",
+      "reasoning": "Witnesses 2 and 3 agree on 'for some reason', which is a standard idiom, whereas 'there's one reason' contradicts the context of an unexplained mechanical issue."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 31.0,
+  "prompt_chars": 3874,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "bare"
+}

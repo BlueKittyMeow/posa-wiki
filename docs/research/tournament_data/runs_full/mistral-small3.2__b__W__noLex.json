@@ -1,0 +1,31 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"Captain Tea Truck gave me one\",\n        \"verdict\": \"correct\",\n        \"correction\": \"Captain Teeny Trout gave me one\",\n        \"reasoning\": \"Consistent nickname for Lucas, as per style card.\"\n    },\n    {\n        \"span\": \"I caught I caught like seven crappies ish\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Disfluency and hedging are consistent with speaker's style.\"\n    },\n    {\n        \"span\": \"I usually let them go unless like some days you just small fish\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear if 'unless like some days you just small fish' is coherent or a transcription error.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "Captain Tea Truck gave me one",
+      "verdict": "correct",
+      "correction": "Captain Teeny Trout gave me one",
+      "reasoning": "Consistent nickname for Lucas, as per style card."
+    },
+    {
+      "span": "I caught I caught like seven crappies ish",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Disfluency and hedging are consistent with speaker's style."
+    },
+    {
+      "span": "I usually let them go unless like some days you just small fish",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear if 'unless like some days you just small fish' is coherent or a transcription error."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 13.3,
+  "prompt_chars": 9628,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "b",
+  "witness_set": "W",
+  "ablation": "noLex"
+}

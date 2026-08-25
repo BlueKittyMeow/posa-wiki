@@ -1,0 +1,31 @@
+{
+  "raw": "[\n  {\n    \"span\": \"Captain Tea Truck gave me one\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Captain Teeny Trout gave me one\",\n    \"reasoning\": \"The entity roster and style card confirm 'Captain Teeny Trout' is the consistent nickname for Lucas, and 'Tea Truck' is a phonetic mangle of this name.\"\n  },\n  {\n    \"span\": \"I got some five nice gills\",\n    \"verdict\": \"correct\",\n    \"correction\": \"I got some five nice bluegills\",\n    \"reasoning\": \"The speaker explicitly distinguishes 'bluegills' later in the sentence; 'some five' is a disfluent count of 'five nice bluegills' which fits the domain lexicon.\"\n  },\n  {\n    \"span\": \"unless like some days you just small fish\",\n    \"verdict\": \"correct\",\n    \"correction\": \"unless like some days you just [catch] small fish\",\n    \"reasoning\": \"The sentence is grammatically incomplete in the draft; adding the implied verb 'catch' or 'get' restores the speaker's typical disfluent but coherent speech pattern without inventing new words.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "Captain Tea Truck gave me one",
+      "verdict": "correct",
+      "correction": "Captain Teeny Trout gave me one",
+      "reasoning": "The entity roster and style card confirm 'Captain Teeny Trout' is the consistent nickname for Lucas, and 'Tea Truck' is a phonetic mangle of this name."
+    },
+    {
+      "span": "I got some five nice gills",
+      "verdict": "correct",
+      "correction": "I got some five nice bluegills",
+      "reasoning": "The speaker explicitly distinguishes 'bluegills' later in the sentence; 'some five' is a disfluent count of 'five nice bluegills' which fits the domain lexicon."
+    },
+    {
+      "span": "unless like some days you just small fish",
+      "verdict": "correct",
+      "correction": "unless like some days you just [catch] small fish",
+      "reasoning": "The sentence is grammatically incomplete in the draft; adding the implied verb 'catch' or 'get' restores the speaker's typical disfluent but coherent speech pattern without inventing new words."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 10.7,
+  "prompt_chars": 10676,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "noFlags"
+}

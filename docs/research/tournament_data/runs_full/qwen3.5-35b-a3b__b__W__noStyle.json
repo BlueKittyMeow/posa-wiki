@@ -1,0 +1,25 @@
+{
+  "raw": "[{\"span\": \"Captain Tea Truck gave me one\", \"verdict\": \"correct\", \"correction\": \"Captain Teeny Trout gave me one\", \"reasoning\": \"The entity roster identifies 'Captain Teeny Trout' as a valid nickname for Matthew Posa, and 'Tea Truck' is a phonetic misrecognition of 'Teeny Trout' supported by the low confidence score on 'Tea'.\"}, {\"span\": \"I got some five nice gills\", \"verdict\": \"correct\", \"correction\": \"I got some five nice bluegills\", \"reasoning\": \"The context explicitly mentions 'blue gills' later in the sentence, and 'gills' alone is an incomplete transcription of the fish species being discussed.\"}]",
+  "rulings": [
+    {
+      "span": "Captain Tea Truck gave me one",
+      "verdict": "correct",
+      "correction": "Captain Teeny Trout gave me one",
+      "reasoning": "The entity roster identifies 'Captain Teeny Trout' as a valid nickname for Matthew Posa, and 'Tea Truck' is a phonetic misrecognition of 'Teeny Trout' supported by the low confidence score on 'Tea'."
+    },
+    {
+      "span": "I got some five nice gills",
+      "verdict": "correct",
+      "correction": "I got some five nice bluegills",
+      "reasoning": "The context explicitly mentions 'blue gills' later in the sentence, and 'gills' alone is an incomplete transcription of the fish species being discussed."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 6.9,
+  "prompt_chars": 4182,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "b",
+  "witness_set": "W",
+  "ablation": "noStyle"
+}

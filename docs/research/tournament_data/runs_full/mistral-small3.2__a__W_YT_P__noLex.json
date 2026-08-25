@@ -1,0 +1,61 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"ladies and gentlemen\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Consistent with Posa's formal-address openings.\"\n    },\n    {\n        \"span\": \"and\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits the show's tagline structure.\"\n    },\n    {\n        \"span\": \"crappie\",\n        \"verdict\": \"correct\",\n        \"correction\": \"Welcome to another episode of the Unsuccessful Fishing Show, where if you're successful, you're unsuccessful. If you're unsuccessful, you're successful. Uh today we are targeting some crap pie. Also known as crap pie. And if we can't catch those. Mm-hmm. We are going to go for some bluegills.\",\n        \"reasoning\": \"The pun 'crap pie' aligns with the episode title and Posa's punning style.\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"correct\",\n        \"correction\": \"Welcome to another episode of the Unsuccessful Fishing Show, where if you're successful, you're unsuccessful. If you're unsuccessful, you're successful. Uh today we are targeting some crap pie. Also known as crap pie. And if we can't catch those. Mm-hmm. We are going to go for some bluegills.\",\n        \"reasoning\": \"The word 'crap' is part of the pun and should not be omitted.\"\n    },\n    {\n        \"span\": \"crappie\",\n        \"verdict\": \"correct\",\n        \"correction\": \"Welcome to another episode of the Unsuccessful Fishing Show, where if you're successful, you're unsuccessful. If you're unsuccessful, you're successful. Uh today we are targeting some crap pie. Also known as crap pie. And if we can't catch those. Mm-hmm. We are going to go for some bluegills.\",\n        \"reasoning\": \"The pun 'crap pie' aligns with the episode title and Posa's punning style.\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Disagreement between 'she's running a little rough' and 'yeah' makes it unclear.\"\n    },\n    {\n        \"span\": \"gonna\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Fits Posa's casual speech style.\"\n    },\n    {\n        \"span\": \"there's one\",\n        \"verdict\": \"correct\",\n        \"correction\": \"Welcome to another episode of the Unsuccessful Fishing Show, where if you're successful, you're unsuccessful. If you're unsuccessful, you're successful. Uh today we are targeting some crap pie. Also known as crap pie. And if we can't catch those. Mm-hmm. We are going to go for some bluegills. Um As you can see, I'm in a new vessel. This is the SS Tin Can 3.0. Yeah, I think I'm gonna have to Tilt the motor up a little bit. Hold on. Uh yeah. For some reason she's running a little slow today.\",\n        \"reasoning\": \"'For some reason' is more consistent with Posa's speech patterns.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Consistent with Posa's formal-address openings."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits the show's tagline structure."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Welcome to another episode of the Unsuccessful Fishing Show, where if you're successful, you're unsuccessful. If you're unsuccessful, you're successful. Uh today we are targeting some crap pie. Also known as crap pie. And if we can't catch those. Mm-hmm. We are going to go for some bluegills.",
+      "reasoning": "The pun 'crap pie' aligns with the episode title and Posa's punning style."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Welcome to another episode of the Unsuccessful Fishing Show, where if you're successful, you're unsuccessful. If you're unsuccessful, you're successful. Uh today we are targeting some crap pie. Also known as crap pie. And if we can't catch those. Mm-hmm. We are going to go for some bluegills.",
+      "reasoning": "The word 'crap' is part of the pun and should not be omitted."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Welcome to another episode of the Unsuccessful Fishing Show, where if you're successful, you're unsuccessful. If you're unsuccessful, you're successful. Uh today we are targeting some crap pie. Also known as crap pie. And if we can't catch those. Mm-hmm. We are going to go for some bluegills.",
+      "reasoning": "The pun 'crap pie' aligns with the episode title and Posa's punning style."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Disagreement between 'she's running a little rough' and 'yeah' makes it unclear."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Fits Posa's casual speech style."
+    },
+    {
+      "span": "there's one",
+      "verdict": "correct",
+      "correction": "Welcome to another episode of the Unsuccessful Fishing Show, where if you're successful, you're unsuccessful. If you're unsuccessful, you're successful. Uh today we are targeting some crap pie. Also known as crap pie. And if we can't catch those. Mm-hmm. We are going to go for some bluegills. Um As you can see, I'm in a new vessel. This is the SS Tin Can 3.0. Yeah, I think I'm gonna have to Tilt the motor up a little bit. Hold on. Uh yeah. For some reason she's running a little slow today.",
+      "reasoning": "'For some reason' is more consistent with Posa's speech patterns."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 55.0,
+  "prompt_chars": 11079,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "noLex"
+}

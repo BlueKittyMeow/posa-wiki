@@ -1,0 +1,61 @@
+{
+  "raw": "[\n  {\n    \"span\": \"ladies and gentlemen\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"This formal opening is consistent with Matthew Posa's speaking style, despite the informal content that follows.\"\n  },\n  {\n    \"span\": \"and\",\n    \"verdict\": \"correct\",\n    \"correction\": \"if\",\n    \"reasoning\": \"The context suggests a conditional statement, making 'if' the appropriate conjunction.\"\n  },\n  {\n    \"span\": \"crappie\",\n    \"verdict\": \"correct\",\n    \"correction\": \"crap high\",\n    \"reasoning\": \"The term 'crap pie' is a pun, and 'crap high' is a recognized term for poor-quality fish, aligning with the show's humor.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"escalate\",\n    \"correction\": \"she's running a little slow today\",\n    \"reasoning\": \"Based on the surrounding context, the silence likely indicates speech not captured by the ASR, which should be clarified by human review.\"\n  },\n  {\n    \"span\": \"gonna\",\n    \"verdict\": \"correct\",\n    \"correction\": \"going to\",\n    \"reasoning\": \"The contraction 'gonna' should be expanded to 'going to' for clarity in the transcript.\"\n  },\n  {\n    \"span\": \"there's one\",\n    \"verdict\": \"correct\",\n    \"correction\": \"for some\",\n    \"reasoning\": \"The phrase 'for some reason' fits the speaker's pattern of self-interruption and uncertainty.\"\n  },\n  {\n    \"span\": \"she's running a little rough\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The draft captures the speaker's hesitant tone accurately, as reported by Witness 1.\"\n  },\n  {\n    \"span\": \"yeah\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The word 'yeah' is a common affirmation and does not require correction.\"\n  }\n]\n",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "This formal opening is consistent with Matthew Posa's speaking style, despite the informal content that follows."
+    },
+    {
+      "span": "and",
+      "verdict": "correct",
+      "correction": "if",
+      "reasoning": "The context suggests a conditional statement, making 'if' the appropriate conjunction."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "crap high",
+      "reasoning": "The term 'crap pie' is a pun, and 'crap high' is a recognized term for poor-quality fish, aligning with the show's humor."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": "she's running a little slow today",
+      "reasoning": "Based on the surrounding context, the silence likely indicates speech not captured by the ASR, which should be clarified by human review."
+    },
+    {
+      "span": "gonna",
+      "verdict": "correct",
+      "correction": "going to",
+      "reasoning": "The contraction 'gonna' should be expanded to 'going to' for clarity in the transcript."
+    },
+    {
+      "span": "there's one",
+      "verdict": "correct",
+      "correction": "for some",
+      "reasoning": "The phrase 'for some reason' fits the speaker's pattern of self-interruption and uncertainty."
+    },
+    {
+      "span": "she's running a little rough",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The draft captures the speaker's hesitant tone accurately, as reported by Witness 1."
+    },
+    {
+      "span": "yeah",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The word 'yeah' is a common affirmation and does not require correction."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 11.8,
+  "prompt_chars": 11652,
+  "judge": "phi3.5",
+  "model": "phi3.5:latest",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

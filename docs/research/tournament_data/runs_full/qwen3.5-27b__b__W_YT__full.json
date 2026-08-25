@@ -1,0 +1,73 @@
+{
+  "raw": "[\n  {\n    \"span\": \"for when\",\n    \"verdict\": \"correct\",\n    \"correction\": \"I'm in by myself because it's just riding so high.\",\n    \"reasoning\": \"The phrase 'for when' is syntactically broken at the start of a sentence; YouTube's omission suggests the audio likely starts directly with 'I'm', fitting the speaker's abrupt style.\"\n  },\n  {\n    \"span\": \"because\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Because' is the standard transcription of the phonetic sound; 'cuz' is a stylistic choice not required for accuracy unless the speaker deliberately slurred it into a distinct monosyllable.\"\n  },\n  {\n    \"span\": \"gotta\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Gotta' accurately reflects the colloquial contraction of 'got to' common in this register; splitting it adds unnecessary formality.\"\n  },\n  {\n    \"span\": \"alright\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Alright' is a valid single-word spelling for the interjection used here; 'all right' is an alternative but not a correction.\"\n  },\n  {\n    \"span\": \"ish\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The Style Card explicitly states that '-ish' suffixes and hedges on numbers are signature disfluencies of this speaker; removing it smooths the text incorrectly.\"\n  },\n  {\n    \"span\": \"tea\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Uh, Captain Teeny Trout gave me one, then I got some five nice gills.\",\n    \"reasoning\": \"The Entity Roster identifies 'Captain Teeny Trout' as a consistent nickname for Lucas; 'Tea Truck' is an ASR hallucination of the pun/phrase.\"\n  },\n  {\n    \"span\": \"was\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'There was some close ones' reflects the speaker's past-tense narrative recounting the trip; 'are' would be a tense shift inconsistent with the surrounding context.\"\n  },\n  {\n    \"span\": \"blue gills\",\n    \"verdict\": \"correct\",\n    \"correction\": \"There was some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish.\",\n    \"reasoning\": \"The Domain Lexicon lists 'bluegill' as a single word; splitting it into 'blue gills' is a transcription error that breaks the compound noun.\"\n  },\n  {\n    \"span\": \"small\",\n    \"verdict\": \"correct\",\n    \"correction\": \"There was some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish.\",\n    \"reasoning\": \"The speaker's style includes grammatical fragmentation ('you just small fish'); 'smaller' is an ASR smoothing attempt that violates the rule against repairing disfluencies.\"\n  },\n  {\n    \"span\": \"having it\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'They just weren't having it' is a coherent idiomatic expression fitting the speaker's personification of fish; omitting it cuts off the sentence abruptly.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "for when",
+      "verdict": "correct",
+      "correction": "I'm in by myself because it's just riding so high.",
+      "reasoning": "The phrase 'for when' is syntactically broken at the start of a sentence; YouTube's omission suggests the audio likely starts directly with 'I'm', fitting the speaker's abrupt style."
+    },
+    {
+      "span": "because",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Because' is the standard transcription of the phonetic sound; 'cuz' is a stylistic choice not required for accuracy unless the speaker deliberately slurred it into a distinct monosyllable."
+    },
+    {
+      "span": "gotta",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Gotta' accurately reflects the colloquial contraction of 'got to' common in this register; splitting it adds unnecessary formality."
+    },
+    {
+      "span": "alright",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Alright' is a valid single-word spelling for the interjection used here; 'all right' is an alternative but not a correction."
+    },
+    {
+      "span": "ish",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The Style Card explicitly states that '-ish' suffixes and hedges on numbers are signature disfluencies of this speaker; removing it smooths the text incorrectly."
+    },
+    {
+      "span": "tea",
+      "verdict": "correct",
+      "correction": "Uh, Captain Teeny Trout gave me one, then I got some five nice gills.",
+      "reasoning": "The Entity Roster identifies 'Captain Teeny Trout' as a consistent nickname for Lucas; 'Tea Truck' is an ASR hallucination of the pun/phrase."
+    },
+    {
+      "span": "was",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'There was some close ones' reflects the speaker's past-tense narrative recounting the trip; 'are' would be a tense shift inconsistent with the surrounding context."
+    },
+    {
+      "span": "blue gills",
+      "verdict": "correct",
+      "correction": "There was some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish.",
+      "reasoning": "The Domain Lexicon lists 'bluegill' as a single word; splitting it into 'blue gills' is a transcription error that breaks the compound noun."
+    },
+    {
+      "span": "small",
+      "verdict": "correct",
+      "correction": "There was some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish.",
+      "reasoning": "The speaker's style includes grammatical fragmentation ('you just small fish'); 'smaller' is an ASR smoothing attempt that violates the rule against repairing disfluencies."
+    },
+    {
+      "span": "having it",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'They just weren't having it' is a coherent idiomatic expression fitting the speaker's personification of fish; omitting it cuts off the sentence abruptly."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 130.4,
+  "prompt_chars": 12010,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "full"
+}

@@ -1,0 +1,43 @@
+{
+  "raw": "[{\"span\": \"Say hi Funk\", \"verdict\": \"correct\", \"correction\": \"Say hi Monty\", \"reasoning\": \"Context indicates the dog's name is Monty, not Funk, and Witness 2 confirms 'Monty' in similar phrasing.\"}, {\"span\": \"Look at him Monty\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 says 'Look at him' while Witness 2 says 'We got a Monty'; without audio, it is impossible to determine if the speaker said 'Look at him' or 'Get Monty'.\"}, {\"span\": \"Come here, buddy\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 has 'Go get it Monty' while Witness 2 has 'Come here, buddy'; the rapid overlapping speech makes it unclear which phrase was actually spoken.\"}, {\"span\": \"Give me Give me that\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 has 'Give me that. Give me that' while Witness 2 has 'Give me Give me that'; the repetition pattern is ambiguous without audio.\"}, {\"span\": \"Let me get you\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 has 'I'll get you' while Witness 2 has 'Let me get you'; both are plausible corrections for a rapid utterance but cannot be distinguished without listening.\"}]",
+  "rulings": [
+    {
+      "span": "Say hi Funk",
+      "verdict": "correct",
+      "correction": "Say hi Monty",
+      "reasoning": "Context indicates the dog's name is Monty, not Funk, and Witness 2 confirms 'Monty' in similar phrasing."
+    },
+    {
+      "span": "Look at him Monty",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 says 'Look at him' while Witness 2 says 'We got a Monty'; without audio, it is impossible to determine if the speaker said 'Look at him' or 'Get Monty'."
+    },
+    {
+      "span": "Come here, buddy",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 has 'Go get it Monty' while Witness 2 has 'Come here, buddy'; the rapid overlapping speech makes it unclear which phrase was actually spoken."
+    },
+    {
+      "span": "Give me Give me that",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 has 'Give me that. Give me that' while Witness 2 has 'Give me Give me that'; the repetition pattern is ambiguous without audio."
+    },
+    {
+      "span": "Let me get you",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 has 'I'll get you' while Witness 2 has 'Let me get you'; both are plausible corrections for a rapid utterance but cannot be distinguished without listening."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 11.3,
+  "prompt_chars": 2576,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "c",
+  "witness_set": "W+YT",
+  "ablation": "bare"
+}

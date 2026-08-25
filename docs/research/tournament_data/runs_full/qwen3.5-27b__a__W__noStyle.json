@@ -1,0 +1,25 @@
+{
+  "raw": "[\n  {\n    \"span\": \"Um, as you can see, I'm in a new vessel. This is the SS Tin Can 3.0.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The low confidence scores for 'SS' and 'Tin' are likely due to the specific proper noun phrase 'SS Tin Can' which may be less common in general training data, but the context of the video description explicitly confirms this vessel name.\"\n  },\n  {\n    \"span\": \"I think I'm gonna have to tilt the motor up a little bit.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Gonna' is standard colloquial speech for 'going to' in this context, and the low probability score reflects the model's hesitation on informal contractions rather than an actual error.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "Um, as you can see, I'm in a new vessel. This is the SS Tin Can 3.0.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The low confidence scores for 'SS' and 'Tin' are likely due to the specific proper noun phrase 'SS Tin Can' which may be less common in general training data, but the context of the video description explicitly confirms this vessel name."
+    },
+    {
+      "span": "I think I'm gonna have to tilt the motor up a little bit.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Gonna' is standard colloquial speech for 'going to' in this context, and the low probability score reflects the model's hesitation on informal contractions rather than an actual error."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 31.3,
+  "prompt_chars": 3480,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "a",
+  "witness_set": "W",
+  "ablation": "noStyle"
+}

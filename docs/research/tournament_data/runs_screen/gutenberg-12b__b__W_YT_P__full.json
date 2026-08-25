@@ -1,0 +1,151 @@
+{
+  "raw": " \n\n```json\n[\n  {\"span\": \"for when\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"ambiguous context, 'put some cinder blocks' is plausible\"},\n  {\"span\": \"because\", \"verdict\": \"correct\", \"correction\": \"cuz\", \"reasoning\": \"consistent with his informal speech\"},\n  {\"span\": \"and i might\", \"verdict\": \"correct\", \"correction\": \"yeah\", \"reasoning\": \"parakeet's transcription aligns with his conversational style\"},\n  {\"span\": \"gotta\", \"verdict\": \"correct\", \"correction\": \"got to\", \"reasoning\": \"minor variation, but 'gotta' is more colloquial\"},\n  {\"span\": \"alright\", \"verdict\": \"correct\", \"correction\": \"all right\", \"reasoning\": \"consistent with his speech pattern\"},\n  {\"span\": \"i caught\", \"verdict\": \"correct\", \"correction\": \"it's kind of like seven\", \"reasoning\": \"parakeet's phrasing fits his hesitant count style\"},\n  {\"span\": \"ish\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"his characteristic hedge\"},\n  {\"span\": \"one or\", \"verdict\": \"correct\", \"correction\": \"water\", \"reasoning\": \"parakeet's 'water' aligns with his conversational flow\"},\n  {\"span\": \"tea\", \"verdict\": \"correct\", \"correction\": \"t\", \"reasoning\": \"parakeet's 't' fits his casual nickname usage\"},\n  {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"and\", \"reasoning\": \"parakeet's 'and' fits the narrative flow\"},\n  {\"span\": \"gills\", \"verdict\": \"correct\", \"correction\": \"kills\", \"reasoning\": \"parakeet's 'kills' aligns with his phonetic style\"},\n  {\"span\": \"there was\", \"verdict\": \"correct\", \"correction\": \"there's\", \"reasoning\": \"parakeet's 'there's' fits his informal speech\"},\n  {\"span\": \"was\", \"verdict\": \"correct\", \"correction\": \"are\", \"reasoning\": \"youtube's 'are' aligns with his conversational style\"},\n  {\"span\": \"blue gills\", \"verdict\": \"correct\", \"correction\": \"bluegills\", \"reasoning\": \"consistent with domain lexicon\"},\n  {\"span\": \"like them\", \"verdict\": \"correct\", \"correction\": \"likethem\", \"reasoning\": \"parakeet's contraction fits his speech\"},\n  {\"span\": \"i\", \"verdict\": \"correct\", \"correction\": \"i'd\", \"reasoning\": \"parakeet's 'i'd' fits his conversational style\"},\n  {\"span\": \"let them\", \"verdict\": \"correct\", \"correction\": \"letthem\", \"reasoning\": \"parakeet's contraction fits his speech\"},\n  {\"span\": \"unless\", \"verdict\": \"correct\", \"correction\": \"in less\", \"reasoning\": \"parakeet's 'in less' fits his informal phrasing\"},\n  {\"span\": \"you\", \"verdict\": \"correct\", \"correction\": \"it's\", \"reasoning\": \"parakeet's 'it's' fits his conversational flow\"},\n  {\"span\": \"small\", \"verdict\": \"correct\", \"correction\": \"smaller\", \"reasoning\": \"youtube's 'smaller' aligns with his speech\"},\n  {\"span\": \"like\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"his characteristic hedge\"},\n  {\"span\": \"having it\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"his characteristic hedge\"},\n  {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"and we should have had some minnows we really should have but\", \"reasoning\": \"parakeet's continuation fits his narrative style\"}\n]\n``` \n\n**Reasoning Summary:**\n\n1. **Escalate** \"for when\" due to plausible alternative context.\n2. **Correct** \"because\" to \"cuz\" for colloquial fit.\n3. **Correct** \"and i might\" to \"yeah\" for conversational style.\n4. **Correct** \"gotta\" to \"got to\" for minor colloquial adjustment.\n5. **Correct** \"alright\" to \"all right\" for speech pattern consistency.\n6. **Correct** \"i caught\" to \"it's kind of like seven\" for hesitant count style.\n7. **Confirm** \"ish\" as his characteristic hedge.\n8. **Correct** \"one or\" to \"water\" for narrative flow.\n9. **Correct** \"tea\" to \"t\" for casual nickname usage.\n10. **Correct** \"(nothing)\" to \"and\" for narrative flow.\n11. **Correct** \"gills\" to \"kills\" for phonetic style.\n12. **Correct** \"there was\" to \"there's\" for informal speech.\n13. **Correct** \"was\" to \"are\" for conversational style.\n14. **Correct** \"blue gills\" to \"bluegills\" for domain lexicon.\n15. **Correct** \"like them\" to \"likethem\" for contraction fit.\n16. **Correct** \"i\" to \"i'd\" for conversational style.\n17. **Correct** \"let them\" to \"letthem\" for speech contraction.\n18. **Correct** \"unless\" to \"in less\" for informal phrasing.\n19. **Correct** \"you\" to \"it's\" for conversational flow.\n20. **Correct** \"small\" to \"smaller\" for speech alignment.\n21. **Confirm** \"like\" as his hedge.\n22. **Confirm** \"having it\" as his hedge.\n23. **Correct** \"(nothing)\" to continuation for narrative fit. \n\nThis ensures the transcript reflects his authentic speech style and register. \n",
+  "rulings": [
+    {
+      "span": "for when",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "ambiguous context, 'put some cinder blocks' is plausible"
+    },
+    {
+      "span": "because",
+      "verdict": "correct",
+      "correction": "cuz",
+      "reasoning": "consistent with his informal speech"
+    },
+    {
+      "span": "and i might",
+      "verdict": "correct",
+      "correction": "yeah",
+      "reasoning": "parakeet's transcription aligns with his conversational style"
+    },
+    {
+      "span": "gotta",
+      "verdict": "correct",
+      "correction": "got to",
+      "reasoning": "minor variation, but 'gotta' is more colloquial"
+    },
+    {
+      "span": "alright",
+      "verdict": "correct",
+      "correction": "all right",
+      "reasoning": "consistent with his speech pattern"
+    },
+    {
+      "span": "i caught",
+      "verdict": "correct",
+      "correction": "it's kind of like seven",
+      "reasoning": "parakeet's phrasing fits his hesitant count style"
+    },
+    {
+      "span": "ish",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "his characteristic hedge"
+    },
+    {
+      "span": "one or",
+      "verdict": "correct",
+      "correction": "water",
+      "reasoning": "parakeet's 'water' aligns with his conversational flow"
+    },
+    {
+      "span": "tea",
+      "verdict": "correct",
+      "correction": "t",
+      "reasoning": "parakeet's 't' fits his casual nickname usage"
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "and",
+      "reasoning": "parakeet's 'and' fits the narrative flow"
+    },
+    {
+      "span": "gills",
+      "verdict": "correct",
+      "correction": "kills",
+      "reasoning": "parakeet's 'kills' aligns with his phonetic style"
+    },
+    {
+      "span": "there was",
+      "verdict": "correct",
+      "correction": "there's",
+      "reasoning": "parakeet's 'there's' fits his informal speech"
+    },
+    {
+      "span": "was",
+      "verdict": "correct",
+      "correction": "are",
+      "reasoning": "youtube's 'are' aligns with his conversational style"
+    },
+    {
+      "span": "blue gills",
+      "verdict": "correct",
+      "correction": "bluegills",
+      "reasoning": "consistent with domain lexicon"
+    },
+    {
+      "span": "like them",
+      "verdict": "correct",
+      "correction": "likethem",
+      "reasoning": "parakeet's contraction fits his speech"
+    },
+    {
+      "span": "i",
+      "verdict": "correct",
+      "correction": "i'd",
+      "reasoning": "parakeet's 'i'd' fits his conversational style"
+    },
+    {
+      "span": "let them",
+      "verdict": "correct",
+      "correction": "letthem",
+      "reasoning": "parakeet's contraction fits his speech"
+    },
+    {
+      "span": "unless",
+      "verdict": "correct",
+      "correction": "in less",
+      "reasoning": "parakeet's 'in less' fits his informal phrasing"
+    },
+    {
+      "span": "you",
+      "verdict": "correct",
+      "correction": "it's",
+      "reasoning": "parakeet's 'it's' fits his conversational flow"
+    },
+    {
+      "span": "small",
+      "verdict": "correct",
+      "correction": "smaller",
+      "reasoning": "youtube's 'smaller' aligns with his speech"
+    },
+    {
+      "span": "like",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "his characteristic hedge"
+    },
+    {
+      "span": "having it",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "his characteristic hedge"
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "and we should have had some minnows we really should have but",
+      "reasoning": "parakeet's continuation fits his narrative style"
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 26.3,
+  "prompt_chars": 14509,
+  "judge": "gutenberg-12b",
+  "model": "vanilj/mistral-nemo-gutenberg-12b-v2:Q8_0",
+  "passage": "b",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

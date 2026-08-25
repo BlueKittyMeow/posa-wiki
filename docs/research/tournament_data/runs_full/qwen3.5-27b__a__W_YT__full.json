@@ -1,0 +1,55 @@
+{
+  "raw": "[\n  {\n    \"span\": \"ladies and gentlemen\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Style Card explicitly states he opens with 'Ladies and gentlemen' as a formal address into informal content; YouTube's omission is likely an ASR smoothing error.\"\n  },\n  {\n    \"span\": \"and\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The conjunction 'and' is necessary for the rhythmic balance of his recurring formulaic wisdom ('if you're successful you're unsuccessful, and if you're unsuccessful you're successful'); omitting it breaks the cadence.\"\n  },\n  {\n    \"span\": \"crappie\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The episode title is 'Crap-Pie' and the description highlights the pun; the speaker explicitly makes the pun out loud, so 'crappie' in the second clause must be rendered as 'crap-pie' to preserve the joke.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The phrase 'also known as' requires a punchline; the YouTube transcript's 'crap' is likely a partial capture of the pun 'crap-pie', which aligns with the show's title and the speaker's habit of stating title puns.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"correct\",\n    \"correction\": \"This is the SS Tin Can 3.0. She's running a little rough. I think I'm gonna have to tilt the motor up a little bit.\",\n    \"reasoning\": \"The YouTube transcript captures 'She's running a little rough' which provides context for why he needs to tilt the motor; the draft's omission of this sentence creates a non-sequitur between naming the boat and tilting the motor.\"\n  },\n  {\n    \"span\": \"gonna\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Style Card notes he speaks with disfluency and informal contractions; 'gonna' is a natural spoken form for this register, whereas 'going to' sounds like ASR smoothing.\"\n  },\n  {\n    \"span\": \"there's one\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Hold on. Uh, yeah. For some reason she's running a little slow today.\",\n    \"reasoning\": \"The phrase 'for some reason' is a more common hedge than 'there's one reason' in this context of explaining a mechanical issue; the YouTube transcript likely captured the natural flow better here.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Style Card explicitly states he opens with 'Ladies and gentlemen' as a formal address into informal content; YouTube's omission is likely an ASR smoothing error."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The conjunction 'and' is necessary for the rhythmic balance of his recurring formulaic wisdom ('if you're successful you're unsuccessful, and if you're unsuccessful you're successful'); omitting it breaks the cadence."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The episode title is 'Crap-Pie' and the description highlights the pun; the speaker explicitly makes the pun out loud, so 'crappie' in the second clause must be rendered as 'crap-pie' to preserve the joke."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The phrase 'also known as' requires a punchline; the YouTube transcript's 'crap' is likely a partial capture of the pun 'crap-pie', which aligns with the show's title and the speaker's habit of stating title puns."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "This is the SS Tin Can 3.0. She's running a little rough. I think I'm gonna have to tilt the motor up a little bit.",
+      "reasoning": "The YouTube transcript captures 'She's running a little rough' which provides context for why he needs to tilt the motor; the draft's omission of this sentence creates a non-sequitur between naming the boat and tilting the motor."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Style Card notes he speaks with disfluency and informal contractions; 'gonna' is a natural spoken form for this register, whereas 'going to' sounds like ASR smoothing."
+    },
+    {
+      "span": "there's one",
+      "verdict": "correct",
+      "correction": "Hold on. Uh, yeah. For some reason she's running a little slow today.",
+      "reasoning": "The phrase 'for some reason' is a more common hedge than 'there's one reason' in this context of explaining a mechanical issue; the YouTube transcript likely captured the natural flow better here."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 103.2,
+  "prompt_chars": 10860,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "full"
+}

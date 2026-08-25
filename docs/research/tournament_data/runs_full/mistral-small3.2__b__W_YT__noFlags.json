@@ -1,0 +1,25 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"Captain Tea Truck gave me one\",\n        \"verdict\": \"correct\",\n        \"correction\": \"Captain Teeny Trout gave me one\",\n        \"reasoning\": \"Consistent nickname for Lucas\"\n    },\n    {\n        \"span\": \"blue gills\",\n        \"verdict\": \"correct\",\n        \"correction\": \"bluegills\",\n        \"reasoning\": \"Domain lexicon: often shortened to 'gills'\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "Captain Tea Truck gave me one",
+      "verdict": "correct",
+      "correction": "Captain Teeny Trout gave me one",
+      "reasoning": "Consistent nickname for Lucas"
+    },
+    {
+      "span": "blue gills",
+      "verdict": "correct",
+      "correction": "bluegills",
+      "reasoning": "Domain lexicon: often shortened to 'gills'"
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 8.1,
+  "prompt_chars": 10676,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "noFlags"
+}

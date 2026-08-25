@@ -1,0 +1,25 @@
+{
+  "raw": "[{\"span\": \"Captain Tea Truck gave me one\", \"verdict\": \"correct\", \"correction\": \"Captain Teeny Trout gave me one\", \"reasoning\": \"The style card establishes 'Captain Teeny Trout' as a consistent nickname for Lucas, and the episode title pun context makes this the only plausible reading.\"}, {\"span\": \"I caught I caught like seven crappies ish\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"This matches the speaker's documented style of disfluency, self-repetition, and using '-ish' suffixes for hesitant counts.\"}]",
+  "rulings": [
+    {
+      "span": "Captain Tea Truck gave me one",
+      "verdict": "correct",
+      "correction": "Captain Teeny Trout gave me one",
+      "reasoning": "The style card establishes 'Captain Teeny Trout' as a consistent nickname for Lucas, and the episode title pun context makes this the only plausible reading."
+    },
+    {
+      "span": "I caught I caught like seven crappies ish",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "This matches the speaker's documented style of disfluency, self-repetition, and using '-ish' suffixes for hesitant counts."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 6.5,
+  "prompt_chars": 9628,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "b",
+  "witness_set": "W",
+  "ablation": "noLex"
+}

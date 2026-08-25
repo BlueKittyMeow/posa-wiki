@@ -1,0 +1,55 @@
+{
+  "raw": "[\n  {\n    \"span\": \"ladies and gentlemen\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The Style Card explicitly states he opens with 'Ladies and gentlemen' as a formal address into informal content; Witness 2's omission is likely an ASR smoothing error.\"\n  },\n  {\n    \"span\": \"and\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The conjunction 'and' is necessary to connect the two clauses of the show's tagline; omitting it breaks the rhythmic parallelism described in the Style Card.\"\n  },\n  {\n    \"span\": \"crappie\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The episode title is 'Crap-Pie' and the description highlights the pun; Witness 1's repetition of 'crappie' destroys the joke, while Witness 2's 'crap high' is a phonetic error for the intended pun 'crap-pie'.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"This span is part of the previous correction; the phrase 'also known as' must be followed by the pun 'crap-pie', not a repetition of 'crappie' or the fragment 'crap'.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"correct\",\n    \"correction\": \"This is the SS Tin Can 3.0. I think I'm gonna have to tilt the motor up a little bit.\",\n    \"reasoning\": \"Witness 2's insertion of 'She's running a little rough' appears to be a hallucination or misplacement, as the draft correctly places the explanation for the boat's performance later in the sentence.\"\n  },\n  {\n    \"span\": \"gonna\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The Style Card notes he speaks with disfluency and informal contractions; 'gonna' is a natural spoken form for this speaker, whereas 'going to' sounds like ASR smoothing.\"\n  },\n  {\n    \"span\": \"there's one\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'There's one reason' is a specific, emphatic phrasing that fits the speaker's style of explaining things; 'for some reason' is a generic smoothing that loses the specific count implied by the audio context.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The Style Card explicitly states he opens with 'Ladies and gentlemen' as a formal address into informal content; Witness 2's omission is likely an ASR smoothing error."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The conjunction 'and' is necessary to connect the two clauses of the show's tagline; omitting it breaks the rhythmic parallelism described in the Style Card."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The episode title is 'Crap-Pie' and the description highlights the pun; Witness 1's repetition of 'crappie' destroys the joke, while Witness 2's 'crap high' is a phonetic error for the intended pun 'crap-pie'."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "This span is part of the previous correction; the phrase 'also known as' must be followed by the pun 'crap-pie', not a repetition of 'crappie' or the fragment 'crap'."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "This is the SS Tin Can 3.0. I think I'm gonna have to tilt the motor up a little bit.",
+      "reasoning": "Witness 2's insertion of 'She's running a little rough' appears to be a hallucination or misplacement, as the draft correctly places the explanation for the boat's performance later in the sentence."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The Style Card notes he speaks with disfluency and informal contractions; 'gonna' is a natural spoken form for this speaker, whereas 'going to' sounds like ASR smoothing."
+    },
+    {
+      "span": "there's one",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'There's one reason' is a specific, emphatic phrasing that fits the speaker's style of explaining things; 'for some reason' is a generic smoothing that loses the specific count implied by the audio context."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 99.7,
+  "prompt_chars": 10315,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "noLex"
+}

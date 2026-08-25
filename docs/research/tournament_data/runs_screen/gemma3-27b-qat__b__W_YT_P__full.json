@@ -1,0 +1,55 @@
+{
+  "raw": "```json\n[\n  {\"span\": \"for when I'm in by myself because it's just riding so high.\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Plausible opening, conversational and slightly rambling.\"},\n  {\"span\": \"I do have the motor tilted up a little bit because it's really shallow right here and I might last time I came through here I dinged a rock so I gotta be careful.\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Disfluent but natural speech pattern; 'and I might' is typical.\"},\n  {\"span\": \"Alright, so I caught I caught like seven crappies ish.\", \"verdict\": \"correct\", \"correction\": \"Alright, so I caught, like, seven crappies ish.\", \"reasoning\": \"The repetition of 'I caught' is awkward; a slight pause is more likely.\"},\n  {\"span\": \"I let one or two go. Uh, Captain Tea Truck gave me one, then I got some five nice gills.\", \"verdict\": \"correct\", \"correction\": \"I let one or two go. Uh, Captain Teeny Trout gave me one, then I got some five nice gills.\", \"reasoning\": \"Stable entity alias 'Captain Teeny Trout' is preferred.\"},\n  {\"span\": \"Bunch of little gills that I threw back.\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Natural phrasing.\"},\n  {\"span\": \"There was some close ones, but with the blue gills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish, but man I could see like right at the end there I saw so many crappies like big fat crappies and they just did not care.\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Long, rambling sentence is typical; disfluency and hedging are present.\"},\n  {\"span\": \"Like one or two of them would like excitedly swim towards my jig, but they just weren't having it.\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Plausible description of fish behavior, conversational tone.\"}\n]\n```",
+  "rulings": [
+    {
+      "span": "for when I'm in by myself because it's just riding so high.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Plausible opening, conversational and slightly rambling."
+    },
+    {
+      "span": "I do have the motor tilted up a little bit because it's really shallow right here and I might last time I came through here I dinged a rock so I gotta be careful.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Disfluent but natural speech pattern; 'and I might' is typical."
+    },
+    {
+      "span": "Alright, so I caught I caught like seven crappies ish.",
+      "verdict": "correct",
+      "correction": "Alright, so I caught, like, seven crappies ish.",
+      "reasoning": "The repetition of 'I caught' is awkward; a slight pause is more likely."
+    },
+    {
+      "span": "I let one or two go. Uh, Captain Tea Truck gave me one, then I got some five nice gills.",
+      "verdict": "correct",
+      "correction": "I let one or two go. Uh, Captain Teeny Trout gave me one, then I got some five nice gills.",
+      "reasoning": "Stable entity alias 'Captain Teeny Trout' is preferred."
+    },
+    {
+      "span": "Bunch of little gills that I threw back.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Natural phrasing."
+    },
+    {
+      "span": "There was some close ones, but with the blue gills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish, but man I could see like right at the end there I saw so many crappies like big fat crappies and they just did not care.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Long, rambling sentence is typical; disfluency and hedging are present."
+    },
+    {
+      "span": "Like one or two of them would like excitedly swim towards my jig, but they just weren't having it.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Plausible description of fish behavior, conversational tone."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 128.5,
+  "prompt_chars": 14509,
+  "judge": "gemma3-27b-qat",
+  "model": "gemma3:27b-it-qat",
+  "passage": "b",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

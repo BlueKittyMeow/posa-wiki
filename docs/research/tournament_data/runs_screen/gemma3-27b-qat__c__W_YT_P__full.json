@@ -1,0 +1,121 @@
+{
+  "raw": "```json\n[\n  {\"span\": \"get it monty\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Plausible imperative to a dog.\"},\n  {\"span\": \"it monty\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Whisper's reading is short and could be noise; YouTube's 'ready get' is a complete rewrite.\"},\n  {\"span\": \"funk\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Addressing his partner by name is likely.\"},\n  {\"span\": \"look at him\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Whisper is plausible, YouTube's 'we got a' is a complete rewrite.\"},\n  {\"span\": \"him\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Plausible pronoun.\"},\n  {\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Competing readings are too different to resolve.\"},\n  {\"span\": \"go get\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Common imperative.\"},\n  {\"span\": \"it\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Plausible pronoun.\"},\n  {\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Competing readings are too different to resolve.\"},\n  {\"span\": \"that give me that\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Repetition is common for this speaker; Parakeet's reading is very different.\"},\n  {\"span\": \"that\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Plausible pronoun.\"},\n  {\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Competing readings are too different to resolve.\"},\n  {\"span\": \"give me\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Common phrase.\"},\n  {\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Competing readings are too different to resolve.\"},\n  {\"span\": \"he won't give it to me give\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Parakeet's reading is incomplete; YouTube's is a rewrite.\"},\n  {\"span\": \"monty i'll get you i'm fine\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Parakeet's reading is very different.\"},\n  {\"span\": \"i'll\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Contraction is plausible.\"},\n  {\"span\": \"i'm\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Contraction is plausible.\"}\n]\n```",
+  "rulings": [
+    {
+      "span": "get it monty",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Plausible imperative to a dog."
+    },
+    {
+      "span": "it monty",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Whisper's reading is short and could be noise; YouTube's 'ready get' is a complete rewrite."
+    },
+    {
+      "span": "funk",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Addressing his partner by name is likely."
+    },
+    {
+      "span": "look at him",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Whisper is plausible, YouTube's 'we got a' is a complete rewrite."
+    },
+    {
+      "span": "him",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Plausible pronoun."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Competing readings are too different to resolve."
+    },
+    {
+      "span": "go get",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Common imperative."
+    },
+    {
+      "span": "it",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Plausible pronoun."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Competing readings are too different to resolve."
+    },
+    {
+      "span": "that give me that",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Repetition is common for this speaker; Parakeet's reading is very different."
+    },
+    {
+      "span": "that",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Plausible pronoun."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Competing readings are too different to resolve."
+    },
+    {
+      "span": "give me",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Common phrase."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Competing readings are too different to resolve."
+    },
+    {
+      "span": "he won't give it to me give",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Parakeet's reading is incomplete; YouTube's is a rewrite."
+    },
+    {
+      "span": "monty i'll get you i'm fine",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Parakeet's reading is very different."
+    },
+    {
+      "span": "i'll",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Contraction is plausible."
+    },
+    {
+      "span": "i'm",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Contraction is plausible."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 176.0,
+  "prompt_chars": 11493,
+  "judge": "gemma3-27b-qat",
+  "model": "gemma3:27b-it-qat",
+  "passage": "c",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

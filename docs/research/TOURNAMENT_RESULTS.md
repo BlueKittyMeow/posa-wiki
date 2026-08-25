@@ -327,3 +327,39 @@ recovers nicknames; flags locate work but currently drive 10x over-escalation.
 - **marshlair-chat's qwen never entered** — unreachable on every probed port.
 - **No cheap-Claude-tier ceiling reference** was run, so there is no
   upper bound to compare the local models against.
+
+## Reproducing / resuming
+
+Raw cells are archived under `docs/research/tournament_data/`
+(`packets/`, `runs_screen/`, `runs_full/`, `runs_audio/`).
+
+**Text judges** (from a checkout on MysteryOfGlass):
+```bash
+# agent-store models need a tunnel; it DIES silently and costs whole cells
+setsid nohup ssh -o BatchMode=yes -o ExitOnForwardFailure=yes \
+  -o ServerAliveInterval=15 -o ServerAliveCountMax=1000 -N \
+  -L 127.0.0.1:11435:127.0.0.1:11435 "Blue Kitty@192.168.1.156" &
+python3 tools/tournament/build_packets.py <datadir> packets
+python3 tools/tournament/runner.py screen packets runs_screen           # all judges
+python3 tools/tournament/runner.py full   packets runs_full qwen3.5-27b # resume grid
+python3 tools/tournament/report.py packets runs_screen runs_full
+```
+
+**Audio bracket** (on MarshLair, inside WSL — one entrant at a time):
+```bash
+sudo systemd-run --unit=audio-moss-t --uid=1000 --gid=1000 \
+  --property=WorkingDirectory=/home/bluekitty/tourney \
+  bash /home/bluekitty/tourney/run_audio.sh moss-thinking
+# then: moss-instruct, then flamingo (needs an ENTRANTS entry + class check)
+# ±clip control: append --no-audio inside run_audio.sh
+```
+Entrant keys live in `ENTRANTS` in `tools/tournament/audio_judge.py`.
+
+**Gotchas that cost time here:**
+- The SSH tunnel to :11435 dropped mid-grid and 31 cells came back as
+  `Connection refused`. They look like parse failures in the scorer — check
+  `error` before concluding a model failed.
+- `print()` without `flush=True` on the cached-cell path makes a live run look
+  stalled.
+- Audio entrants at ~16-17 GB against ~14.5 GB free VRAM spill to CPU and get
+  4-12x slower as the clip lengthens. Budget accordingly or quantise.

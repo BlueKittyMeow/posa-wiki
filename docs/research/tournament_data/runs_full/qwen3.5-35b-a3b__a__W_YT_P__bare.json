@@ -1,0 +1,25 @@
+{
+  "raw": "[\n{\"span\": \"Today we are targeting some crappie, also known as crappie.\", \"verdict\": \"correct\", \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\", \"reasoning\": \"The video title and description explicitly reference a 'crappie/crap-pie pun' which Witness 1 failed to capture.\"},\n{\"span\": \"There's one reason she's running a little slow today.\", \"verdict\": \"correct\", \"correction\": \"For some reason she's running a little slow today.\", \"reasoning\": \"Witnesses 2 and 3 agree on 'for some reason', which is the standard idiomatic phrase, whereas 'one reason' is likely an ASR error.\"}\n]",
+  "rulings": [
+    {
+      "span": "Today we are targeting some crappie, also known as crappie.",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The video title and description explicitly reference a 'crappie/crap-pie pun' which Witness 1 failed to capture."
+    },
+    {
+      "span": "There's one reason she's running a little slow today.",
+      "verdict": "correct",
+      "correction": "For some reason she's running a little slow today.",
+      "reasoning": "Witnesses 2 and 3 agree on 'for some reason', which is the standard idiomatic phrase, whereas 'one reason' is likely an ASR error."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 6.8,
+  "prompt_chars": 3874,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "bare"
+}

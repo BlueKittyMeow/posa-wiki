@@ -1,0 +1,79 @@
+{
+  "raw": "[\n  {\n    \"span\": \"for when I'm in by myself because it's just riding so high.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"This phrase aligns with the speaker's habit of talking to himself when alone, as described in the style card.\"\n  },\n  {\n    \"span\": \"I caught I caught like seven crappies ish.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"I caught about seven crappies.\",\n    \"reasoning\": \"The term 'ish' is used by the speaker to indicate an approximation, which is consistent with the style and speech patterns described.\"\n  },\n  {\n    \"span\": \"Uh, Captain Tea Truck gave me one.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Uh, Captain Truck gave me one.\",\n    \"reasoning\": \"The speaker uses 'Uh' as a hesitation marker and corrects himself, which is typical according to the style card.\"\n  },\n  {\n    \"span\": \"Then I got some five nice gills.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"This sentence is coherent and aligns with the speaker's style of self-correction during narration.\"\n  },\n  {\n    \"span\": \"Bunch of little gills that I threw back.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The sentence is grammatically correct and fits the speaker's informal narration style.\"\n  },\n  {\n    \"span\": \"There were some close ones, but with the blue gills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish,\",\n    \"verdict\": \"correct\",\n    \"correction\": \"There were some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless some days you just catch smaller fish,\",\n    \"reasoning\": \"The speaker's colloquial style and use of 'small fish' for bluegills are consistent with the provided context.\"\n  },\n  {\n    \"span\": \"Like one or two of them would like excitedly swim towards my jig, but they just weren't having it.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"This sentence captures the speaker's conversational style and use of imperatives directed at his dog.\"\n  },\n  {\n    \"span\": \"I could see like right at the end there I saw so many crappies, like big fat crappies and they just did not care.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The sentence is coherent and reflects the speaker's informal narration style and use of colloquialisms.\"\n  },\n  {\n    \"span\": \"Got to be careful alright so I caught,\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Got to be careful alright so I caught,\",\n    \"reasoning\": \"The speaker often uses filler words like 'alright' and corrects himself, which is in line with the style card.\"\n  },\n  {\n    \"span\": \"I like'em either to be big fat ones or I'd usually let em go in less, like Some days it's just smaller fish,\",\n    \"verdict\": \"correct\",\n    \"correction\": \"I like'em either to be big fat ones or I'd usually let them go in less, like some days you just catch smaller fish,\",\n    \"reasoning\": \"The speaker's colloquial style and use of non-standard grammar ('I'd' instead of 'I would', 'em' instead of 'them') are consistent with the style card.\"\n  },\n  {\n    \"span\": \"And we should have had some minnows. We really should have but\",\n    \"verdict\": \"correct\",\n    \"correction\": \"And we should have had some minnows. We really should have but\",\n    \"reasoning\": \"The speaker's informal style and use of incomplete sentences are in line with the provided context.\"\n  }\n]\n\nIn this ruling, I have confirmed the draft readings that align with the speaker's style and corrected those that contain minor inaccuracies, ensuring the transcript reflects the way a human might speak aloud. I have not escalated any spans to human review due to the clear context provided by the speaker's style and the surrounding text. The corrections maintain the speaker's colloquial and informal register, as well as the occasional grammatical non-standard usage.",
+  "rulings": [
+    {
+      "span": "for when I'm in by myself because it's just riding so high.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "This phrase aligns with the speaker's habit of talking to himself when alone, as described in the style card."
+    },
+    {
+      "span": "I caught I caught like seven crappies ish.",
+      "verdict": "correct",
+      "correction": "I caught about seven crappies.",
+      "reasoning": "The term 'ish' is used by the speaker to indicate an approximation, which is consistent with the style and speech patterns described."
+    },
+    {
+      "span": "Uh, Captain Tea Truck gave me one.",
+      "verdict": "correct",
+      "correction": "Uh, Captain Truck gave me one.",
+      "reasoning": "The speaker uses 'Uh' as a hesitation marker and corrects himself, which is typical according to the style card."
+    },
+    {
+      "span": "Then I got some five nice gills.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "This sentence is coherent and aligns with the speaker's style of self-correction during narration."
+    },
+    {
+      "span": "Bunch of little gills that I threw back.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The sentence is grammatically correct and fits the speaker's informal narration style."
+    },
+    {
+      "span": "There were some close ones, but with the blue gills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish,",
+      "verdict": "correct",
+      "correction": "There were some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless some days you just catch smaller fish,",
+      "reasoning": "The speaker's colloquial style and use of 'small fish' for bluegills are consistent with the provided context."
+    },
+    {
+      "span": "Like one or two of them would like excitedly swim towards my jig, but they just weren't having it.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "This sentence captures the speaker's conversational style and use of imperatives directed at his dog."
+    },
+    {
+      "span": "I could see like right at the end there I saw so many crappies, like big fat crappies and they just did not care.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The sentence is coherent and reflects the speaker's informal narration style and use of colloquialisms."
+    },
+    {
+      "span": "Got to be careful alright so I caught,",
+      "verdict": "correct",
+      "correction": "Got to be careful alright so I caught,",
+      "reasoning": "The speaker often uses filler words like 'alright' and corrects himself, which is in line with the style card."
+    },
+    {
+      "span": "I like'em either to be big fat ones or I'd usually let em go in less, like Some days it's just smaller fish,",
+      "verdict": "correct",
+      "correction": "I like'em either to be big fat ones or I'd usually let them go in less, like some days you just catch smaller fish,",
+      "reasoning": "The speaker's colloquial style and use of non-standard grammar ('I'd' instead of 'I would', 'em' instead of 'them') are consistent with the style card."
+    },
+    {
+      "span": "And we should have had some minnows. We really should have but",
+      "verdict": "correct",
+      "correction": "And we should have had some minnows. We really should have but",
+      "reasoning": "The speaker's informal style and use of incomplete sentences are in line with the provided context."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 10.3,
+  "prompt_chars": 14537,
+  "judge": "phi3.5",
+  "model": "phi3.5:latest",
+  "passage": "b",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

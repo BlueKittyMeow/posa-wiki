@@ -1,0 +1,85 @@
+{
+  "raw": "[{\"span\": \"get it monty\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Witness 1's 'Get it Monty' is the only reading that fits the imperative command context for a dog, whereas YouTube's 'ready get' and Parakeet's silence are implausible.\"}, {\"span\": \"say hi funk\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 hears 'Funk' (a person in the roster) while Witnesses 2 and 3 hear 'punk'; without audio, it is impossible to distinguish between a name drop or a playful insult.\"}, {\"span\": \"look at him\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1's 'Look at him' conflicts with YouTube's 'we got a' and Parakeet's silence; the low confidence score (0.124) for 'Look' suggests this segment is unreliable.\"}, {\"span\": \"help him see it\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 uses 'him' while Parakeet hears 'them'; the low confidence score (0.296) for 'him' and the pronoun disagreement make a definitive ruling impossible.\"}, {\"span\": \"go get it\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1's 'go get it' is directly contradicted by Parakeet's 'forget it'; both are plausible commands but the audio evidence is conflicting.\"}, {\"span\": \"give me that\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The repetition of 'Give me that' in Witness 1 aligns with the context of a struggle over an object and is supported by partial agreement from YouTube ('Give me').\"}, {\"span\": \"you little stinker\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 hears 'give me that' before 'stinker', while Parakeet hears 'hear your'; the low confidence score (0.443) for 'You' and the conflicting preceding words require human verification.\"}, {\"span\": \"he's like no\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The phrase 'He's like, no' is a standard colloquialism for reporting speech or thought, supported by all witnesses who heard 'no', and fits the context of the dog refusing to give an item.\"}, {\"span\": \"he won't give it to me\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"This is a coherent sentence explaining the dog's refusal; while Parakeet missed this segment, Witness 1's reading is grammatically and contextually sound.\"}, {\"span\": \"give it here\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 has 'give it here' while YouTube has 'give me here'; the low confidence score (0.502) for 'He' in the preceding clause casts doubt on the entire sequence.\"}, {\"span\": \"monty i'll get you\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 hears 'I'll get you' while YouTube hears 'Let me get you'; both are plausible threats to a dog, but the low confidence scores for 'You' and 'He' make this uncertain.\"}, {\"span\": \"i'm fine\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1's 'I'm fine' is contradicted by YouTube's '(nothing)' and Parakeet's 'Ooh yeah'; the low confidence score (0.502) for 'He' in the previous clause suggests this entire turn is unreliable.\"}]",
+  "rulings": [
+    {
+      "span": "get it monty",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Witness 1's 'Get it Monty' is the only reading that fits the imperative command context for a dog, whereas YouTube's 'ready get' and Parakeet's silence are implausible."
+    },
+    {
+      "span": "say hi funk",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'Funk' (a person in the roster) while Witnesses 2 and 3 hear 'punk'; without audio, it is impossible to distinguish between a name drop or a playful insult."
+    },
+    {
+      "span": "look at him",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1's 'Look at him' conflicts with YouTube's 'we got a' and Parakeet's silence; the low confidence score (0.124) for 'Look' suggests this segment is unreliable."
+    },
+    {
+      "span": "help him see it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 uses 'him' while Parakeet hears 'them'; the low confidence score (0.296) for 'him' and the pronoun disagreement make a definitive ruling impossible."
+    },
+    {
+      "span": "go get it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1's 'go get it' is directly contradicted by Parakeet's 'forget it'; both are plausible commands but the audio evidence is conflicting."
+    },
+    {
+      "span": "give me that",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The repetition of 'Give me that' in Witness 1 aligns with the context of a struggle over an object and is supported by partial agreement from YouTube ('Give me')."
+    },
+    {
+      "span": "you little stinker",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'give me that' before 'stinker', while Parakeet hears 'hear your'; the low confidence score (0.443) for 'You' and the conflicting preceding words require human verification."
+    },
+    {
+      "span": "he's like no",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The phrase 'He's like, no' is a standard colloquialism for reporting speech or thought, supported by all witnesses who heard 'no', and fits the context of the dog refusing to give an item."
+    },
+    {
+      "span": "he won't give it to me",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "This is a coherent sentence explaining the dog's refusal; while Parakeet missed this segment, Witness 1's reading is grammatically and contextually sound."
+    },
+    {
+      "span": "give it here",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 has 'give it here' while YouTube has 'give me here'; the low confidence score (0.502) for 'He' in the preceding clause casts doubt on the entire sequence."
+    },
+    {
+      "span": "monty i'll get you",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'I'll get you' while YouTube hears 'Let me get you'; both are plausible threats to a dog, but the low confidence scores for 'You' and 'He' make this uncertain."
+    },
+    {
+      "span": "i'm fine",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1's 'I'm fine' is contradicted by YouTube's '(nothing)' and Parakeet's 'Ooh yeah'; the low confidence score (0.502) for 'He' in the previous clause suggests this entire turn is unreliable."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 29.0,
+  "prompt_chars": 5502,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "c",
+  "witness_set": "W+YT+P",
+  "ablation": "noStyle"
+}

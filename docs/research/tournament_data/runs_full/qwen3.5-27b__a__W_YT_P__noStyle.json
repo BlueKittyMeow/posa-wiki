@@ -1,0 +1,49 @@
+{
+  "raw": "[\n  {\n    \"span\": \"ladies and gentlemen\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Welcome to another episode of the unsuccessful fishing show, where if you're successful you're unsuccessful, and if you're unsuccessful you're successful.\",\n    \"reasoning\": \"Two witnesses omit the phrase entirely while only one includes it; given the casual tone of a YouTube intro, 'Ladies and gentlemen' is likely an ASR hallucination or over-formalization not present in the audio.\"\n  },\n  {\n    \"span\": \"and\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Welcome to another episode of the unsuccessful fishing show, where if you're successful you're unsuccessful. If you're unsuccessful you're successful.\",\n    \"reasoning\": \"Two witnesses omit the conjunction 'and' between the two clauses, suggesting a pause or sentence break rather than a continuous flow with 'and'.\"\n  },\n  {\n    \"span\": \"crappie\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The video title and description explicitly mention the 'Crap-Pie' pun; Witness 1's repetition of 'crappie' is a failure to recognize the pun, while Witnesses 2 and 3 correctly identify the phonetic play on words ('crap high', 'crap pie').\"\n  },\n  {\n    \"span\": \"crappie\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"This is the second instance of the pun; 'crap copy' (Witness 3) and 'crap' (Witness 2) are partial errors, but the intended phrase is clearly the pun 'crap-pie' established in the video title.\"\n  },\n  {\n    \"span\": \"gonna\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'Gonna' is a standard colloquial contraction for 'going to' in spoken English; while Witness 2 transcribed it as two words, the draft's single word accurately reflects the likely spoken rhythm and is not an error.\"\n  },\n  {\n    \"span\": \"there's one\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Uh, yeah. For some reason she's running a little slow today.\",\n    \"reasoning\": \"Two witnesses agree on 'for some' while only the draft has 'there's one'; 'For some reason' is a common idiom that fits the context of explaining a mechanical issue better than the awkward 'There's one reason'.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "correct",
+      "correction": "Welcome to another episode of the unsuccessful fishing show, where if you're successful you're unsuccessful, and if you're unsuccessful you're successful.",
+      "reasoning": "Two witnesses omit the phrase entirely while only one includes it; given the casual tone of a YouTube intro, 'Ladies and gentlemen' is likely an ASR hallucination or over-formalization not present in the audio."
+    },
+    {
+      "span": "and",
+      "verdict": "correct",
+      "correction": "Welcome to another episode of the unsuccessful fishing show, where if you're successful you're unsuccessful. If you're unsuccessful you're successful.",
+      "reasoning": "Two witnesses omit the conjunction 'and' between the two clauses, suggesting a pause or sentence break rather than a continuous flow with 'and'."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The video title and description explicitly mention the 'Crap-Pie' pun; Witness 1's repetition of 'crappie' is a failure to recognize the pun, while Witnesses 2 and 3 correctly identify the phonetic play on words ('crap high', 'crap pie')."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "This is the second instance of the pun; 'crap copy' (Witness 3) and 'crap' (Witness 2) are partial errors, but the intended phrase is clearly the pun 'crap-pie' established in the video title."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Gonna' is a standard colloquial contraction for 'going to' in spoken English; while Witness 2 transcribed it as two words, the draft's single word accurately reflects the likely spoken rhythm and is not an error."
+    },
+    {
+      "span": "there's one",
+      "verdict": "correct",
+      "correction": "Uh, yeah. For some reason she's running a little slow today.",
+      "reasoning": "Two witnesses agree on 'for some' while only the draft has 'there's one'; 'For some reason' is a common idiom that fits the context of explaining a mechanical issue better than the awkward 'There's one reason'."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 94.4,
+  "prompt_chars": 5633,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "noStyle"
+}

@@ -1,0 +1,25 @@
+{
+  "raw": "[\n  {\n    \"span\": \"Today we are targeting some crappie, also known as crappie.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The episode title is 'Crap-Pie' and the style card mandates preserving puns; Witness 3 explicitly transcribes 'crap pie', confirming the wordplay intended by the speaker.\"\n  },\n  {\n    \"span\": \"There's one reason she's running a little slow today.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"For some reason she's running a little slow today.\",\n    \"reasoning\": \"Witnesses 2 and 3 agree on 'for some reason', which is a common filler phrase fitting the speaker's hesitant style, whereas 'There's one reason' contradicts the consensus of other witnesses.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "Today we are targeting some crappie, also known as crappie.",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The episode title is 'Crap-Pie' and the style card mandates preserving puns; Witness 3 explicitly transcribes 'crap pie', confirming the wordplay intended by the speaker."
+    },
+    {
+      "span": "There's one reason she's running a little slow today.",
+      "verdict": "correct",
+      "correction": "For some reason she's running a little slow today.",
+      "reasoning": "Witnesses 2 and 3 agree on 'for some reason', which is a common filler phrase fitting the speaker's hesitant style, whereas 'There's one reason' contradicts the consensus of other witnesses."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 34.8,
+  "prompt_chars": 10410,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "noFlags"
+}

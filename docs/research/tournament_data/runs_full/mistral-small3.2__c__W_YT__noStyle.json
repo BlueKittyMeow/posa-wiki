@@ -1,0 +1,67 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"it monty\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Both 'get it Monty' and 'get ready get' are plausible, but context is unclear.\"\n    },\n    {\n        \"span\": \"funk\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Both 'Funk' and 'punk' are possible, but 'Funk' is a canonical spelling in the entity roster.\"\n    },\n    {\n        \"span\": \"look at him\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Both 'look at him' and 'we got a' are possible, but context is unclear.\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Both 'nothing' and 'come here buddy' are possible, but context is unclear.\"\n    },\n    {\n        \"span\": \"it\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Both 'it' and 'him' are possible, but context is unclear.\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Both 'nothing' and 'give me' are possible, but context is unclear.\"\n    },\n    {\n        \"span\": \"that\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Both 'that' and 'here' are possible, but context is unclear.\"\n    },\n    {\n        \"span\": \"i'll\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Both 'I'll' and 'Let me' are possible, but context is unclear.\"\n    },\n    {\n        \"span\": \"i'm\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Both 'I'm' and 'nothing' are possible, but context is unclear.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "it monty",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'get it Monty' and 'get ready get' are plausible, but context is unclear."
+    },
+    {
+      "span": "funk",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'Funk' and 'punk' are possible, but 'Funk' is a canonical spelling in the entity roster."
+    },
+    {
+      "span": "look at him",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'look at him' and 'we got a' are possible, but context is unclear."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'nothing' and 'come here buddy' are possible, but context is unclear."
+    },
+    {
+      "span": "it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'it' and 'him' are possible, but context is unclear."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'nothing' and 'give me' are possible, but context is unclear."
+    },
+    {
+      "span": "that",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'that' and 'here' are possible, but context is unclear."
+    },
+    {
+      "span": "i'll",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'I'll' and 'Let me' are possible, but context is unclear."
+    },
+    {
+      "span": "i'm",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'I'm' and 'nothing' are possible, but context is unclear."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 33.9,
+  "prompt_chars": 4220,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "c",
+  "witness_set": "W+YT",
+  "ablation": "noStyle"
+}

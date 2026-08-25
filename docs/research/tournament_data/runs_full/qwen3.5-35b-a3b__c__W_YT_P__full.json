@@ -1,0 +1,121 @@
+{
+  "raw": "[\n{\"span\": \"get it monty\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The speaker is addressing his dog Monty directly with a command, consistent with the style of talking to dogs mid-narration.\"},\n{\"span\": \"it monty\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 2 hears 'ready get' while Witness 1 has 'it monty'; without audio, it is unclear if the speaker said 'Get it Monty' or 'Get ready, Monty'.\"},\n{\"span\": \"funk\", \"verdict\": \"correct\", \"correction\": \"Say hi punk.\", \"reasoning\": \"Witnesses 2 and 3 agree on 'punk', which fits the register of calling a dog a 'little stinker' and is a common mishearing of 'Funk' in this context, though 'Funk' is also a valid name; however, given the 'punk' consensus and the playful tone, 'Say hi punk' is the more likely intended phrase or pun.\"},\n{\"span\": \"look at him\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 2 hears 'we got a' while Witness 1 has 'look at him'; both are plausible continuations but conflicting without audio verification.\"},\n{\"span\": \"him\", \"verdict\": \"correct\", \"correction\": \"Help them see it.\", \"reasoning\": \"Witness 3 heard 'them', which is consistent with the speaker referring to multiple dogs or objects, and aligns better with the plural context of 'help' than the singular 'him'.\"},\n{\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 2 hears 'come here buddy' which is a plausible command to a dog, but Witness 1 has no text here; without audio, it is uncertain if this phrase was spoken.\"},\n{\"span\": \"go get\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 heard 'forget' while Witness 1 has 'go get'; both are phonetically possible but contradictory without audio verification.\"},\n{\"span\": \"it\", \"verdict\": \"correct\", \"correction\": \"Go get him, Monty.\", \"reasoning\": \"Witness 2 heard 'him' which is consistent with the speaker addressing a specific dog or object, making 'Go get him, Monty' more coherent than 'Go get it'.\"},\n{\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 2 hears 'give me' which is a plausible command, but Witness 1 has no text here; without audio, it is uncertain if this phrase was spoken.\"},\n{\"span\": \"that give me that\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 heard 'can' while Witness 1 has 'that give me that'; the repetition of 'give me that' is stylistically possible but the 'can' reading suggests a different utterance.\"},\n{\"span\": \"that\", \"verdict\": \"correct\", \"correction\": \"Give me here, you little stinker.\", \"reasoning\": \"Witness 2 heard 'here' which fits the context of demanding an object back from a dog more naturally than 'that' in this specific phrase structure.\"},\n{\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 heard 'hear your' while Witness 1 has no text; without audio, it is uncertain if this phrase was spoken.\"},\n{\"span\": \"give me\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 heard 'you could hear' which is a completely different utterance than 'give me'; without audio, it is impossible to determine the correct phrasing.\"},\n{\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 heard 'and' while Witness 1 has no text; without audio, it is uncertain if this conjunction was spoken.\"},\n{\"span\": \"he won't give it to me give\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 heard '(nothing)' for this span while Witness 1 has a long phrase; without audio, it is uncertain if the speaker repeated 'give' or said something else.\"},\n{\"span\": \"monty i'll get you i'm fine\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 heard 'ooh yeah' which is a completely different utterance than 'monty i'll get you i'm fine'; without audio, it is impossible to determine the correct phrasing.\"},\n{\"span\": \"i'll\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 2 heard 'let me' while Witness 1 has 'i'll'; both are plausible commands but conflicting without audio verification.\"},\n{\"span\": \"i'm\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 2 heard '(nothing)' while Witness 1 has 'i'm'; without audio, it is uncertain if this word was spoken or if the phrase was different.\"}\n]",
+  "rulings": [
+    {
+      "span": "get it monty",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The speaker is addressing his dog Monty directly with a command, consistent with the style of talking to dogs mid-narration."
+    },
+    {
+      "span": "it monty",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 hears 'ready get' while Witness 1 has 'it monty'; without audio, it is unclear if the speaker said 'Get it Monty' or 'Get ready, Monty'."
+    },
+    {
+      "span": "funk",
+      "verdict": "correct",
+      "correction": "Say hi punk.",
+      "reasoning": "Witnesses 2 and 3 agree on 'punk', which fits the register of calling a dog a 'little stinker' and is a common mishearing of 'Funk' in this context, though 'Funk' is also a valid name; however, given the 'punk' consensus and the playful tone, 'Say hi punk' is the more likely intended phrase or pun."
+    },
+    {
+      "span": "look at him",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 hears 'we got a' while Witness 1 has 'look at him'; both are plausible continuations but conflicting without audio verification."
+    },
+    {
+      "span": "him",
+      "verdict": "correct",
+      "correction": "Help them see it.",
+      "reasoning": "Witness 3 heard 'them', which is consistent with the speaker referring to multiple dogs or objects, and aligns better with the plural context of 'help' than the singular 'him'."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 hears 'come here buddy' which is a plausible command to a dog, but Witness 1 has no text here; without audio, it is uncertain if this phrase was spoken."
+    },
+    {
+      "span": "go get",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 heard 'forget' while Witness 1 has 'go get'; both are phonetically possible but contradictory without audio verification."
+    },
+    {
+      "span": "it",
+      "verdict": "correct",
+      "correction": "Go get him, Monty.",
+      "reasoning": "Witness 2 heard 'him' which is consistent with the speaker addressing a specific dog or object, making 'Go get him, Monty' more coherent than 'Go get it'."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 hears 'give me' which is a plausible command, but Witness 1 has no text here; without audio, it is uncertain if this phrase was spoken."
+    },
+    {
+      "span": "that give me that",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 heard 'can' while Witness 1 has 'that give me that'; the repetition of 'give me that' is stylistically possible but the 'can' reading suggests a different utterance."
+    },
+    {
+      "span": "that",
+      "verdict": "correct",
+      "correction": "Give me here, you little stinker.",
+      "reasoning": "Witness 2 heard 'here' which fits the context of demanding an object back from a dog more naturally than 'that' in this specific phrase structure."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 heard 'hear your' while Witness 1 has no text; without audio, it is uncertain if this phrase was spoken."
+    },
+    {
+      "span": "give me",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 heard 'you could hear' which is a completely different utterance than 'give me'; without audio, it is impossible to determine the correct phrasing."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 heard 'and' while Witness 1 has no text; without audio, it is uncertain if this conjunction was spoken."
+    },
+    {
+      "span": "he won't give it to me give",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 heard '(nothing)' for this span while Witness 1 has a long phrase; without audio, it is uncertain if the speaker repeated 'give' or said something else."
+    },
+    {
+      "span": "monty i'll get you i'm fine",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 heard 'ooh yeah' which is a completely different utterance than 'monty i'll get you i'm fine'; without audio, it is impossible to determine the correct phrasing."
+    },
+    {
+      "span": "i'll",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 heard 'let me' while Witness 1 has 'i'll'; both are plausible commands but conflicting without audio verification."
+    },
+    {
+      "span": "i'm",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 2 heard '(nothing)' while Witness 1 has 'i'm'; without audio, it is uncertain if this word was spoken or if the phrase was different."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 34.3,
+  "prompt_chars": 11493,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "c",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

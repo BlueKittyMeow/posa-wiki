@@ -1,0 +1,31 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"Um, as you can see, I'm in a new vessel.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"Filler word 'Um' is common in speech and the sentence is coherent.\"\n    },\n    {\n        \"span\": \"I think I'm gonna have to tilt the motor up a little bit.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'Gonna' is a common contraction in casual speech and fits the context.\"\n    },\n    {\n        \"span\": \"This is the SS Tin Can 3.0.\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'SS' and 'Tin' are domain terms and fit the context of the vessel's name.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "Um, as you can see, I'm in a new vessel.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Filler word 'Um' is common in speech and the sentence is coherent."
+    },
+    {
+      "span": "I think I'm gonna have to tilt the motor up a little bit.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Gonna' is a common contraction in casual speech and fits the context."
+    },
+    {
+      "span": "This is the SS Tin Can 3.0.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'SS' and 'Tin' are domain terms and fit the context of the vessel's name."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 16.1,
+  "prompt_chars": 3480,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "a",
+  "witness_set": "W",
+  "ablation": "noStyle"
+}

@@ -1,0 +1,55 @@
+{
+  "raw": "[{\"span\": \"ladies and gentlemen\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Style Card explicitly states he opens with 'Ladies and gentlemen' as a formal address into informal content; the draft preserves this signature opening while other witnesses missed it.\"}, {\"span\": \"and\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The conjunction 'and' is necessary to link the two clauses of the show's tagline ('if you're successful you're unsuccessful, and if you're unsuccessful you're successful'), which is a known recurring formulaic wisdom.\"}, {\"span\": \"crappie\", \"verdict\": \"correct\", \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\", \"reasoning\": \"The episode title 'Crap-Pie' and the description confirm a pun is being made; the draft's repetition of 'crappie' destroys the joke, while Witness 3 correctly identifies the pun 'crap pie' (or 'crap-pie') which fits the speaker's style of making puns the point.\"}, {\"span\": \"crappie\", \"verdict\": \"correct\", \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\", \"reasoning\": \"This is the second instance of the same pun; Witness 3's 'crap copy' is a clear ASR error for 'crap pie', and the draft's repetition of 'crappie' fails to capture the intended wordplay.\"}, {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"This is the SS Tin Can 3.0. I think I'm gonna have to tilt the motor up a little bit.\", \"reasoning\": \"Witness 2's insertion of 'She's running a little rough' appears to be a hallucination or misplacement of the later sentence about the boat running slow; the draft correctly omits this phrase here, maintaining the flow before the motor adjustment.\"}, {\"span\": \"gonna\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The Style Card notes he speaks with disfluency and informal contractions like 'gonna'; Witness 2's 'going to' is an over-smoothing of his natural register.\"}, {\"span\": \"there's one\", \"verdict\": \"correct\", \"correction\": \"Hold on. Uh, yeah. For some reason she's running a little slow today.\", \"reasoning\": \"Witnesses 2 and 3 agree on 'for some', which is a more common phrase than 'there's one' in this context; the draft likely misheard the phonetic similarity between 'there's one' and 'for some'.\"}]",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Style Card explicitly states he opens with 'Ladies and gentlemen' as a formal address into informal content; the draft preserves this signature opening while other witnesses missed it."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The conjunction 'and' is necessary to link the two clauses of the show's tagline ('if you're successful you're unsuccessful, and if you're unsuccessful you're successful'), which is a known recurring formulaic wisdom."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The episode title 'Crap-Pie' and the description confirm a pun is being made; the draft's repetition of 'crappie' destroys the joke, while Witness 3 correctly identifies the pun 'crap pie' (or 'crap-pie') which fits the speaker's style of making puns the point."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "This is the second instance of the same pun; Witness 3's 'crap copy' is a clear ASR error for 'crap pie', and the draft's repetition of 'crappie' fails to capture the intended wordplay."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "This is the SS Tin Can 3.0. I think I'm gonna have to tilt the motor up a little bit.",
+      "reasoning": "Witness 2's insertion of 'She's running a little rough' appears to be a hallucination or misplacement of the later sentence about the boat running slow; the draft correctly omits this phrase here, maintaining the flow before the motor adjustment."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The Style Card notes he speaks with disfluency and informal contractions like 'gonna'; Witness 2's 'going to' is an over-smoothing of his natural register."
+    },
+    {
+      "span": "there's one",
+      "verdict": "correct",
+      "correction": "Hold on. Uh, yeah. For some reason she's running a little slow today.",
+      "reasoning": "Witnesses 2 and 3 agree on 'for some', which is a more common phrase than 'there's one' in this context; the draft likely misheard the phonetic similarity between 'there's one' and 'for some'."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 115.4,
+  "prompt_chars": 11624,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

@@ -1,0 +1,156 @@
+{
+  "packet_id": "a__W",
+  "passage": "a",
+  "passage_window": [
+    63.0,
+    100.0
+  ],
+  "passage_label": "cold open - show name + the crappie/crap-pie pun",
+  "witness_set": "W",
+  "video": {
+    "title": "Crap-Pie - The Unsuccessful Fishing Show - Episode 15",
+    "description": "I head out fishing in the S.S. Tin Can 3.0 to catch some crappie!"
+  },
+  "entity_roster": {
+    "people": [
+      {
+        "name": "Matthew Posa",
+        "aliases": [
+          "Captain Teeny Trout",
+          "Teeny Trout"
+        ]
+      },
+      {
+        "name": "Funk",
+        "aliases": [
+          "Erin"
+        ]
+      },
+      {
+        "name": "Lucas",
+        "aliases": [
+          "Captain Teeny Trout",
+          "Teeny Trout"
+        ]
+      },
+      {
+        "name": "Erin",
+        "aliases": []
+      },
+      {
+        "name": "Jake",
+        "aliases": [
+          "jake"
+        ]
+      },
+      {
+        "name": "Ken",
+        "aliases": [
+          "ken",
+          "chainsaw ken"
+        ]
+      },
+      {
+        "name": "Matthew's Mom",
+        "aliases": [
+          "mom"
+        ]
+      },
+      {
+        "name": "Matthew's Dad",
+        "aliases": [
+          "dad"
+        ]
+      },
+      {
+        "name": "Matthew's Brother",
+        "aliases": [
+          "brother"
+        ]
+      }
+    ],
+    "dogs": [
+      {
+        "name": "Monty",
+        "breed": "Rough Collie"
+      },
+      {
+        "name": "Rueger",
+        "breed": "Mixed Breed"
+      },
+      {
+        "name": "Layla",
+        "breed": "English Shepherd"
+      }
+    ],
+    "domain_terms": [
+      "crappie",
+      "crappies",
+      "bluegill",
+      "bluegills",
+      "gills",
+      "Boundary Waters",
+      "steel eater",
+      "SS Tin Can"
+    ]
+  },
+  "witnesses": {
+    "whisper": {
+      "segments": [
+        {
+          "t": 10.85,
+          "text": "Ladies and gentlemen, welcome to another episode of the unsuccessful fishing show, where if you're successful you're unsuccessful, and if you're unsuccessful you're successful."
+        },
+        {
+          "t": 69.31,
+          "text": "Today we are targeting some crappie, also known as crappie."
+        },
+        {
+          "t": 74.39,
+          "text": "And if we can't catch those,"
+        },
+        {
+          "t": 76.75,
+          "text": "we are going to go for some bluegills."
+        },
+        {
+          "t": 80.99,
+          "text": "Um, as you can see, I'm in a new vessel. This is the SS Tin Can 3.0."
+        },
+        {
+          "t": 86.87,
+          "text": "I think I'm gonna have to tilt the motor up a little bit. Hold on. Uh, yeah."
+        },
+        {
+          "t": 97.28,
+          "text": "There's one reason she's running a little slow today."
+        }
+      ],
+      "text": "Ladies and gentlemen, welcome to another episode of the unsuccessful fishing show, where if you're successful you're unsuccessful, and if you're unsuccessful you're successful. Today we are targeting some crappie, also known as crappie. And if we can't catch those, we are going to go for some bluegills. Um, as you can see, I'm in a new vessel. This is the SS Tin Can 3.0. I think I'm gonna have to tilt the motor up a little bit. Hold on. Uh, yeah. There's one reason she's running a little slow today."
+    }
+  },
+  "draft_transcript": "Ladies and gentlemen, welcome to another episode of the unsuccessful fishing show, where if you're successful you're unsuccessful, and if you're unsuccessful you're successful. Today we are targeting some crappie, also known as crappie. And if we can't catch those, we are going to go for some bluegills. Um, as you can see, I'm in a new vessel. This is the SS Tin Can 3.0. I think I'm gonna have to tilt the motor up a little bit. Hold on. Uh, yeah. There's one reason she's running a little slow today.",
+  "disagreement_flags": [],
+  "whisper_low_confidence": [
+    {
+      "word": "Um,",
+      "t": 80.99,
+      "p": 0.025
+    },
+    {
+      "word": "gonna",
+      "t": 92.14,
+      "p": 0.338
+    },
+    {
+      "word": "SS",
+      "t": 83.77,
+      "p": 0.396
+    },
+    {
+      "word": "Tin",
+      "t": 84.35,
+      "p": 0.441
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"No clear evidence to support 'put some cinder blocks up on the front though'\"\n    },\n    {\n        \"span\": \"for when\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"No clear evidence to support omitting 'for when'\"\n    },\n    {\n        \"span\": \"because\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'because' is more formal and likely than 'cuz'\"\n    },\n    {\n        \"span\": \"and i might\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'yeah' is not contextually appropriate here\"\n    },\n    {\n        \"span\": \"gotta\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'gotta' is a common contraction for 'got to'\"\n    },\n    {\n        \"span\": \"alright\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'alright' is a common variation of 'all right'\"\n    },\n    {\n        \"span\": \"i caught\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'i caught' is more contextually appropriate than 'it's kind of'\"\n    },\n    {\n        \"span\": \"ish\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'ish' is a common colloquialism indicating approximation\"\n    },\n    {\n        \"span\": \"one or\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'water' is not contextually appropriate\"\n    },\n    {\n        \"span\": \"tea\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear between 'tea' and 't truck'\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'and' is not necessary for the sentence to make sense\"\n    },\n    {\n        \"span\": \"gills\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'gills' is the correct term in this context\"\n    },\n    {\n        \"span\": \"there was\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'there was' is grammatically correct and contextually appropriate\"\n    },\n    {\n        \"span\": \"was\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'was' is grammatically correct and contextually appropriate\"\n    },\n    {\n        \"span\": \"blue gills\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'blue gills' is the correct term in this context\"\n    },\n    {\n        \"span\": \"like them\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'like them' is grammatically correct and contextually appropriate\"\n    },\n    {\n        \"span\": \"i\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'i' is grammatically correct and contextually appropriate\"\n    },\n    {\n        \"span\": \"let them\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'let them' is grammatically correct and contextually appropriate\"\n    },\n    {\n        \"span\": \"unless\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'unless' is grammatically correct and contextually appropriate\"\n    },\n    {\n        \"span\": \"you\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'you' is grammatically correct and contextually appropriate\"\n    },\n    {\n        \"span\": \"small\",\n        \"verdict\": \"correct\",\n        \"correction\": \"some days you just smaller fish, but man\",\n        \"reasoning\": \"'smaller' is more contextually appropriate than 'small'\"\n    },\n    {\n        \"span\": \"like\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'like' is grammatically correct and contextually appropriate\"\n    },\n    {\n        \"span\": \"having it\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'having it' is grammatically correct and contextually appropriate\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"confirm\",\n        \"correction\": null,\n        \"reasoning\": \"'and we should have had some minnows we really should have but' is not contextually appropriate\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "(nothing)",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "No clear evidence to support 'put some cinder blocks up on the front though'"
+    },
+    {
+      "span": "for when",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "No clear evidence to support omitting 'for when'"
+    },
+    {
+      "span": "because",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'because' is more formal and likely than 'cuz'"
+    },
+    {
+      "span": "and i might",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'yeah' is not contextually appropriate here"
+    },
+    {
+      "span": "gotta",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'gotta' is a common contraction for 'got to'"
+    },
+    {
+      "span": "alright",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'alright' is a common variation of 'all right'"
+    },
+    {
+      "span": "i caught",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'i caught' is more contextually appropriate than 'it's kind of'"
+    },
+    {
+      "span": "ish",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'ish' is a common colloquialism indicating approximation"
+    },
+    {
+      "span": "one or",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'water' is not contextually appropriate"
+    },
+    {
+      "span": "tea",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear between 'tea' and 't truck'"
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'and' is not necessary for the sentence to make sense"
+    },
+    {
+      "span": "gills",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'gills' is the correct term in this context"
+    },
+    {
+      "span": "there was",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'there was' is grammatically correct and contextually appropriate"
+    },
+    {
+      "span": "was",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'was' is grammatically correct and contextually appropriate"
+    },
+    {
+      "span": "blue gills",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'blue gills' is the correct term in this context"
+    },
+    {
+      "span": "like them",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'like them' is grammatically correct and contextually appropriate"
+    },
+    {
+      "span": "i",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'i' is grammatically correct and contextually appropriate"
+    },
+    {
+      "span": "let them",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'let them' is grammatically correct and contextually appropriate"
+    },
+    {
+      "span": "unless",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'unless' is grammatically correct and contextually appropriate"
+    },
+    {
+      "span": "you",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'you' is grammatically correct and contextually appropriate"
+    },
+    {
+      "span": "small",
+      "verdict": "correct",
+      "correction": "some days you just smaller fish, but man",
+      "reasoning": "'smaller' is more contextually appropriate than 'small'"
+    },
+    {
+      "span": "like",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'like' is grammatically correct and contextually appropriate"
+    },
+    {
+      "span": "having it",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'having it' is grammatically correct and contextually appropriate"
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'and we should have had some minnows we really should have but' is not contextually appropriate"
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 79.8,
+  "prompt_chars": 8518,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "b",
+  "witness_set": "W+YT+P",
+  "ablation": "noStyle"
+}

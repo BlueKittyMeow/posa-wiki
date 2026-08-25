@@ -1,0 +1,25 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"crappie, also known as crappie\",\n        \"verdict\": \"correct\",\n        \"correction\": \"crap high, also known as crappie\",\n        \"reasoning\": \"Witness 2's testimony suggests the speaker said 'crap high' as a pun.\"\n    },\n    {\n        \"span\": \"There's one reason she's running a little slow today\",\n        \"verdict\": \"correct\",\n        \"correction\": \"for some reason she's running a little slow today\",\n        \"reasoning\": \"Witness 2's testimony indicates the speaker said 'for some reason' instead of 'There's one reason'.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "crappie, also known as crappie",
+      "verdict": "correct",
+      "correction": "crap high, also known as crappie",
+      "reasoning": "Witness 2's testimony suggests the speaker said 'crap high' as a pun."
+    },
+    {
+      "span": "There's one reason she's running a little slow today",
+      "verdict": "correct",
+      "correction": "for some reason she's running a little slow today",
+      "reasoning": "Witness 2's testimony indicates the speaker said 'for some reason' instead of 'There's one reason'."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 10.6,
+  "prompt_chars": 3344,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "bare"
+}

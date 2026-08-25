@@ -1,0 +1,61 @@
+{
+  "raw": "[\n  {\n    \"span\": \"ladies and gentlemen\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Style card confirms 'Ladies and gentlemen' is a recurring formal opening for this speaker.\"\n  },\n  {\n    \"span\": \"and\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The conjunction is required for the show's tagline structure; its absence in other transcripts is likely a smoothing error.\"\n  },\n  {\n    \"span\": \"crappie\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The episode title pun 'Crap-Pie' must be spoken; Witness 1's 'also known as crappie' flattens the joke, while Witnesses 2 and 3 capture the pun variants.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The phrase 'also known as crap-pie' is the intended pun; Witnesses 2 and 3 correctly identify the wordplay that Witness 1 missed.\"\n  },\n  {\n    \"span\": \"crappie\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"Witness 3's 'crap copy' is a phonetic mishearing of the pun 'crap-pie', which aligns with the title and style card rules.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"correct\",\n    \"correction\": \"This is the SS Tin Can 3.0. I think I'm gonna have to tilt the motor up a little bit.\",\n    \"reasoning\": \"Witnesses 2 and 3 correctly identify 'she's running a little rough' or 'yeah' as filler/observation, whereas Witness 1's insertion of 'I think I'm gonna have to tilt...' is a smooth-over that likely skips the actual spoken hesitation or observation.\"\n  },\n  {\n    \"span\": \"gonna\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The speaker uses colloquialisms like 'gonna'; Witness 2's 'going to' is a valid but less likely formalization of the same utterance.\"\n  },\n  {\n    \"span\": \"there's one\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witnesses 2 and 3 agree on 'for some reason', while Witness 1 has 'there's one reason'; the phonetic similarity makes it difficult to distinguish without audio.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Style card confirms 'Ladies and gentlemen' is a recurring formal opening for this speaker."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The conjunction is required for the show's tagline structure; its absence in other transcripts is likely a smoothing error."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The episode title pun 'Crap-Pie' must be spoken; Witness 1's 'also known as crappie' flattens the joke, while Witnesses 2 and 3 capture the pun variants."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The phrase 'also known as crap-pie' is the intended pun; Witnesses 2 and 3 correctly identify the wordplay that Witness 1 missed."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "Witness 3's 'crap copy' is a phonetic mishearing of the pun 'crap-pie', which aligns with the title and style card rules."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "This is the SS Tin Can 3.0. I think I'm gonna have to tilt the motor up a little bit.",
+      "reasoning": "Witnesses 2 and 3 correctly identify 'she's running a little rough' or 'yeah' as filler/observation, whereas Witness 1's insertion of 'I think I'm gonna have to tilt...' is a smooth-over that likely skips the actual spoken hesitation or observation."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The speaker uses colloquialisms like 'gonna'; Witness 2's 'going to' is a valid but less likely formalization of the same utterance."
+    },
+    {
+      "span": "there's one",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witnesses 2 and 3 agree on 'for some reason', while Witness 1 has 'there's one reason'; the phonetic similarity makes it difficult to distinguish without audio."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 53.3,
+  "prompt_chars": 11624,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

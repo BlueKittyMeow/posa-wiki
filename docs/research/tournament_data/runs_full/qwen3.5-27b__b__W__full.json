@@ -1,0 +1,37 @@
+{
+  "raw": "[\n  {\n    \"span\": \"I might last time I came through here\",\n    \"verdict\": \"correct\",\n    \"correction\": \"last time I came through here\",\n    \"reasoning\": \"The word 'might' is a transcription error for the disfluent start of the sentence; removing it restores the coherent narrative about a past event.\"\n  },\n  {\n    \"span\": \"Captain Tea Truck gave me one\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Captain Teeny Trout gave me one\",\n    \"reasoning\": \"'Tea Truck' is an ASR hallucination of the recurring nickname 'Captain Teeny Trout' (Lucas), which fits the entity roster and the show's style.\"\n  },\n  {\n    \"span\": \"then I got some five nice gills\",\n    \"verdict\": \"correct\",\n    \"correction\": \"then I got some, five nice gills\",\n    \"reasoning\": \"The speaker uses a disfluent pause or self-correction here; adding a comma reflects the spoken rhythm without inventing words.\"\n  },\n  {\n    \"span\": \"unless like some days you just small fish\",\n    \"verdict\": \"correct\",\n    \"correction\": \"unless like some days you just catch small fish\",\n    \"reasoning\": \"The verb 'catch' is missing in the draft, likely dropped due to ASR smoothing of a rapid utterance; adding it restores grammatical coherence while keeping the speaker's informal style.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "I might last time I came through here",
+      "verdict": "correct",
+      "correction": "last time I came through here",
+      "reasoning": "The word 'might' is a transcription error for the disfluent start of the sentence; removing it restores the coherent narrative about a past event."
+    },
+    {
+      "span": "Captain Tea Truck gave me one",
+      "verdict": "correct",
+      "correction": "Captain Teeny Trout gave me one",
+      "reasoning": "'Tea Truck' is an ASR hallucination of the recurring nickname 'Captain Teeny Trout' (Lucas), which fits the entity roster and the show's style."
+    },
+    {
+      "span": "then I got some five nice gills",
+      "verdict": "correct",
+      "correction": "then I got some, five nice gills",
+      "reasoning": "The speaker uses a disfluent pause or self-correction here; adding a comma reflects the spoken rhythm without inventing words."
+    },
+    {
+      "span": "unless like some days you just small fish",
+      "verdict": "correct",
+      "correction": "unless like some days you just catch small fish",
+      "reasoning": "The verb 'catch' is missing in the draft, likely dropped due to ASR smoothing of a rapid utterance; adding it restores grammatical coherence while keeping the speaker's informal style."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 55.0,
+  "prompt_chars": 10173,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "b",
+  "witness_set": "W",
+  "ablation": "full"
+}

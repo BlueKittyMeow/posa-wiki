@@ -1,0 +1,67 @@
+{
+  "raw": "[{\"span\": \"ladies and gentlemen\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Style Card explicitly states he opens with 'Ladies and gentlemen' as a formal address into informal content; the draft preserves this signature opening while other witnesses missed it.\"}, {\"span\": \"and\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The conjunction 'and' is necessary to link the two clauses of the show's tagline ('if you're successful you're unsuccessful, and if you're unsuccessful you're successful'); removing it breaks the rhythmic parallelism central to the joke.\"}, {\"span\": \"crappie\", \"verdict\": \"correct\", \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\", \"reasoning\": \"The episode title is 'Crap-Pie' and the description highlights the pun; the speaker intentionally mispronounces 'crappie' as 'crap-pie' to make the joke, which Witness 3 ('crap pie') correctly captured while the draft flattened it.\"}, {\"span\": \"crappie\", \"verdict\": \"correct\", \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\", \"reasoning\": \"This is the second instance of the pun in the same sentence; 'crap copy' (Witness 3) and 'crap high' (Witness 2) are ASR errors for the deliberate pun 'crap-pie'.\"}, {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\", \"reasoning\": \"The phrase 'also known as' requires an object; Witness 2's 'crap' is a partial capture of the pun 'crap-pie', confirming the draft's omission of the pun was an error.\"}, {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\", \"reasoning\": \"Witness 3's 'crap copy' is a phonetic hallucination for 'crap-pie'; the context of the title pun confirms the intended word.\"}, {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"This is the SS Tin Can 3.0. I think I'm gonna have to tilt the motor up a little bit.\", \"reasoning\": \"Witness 2's 'She's running a little rough' appears to be a hallucination or misplacement of the later sentence about the boat running slow; the draft correctly places the thought about tilting the motor immediately after naming the vessel.\"}, {\"span\": \"gonna\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Style Card notes he speaks with disfluency and informal contractions; 'gonna' is a natural contraction for this speaker, whereas 'going to' (Witness 2) sounds like ASR smoothing.\"}, {\"span\": \"there's one\", \"verdict\": \"correct\", \"correction\": \"Hold on. Uh, yeah. There's one reason she's running a little slow today.\", \"reasoning\": \"The phrase 'There's one reason' is a specific setup for an explanation, whereas 'for some reason' (Witness 2/3) is a generic hedge; the specificity of 'one reason' fits his narrative style better and aligns with the draft's distinct phrasing.\"}]",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Style Card explicitly states he opens with 'Ladies and gentlemen' as a formal address into informal content; the draft preserves this signature opening while other witnesses missed it."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The conjunction 'and' is necessary to link the two clauses of the show's tagline ('if you're successful you're unsuccessful, and if you're unsuccessful you're successful'); removing it breaks the rhythmic parallelism central to the joke."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The episode title is 'Crap-Pie' and the description highlights the pun; the speaker intentionally mispronounces 'crappie' as 'crap-pie' to make the joke, which Witness 3 ('crap pie') correctly captured while the draft flattened it."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "This is the second instance of the pun in the same sentence; 'crap copy' (Witness 3) and 'crap high' (Witness 2) are ASR errors for the deliberate pun 'crap-pie'."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The phrase 'also known as' requires an object; Witness 2's 'crap' is a partial capture of the pun 'crap-pie', confirming the draft's omission of the pun was an error."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "Witness 3's 'crap copy' is a phonetic hallucination for 'crap-pie'; the context of the title pun confirms the intended word."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "This is the SS Tin Can 3.0. I think I'm gonna have to tilt the motor up a little bit.",
+      "reasoning": "Witness 2's 'She's running a little rough' appears to be a hallucination or misplacement of the later sentence about the boat running slow; the draft correctly places the thought about tilting the motor immediately after naming the vessel."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Style Card notes he speaks with disfluency and informal contractions; 'gonna' is a natural contraction for this speaker, whereas 'going to' (Witness 2) sounds like ASR smoothing."
+    },
+    {
+      "span": "there's one",
+      "verdict": "correct",
+      "correction": "Hold on. Uh, yeah. There's one reason she's running a little slow today.",
+      "reasoning": "The phrase 'There's one reason' is a specific setup for an explanation, whereas 'for some reason' (Witness 2/3) is a generic hedge; the specificity of 'one reason' fits his narrative style better and aligns with the draft's distinct phrasing."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 116.7,
+  "prompt_chars": 11079,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "noLex"
+}

@@ -1,0 +1,43 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"for when I'm in by myself because it's just riding so high.\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Unclear context for 'for when'\"\n    },\n    {\n        \"span\": \"I caught I caught like seven crappies ish.\",\n        \"verdict\": \"correct\",\n        \"correction\": \"I caught like seven crappies.\",\n        \"reasoning\": \"Redundant repetition and 'ish' seems unnecessary\"\n    },\n    {\n        \"span\": \"Uh, Captain Tea Truck gave me one,\",\n        \"verdict\": \"correct\",\n        \"correction\": \"Uh, Captain Truck gave me one,\",\n        \"reasoning\": \"Consistent with Witness 2 and likely correct\"\n    },\n    {\n        \"span\": \"with the blue gills,\",\n        \"verdict\": \"correct\",\n        \"correction\": \"with the bluegills,\",\n        \"reasoning\": \"Consistent with Witness 2 and likely correct\"\n    },\n    {\n        \"span\": \"you just small fish,\",\n        \"verdict\": \"correct\",\n        \"correction\": \"you just smaller fish.\",\n        \"reasoning\": \"Consistent with Witness 2 and likely correct\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "for when I'm in by myself because it's just riding so high.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Unclear context for 'for when'"
+    },
+    {
+      "span": "I caught I caught like seven crappies ish.",
+      "verdict": "correct",
+      "correction": "I caught like seven crappies.",
+      "reasoning": "Redundant repetition and 'ish' seems unnecessary"
+    },
+    {
+      "span": "Uh, Captain Tea Truck gave me one,",
+      "verdict": "correct",
+      "correction": "Uh, Captain Truck gave me one,",
+      "reasoning": "Consistent with Witness 2 and likely correct"
+    },
+    {
+      "span": "with the blue gills,",
+      "verdict": "correct",
+      "correction": "with the bluegills,",
+      "reasoning": "Consistent with Witness 2 and likely correct"
+    },
+    {
+      "span": "you just small fish,",
+      "verdict": "correct",
+      "correction": "you just smaller fish.",
+      "reasoning": "Consistent with Witness 2 and likely correct"
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 19.4,
+  "prompt_chars": 4140,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "bare"
+}

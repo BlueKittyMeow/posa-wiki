@@ -1,0 +1,602 @@
+{
+  "packet_id": "b__W_YT_P",
+  "passage": "b",
+  "passage_window": [
+    1650.0,
+    1700.0
+  ],
+  "passage_label": "fast recap - the Captain nickname + fish counts",
+  "witness_set": "W+YT+P",
+  "video": {
+    "title": "Crap-Pie - The Unsuccessful Fishing Show - Episode 15",
+    "description": "I head out fishing in the S.S. Tin Can 3.0 to catch some crappie!"
+  },
+  "entity_roster": {
+    "people": [
+      {
+        "name": "Matthew Posa",
+        "aliases": [
+          "Captain Teeny Trout",
+          "Teeny Trout"
+        ]
+      },
+      {
+        "name": "Funk",
+        "aliases": [
+          "Erin"
+        ]
+      },
+      {
+        "name": "Lucas",
+        "aliases": [
+          "Captain Teeny Trout",
+          "Teeny Trout"
+        ]
+      },
+      {
+        "name": "Erin",
+        "aliases": []
+      },
+      {
+        "name": "Jake",
+        "aliases": [
+          "jake"
+        ]
+      },
+      {
+        "name": "Ken",
+        "aliases": [
+          "ken",
+          "chainsaw ken"
+        ]
+      },
+      {
+        "name": "Matthew's Mom",
+        "aliases": [
+          "mom"
+        ]
+      },
+      {
+        "name": "Matthew's Dad",
+        "aliases": [
+          "dad"
+        ]
+      },
+      {
+        "name": "Matthew's Brother",
+        "aliases": [
+          "brother"
+        ]
+      }
+    ],
+    "dogs": [
+      {
+        "name": "Monty",
+        "breed": "Rough Collie"
+      },
+      {
+        "name": "Rueger",
+        "breed": "Mixed Breed"
+      },
+      {
+        "name": "Layla",
+        "breed": "English Shepherd"
+      }
+    ],
+    "domain_terms": [
+      "crappie",
+      "crappies",
+      "bluegill",
+      "bluegills",
+      "gills",
+      "Boundary Waters",
+      "steel eater",
+      "SS Tin Can"
+    ]
+  },
+  "witnesses": {
+    "whisper": {
+      "segments": [
+        {
+          "t": 1648.85,
+          "text": "for when I'm in by myself because"
+        },
+        {
+          "t": 1650.97,
+          "text": "it's just riding so high."
+        },
+        {
+          "t": 1653.09,
+          "text": "I do have the motor tilted up a little bit"
+        },
+        {
+          "t": 1655.41,
+          "text": "because it's really shallow right here"
+        },
+        {
+          "t": 1657.11,
+          "text": "and I might"
+        },
+        {
+          "t": 1658.59,
+          "text": "last time I came through here I dinged a rock"
+        },
+        {
+          "t": 1660.99,
+          "text": "so I gotta be careful."
+        },
+        {
+          "t": 1663.21,
+          "text": "Alright, so I caught"
+        },
+        {
+          "t": 1665.25,
+          "text": "I caught like seven"
+        },
+        {
+          "t": 1667.87,
+          "text": "crappies"
+        },
+        {
+          "t": 1669.19,
+          "text": "ish. I let one or two go."
+        },
+        {
+          "t": 1671.85,
+          "text": "Uh, Captain Tea Truck"
+        },
+        {
+          "t": 1673.27,
+          "text": "gave me one, then I got some five nice gills."
+        },
+        {
+          "t": 1675.31,
+          "text": "Bunch of little gills that I threw back."
+        },
+        {
+          "t": 1677.63,
+          "text": "There was some close ones, but"
+        },
+        {
+          "t": 1678.95,
+          "text": "with the blue gills, I like them either"
+        },
+        {
+          "t": 1681.35,
+          "text": "to be big fat ones or I usually let them"
+        },
+        {
+          "t": 1683.21,
+          "text": "go unless like"
+        },
+        {
+          "t": 1684.69,
+          "text": "some days you just small fish, but man"
+        },
+        {
+          "t": 1687.21,
+          "text": "I could see like right at the end"
+        },
+        {
+          "t": 1689.31,
+          "text": "there I saw so many"
+        },
+        {
+          "t": 1691.29,
+          "text": "crappies like big fat"
+        },
+        {
+          "t": 1693.27,
+          "text": "crappies and they just"
+        },
+        {
+          "t": 1695.25,
+          "text": "did not care. Like one or two"
+        },
+        {
+          "t": 1697.17,
+          "text": "of them would like excitedly swim towards"
+        },
+        {
+          "t": 1699.11,
+          "text": "my jig, but they just weren't having it."
+        }
+      ],
+      "text": "for when I'm in by myself because it's just riding so high. I do have the motor tilted up a little bit because it's really shallow right here and I might last time I came through here I dinged a rock so I gotta be careful. Alright, so I caught I caught like seven crappies ish. I let one or two go. Uh, Captain Tea Truck gave me one, then I got some five nice gills. Bunch of little gills that I threw back. There was some close ones, but with the blue gills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish, but man I could see like right at the end there I saw so many crappies like big fat crappies and they just did not care. Like one or two of them would like excitedly swim towards my jig, but they just weren't having it."
+    },
+    "youtube": {
+      "segments": [
+        {
+          "t": 1649.36,
+          "text": "I'm in by myself cuz it's just riding so"
+        },
+        {
+          "t": 1652.72,
+          "text": "high. I do have the motor tilted up a"
+        },
+        {
+          "t": 1655.36,
+          "text": "little bit because it's really shallow"
+        },
+        {
+          "t": 1656.88,
+          "text": "right here and I might last time I came"
+        },
+        {
+          "t": 1659.92,
+          "text": "through here I dinged a rock so I got to"
+        },
+        {
+          "t": 1662.08,
+          "text": "be careful. All right, so I caught I"
+        },
+        {
+          "t": 1665.6,
+          "text": "caught like seven crappies."
+        },
+        {
+          "t": 1669.92,
+          "text": "I let one or two go. Uh captain truck"
+        },
+        {
+          "t": 1673.52,
+          "text": "gave me one. Then I got some five nice"
+        },
+        {
+          "t": 1675.12,
+          "text": "gills. Bunch of little gills that I"
+        },
+        {
+          "t": 1677.12,
+          "text": "threw back. There are some close ones,"
+        },
+        {
+          "t": 1678.96,
+          "text": "but with the bluegills, I like them"
+        },
+        {
+          "t": 1681.28,
+          "text": "either to be big fat ones or I usually"
+        },
+        {
+          "t": 1683.12,
+          "text": "let them go unless like some days you"
+        },
+        {
+          "t": 1686.16,
+          "text": "just smaller fish. But man, I could see"
+        },
+        {
+          "t": 1688.64,
+          "text": "like right at the end there, I saw so"
+        },
+        {
+          "t": 1691.28,
+          "text": "many crappies, like big fat crappies,"
+        },
+        {
+          "t": 1694.72,
+          "text": "and they just did not care. Like one or"
+        },
+        {
+          "t": 1697.12,
+          "text": "two of them would like excitedly swim"
+        },
+        {
+          "t": 1699.12,
+          "text": "towards my jig, but they just weren't"
+        }
+      ],
+      "text": "I'm in by myself cuz it's just riding so high. I do have the motor tilted up a little bit because it's really shallow right here and I might last time I came through here I dinged a rock so I got to be careful. All right, so I caught I caught like seven crappies. I let one or two go. Uh captain truck gave me one. Then I got some five nice gills. Bunch of little gills that I threw back. There are some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just smaller fish. But man, I could see like right at the end there, I saw so many crappies, like big fat crappies, and they just did not care. Like one or two of them would like excitedly swim towards my jig, but they just weren't"
+    },
+    "parakeet": {
+      "segments": [
+        {
+          "t": 1647.2,
+          "text": "Put some cinder blocks up on the front though for when I'm in by myself because it's just riding so high. I do have the motor tilted up a little bit because it's really shallow right here."
+        },
+        {
+          "t": 1657.7,
+          "text": "Yeah."
+        },
+        {
+          "t": 1658.98,
+          "text": "Last time I came through here, I dinged a rock."
+        },
+        {
+          "t": 1661.57,
+          "text": "So I gotta be careful."
+        },
+        {
+          "t": 1663.49,
+          "text": "Alright, so I caught"
+        },
+        {
+          "t": 1665.35,
+          "text": "It's kind of like"
+        },
+        {
+          "t": 1666.43,
+          "text": "Seven."
+        },
+        {
+          "t": 1667.87,
+          "text": "Crappies."
+        },
+        {
+          "t": 1669.28,
+          "text": "Ish, I let water two go."
+        },
+        {
+          "t": 1672.29,
+          "text": "Uh Captain T Truck gave me one and then I got some five nice gills, bunch of little kills."
+        },
+        {
+          "t": 1676.77,
+          "text": "that I threw back."
+        },
+        {
+          "t": 1677.99,
+          "text": "There's some close ones, but with the bluegills."
+        },
+        {
+          "t": 1680.71,
+          "text": "I like'em either to be big fat ones or I'd usually let'em go in less, like"
+        },
+        {
+          "t": 1685.15,
+          "text": "Some days it's just smaller fish, but man"
+        },
+        {
+          "t": 1687.78,
+          "text": "I could see, like right at the end there, I saw so many crappies."
+        },
+        {
+          "t": 1692.87,
+          "text": "Big fat crappies."
+        },
+        {
+          "t": 1694.72,
+          "text": "And they just did not care. Like, one or two of them would, like, excitedly swim towards my jig, but they just weren't having it. And we should have had some minnows. We really should have. But."
+        }
+      ],
+      "text": "Put some cinder blocks up on the front though for when I'm in by myself because it's just riding so high. I do have the motor tilted up a little bit because it's really shallow right here. Yeah. Last time I came through here, I dinged a rock. So I gotta be careful. Alright, so I caught It's kind of like Seven. Crappies. Ish, I let water two go. Uh Captain T Truck gave me one and then I got some five nice gills, bunch of little kills. that I threw back. There's some close ones, but with the bluegills. I like'em either to be big fat ones or I'd usually let'em go in less, like Some days it's just smaller fish, but man I could see, like right at the end there, I saw so many crappies. Big fat crappies. And they just did not care. Like, one or two of them would, like, excitedly swim towards my jig, but they just weren't having it. And we should have had some minnows. We really should have. But."
+    }
+  },
+  "draft_transcript": "for when I'm in by myself because it's just riding so high. I do have the motor tilted up a little bit because it's really shallow right here and I might last time I came through here I dinged a rock so I gotta be careful. Alright, so I caught I caught like seven crappies ish. I let one or two go. Uh, Captain Tea Truck gave me one, then I got some five nice gills. Bunch of little gills that I threw back. There was some close ones, but with the blue gills, I like them either to be big fat ones or I usually let them go unless like some days you just small fish, but man I could see like right at the end there I saw so many crappies like big fat crappies and they just did not care. Like one or two of them would like excitedly swim towards my jig, but they just weren't having it.",
+  "disagreement_flags": [
+    {
+      "whisper_span": "(nothing)",
+      "context": "for when i'm",
+      "alternatives": {
+        "parakeet": "put some cinder blocks up on the front though"
+      }
+    },
+    {
+      "whisper_span": "for when",
+      "context": "for when i'm in by",
+      "alternatives": {
+        "youtube": "(nothing)"
+      }
+    },
+    {
+      "whisper_span": "because",
+      "context": "in by myself because it's just riding",
+      "alternatives": {
+        "youtube": "cuz"
+      }
+    },
+    {
+      "whisper_span": "and i might",
+      "context": "shallow right here and i might last time i",
+      "alternatives": {
+        "parakeet": "yeah"
+      }
+    },
+    {
+      "whisper_span": "gotta",
+      "context": "rock so i gotta be careful alright",
+      "alternatives": {
+        "youtube": "got to"
+      }
+    },
+    {
+      "whisper_span": "alright",
+      "context": "gotta be careful alright so i caught",
+      "alternatives": {
+        "youtube": "all right"
+      }
+    },
+    {
+      "whisper_span": "i caught",
+      "context": "so i caught i caught like seven crappies",
+      "alternatives": {
+        "parakeet": "it's kind of"
+      }
+    },
+    {
+      "whisper_span": "ish",
+      "context": "like seven crappies ish i let one",
+      "alternatives": {
+        "youtube": "(nothing)"
+      }
+    },
+    {
+      "whisper_span": "one or",
+      "context": "ish i let one or two go captain",
+      "alternatives": {
+        "parakeet": "water"
+      }
+    },
+    {
+      "whisper_span": "tea",
+      "context": "two go captain tea truck gave me",
+      "alternatives": {
+        "youtube": "(nothing)",
+        "parakeet": "t"
+      }
+    },
+    {
+      "whisper_span": "(nothing)",
+      "context": "gave me one then i got",
+      "alternatives": {
+        "parakeet": "and"
+      }
+    },
+    {
+      "whisper_span": "gills",
+      "context": "bunch of little gills that i threw",
+      "alternatives": {
+        "parakeet": "kills"
+      }
+    },
+    {
+      "whisper_span": "there was",
+      "context": "i threw back there was some close ones",
+      "alternatives": {
+        "parakeet": "there's"
+      }
+    },
+    {
+      "whisper_span": "was",
+      "context": "threw back there was some close ones",
+      "alternatives": {
+        "youtube": "are"
+      }
+    },
+    {
+      "whisper_span": "blue gills",
+      "context": "but with the blue gills i like them",
+      "alternatives": {
+        "youtube": "bluegills",
+        "parakeet": "bluegills"
+      }
+    },
+    {
+      "whisper_span": "like them",
+      "context": "blue gills i like them either to be",
+      "alternatives": {
+        "parakeet": "likethem"
+      }
+    },
+    {
+      "whisper_span": "i",
+      "context": "fat ones or i usually let them",
+      "alternatives": {
+        "parakeet": "i'd"
+      }
+    },
+    {
+      "whisper_span": "let them",
+      "context": "or i usually let them go unless like",
+      "alternatives": {
+        "parakeet": "letthem"
+      }
+    },
+    {
+      "whisper_span": "unless",
+      "context": "let them go unless like some days",
+      "alternatives": {
+        "parakeet": "in less"
+      }
+    },
+    {
+      "whisper_span": "you",
+      "context": "like some days you just small fish",
+      "alternatives": {
+        "parakeet": "it's"
+      }
+    },
+    {
+      "whisper_span": "small",
+      "context": "days you just small fish but man",
+      "alternatives": {
+        "youtube": "smaller",
+        "parakeet": "smaller"
+      }
+    },
+    {
+      "whisper_span": "like",
+      "context": "so many crappies like big fat crappies",
+      "alternatives": {
+        "parakeet": "(nothing)"
+      }
+    },
+    {
+      "whisper_span": "having it",
+      "context": "they just weren't having it",
+      "alternatives": {
+        "youtube": "(nothing)"
+      }
+    },
+    {
+      "whisper_span": "(nothing)",
+      "context": "weren't having it",
+      "alternatives": {
+        "parakeet": "and we should have had some minnows we really should have but"
+      }
+    }
+  ],
+  "whisper_low_confidence": [
+    {
+      "word": "I",
+      "t": 1687.21,
+      "p": 0.135
+    },
+    {
+      "word": "I",
+      "t": 1665.25,
+      "p": 0.144
+    },
+    {
+      "word": "Tea",
+      "t": 1672.81,
+      "p": 0.26
+    },
+    {
+      "word": "unless",
+      "t": 1683.35,
+      "p": 0.262
+    },
+    {
+      "word": "and",
+      "t": 1657.11,
+      "p": 0.298
+    },
+    {
+      "word": "Uh,",
+      "t": 1671.85,
+      "p": 0.339
+    },
+    {
+      "word": "last",
+      "t": 1658.59,
+      "p": 0.344
+    },
+    {
+      "word": "Like",
+      "t": 1696.31,
+      "p": 0.372
+    },
+    {
+      "word": "Captain",
+      "t": 1672.47,
+      "p": 0.401
+    },
+    {
+      "word": "I",
+      "t": 1689.53,
+      "p": 0.405
+    },
+    {
+      "word": "like",
+      "t": 1691.81,
+      "p": 0.483
+    },
+    {
+      "word": "was",
+      "t": 1677.99,
+      "p": 0.506
+    }
+  ]
+}

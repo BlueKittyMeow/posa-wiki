@@ -1,0 +1,25 @@
+{
+  "raw": "[\n  {\n    \"span\": \"Today we are targeting some crappie, also known as crappie.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The video title and description explicitly feature the 'crappie/crap-pie' pun, which Witness 2 partially captured as 'crap crappie', indicating the speaker made a joke about the fish name sounding like the food.\"\n  },\n  {\n    \"span\": \"There's one reason she's running a little slow today.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"For some reason she's running a little slow today.\",\n    \"reasoning\": \"Witness 2 transcribed 'for some reason', which is a more natural idiom in this context than the awkward 'There's one reason' produced by Witness 1, especially given the speaker's hesitation ('Uh, yeah').\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "Today we are targeting some crappie, also known as crappie.",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The video title and description explicitly feature the 'crappie/crap-pie' pun, which Witness 2 partially captured as 'crap crappie', indicating the speaker made a joke about the fish name sounding like the food."
+    },
+    {
+      "span": "There's one reason she's running a little slow today.",
+      "verdict": "correct",
+      "correction": "For some reason she's running a little slow today.",
+      "reasoning": "Witness 2 transcribed 'for some reason', which is a more natural idiom in this context than the awkward 'There's one reason' produced by Witness 1, especially given the speaker's hesitation ('Uh, yeah')."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 46.2,
+  "prompt_chars": 3344,
+  "judge": "qwen3.5-27b",
+  "model": "qwen3.5:27b",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "bare"
+}

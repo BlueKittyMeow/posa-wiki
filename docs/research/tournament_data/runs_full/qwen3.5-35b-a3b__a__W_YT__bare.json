@@ -1,0 +1,25 @@
+{
+  "raw": "[{\"span\": \"also known as crappie\", \"verdict\": \"correct\", \"correction\": \"also known as crap-pie\", \"reasoning\": \"The video title and description explicitly reference a 'crappie/crap-pie pun', making the repetition of 'crappie' in Witness 1's draft an error that misses the intended wordplay.\"}, {\"span\": \"She's running a little rough. I think I'm going to have to tilt the motor up a little bit.\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 and Witness 2 disagree on whether the boat is 'running a little slow' or 'running a little rough', and the order of the 'tilt motor' instruction differs; without audio, it is impossible to determine which phrasing is accurate.\"}]",
+  "rulings": [
+    {
+      "span": "also known as crappie",
+      "verdict": "correct",
+      "correction": "also known as crap-pie",
+      "reasoning": "The video title and description explicitly reference a 'crappie/crap-pie pun', making the repetition of 'crappie' in Witness 1's draft an error that misses the intended wordplay."
+    },
+    {
+      "span": "She's running a little rough. I think I'm going to have to tilt the motor up a little bit.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 and Witness 2 disagree on whether the boat is 'running a little slow' or 'running a little rough', and the order of the 'tilt motor' instruction differs; without audio, it is impossible to determine which phrasing is accurate."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 7.8,
+  "prompt_chars": 3344,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "bare"
+}

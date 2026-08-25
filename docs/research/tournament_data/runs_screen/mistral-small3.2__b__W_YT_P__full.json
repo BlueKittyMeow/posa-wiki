@@ -1,0 +1,157 @@
+{
+  "raw": "```json\n[\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Context does not provide enough information to determine the correct reading.\"\n  },\n  {\n    \"span\": \"for when\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'for when' and '(nothing)' are plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"because\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"'because' and 'cuz' are both plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"and i might\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'and i might' and 'yeah' are plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"gotta\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"'gotta' and 'got to' are both plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"alright\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"'alright' and 'all right' are both plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"i caught\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'i caught' and 'it's kind of' are plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"ish\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'ish' is a common disfluency in this speaker's register.\"\n  },\n  {\n    \"span\": \"one or\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'one or' and 'water' are plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"tea\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'tea' and 't' are plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Context does not provide enough information to determine the correct reading.\"\n  },\n  {\n    \"span\": \"gills\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'gills' is a common term in this speaker's fishing lexicon.\"\n  },\n  {\n    \"span\": \"there was\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'there was' and 'there's' are plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"was\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'was' and 'are' are plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"blue gills\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"'blue gills' is consistent with the speaker's style and fishing lexicon.\"\n  },\n  {\n    \"span\": \"like them\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'like them' and 'likethem' are plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"i\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'i' and 'i'd' are plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"let them\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'let them' and 'letthem' are plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"unless\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'unless' and 'in less' are plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"you\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'you' and 'it's' are plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"small\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'small' and 'smaller' are plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"like\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'like' and '(nothing)' are plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"having it\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Both 'having it' and '(nothing)' are plausible, but context does not clearly favor one.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Context does not provide enough information to determine the correct reading.\"\n  }\n]\n```",
+  "rulings": [
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Context does not provide enough information to determine the correct reading."
+    },
+    {
+      "span": "for when",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'for when' and '(nothing)' are plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "because",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "'because' and 'cuz' are both plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "and i might",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'and i might' and 'yeah' are plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "gotta",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "'gotta' and 'got to' are both plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "alright",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "'alright' and 'all right' are both plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "i caught",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'i caught' and 'it's kind of' are plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "ish",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'ish' is a common disfluency in this speaker's register."
+    },
+    {
+      "span": "one or",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'one or' and 'water' are plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "tea",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'tea' and 't' are plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Context does not provide enough information to determine the correct reading."
+    },
+    {
+      "span": "gills",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'gills' is a common term in this speaker's fishing lexicon."
+    },
+    {
+      "span": "there was",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'there was' and 'there's' are plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "was",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'was' and 'are' are plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "blue gills",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'blue gills' is consistent with the speaker's style and fishing lexicon."
+    },
+    {
+      "span": "like them",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'like them' and 'likethem' are plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "i",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'i' and 'i'd' are plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "let them",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'let them' and 'letthem' are plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "unless",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'unless' and 'in less' are plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "you",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'you' and 'it's' are plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "small",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'small' and 'smaller' are plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "like",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'like' and '(nothing)' are plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "having it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Both 'having it' and '(nothing)' are plausible, but context does not clearly favor one."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Context does not provide enough information to determine the correct reading."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 100.1,
+  "prompt_chars": 14509,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "b",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

@@ -1,0 +1,121 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"get it monty\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Parakeet heard nothing, YouTube heard 'ready get'\"\n    },\n    {\n        \"span\": \"it monty\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Parakeet heard nothing, YouTube heard 'ready get'\"\n    },\n    {\n        \"span\": \"funk\",\n        \"verdict\": \"correct\",\n        \"correction\": \"Say hi punk. Hi. Monty. Help him see it. Go get it Monty. Give me that. Give me that. You little stinker. Give me that. He's like, no. He won't give it to me. Give it here. Monty. I'll get you. I'm fine. You can have it.\",\n        \"reasoning\": \"Both YouTube and Parakeet heard 'punk'\"\n    },\n    {\n        \"span\": \"look at him\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"YouTube heard 'we got a', Parakeet heard nothing\"\n    },\n    {\n        \"span\": \"him\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Parakeet heard 'them'\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"YouTube heard 'come here buddy'\"\n    },\n    {\n        \"span\": \"go get\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Parakeet heard 'forget'\"\n    },\n    {\n        \"span\": \"it\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"YouTube heard 'him'\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"YouTube heard 'give me'\"\n    },\n    {\n        \"span\": \"that give me that\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Parakeet heard 'can'\"\n    },\n    {\n        \"span\": \"that\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"YouTube heard 'here'\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Parakeet heard 'hear your'\"\n    },\n    {\n        \"span\": \"give me\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Parakeet heard 'you could hear'\"\n    },\n    {\n        \"span\": \"(nothing)\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Parakeet heard 'and'\"\n    },\n    {\n        \"span\": \"he won't give it to me give\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Parakeet heard nothing\"\n    },\n    {\n        \"span\": \"monty i'll get you i'm fine\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Parakeet heard 'ooh yeah'\"\n    },\n    {\n        \"span\": \"i'll\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"YouTube heard 'let me'\"\n    },\n    {\n        \"span\": \"i'm\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"YouTube heard nothing\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "get it monty",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Parakeet heard nothing, YouTube heard 'ready get'"
+    },
+    {
+      "span": "it monty",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Parakeet heard nothing, YouTube heard 'ready get'"
+    },
+    {
+      "span": "funk",
+      "verdict": "correct",
+      "correction": "Say hi punk. Hi. Monty. Help him see it. Go get it Monty. Give me that. Give me that. You little stinker. Give me that. He's like, no. He won't give it to me. Give it here. Monty. I'll get you. I'm fine. You can have it.",
+      "reasoning": "Both YouTube and Parakeet heard 'punk'"
+    },
+    {
+      "span": "look at him",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "YouTube heard 'we got a', Parakeet heard nothing"
+    },
+    {
+      "span": "him",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Parakeet heard 'them'"
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "YouTube heard 'come here buddy'"
+    },
+    {
+      "span": "go get",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Parakeet heard 'forget'"
+    },
+    {
+      "span": "it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "YouTube heard 'him'"
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "YouTube heard 'give me'"
+    },
+    {
+      "span": "that give me that",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Parakeet heard 'can'"
+    },
+    {
+      "span": "that",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "YouTube heard 'here'"
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Parakeet heard 'hear your'"
+    },
+    {
+      "span": "give me",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Parakeet heard 'you could hear'"
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Parakeet heard 'and'"
+    },
+    {
+      "span": "he won't give it to me give",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Parakeet heard nothing"
+    },
+    {
+      "span": "monty i'll get you i'm fine",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Parakeet heard 'ooh yeah'"
+    },
+    {
+      "span": "i'll",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "YouTube heard 'let me'"
+    },
+    {
+      "span": "i'm",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "YouTube heard nothing"
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 62.1,
+  "prompt_chars": 5502,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "c",
+  "witness_set": "W+YT+P",
+  "ablation": "noStyle"
+}

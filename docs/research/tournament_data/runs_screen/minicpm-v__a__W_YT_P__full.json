@@ -1,0 +1,18 @@
+{
+  "raw": "{\n  \"span\": \"ladies and gentlemen, welcome to another episode of the unsuccessful fishing show, where if you're successful you're unsuccessful, and if you're unsuccessful you're successful. Today we are targeting some crappie, also known as crappie. And if we can't catch those, we are going to go for some bluegills. Um, as you can see, I'm in a new vessel. This is the SS Tin Can 3.0. I think I'm gonna have to tilt the motor up a little bit. Hold on. Uh, yeah. There's one reason she's running a little slow today.\",\n  \"verdict\": \"confirm\",\n  \"reasoning\": \"The draft reading is consistent with the audio, and there is no evidence to suggest that the audio contains a different sentence.\"\n}",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen, welcome to another episode of the unsuccessful fishing show, where if you're successful you're unsuccessful, and if you're unsuccessful you're successful. Today we are targeting some crappie, also known as crappie. And if we can't catch those, we are going to go for some bluegills. Um, as you can see, I'm in a new vessel. This is the SS Tin Can 3.0. I think I'm gonna have to tilt the motor up a little bit. Hold on. Uh, yeah. There's one reason she's running a little slow today.",
+      "verdict": "confirm",
+      "reasoning": "The draft reading is consistent with the audio, and there is no evidence to suggest that the audio contains a different sentence."
+    }
+  ],
+  "parse_note": "recovered-objects",
+  "elapsed": 31.2,
+  "prompt_chars": 11652,
+  "judge": "minicpm-v",
+  "model": "minicpm-v:latest",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

@@ -1,0 +1,55 @@
+{
+  "raw": "[\n  {\n    \"span\": \"for when I'm in by myself because it's just riding so high.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Put some cinder blocks up on the front though for when I'm in by myself because it's just riding so high.\",\n    \"reasoning\": \"Witness 3 provides the missing subject and context ('cinder blocks') that Witness 1 omits, making the sentence grammatically complete.\"\n  },\n  {\n    \"span\": \"I might last time I came through here\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Yeah. Last time I came through here,\",\n    \"reasoning\": \"The phrase 'I might' is a transcription error for the filler word 'Yeah' or a stutter, as confirmed by Witness 3's clearer phrasing.\"\n  },\n  {\n    \"span\": \"Captain Tea Truck gave me one\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Uh Captain T Truck gave me one\",\n    \"reasoning\": \"Witness 2 and 3 confirm the nickname is 'T Truck' (likely a play on 'Tea Truck'), whereas Witness 1 incorrectly transcribed it as 'Captain Tea Truck'.\"\n  },\n  {\n    \"span\": \"I let one or two go\",\n    \"verdict\": \"correct\",\n    \"correction\": \"I let water two go\",\n    \"reasoning\": \"While 'one or two' is plausible, Witness 3's 'water two' suggests a specific mishearing of 'one or two' as 'water two' due to phonetic similarity in fast speech; however, given the context of fishing, 'one or two' is the intended meaning. Wait, re-evaluating: 'I let one or two go' (W1/W2) vs 'I let water two go' (W3). 'Water' is likely a hallucination by W3 for 'one or'. The draft says 'one or two'. This is likely correct in the draft. I will revert this to confirm.\"\n  },\n  {\n    \"span\": \"Bunch of little gills that I threw back\",\n    \"verdict\": \"correct\",\n    \"correction\": \"bunch of little kills that I threw back\",\n    \"reasoning\": \"Witness 3 transcribes this as 'kills', which is a common ASR error for 'gills' in fishing contexts, but 'gills' (bluegills) makes more sense. However, looking at the pattern of errors, 'gills' is repeated multiple times. Let's look closer. W1: 'little gills'. W2: 'little gills'. W3: 'little kills'. The speaker likely said 'gills'. The draft has 'gills'. This is correct.\"\n  },\n  {\n    \"span\": \"unless like some days you just small fish\",\n    \"verdict\": \"correct\",\n    \"correction\": \"unless like some days it's just smaller fish\",\n    \"reasoning\": \"The draft misses the verb 'it's' and the comparative 'smaller', which are present in Witness 2 ('just smaller fish') and implied by the grammar of Witness 3.\"\n  },\n  {\n    \"span\": \"but they just weren't having it.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"This ending is consistent across all witnesses and makes grammatical sense.\"\n  }\n]\n\n*Self-Correction on the 'one or two' vs 'water two' and 'gills' vs 'kills':*\nLet's re-evaluate the specific spans in the draft against the consensus.\n1. \"for when I'm...\" -> Missing \"Put some cinder blocks up on the front though\". Correct.\n2. \"I might last time\" -> \"Yeah. Last time\". Correct.\n3. \"Captain Tea Truck\" -> \"Captain T Truck\". Correct.\n4. \"I let one or two go\" vs \"I let water two go\". W1/W2 say \"one or two\". W3 says \"water two\". \"One or two\" is the logical phrase. The draft has \"one or two\". This should be **confirm**.\n5. \"little gills\" vs \"little kills\". W1/W2 say \"gills\". W3 says \"kills\". \"Gills\" is the correct term for bluegills. Draft has \"gills\". This should be **confirm**.\n6. \"unless like some days you just small fish\" -> W2 says \"just smaller fish\". W3 says \"it's just smaller fish\". The draft misses \"smaller\" and \"it's\". Correct.\n\nRefining the list to only include actual errors in the draft:\n- Missing start of sentence.\n- \"I might\" instead of \"Yeah\".\n- \"Captain Tea Truck\" instead of \"Captain T Truck\".\n- \"you just small fish\" instead of \"it's just smaller fish\".\n\nWait, W3 says \"I let water two go\". This is likely a hallucination by the ASR for \"one or two\". The draft has \"one or two\". So that part of the draft is correct.\nW3 says \"little kills\". Likely hallucination for \"gills\". Draft has \"gills\". Correct.\n\nSo the errors are:\n1. Start of sentence.\n2. \"I might\" -> \"Yeah\".\n3. \"Captain Tea Truck\" -> \"Captain T Truck\".\n4. \"you just small fish\" -> \"it's just smaller fish\".\n\nLet's format the JSON.\n\n```json\n[\n  {\n    \"span\": \"for when I'm in by myself because it's just riding so high.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Put some cinder blocks up on the front though for when I'm in by myself because it's just riding so high.\",\n    \"reasoning\": \"Witness 3 provides the missing introductory clause about 'cinder blocks' which is absent in the draft.\"\n  },\n  {\n    \"span\": \"I might last time I came through here\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Yeah. Last time I came through here,\",\n    \"reasoning\": \"The phrase 'I might' is a transcription error for the filler 'Yeah' or a stutter, as confirmed by Witness 3.\"\n  },\n  {\n    \"span\": \"Captain Tea Truck gave me one\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Uh Captain T Truck gave me one\",\n    \"reasoning\": \"Witnesses 2 and 3 confirm the nickname is 'T Truck', not 'Tea Truck'.\"\n  },\n  {\n    \"span\": \"unless like some days you just small fish\",\n    \"verdict\": \"correct\",\n    \"correction\": \"unless like some days it's just smaller fish\",\n    \"reasoning\": \"The draft omits the verb 'it's' and the comparative adjective 'smaller', which are present in Witness 2.\"\n  }\n]\n```",
+  "rulings": [
+    {
+      "span": "for when I'm in by myself because it's just riding so high.",
+      "verdict": "correct",
+      "correction": "Put some cinder blocks up on the front though for when I'm in by myself because it's just riding so high.",
+      "reasoning": "Witness 3 provides the missing subject and context ('cinder blocks') that Witness 1 omits, making the sentence grammatically complete."
+    },
+    {
+      "span": "I might last time I came through here",
+      "verdict": "correct",
+      "correction": "Yeah. Last time I came through here,",
+      "reasoning": "The phrase 'I might' is a transcription error for the filler word 'Yeah' or a stutter, as confirmed by Witness 3's clearer phrasing."
+    },
+    {
+      "span": "Captain Tea Truck gave me one",
+      "verdict": "correct",
+      "correction": "Uh Captain T Truck gave me one",
+      "reasoning": "Witness 2 and 3 confirm the nickname is 'T Truck' (likely a play on 'Tea Truck'), whereas Witness 1 incorrectly transcribed it as 'Captain Tea Truck'."
+    },
+    {
+      "span": "I let one or two go",
+      "verdict": "correct",
+      "correction": "I let water two go",
+      "reasoning": "While 'one or two' is plausible, Witness 3's 'water two' suggests a specific mishearing of 'one or two' as 'water two' due to phonetic similarity in fast speech; however, given the context of fishing, 'one or two' is the intended meaning. Wait, re-evaluating: 'I let one or two go' (W1/W2) vs 'I let water two go' (W3). 'Water' is likely a hallucination by W3 for 'one or'. The draft says 'one or two'. This is likely correct in the draft. I will revert this to confirm."
+    },
+    {
+      "span": "Bunch of little gills that I threw back",
+      "verdict": "correct",
+      "correction": "bunch of little kills that I threw back",
+      "reasoning": "Witness 3 transcribes this as 'kills', which is a common ASR error for 'gills' in fishing contexts, but 'gills' (bluegills) makes more sense. However, looking at the pattern of errors, 'gills' is repeated multiple times. Let's look closer. W1: 'little gills'. W2: 'little gills'. W3: 'little kills'. The speaker likely said 'gills'. The draft has 'gills'. This is correct."
+    },
+    {
+      "span": "unless like some days you just small fish",
+      "verdict": "correct",
+      "correction": "unless like some days it's just smaller fish",
+      "reasoning": "The draft misses the verb 'it's' and the comparative 'smaller', which are present in Witness 2 ('just smaller fish') and implied by the grammar of Witness 3."
+    },
+    {
+      "span": "but they just weren't having it.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "This ending is consistent across all witnesses and makes grammatical sense."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 54.2,
+  "prompt_chars": 5076,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "b",
+  "witness_set": "W+YT+P",
+  "ablation": "bare"
+}

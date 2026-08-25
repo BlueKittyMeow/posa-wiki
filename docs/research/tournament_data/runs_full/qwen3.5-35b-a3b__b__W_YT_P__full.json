@@ -1,0 +1,145 @@
+{
+  "raw": "[\n{\"span\": \"for when i'm in by myself because it's just riding so high\", \"verdict\": \"correct\", \"correction\": \"Put some cinder blocks up on the front though for when I'm in by myself because it's just riding so high.\", \"reasoning\": \"Parakeet captures a missing opening clause that explains the boat's high ride, which is contextually necessary and consistent with the speaker's style of explaining gear.\"},\n{\"span\": \"because\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The draft 'because' is semantically identical to YouTube's 'cuz'; no correction needed as both fit the register.\"},\n{\"span\": \"and i might last time i came through here\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 reads 'and I might last time' which is grammatically broken; Witness 3 reads 'Yeah. Last time', but the exact transition word (if any) between 'shallow right here' and 'Last time' is ambiguous without audio.\"},\n{\"span\": \"gotta\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Both 'gotta' and 'got to' are valid representations of the same spoken phrase; no correction needed.\"},\n{\"span\": \"alright\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The spelling variation between 'alright' and 'all right' is orthographic only; both represent the same utterance.\"},\n{\"span\": \"i caught i caught like seven crappies ish\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 reads a stuttered repetition ('caught I caught') with 'ish', while Witness 3 reads 'It's kind of like Seven'; the exact phrasing of this disfluent count is unclear.\"},\n{\"span\": \"ish\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"The presence of the filler 'ish' after a number is a key stylistic feature; Witness 1 includes it while YouTube omits it, and without audio, it is impossible to confirm if the speaker actually said it.\"},\n{\"span\": \"one or\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 reads 'let one or two go' (standard), while Witness 3 reads 'let water two go'; the word 'one' vs 'water' is a critical divergence that cannot be resolved without listening.\"},\n{\"span\": \"tea\", \"verdict\": \"correct\", \"correction\": \"Uh, Captain Tea Truck gave me one.\", \"reasoning\": \"The speaker consistently uses the nickname 'Captain Teeny Trout'; 'Tea Truck' is a phonetic distortion of 'Teeny Trout' that fits the style card's rule about deliberate mispronunciations and puns, whereas 'Truck' alone or no middle word loses the specific entity alias.\"},\n{\"span\": \"gills\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 reads 'little gills', while Witness 3 reads 'little kills'; given the context of throwing fish back, 'gills' is logical but 'kills' could be a mishearing or a specific term; the audio is needed to distinguish.\"},\n{\"span\": \"there was\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 reads 'There was some close ones', while Witness 3 reads 'There's some close ones'; the contraction and verb form are disputed.\"},\n{\"span\": \"was\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Same as above; the verb 'was' vs 'are' (YouTube) or 'is' (Parakeet) in the phrase 'There was/are some close ones' is disputed.\"},\n{\"span\": \"blue gills\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The speaker's style card notes he often uses 'bluegill' or 'gills'; 'blue gills' as two words is a valid phonetic realization of the fish name and not an error.\"},\n{\"span\": \"like them\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 reads 'I like them', while Witness 3 reads 'likethem' (potentially 'I'd like them'); the presence of the subject 'I' and the verb form is disputed.\"},\n{\"span\": \"i\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 reads 'or I usually', while Witness 3 reads 'or I'd usually'; the contraction 'I'd' vs full 'I' is a key phonetic difference.\"},\n{\"span\": \"let them\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 reads 'let them', while Witness 3 reads 'letthem' (potentially 'let 'em'); the contraction is disputed.\"},\n{\"span\": \"unless\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 reads 'unless like some days', while Witness 3 reads 'in less like Some days'; the word 'unless' vs 'in less' is a significant divergence requiring audio.\"},\n{\"span\": \"you\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 reads 'days you just small fish', while Witness 3 reads 'days it's just smaller fish'; the subject 'you' vs 'it's' is disputed.\"},\n{\"span\": \"small\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 reads 'just small fish', while YouTube and Parakeet read 'just smaller fish'; the comparative form is disputed.\"},\n{\"span\": \"like\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 includes a filler 'like' before 'big fat crappies', while Witness 3 omits it; the presence of this disfluency is uncertain.\"},\n{\"span\": \"having it\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1 ends with 'weren't having it', while YouTube cuts off and Parakeet adds a new sentence about minnows; the exact ending of this clause is disputed.\"},\n{\"span\": \"and we should have had some minnows we really should have but\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 3 includes a distinct closing sentence about minnows that Witnesses 1 and 2 do not capture; the presence of this entire segment is uncertain.\"}\n]",
+  "rulings": [
+    {
+      "span": "for when i'm in by myself because it's just riding so high",
+      "verdict": "correct",
+      "correction": "Put some cinder blocks up on the front though for when I'm in by myself because it's just riding so high.",
+      "reasoning": "Parakeet captures a missing opening clause that explains the boat's high ride, which is contextually necessary and consistent with the speaker's style of explaining gear."
+    },
+    {
+      "span": "because",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The draft 'because' is semantically identical to YouTube's 'cuz'; no correction needed as both fit the register."
+    },
+    {
+      "span": "and i might last time i came through here",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 reads 'and I might last time' which is grammatically broken; Witness 3 reads 'Yeah. Last time', but the exact transition word (if any) between 'shallow right here' and 'Last time' is ambiguous without audio."
+    },
+    {
+      "span": "gotta",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Both 'gotta' and 'got to' are valid representations of the same spoken phrase; no correction needed."
+    },
+    {
+      "span": "alright",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The spelling variation between 'alright' and 'all right' is orthographic only; both represent the same utterance."
+    },
+    {
+      "span": "i caught i caught like seven crappies ish",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 reads a stuttered repetition ('caught I caught') with 'ish', while Witness 3 reads 'It's kind of like Seven'; the exact phrasing of this disfluent count is unclear."
+    },
+    {
+      "span": "ish",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "The presence of the filler 'ish' after a number is a key stylistic feature; Witness 1 includes it while YouTube omits it, and without audio, it is impossible to confirm if the speaker actually said it."
+    },
+    {
+      "span": "one or",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 reads 'let one or two go' (standard), while Witness 3 reads 'let water two go'; the word 'one' vs 'water' is a critical divergence that cannot be resolved without listening."
+    },
+    {
+      "span": "tea",
+      "verdict": "correct",
+      "correction": "Uh, Captain Tea Truck gave me one.",
+      "reasoning": "The speaker consistently uses the nickname 'Captain Teeny Trout'; 'Tea Truck' is a phonetic distortion of 'Teeny Trout' that fits the style card's rule about deliberate mispronunciations and puns, whereas 'Truck' alone or no middle word loses the specific entity alias."
+    },
+    {
+      "span": "gills",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 reads 'little gills', while Witness 3 reads 'little kills'; given the context of throwing fish back, 'gills' is logical but 'kills' could be a mishearing or a specific term; the audio is needed to distinguish."
+    },
+    {
+      "span": "there was",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 reads 'There was some close ones', while Witness 3 reads 'There's some close ones'; the contraction and verb form are disputed."
+    },
+    {
+      "span": "was",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Same as above; the verb 'was' vs 'are' (YouTube) or 'is' (Parakeet) in the phrase 'There was/are some close ones' is disputed."
+    },
+    {
+      "span": "blue gills",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The speaker's style card notes he often uses 'bluegill' or 'gills'; 'blue gills' as two words is a valid phonetic realization of the fish name and not an error."
+    },
+    {
+      "span": "like them",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 reads 'I like them', while Witness 3 reads 'likethem' (potentially 'I'd like them'); the presence of the subject 'I' and the verb form is disputed."
+    },
+    {
+      "span": "i",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 reads 'or I usually', while Witness 3 reads 'or I'd usually'; the contraction 'I'd' vs full 'I' is a key phonetic difference."
+    },
+    {
+      "span": "let them",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 reads 'let them', while Witness 3 reads 'letthem' (potentially 'let 'em'); the contraction is disputed."
+    },
+    {
+      "span": "unless",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 reads 'unless like some days', while Witness 3 reads 'in less like Some days'; the word 'unless' vs 'in less' is a significant divergence requiring audio."
+    },
+    {
+      "span": "you",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 reads 'days you just small fish', while Witness 3 reads 'days it's just smaller fish'; the subject 'you' vs 'it's' is disputed."
+    },
+    {
+      "span": "small",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 reads 'just small fish', while YouTube and Parakeet read 'just smaller fish'; the comparative form is disputed."
+    },
+    {
+      "span": "like",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 includes a filler 'like' before 'big fat crappies', while Witness 3 omits it; the presence of this disfluency is uncertain."
+    },
+    {
+      "span": "having it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 ends with 'weren't having it', while YouTube cuts off and Parakeet adds a new sentence about minnows; the exact ending of this clause is disputed."
+    },
+    {
+      "span": "and we should have had some minnows we really should have but",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 3 includes a distinct closing sentence about minnows that Witnesses 1 and 2 do not capture; the presence of this entire segment is uncertain."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 52.2,
+  "prompt_chars": 14509,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "b",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

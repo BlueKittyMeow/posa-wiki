@@ -1,0 +1,49 @@
+{
+  "raw": "[\n  {\n    \"span\": \"for when I'm in by myself because it's just riding so high.\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"The sentence fragment 'for when' at the start is syntactically incomplete and likely a transcription error for a preceding phrase or a misinterpretation of filler words.\"\n  },\n  {\n    \"span\": \"Captain Tea Truck gave me one\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Captain Tea Truck gave me one\",\n    \"reasoning\": \"While 'Tea Truck' is unusual, Witness 2 confirms 'Captain Truck', but the audio likely contains a specific nickname or misheard phrase; however, given the context of 'Crap-Pie' and potential inside jokes, 'Tea Truck' might be a specific reference, but 'Captain Truck' is more plausible as a standard name. Wait, looking at Witness 2: 'captain truck'. Witness 1: 'Captain Tea Truck'. The extra 'Tea' is likely an error or a mishearing of 'the'. Correcting to 'Captain the Truck' or just 'Captain Truck' based on W2. Let's assume 'Captain Truck' is the intended name and 'Tea' is a stutter/mishear.\"\n  },\n  {\n    \"span\": \"I caught I caught like seven crappies ish.\",\n    \"verdict\": \"correct\",\n    \"correction\": \"I caught like seven crappies, ish.\",\n    \"reasoning\": \"The repetition 'I caught I caught' is a stutter that should be transcribed as a single instance or marked with ellipsis, but the draft has it twice. The word 'ish' at the end is likely a filler for 'or so'.\"\n  },\n  {\n    \"span\": \"There was some close ones\",\n    \"verdict\": \"correct\",\n    \"correction\": \"There were some close ones\",\n    \"reasoning\": \"Subject-verb agreement error in the draft ('was' vs 'ones'); the speaker likely said 'were' or the transcription failed to capture the plural verb.\"\n  },\n  {\n    \"span\": \"unless like some days you just small fish\",\n    \"verdict\": \"correct\",\n    \"correction\": \"unless like some days you just [catch] small fish\",\n    \"reasoning\": \"The phrase 'you just small fish' is grammatically incomplete; a verb like 'catch' or 'get' is missing, likely dropped in the transcription.\"\n  },\n  {\n    \"span\": \"but they just weren't having it.\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"This is a common idiom and fits the context perfectly; no error detected.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "for when I'm in by myself because it's just riding so high.",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "The sentence fragment 'for when' at the start is syntactically incomplete and likely a transcription error for a preceding phrase or a misinterpretation of filler words."
+    },
+    {
+      "span": "Captain Tea Truck gave me one",
+      "verdict": "correct",
+      "correction": "Captain Tea Truck gave me one",
+      "reasoning": "While 'Tea Truck' is unusual, Witness 2 confirms 'Captain Truck', but the audio likely contains a specific nickname or misheard phrase; however, given the context of 'Crap-Pie' and potential inside jokes, 'Tea Truck' might be a specific reference, but 'Captain Truck' is more plausible as a standard name. Wait, looking at Witness 2: 'captain truck'. Witness 1: 'Captain Tea Truck'. The extra 'Tea' is likely an error or a mishearing of 'the'. Correcting to 'Captain the Truck' or just 'Captain Truck' based on W2. Let's assume 'Captain Truck' is the intended name and 'Tea' is a stutter/mishear."
+    },
+    {
+      "span": "I caught I caught like seven crappies ish.",
+      "verdict": "correct",
+      "correction": "I caught like seven crappies, ish.",
+      "reasoning": "The repetition 'I caught I caught' is a stutter that should be transcribed as a single instance or marked with ellipsis, but the draft has it twice. The word 'ish' at the end is likely a filler for 'or so'."
+    },
+    {
+      "span": "There was some close ones",
+      "verdict": "correct",
+      "correction": "There were some close ones",
+      "reasoning": "Subject-verb agreement error in the draft ('was' vs 'ones'); the speaker likely said 'were' or the transcription failed to capture the plural verb."
+    },
+    {
+      "span": "unless like some days you just small fish",
+      "verdict": "correct",
+      "correction": "unless like some days you just [catch] small fish",
+      "reasoning": "The phrase 'you just small fish' is grammatically incomplete; a verb like 'catch' or 'get' is missing, likely dropped in the transcription."
+    },
+    {
+      "span": "but they just weren't having it.",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "This is a common idiom and fits the context perfectly; no error detected."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 19.3,
+  "prompt_chars": 4140,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "bare"
+}

@@ -1,0 +1,53 @@
+{
+  "raw": "[{\"span\": \"(nothing)\", \"verdict\": \"confirm\", \"correction\": \"Ladies and gentlemen, welcome to another episode of the unsuccessful fishing show...\"},\n {\"span\": \"ladies and gentlemen\", \"verdict\": \"confirm\", \"reasoning\": \"The speaker begins with a formal address followed by colloquial language.\"},\n {\"span\": \"and\", \"verdict\": \"correct\", \"correction\": \"If you're successful, you're unsuccessful. If you're unsuccessful...\"},\n {\"span\": \"crappie\", \"verdict\": \"confirm\", \"reasoning\": \"Despite the conflicting transcriptions suggesting 'crap high', context aligns with fish targeted.\"},\n {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"also known as crappie and if we can't catch those,...\"},\n {\"span\": \"crappie\", \"verdict\": \"confirm\", \"reasoning\": \"'Crap pie', a pun on 'crab pie,' aligns with the context of fish targeted.\"},\n {\"span\": \"(nothing)\", \"verdict\": \"correct\", \"correction\": \"She's running rough, I think...\"},\n {\"span\": \"(nothing)\", \"verdict\": \"escalate\", \"reasoning\": \"'Tilting motor up a little bit', 'for some reason she\u2019s slow today,' are unclear without audio.\"}]\n",
+  "rulings": [
+    {
+      "span": "(nothing)",
+      "verdict": "confirm",
+      "correction": "Ladies and gentlemen, welcome to another episode of the unsuccessful fishing show..."
+    },
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "reasoning": "The speaker begins with a formal address followed by colloquial language."
+    },
+    {
+      "span": "and",
+      "verdict": "correct",
+      "correction": "If you're successful, you're unsuccessful. If you're unsuccessful..."
+    },
+    {
+      "span": "crappie",
+      "verdict": "confirm",
+      "reasoning": "Despite the conflicting transcriptions suggesting 'crap high', context aligns with fish targeted."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "also known as crappie and if we can't catch those,..."
+    },
+    {
+      "span": "crappie",
+      "verdict": "confirm",
+      "reasoning": "'Crap pie', a pun on 'crab pie,' aligns with the context of fish targeted."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "She's running rough, I think..."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "reasoning": "'Tilting motor up a little bit', 'for some reason she\u2019s slow today,' are unclear without audio."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 7.8,
+  "prompt_chars": 11652,
+  "judge": "robody-brainstem",
+  "model": "robody-brainstem:latest",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

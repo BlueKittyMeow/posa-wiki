@@ -1,0 +1,9 @@
+{
+  "judge": "qwen2-audio",
+  "model": "Qwen/Qwen2-Audio-7B-Instruct",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "withClip",
+  "raw": "```json\n[\n    {\"span\": \"Ladies and gentlemen, welcome to another episode of the unsuccessful fishing show, where if you're successful you're unsuccessful, and if you're unsuccessful you're successful.\", \"verdict\": \"confirm\"},\n    {\"span\": \"crappie, also known as crappie.\", \"verdict\": \"correct\"},\n    {\"span\": \"crappie, also known as crappie. And if we can't catch those, we are going to go for some bluegills.\", \"verdict\": \"correct\"},\n    {\"span\": \"As you can see, I'm in a new vessel. This is the SS Tin Can 3.0.\", \"verdict\": \"confirm\"},\n    {\"span\": \"There's one reason she's running a little slow today.\", \"verdict\": \"confirm\"}\n]\n```",
+  "elapsed": 199.1
+}

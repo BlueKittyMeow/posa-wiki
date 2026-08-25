@@ -1,0 +1,61 @@
+{
+  "raw": "```json\n[\n  {\"span\": \"ladies and gentlemen\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Formal address opening is consistent with the style card.\"},\n  {\"span\": \"and\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The speaker frequently interrupts and restarts himself; a dropped conjunction is plausible.\"},\n  {\"span\": \"crappie\", \"verdict\": \"correct\", \"correction\": \"crappie\", \"reasoning\": \"The episode is about crappie, and the title pun is likely repeated.\"},\n  {\"span\": \"also known as crappie\", \"verdict\": \"correct\", \"correction\": \"also known as crappie\", \"reasoning\": \"Repetition of 'crappie' is plausible and reinforces the title pun.\"},\n  {\"span\": \"crappie\", \"verdict\": \"correct\", \"correction\": \"crappie\", \"reasoning\": \"The episode is about crappie, and the title pun is likely repeated.\"},\n  {\"span\": \"SS Tin Can 3.0\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Naming objects is a stylistic signature.\"},\n  {\"span\": \"gonna\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Contractions are common in this register.\"},\n  {\"span\": \"there's one\", \"verdict\": \"correct\", \"correction\": \"for some reason\", \"reasoning\": \"The speaker uses hedges and restarts; 'for some reason' fits the pattern.\"}\n]\n```",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Formal address opening is consistent with the style card."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The speaker frequently interrupts and restarts himself; a dropped conjunction is plausible."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "crappie",
+      "reasoning": "The episode is about crappie, and the title pun is likely repeated."
+    },
+    {
+      "span": "also known as crappie",
+      "verdict": "correct",
+      "correction": "also known as crappie",
+      "reasoning": "Repetition of 'crappie' is plausible and reinforces the title pun."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "crappie",
+      "reasoning": "The episode is about crappie, and the title pun is likely repeated."
+    },
+    {
+      "span": "SS Tin Can 3.0",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Naming objects is a stylistic signature."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Contractions are common in this register."
+    },
+    {
+      "span": "there's one",
+      "verdict": "correct",
+      "correction": "for some reason",
+      "reasoning": "The speaker uses hedges and restarts; 'for some reason' fits the pattern."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 117.5,
+  "prompt_chars": 11624,
+  "judge": "gemma3-27b-qat",
+  "model": "gemma3:27b-it-qat",
+  "passage": "a",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

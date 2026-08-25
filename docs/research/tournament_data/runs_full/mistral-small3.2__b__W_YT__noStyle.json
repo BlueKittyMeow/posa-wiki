@@ -1,0 +1,73 @@
+{
+  "raw": "```json\n[\n    {\n        \"span\": \"for when\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Context suggests it might be a filler phrase, but YouTube heard nothing.\"\n    },\n    {\n        \"span\": \"because\",\n        \"verdict\": \"correct\",\n        \"correction\": \"I'm in by myself cuz it's just riding so high.\",\n        \"reasoning\": \"YouTube's 'cuz' is more natural in this context.\"\n    },\n    {\n        \"span\": \"gotta\",\n        \"verdict\": \"correct\",\n        \"correction\": \"I might last time I came through here I dinged a rock so I got to be careful.\",\n        \"reasoning\": \"YouTube's 'got to' is more natural in this context.\"\n    },\n    {\n        \"span\": \"alright\",\n        \"verdict\": \"correct\",\n        \"correction\": \"All right, so I caught I caught like seven crappies.\",\n        \"reasoning\": \"YouTube's 'all right' is more natural in this context.\"\n    },\n    {\n        \"span\": \"ish\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Context suggests it might be a filler word, but YouTube heard nothing.\"\n    },\n    {\n        \"span\": \"tea\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Context suggests it might be part of a nickname, but YouTube heard nothing.\"\n    },\n    {\n        \"span\": \"was\",\n        \"verdict\": \"correct\",\n        \"correction\": \"There are some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just smaller fish.\",\n        \"reasoning\": \"YouTube's 'are' fits better grammatically.\"\n    },\n    {\n        \"span\": \"blue gills\",\n        \"verdict\": \"correct\",\n        \"correction\": \"There are some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just smaller fish.\",\n        \"reasoning\": \"YouTube's 'bluegills' is more consistent with the context.\"\n    },\n    {\n        \"span\": \"small\",\n        \"verdict\": \"correct\",\n        \"correction\": \"But man, I could see like right at the end there, I saw so many crappies, like big fat crappies, and they just did not care.\",\n        \"reasoning\": \"YouTube's 'smaller' fits better grammatically.\"\n    },\n    {\n        \"span\": \"having it\",\n        \"verdict\": \"escalate\",\n        \"correction\": null,\n        \"reasoning\": \"Context suggests it might be a filler phrase, but YouTube heard nothing.\"\n    }\n]\n```",
+  "rulings": [
+    {
+      "span": "for when",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Context suggests it might be a filler phrase, but YouTube heard nothing."
+    },
+    {
+      "span": "because",
+      "verdict": "correct",
+      "correction": "I'm in by myself cuz it's just riding so high.",
+      "reasoning": "YouTube's 'cuz' is more natural in this context."
+    },
+    {
+      "span": "gotta",
+      "verdict": "correct",
+      "correction": "I might last time I came through here I dinged a rock so I got to be careful.",
+      "reasoning": "YouTube's 'got to' is more natural in this context."
+    },
+    {
+      "span": "alright",
+      "verdict": "correct",
+      "correction": "All right, so I caught I caught like seven crappies.",
+      "reasoning": "YouTube's 'all right' is more natural in this context."
+    },
+    {
+      "span": "ish",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Context suggests it might be a filler word, but YouTube heard nothing."
+    },
+    {
+      "span": "tea",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Context suggests it might be part of a nickname, but YouTube heard nothing."
+    },
+    {
+      "span": "was",
+      "verdict": "correct",
+      "correction": "There are some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just smaller fish.",
+      "reasoning": "YouTube's 'are' fits better grammatically."
+    },
+    {
+      "span": "blue gills",
+      "verdict": "correct",
+      "correction": "There are some close ones, but with the bluegills, I like them either to be big fat ones or I usually let them go unless like some days you just smaller fish.",
+      "reasoning": "YouTube's 'bluegills' is more consistent with the context."
+    },
+    {
+      "span": "small",
+      "verdict": "correct",
+      "correction": "But man, I could see like right at the end there, I saw so many crappies, like big fat crappies, and they just did not care.",
+      "reasoning": "YouTube's 'smaller' fits better grammatically."
+    },
+    {
+      "span": "having it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Context suggests it might be a filler phrase, but YouTube heard nothing."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 44.9,
+  "prompt_chars": 6019,
+  "judge": "mistral-small3.2",
+  "model": "mistral-small3.2:24b",
+  "passage": "b",
+  "witness_set": "W+YT",
+  "ablation": "noStyle"
+}

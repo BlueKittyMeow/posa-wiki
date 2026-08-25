@@ -1,0 +1,97 @@
+{
+  "raw": "[\n{\"span\": \"for when i'm in by myself because it's just riding so high\", \"verdict\": \"correct\", \"correction\": \"put some cinder blocks up on the front though for when i'm in by myself because it's just riding so high\", \"reasoning\": \"Witness 1 and 2 miss the opening phrase which Witness 3 correctly identifies as a practical tip about boat stability.\"},\n{\"span\": \"because it's just riding so high\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"All witnesses agree on this clause; 'cuz' in Witness 2 is a valid phonetic variant of 'because' and does not require correction.\"},\n{\"span\": \"and i might last time i came through here\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1/2 read 'and i might' while Witness 3 reads 'yeah'; the speaker likely said 'and I might have' or 'I did', but the ASR disagreement on the auxiliary verb and modal is significant.\"},\n{\"span\": \"so i gotta be careful\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"'Gotta' is a standard colloquial contraction for 'got to'; both readings are valid representations of the same speech act.\"},\n{\"span\": \"alright so i caught\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Witness 1/2 read 'alright' and Witness 3 reads 'yeah' as a filler; however, the transition to the catch count is clearly marked by 'alright' in the draft which fits the speaker's style of opening segments.\"},\n{\"span\": \"i caught i caught like seven crappies ish\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1/2 hear a stuttered 'caught caught' while Witness 3 hears 'it's kind of like'; given the speaker's habit of hesitating and revising counts ('ish'), both are plausible but the exact phrasing is ambiguous.\"},\n{\"span\": \"ish i let one or two go\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1/2 hear 'one or' while Witness 3 hears 'water'; 'let one or two go' fits the fishing context perfectly, but 'let water two go' is a distinct possibility if the speaker was talking about releasing water or a specific fish type, requiring audio verification.\"},\n{\"span\": \"captain tea truck gave me one\", \"verdict\": \"correct\", \"correction\": \"uh captain teeny trout gave me one\", \"reasoning\": \"The entity roster confirms 'Captain Teeny Trout' is the consistent nickname for Lucas; 'Tea Truck' and 'T Truck' are phonetic mangles of this specific recurring name.\"},\n{\"span\": \"bunch of little gills that i threw back\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1/2 hear 'gills' while Witness 3 hears 'kills'; given the context of throwing fish back, 'gills' is semantically correct, but 'kills' could be a mishearing of 'little gills' or a specific slang term; audio needed to distinguish.\"},\n{\"span\": \"there was some close ones\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1/2 read 'there was' while Witness 3 reads 'there's'; the speaker often uses non-standard grammar or rapid speech that blurs these forms, and both are plausible in this register.\"},\n{\"span\": \"blue gills i like them either to be\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"The distinction between 'blue gills' (two words) and 'bluegills' (one word) is orthographic; the meaning is identical and fits the domain lexicon.\"},\n{\"span\": \"or i usually let them go unless like some days you just small fish\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1/2 read 'you just small' while Witness 3 reads 'it's just smaller'; the speaker's speech patterns include dropping verbs and using hedges, making it unclear if he said 'you just [have] small fish' or 'it's just smaller fish'.\"},\n{\"span\": \"like big fat crappies\", \"verdict\": \"confirm\", \"correction\": null, \"reasoning\": \"Witness 1/2 include the filler 'like' while Witness 3 omits it; this is a minor disfluency difference that does not change the meaning or correctness of the core description.\"},\n{\"span\": \"they just weren't having it\", \"verdict\": \"escalate\", \"correction\": null, \"reasoning\": \"Witness 1/2 end the sentence at 'having it' while Witness 3 adds a new clause about minnows; the transcript draft cuts off mid-thought or before a new thought, and the audio likely contains the transition to the minnow comment.\"}\n]",
+  "rulings": [
+    {
+      "span": "for when i'm in by myself because it's just riding so high",
+      "verdict": "correct",
+      "correction": "put some cinder blocks up on the front though for when i'm in by myself because it's just riding so high",
+      "reasoning": "Witness 1 and 2 miss the opening phrase which Witness 3 correctly identifies as a practical tip about boat stability."
+    },
+    {
+      "span": "because it's just riding so high",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "All witnesses agree on this clause; 'cuz' in Witness 2 is a valid phonetic variant of 'because' and does not require correction."
+    },
+    {
+      "span": "and i might last time i came through here",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1/2 read 'and i might' while Witness 3 reads 'yeah'; the speaker likely said 'and I might have' or 'I did', but the ASR disagreement on the auxiliary verb and modal is significant."
+    },
+    {
+      "span": "so i gotta be careful",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "'Gotta' is a standard colloquial contraction for 'got to'; both readings are valid representations of the same speech act."
+    },
+    {
+      "span": "alright so i caught",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Witness 1/2 read 'alright' and Witness 3 reads 'yeah' as a filler; however, the transition to the catch count is clearly marked by 'alright' in the draft which fits the speaker's style of opening segments."
+    },
+    {
+      "span": "i caught i caught like seven crappies ish",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1/2 hear a stuttered 'caught caught' while Witness 3 hears 'it's kind of like'; given the speaker's habit of hesitating and revising counts ('ish'), both are plausible but the exact phrasing is ambiguous."
+    },
+    {
+      "span": "ish i let one or two go",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1/2 hear 'one or' while Witness 3 hears 'water'; 'let one or two go' fits the fishing context perfectly, but 'let water two go' is a distinct possibility if the speaker was talking about releasing water or a specific fish type, requiring audio verification."
+    },
+    {
+      "span": "captain tea truck gave me one",
+      "verdict": "correct",
+      "correction": "uh captain teeny trout gave me one",
+      "reasoning": "The entity roster confirms 'Captain Teeny Trout' is the consistent nickname for Lucas; 'Tea Truck' and 'T Truck' are phonetic mangles of this specific recurring name."
+    },
+    {
+      "span": "bunch of little gills that i threw back",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1/2 hear 'gills' while Witness 3 hears 'kills'; given the context of throwing fish back, 'gills' is semantically correct, but 'kills' could be a mishearing of 'little gills' or a specific slang term; audio needed to distinguish."
+    },
+    {
+      "span": "there was some close ones",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1/2 read 'there was' while Witness 3 reads 'there's'; the speaker often uses non-standard grammar or rapid speech that blurs these forms, and both are plausible in this register."
+    },
+    {
+      "span": "blue gills i like them either to be",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The distinction between 'blue gills' (two words) and 'bluegills' (one word) is orthographic; the meaning is identical and fits the domain lexicon."
+    },
+    {
+      "span": "or i usually let them go unless like some days you just small fish",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1/2 read 'you just small' while Witness 3 reads 'it's just smaller'; the speaker's speech patterns include dropping verbs and using hedges, making it unclear if he said 'you just [have] small fish' or 'it's just smaller fish'."
+    },
+    {
+      "span": "like big fat crappies",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Witness 1/2 include the filler 'like' while Witness 3 omits it; this is a minor disfluency difference that does not change the meaning or correctness of the core description."
+    },
+    {
+      "span": "they just weren't having it",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1/2 end the sentence at 'having it' while Witness 3 adds a new clause about minnows; the transcript draft cuts off mid-thought or before a new thought, and the audio likely contains the transition to the minnow comment."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 35.1,
+  "prompt_chars": 14509,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "b",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

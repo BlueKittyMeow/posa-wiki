@@ -1,0 +1,43 @@
+{
+  "raw": "[\n {\"span\": \"get it monty\", \"verdict\": \"correct\", \"correction\": \"Got him (I'll get Monty)\", \"reasoning\": \"The speaker uses 'got', not 'get'. Matches informal speech pattern.\"},\n {\"span\": \"it monty help see its\", \"verdict\": \"incorrect\", \"correction\": \"Help it, Monthy catch sight of them.\", \"reasoning\": \"Speaker addresses the dog as Monty and uses correct imperative form 'help'. Includes missing word for clarity.\"},\n {\"span\": \"it monty go get here give me that he no like\", \"verdict\": \"correct\", \"correction\": \"It's Monthy, goes to catch it; won\u2019t give \u2013 but I will. You can have.\", \"reasoning\": \"Speaker addresses the dog and uses imperative form 'go', correct grammar for request.\"},\n {\"span\": \"hey monty i m fine ooh yeah\", \"verdict\": \"correct\", \"correction\": null, \"reasoning\": \"'He'll get it here; I\u2019m alright. You can have.' The speech pattern matches the informal and disfluent style.\"},\n {\"span\": \"(nothing) come here buddy\", \"verdict\": \"infer from context - escalate to human review.\", \"correction\": null, \"reasoning\": \"'Come here Buddy' is implied but not clear; needs clarification considering the speaker\u2019s speech pattern.\"}\n]\n",
+  "rulings": [
+    {
+      "span": "get it monty",
+      "verdict": "correct",
+      "correction": "Got him (I'll get Monty)",
+      "reasoning": "The speaker uses 'got', not 'get'. Matches informal speech pattern."
+    },
+    {
+      "span": "it monty help see its",
+      "verdict": "incorrect",
+      "correction": "Help it, Monthy catch sight of them.",
+      "reasoning": "Speaker addresses the dog as Monty and uses correct imperative form 'help'. Includes missing word for clarity."
+    },
+    {
+      "span": "it monty go get here give me that he no like",
+      "verdict": "correct",
+      "correction": "It's Monthy, goes to catch it; won\u2019t give \u2013 but I will. You can have.",
+      "reasoning": "Speaker addresses the dog and uses imperative form 'go', correct grammar for request."
+    },
+    {
+      "span": "hey monty i m fine ooh yeah",
+      "verdict": "correct",
+      "correction": null,
+      "reasoning": "'He'll get it here; I\u2019m alright. You can have.' The speech pattern matches the informal and disfluent style."
+    },
+    {
+      "span": "(nothing) come here buddy",
+      "verdict": "infer from context - escalate to human review.",
+      "correction": null,
+      "reasoning": "'Come here Buddy' is implied but not clear; needs clarification considering the speaker\u2019s speech pattern."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 3.1,
+  "prompt_chars": 11521,
+  "judge": "robody-brainstem",
+  "model": "robody-brainstem:latest",
+  "passage": "c",
+  "witness_set": "W+YT+P",
+  "ablation": "full"
+}

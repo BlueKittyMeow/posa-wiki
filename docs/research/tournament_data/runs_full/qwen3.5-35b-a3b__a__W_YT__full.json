@@ -1,0 +1,55 @@
+{
+  "raw": "[\n  {\n    \"span\": \"ladies and gentlemen\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"Style card confirms this is a recurring formal-address opening signature of the speaker.\"\n  },\n  {\n    \"span\": \"and\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The conjunction is required for the parallel structure of the show's tagline and fits the speaker's repetitive style.\"\n  },\n  {\n    \"span\": \"crappie\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie.\",\n    \"reasoning\": \"The episode title pun 'Crap-Pie' must be vocalized; the YouTube caption 'crap high' is a phonetic mishearing of the deliberate wordplay.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"correct\",\n    \"correction\": \"Today we are targeting some crappie, also known as crap-pie. And if we can't catch those...\",\n    \"reasoning\": \"The word 'And' is present in the draft and YouTube's omission of it creates a disjointed flow inconsistent with the speaker's continuous narration style.\"\n  },\n  {\n    \"span\": \"(nothing)\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 1 hears 'I think I'm gonna have to tilt' while Witness 2 hears 'She's running a little rough'; the speaker often comments on boat performance before or after motor adjustments, making both plausible but mutually exclusive in this specific sequence.\"\n  },\n  {\n    \"span\": \"gonna\",\n    \"verdict\": \"confirm\",\n    \"correction\": null,\n    \"reasoning\": \"The contraction 'gonna' is consistent with the speaker's informal register and frequent use of colloquialisms.\"\n  },\n  {\n    \"span\": \"there's one\",\n    \"verdict\": \"escalate\",\n    \"correction\": null,\n    \"reasoning\": \"Witness 1 hears 'There's one reason' while Witness 2 hears 'for some reason'; both are common phrases, but the specific phrasing of the speaker's hesitation or explanation is ambiguous without audio.\"\n  }\n]",
+  "rulings": [
+    {
+      "span": "ladies and gentlemen",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "Style card confirms this is a recurring formal-address opening signature of the speaker."
+    },
+    {
+      "span": "and",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The conjunction is required for the parallel structure of the show's tagline and fits the speaker's repetitive style."
+    },
+    {
+      "span": "crappie",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie.",
+      "reasoning": "The episode title pun 'Crap-Pie' must be vocalized; the YouTube caption 'crap high' is a phonetic mishearing of the deliberate wordplay."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "correct",
+      "correction": "Today we are targeting some crappie, also known as crap-pie. And if we can't catch those...",
+      "reasoning": "The word 'And' is present in the draft and YouTube's omission of it creates a disjointed flow inconsistent with the speaker's continuous narration style."
+    },
+    {
+      "span": "(nothing)",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'I think I'm gonna have to tilt' while Witness 2 hears 'She's running a little rough'; the speaker often comments on boat performance before or after motor adjustments, making both plausible but mutually exclusive in this specific sequence."
+    },
+    {
+      "span": "gonna",
+      "verdict": "confirm",
+      "correction": null,
+      "reasoning": "The contraction 'gonna' is consistent with the speaker's informal register and frequent use of colloquialisms."
+    },
+    {
+      "span": "there's one",
+      "verdict": "escalate",
+      "correction": null,
+      "reasoning": "Witness 1 hears 'There's one reason' while Witness 2 hears 'for some reason'; both are common phrases, but the specific phrasing of the speaker's hesitation or explanation is ambiguous without audio."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 23.1,
+  "prompt_chars": 10860,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "a",
+  "witness_set": "W+YT",
+  "ablation": "full"
+}

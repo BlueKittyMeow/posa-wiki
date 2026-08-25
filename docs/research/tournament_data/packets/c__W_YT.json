@@ -1,0 +1,323 @@
+{
+  "packet_id": "c__W_YT",
+  "passage": "c",
+  "passage_window": [
+    1790.0,
+    1835.0
+  ],
+  "passage_label": "overlapping dog play - rapid short utterances",
+  "witness_set": "W+YT",
+  "video": {
+    "title": "Crap-Pie - The Unsuccessful Fishing Show - Episode 15",
+    "description": "I head out fishing in the S.S. Tin Can 3.0 to catch some crappie!"
+  },
+  "entity_roster": {
+    "people": [
+      {
+        "name": "Matthew Posa",
+        "aliases": [
+          "Captain Teeny Trout",
+          "Teeny Trout"
+        ]
+      },
+      {
+        "name": "Funk",
+        "aliases": [
+          "Erin"
+        ]
+      },
+      {
+        "name": "Lucas",
+        "aliases": [
+          "Captain Teeny Trout",
+          "Teeny Trout"
+        ]
+      },
+      {
+        "name": "Erin",
+        "aliases": []
+      },
+      {
+        "name": "Jake",
+        "aliases": [
+          "jake"
+        ]
+      },
+      {
+        "name": "Ken",
+        "aliases": [
+          "ken",
+          "chainsaw ken"
+        ]
+      },
+      {
+        "name": "Matthew's Mom",
+        "aliases": [
+          "mom"
+        ]
+      },
+      {
+        "name": "Matthew's Dad",
+        "aliases": [
+          "dad"
+        ]
+      },
+      {
+        "name": "Matthew's Brother",
+        "aliases": [
+          "brother"
+        ]
+      }
+    ],
+    "dogs": [
+      {
+        "name": "Monty",
+        "breed": "Rough Collie"
+      },
+      {
+        "name": "Rueger",
+        "breed": "Mixed Breed"
+      },
+      {
+        "name": "Layla",
+        "breed": "English Shepherd"
+      }
+    ],
+    "domain_terms": [
+      "crappie",
+      "crappies",
+      "bluegill",
+      "bluegills",
+      "gills",
+      "Boundary Waters",
+      "steel eater",
+      "SS Tin Can"
+    ]
+  },
+  "witnesses": {
+    "whisper": {
+      "segments": [
+        {
+          "t": 1752.98,
+          "text": "Get it Monty. Say hi"
+        },
+        {
+          "t": 1795.0,
+          "text": "Funk. Hi."
+        },
+        {
+          "t": 1797.8,
+          "text": "Look at him Monty."
+        },
+        {
+          "t": 1799.44,
+          "text": "Help him see it."
+        },
+        {
+          "t": 1801.8,
+          "text": "Go get it Monty."
+        },
+        {
+          "t": 1803.92,
+          "text": "Give me that."
+        },
+        {
+          "t": 1806.02,
+          "text": "Give me that."
+        },
+        {
+          "t": 1806.9,
+          "text": "You little stinker."
+        },
+        {
+          "t": 1808.64,
+          "text": "Give me that."
+        },
+        {
+          "t": 1811.02,
+          "text": "He's like, no."
+        },
+        {
+          "t": 1816.81,
+          "text": "He won't give it to me."
+        },
+        {
+          "t": 1821.44,
+          "text": "Give it here."
+        },
+        {
+          "t": 1825.4,
+          "text": "Monty."
+        },
+        {
+          "t": 1827.24,
+          "text": "I'll get you."
+        },
+        {
+          "t": 1831.98,
+          "text": "I'm fine. You can have it."
+        }
+      ],
+      "text": "Get it Monty. Say hi Funk. Hi. Look at him Monty. Help him see it. Go get it Monty. Give me that. Give me that. You little stinker. Give me that. He's like, no. He won't give it to me. Give it here. Monty. I'll get you. I'm fine. You can have it."
+    },
+    "youtube": {
+      "segments": [
+        {
+          "t": 1764.0,
+          "text": "Get ready. Get"
+        },
+        {
+          "t": 1794.8,
+          "text": "Say hi, punk."
+        },
+        {
+          "t": 1795.84,
+          "text": "Hi."
+        },
+        {
+          "t": 1798.4,
+          "text": "We got a Monty. Help him see it. Come"
+        },
+        {
+          "t": 1800.88,
+          "text": "here, buddy."
+        },
+        {
+          "t": 1802.24,
+          "text": "Go get him, Monty."
+        },
+        {
+          "t": 1804.32,
+          "text": "Give me Give me that. Give me here, you"
+        },
+        {
+          "t": 1807.28,
+          "text": "little stinker."
+        },
+        {
+          "t": 1809.6,
+          "text": "Give me that. He's like, \"No."
+        },
+        {
+          "t": 1819.28,
+          "text": "He won't give it to me."
+        },
+        {
+          "t": 1821.92,
+          "text": "Give it here,"
+        },
+        {
+          "t": 1825.6,
+          "text": "Monty."
+        },
+        {
+          "t": 1827.6,
+          "text": "Let me get you."
+        },
+        {
+          "t": 1832.4,
+          "text": "Oh, fine. You can have it."
+        }
+      ],
+      "text": "Get ready. Get Say hi, punk. Hi. We got a Monty. Help him see it. Come here, buddy. Go get him, Monty. Give me Give me that. Give me here, you little stinker. Give me that. He's like, \"No. He won't give it to me. Give it here, Monty. Let me get you. Oh, fine. You can have it."
+    }
+  },
+  "draft_transcript": "Get it Monty. Say hi Funk. Hi. Look at him Monty. Help him see it. Go get it Monty. Give me that. Give me that. You little stinker. Give me that. He's like, no. He won't give it to me. Give it here. Monty. I'll get you. I'm fine. You can have it.",
+  "disagreement_flags": [
+    {
+      "whisper_span": "it monty",
+      "context": "get it monty say hi funk",
+      "alternatives": {
+        "youtube": "ready get"
+      }
+    },
+    {
+      "whisper_span": "funk",
+      "context": "monty say hi funk hi look at",
+      "alternatives": {
+        "youtube": "punk"
+      }
+    },
+    {
+      "whisper_span": "look at him",
+      "context": "hi funk hi look at him monty help him",
+      "alternatives": {
+        "youtube": "we got a"
+      }
+    },
+    {
+      "whisper_span": "(nothing)",
+      "context": "him see it go get it",
+      "alternatives": {
+        "youtube": "come here buddy"
+      }
+    },
+    {
+      "whisper_span": "it",
+      "context": "it go get it monty give me",
+      "alternatives": {
+        "youtube": "him"
+      }
+    },
+    {
+      "whisper_span": "(nothing)",
+      "context": "get it monty give me that",
+      "alternatives": {
+        "youtube": "give me"
+      }
+    },
+    {
+      "whisper_span": "that",
+      "context": "that give me that you little stinker",
+      "alternatives": {
+        "youtube": "here"
+      }
+    },
+    {
+      "whisper_span": "i'll",
+      "context": "it here monty i'll get you i'm",
+      "alternatives": {
+        "youtube": "let me"
+      }
+    },
+    {
+      "whisper_span": "i'm",
+      "context": "i'll get you i'm fine you can",
+      "alternatives": {
+        "youtube": "(nothing)"
+      }
+    }
+  ],
+  "whisper_low_confidence": [
+    {
+      "word": "Funk.",
+      "t": 1795.0,
+      "p": 0.032
+    },
+    {
+      "word": "Look",
+      "t": 1797.8,
+      "p": 0.124
+    },
+    {
+      "word": "Help",
+      "t": 1799.44,
+      "p": 0.173
+    },
+    {
+      "word": "him",
+      "t": 1798.52,
+      "p": 0.296
+    },
+    {
+      "word": "You",
+      "t": 1806.9,
+      "p": 0.443
+    },
+    {
+      "word": "He",
+      "t": 1816.81,
+      "p": 0.502
+    }
+  ]
+}

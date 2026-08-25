@@ -1,0 +1,25 @@
+{
+  "raw": "[{\"span\": \"Captain Tea Truck gave me one\", \"verdict\": \"correct\", \"correction\": \"Captain Teeny Trout gave me one\", \"reasoning\": \"The entity roster and style card confirm 'Captain Teeny Trout' is the consistent nickname for Lucas, and 'Tea Truck' is a phonetic mangle of this name.\"}, {\"span\": \"I got some five nice gills\", \"verdict\": \"correct\", \"correction\": \"I got like five nice gills\", \"reasoning\": \"The speaker's style card mandates that counts are given hesitantly with '-ish' or 'like' hedges; the ASR likely dropped the filler word 'like' which is present in the low-confidence flags for surrounding words.\"}]",
+  "rulings": [
+    {
+      "span": "Captain Tea Truck gave me one",
+      "verdict": "correct",
+      "correction": "Captain Teeny Trout gave me one",
+      "reasoning": "The entity roster and style card confirm 'Captain Teeny Trout' is the consistent nickname for Lucas, and 'Tea Truck' is a phonetic mangle of this name."
+    },
+    {
+      "span": "I got some five nice gills",
+      "verdict": "correct",
+      "correction": "I got like five nice gills",
+      "reasoning": "The speaker's style card mandates that counts are given hesitantly with '-ish' or 'like' hedges; the ASR likely dropped the filler word 'like' which is present in the low-confidence flags for surrounding words."
+    }
+  ],
+  "parse_note": null,
+  "elapsed": 9.4,
+  "prompt_chars": 10173,
+  "judge": "qwen3.5-35b-a3b",
+  "model": "qwen3.5:35b-a3b",
+  "passage": "b",
+  "witness_set": "W",
+  "ablation": "full"
+}
