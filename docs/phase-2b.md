@@ -1,6 +1,6 @@
 # Phase 2B: API & CRUD Development
 
-**Status:** In Progress - Step 2 (Review Queues) + Step 2.5 (Seasons) Complete ✓
+**Status:** In Progress - Step 2 (Review Queues) + Step 2.5 (Seasons) + Step 2.6 (Trip Length) Complete ✓
 **Goal:** Deliver a fully functional admin panel with CRUD operations for all major data models, a versioned REST API, and hardened security.
 
 ## Progress Update
@@ -154,6 +154,54 @@ Built:
   human-never-overwritten, idempotency, upload-date-is-not-evidence and
   ambiguous-canoe-stays-Unknown; queue approve/reject round-trips; `/videos`
   filtering; badge rendering and *non*-rendering.
+*Completed by Claude*
+
+**Step 2.6: Trip Length (Nights) as a Video Facet** ✓ COMPLETE
+- Deliberately the same shape as Step 2.5 — trip length is a **facet of a
+  video**, not a series, and **Unknown (NULL) is a legitimate value**.
+- Migration `012_add_nights_provenance.sql`: `videos.nights_confidence`
+  (`high` / `medium` / `human`) + `videos.nights_source` (rule name or
+  `human:web-review`). `videos.number_of_nights` already existed and was
+  100% NULL.
+- Owner-approved rules in `scripts/derive_nights.py` (idempotent, `--db` /
+  `--dry-run` / `--json`): a stated night count is exact; the part-title form
+  "(Night X of Y)" gives the trip length **Y**; days convert `nights = N - 1`;
+  "Overnight"/"Overnighter" → 1. A title carrying **both** a days and a nights
+  form is cross-checked — consistent writes, inconsistent goes to review.
+  Week language, day-trip series membership, description keywords and
+  inconsistent pairs only *propose*.
+- **0 is never inferred.** A Hike and Cook with no overnight evidence is
+  *probably* a day trip; membership in `Hike and Cook` / `Day Hiking` emits a
+  medium-confidence candidate 0, and a human decides. `1 Day …` (which would
+  convert to 0) is likewise proposed, not written.
+- First run over 358 videos: **91 written** — 1 night 33, 2 nights 9,
+  3 nights 7, 4 nights 2, 5 nights 2, 6 nights 3, 7 nights 26, 9 nights 7,
+  12 nights 1, 14 nights 1 — **267 unknown**, plus 65 review candidates
+  (35 day-trip-series, 22 week-language, 8 description). A second run writes 0.
+  Sources: `title:nights` 48, `title:overnight` 33, `title:night-of+days-cross-check`
+  7, `title:days-minus-one` 3.
+- **Finding:** the days↔nights cross-check is real, not theoretical — the
+  seven "8 Day Wilderness Adventure with My Dog (Night N of 7)" part titles
+  all agree (8 − 1 = 7) and were written at high confidence on the strength of
+  both forms. Week language is the opposite case: 22 titles say "Weeklong" or
+  "A Week in the Wilderness" and *none* of them say whether that is 6 or 7
+  nights, so all 22 are proposals.
+- Review queue `nights` (5th entry in the `QUEUES` registry, so the dashboard
+  counts it automatically). Approve writes `number_of_nights` +
+  `nights_confidence='human'` + `nights_source='human:web-review'`; reject
+  means "Unknown stands". Decisions in `data/nights_review_decisions.json`,
+  keyed by `video_id`, read by both the queue and the script.
+- Site surfacing: themed `nights_chip()` macro (🌙 N nights / 🥾 Day trip,
+  rendered only when the length is known) on `video_detail.html` and
+  `watch.html`; `/videos` gained a second chip row —
+  Day trip (0) / Overnight (1) / Weekend (2–3) / Week-ish (4–7) / Epic (8+) /
+  Unknown — as `?nights=epic` etc., composing with `?season=` and preserving
+  sort/order/page.
+- Tests: `tests/test_nights.py` (44 tests) — rule units incl. the
+  days/nights cross-check both ways, 0-is-never-inferred, human-never-
+  overwritten, idempotency; queue approve/reject round-trips; `/videos`
+  bucket filtering and season composition; badge rendering and
+  *non*-rendering.
 *Completed by Claude*
 
 **Step 1.5: Viewer Test Account & Login Flow** ⏳ TODO

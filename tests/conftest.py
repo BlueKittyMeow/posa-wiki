@@ -28,6 +28,7 @@ MIGRATION_FILES = [
     "008_add_duration_seconds.sql",
     "010_create_transcripts.sql",
     "011_add_season_provenance.sql",
+    "012_add_nights_provenance.sql",
 ]
 
 

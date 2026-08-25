@@ -45,12 +45,15 @@ SERIES_CANDIDATES_FILENAME = 'series_review_candidates.json'
 SERIES_DECISIONS_FILENAME = 'series_review_decisions.json'
 SEASON_CANDIDATES_FILENAME = 'season_review_candidates.json'
 SEASON_DECISIONS_FILENAME = 'season_review_decisions.json'
+NIGHTS_CANDIDATES_FILENAME = 'nights_review_candidates.json'
+NIGHTS_DECISIONS_FILENAME = 'nights_review_decisions.json'
 TAG_DISMISSED_FILENAME = 'tag_review_dismissed.json'
 DOG_DISMISSED_FILENAME = 'dog_review_dismissed.json'
 
 DEFAULT_DATA_DIR = REPO_ROOT / 'data'
 DEFAULT_DECISIONS_PATH = DEFAULT_DATA_DIR / SERIES_DECISIONS_FILENAME
 DEFAULT_SEASON_DECISIONS_PATH = DEFAULT_DATA_DIR / SEASON_DECISIONS_FILENAME
+DEFAULT_NIGHTS_DECISIONS_PATH = DEFAULT_DATA_DIR / NIGHTS_DECISIONS_FILENAME
 
 MAX_TAG_SAMPLES = 6
 
@@ -205,6 +208,56 @@ def record_season_decision(video_id, season, decision, extra=None, path=None):
         'note',
         'Human season decisions from the /admin review queue. '
         'derive_seasons.py reads this file so decided videos are never '
+        'proposed again. A reject means "Unknown stands".',
+    )
+    write_json(path, payload)
+    return record
+
+
+# --------------------------------------------------------------------------
+# Nights (trip length) decisions -- shared with scripts/derive_nights.py
+# --------------------------------------------------------------------------
+
+def load_nights_decisions(path=None) -> Dict[str, Any]:
+    """Return ``{video_id: decision-record}`` for already-reviewed trip lengths.
+
+    Keyed by ``video_id`` alone (a video covers one trip), so a rejected
+    proposal suppresses *every* future proposal for that video -- "Unknown"
+    is a legitimate answer for trip length and must stick.
+
+    Importable from plain scripts (no Flask app context required).
+    """
+    if path is None:
+        path = DEFAULT_NIGHTS_DECISIONS_PATH
+    payload = read_json(path, default={}) or {}
+    decisions = payload.get('decisions')
+    return decisions if isinstance(decisions, dict) else {}
+
+
+def record_nights_decision(video_id, nights, decision, extra=None, path=None):
+    """Persist an approve/reject for a proposed trip length."""
+    if path is None:
+        path = data_path(NIGHTS_DECISIONS_FILENAME)
+    payload = read_json(path, default=None) or {}
+    decisions = payload.get('decisions')
+    if not isinstance(decisions, dict):
+        decisions = {}
+    record = {
+        'video_id': video_id,
+        'nights': nights,
+        'decision': decision,
+        'decided_at': _now(),
+        'source': REVIEW_PROVENANCE,
+    }
+    if extra:
+        record.update(extra)
+    decisions[video_id] = record
+    payload['decisions'] = decisions
+    payload['updated_at'] = _now()
+    payload.setdefault(
+        'note',
+        'Human trip-length decisions from the /admin review queue. '
+        'derive_nights.py reads this file so decided videos are never '
         'proposed again. A reject means "Unknown stands".',
     )
     write_json(path, payload)
@@ -865,13 +918,177 @@ class SeasonCandidateQueue(ReviewQueue):
 
 
 # --------------------------------------------------------------------------
+# 5. Trip length (nights) candidates
+# --------------------------------------------------------------------------
+
+def nights_label(nights) -> str:
+    """'🌙 3 nights' / '🌙 Overnight (1 night)' / '🥾 Day trip (0 nights)'."""
+    if nights is None:
+        return '❔ Unknown'
+    if nights == 0:
+        return '🥾 Day trip (0 nights)'
+    if nights == 1:
+        return '🌙 Overnight (1 night)'
+    return f'🌙 {nights} nights'
+
+
+class NightsCandidateQueue(ReviewQueue):
+    """Medium-confidence trip lengths from ``scripts/derive_nights.py``.
+
+    Trip length is a video facet, not a series. Rejecting is a real answer:
+    it means "Unknown stands", and the video is never proposed again. In
+    particular a day-trip series membership only *proposes* 0 nights -- the
+    absence of overnight evidence is not evidence of absence.
+    """
+
+    key = 'nights'
+    label = 'Trip length candidates'
+    icon = '🌙'
+    description = ('Medium-confidence trip lengths (week language, day-trip '
+                   'series membership, description keywords, inconsistent '
+                   'day/night titles). Approving stamps the video '
+                   + REVIEW_PROVENANCE + '; rejecting means Unknown stands. '
+                   'Unknown is always a legitimate answer.')
+    empty_message = ('No pending trip-length candidates. Regenerate them with '
+                     'python scripts/derive_nights.py.')
+    candidates_file = 'data/' + NIGHTS_CANDIDATES_FILENAME
+    regenerate_command = 'python scripts/derive_nights.py'
+
+    #: Anything longer than this in a title is a parsing accident, not a trip.
+    MAX_NIGHTS = 60
+
+    def _candidates(self):
+        payload = read_json(data_path(NIGHTS_CANDIDATES_FILENAME), default=None)
+        if not payload:
+            return None  # signals "file missing"
+        candidates = payload.get('candidates')
+        return candidates if isinstance(candidates, list) else []
+
+    def file_missing(self) -> bool:
+        return self._candidates() is None
+
+    def items(self, conn) -> List[ReviewItem]:
+        candidates = self._candidates()
+        if not candidates:
+            return []
+
+        decisions = load_nights_decisions(data_path(NIGHTS_DECISIONS_FILENAME))
+
+        video_ids = [c.get('video_id') for c in candidates if c.get('video_id')]
+        videos = {}
+        if video_ids:
+            marks = ','.join('?' * len(video_ids))
+            videos = {
+                row['video_id']: row
+                for row in conn.execute(
+                    'SELECT video_id, title, upload_date, thumbnail_url, '
+                    'number_of_nights, nights_confidence '
+                    f'FROM videos WHERE video_id IN ({marks})', video_ids)
+            }
+
+        items = []
+        for candidate in candidates:
+            video_id = candidate.get('video_id')
+            nights = candidate.get('proposed_nights')
+            if not video_id or not self._valid(nights):
+                continue
+            nights = int(nights)
+            if video_id in decisions:
+                continue
+            video = videos.get(video_id)
+            if video is None:
+                continue
+            # A human already settled this one, or a high-confidence rule has
+            # since claimed it -- either way, stop asking.
+            if video['nights_confidence'] == 'human':
+                continue
+            if video['number_of_nights'] is not None:
+                continue
+
+            evidence = candidate.get('evidence')
+            items.append(ReviewItem(
+                kind='nights',
+                item_id=f'nights:{video_id}:{nights}',
+                title=video['title'] or candidate.get('title') or video_id,
+                proposal=f'Trip length: {nights_label(nights)}',
+                provenance='rule: ' + (candidate.get('rule') or 'unknown')
+                           + f" ({candidate.get('confidence', 'medium')} "
+                           'confidence)',
+                payload={'video_id': video_id, 'nights': nights},
+                video_id=video_id,
+                thumbnail_url=video['thumbnail_url'],
+                upload_date=video['upload_date'],
+                detail=nights_label(nights),
+                samples=[evidence] if evidence else [],
+            ))
+        return items
+
+    # -- actions ----------------------------------------------------------
+    def _valid(self, nights) -> bool:
+        if isinstance(nights, bool) or nights is None:
+            return False
+        try:
+            value = int(nights)
+        except (TypeError, ValueError):
+            return False
+        return 0 <= value <= self.MAX_NIGHTS
+
+    def _resolve(self, conn, payload):
+        video_id = (payload.get('video_id') or '').strip()
+        nights = payload.get('nights')
+        if not video_id or nights is None or nights == '':
+            raise ValueError('Missing video_id or nights.')
+        if not self._valid(nights):
+            raise ValueError(f'“{nights}” is not a plausible number of nights.')
+        nights = int(nights)
+        row = conn.execute(
+            'SELECT video_id, nights_confidence FROM videos WHERE video_id = ?',
+            (video_id,)).fetchone()
+        if row is None:
+            raise ValueError(f'Video {video_id} does not exist.')
+        return video_id, nights, row
+
+    def approve(self, conn, payload):
+        video_id, nights, _row = self._resolve(conn, payload)
+        conn.execute(
+            'UPDATE videos SET number_of_nights = ?, nights_confidence = ?, '
+            'nights_source = ?, updated_at = ? WHERE video_id = ?',
+            (nights, 'human', REVIEW_PROVENANCE,
+             datetime.now().isoformat(), video_id),
+        )
+        conn.commit()
+        record_nights_decision(video_id, nights, 'approve',
+                               path=data_path(NIGHTS_DECISIONS_FILENAME))
+        return {
+            'message': f'Set {video_id} to {nights} night'
+                       f'{"s" if nights != 1 else ""}.',
+            'resource_id': video_id,
+            'details': {'video_id': video_id, 'number_of_nights': nights,
+                        'nights_confidence': 'human',
+                        'nights_source': REVIEW_PROVENANCE},
+        }
+
+    def reject(self, conn, payload):
+        video_id, nights, _row = self._resolve(conn, payload)
+        record_nights_decision(video_id, nights, 'reject',
+                               path=data_path(NIGHTS_DECISIONS_FILENAME))
+        return {
+            'message': f'Dismissed “{nights} nights” for {video_id}; '
+                       'Unknown stands.',
+            'resource_id': video_id,
+            'details': {'video_id': video_id, 'nights': nights},
+        }
+
+
+# --------------------------------------------------------------------------
 # Registry
 # --------------------------------------------------------------------------
 
 QUEUES: Dict[str, ReviewQueue] = {
     queue.key: queue
     for queue in (SeriesCandidateQueue(), UnvalidatedTagQueue(),
-                  DogCandidateQueue(), SeasonCandidateQueue())
+                  DogCandidateQueue(), SeasonCandidateQueue(),
+                  NightsCandidateQueue())
 }
 
 

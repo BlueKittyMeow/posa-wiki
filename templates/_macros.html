@@ -58,3 +58,24 @@
   {%- endif -%}
 {%- endif -%}
 {% endmacro %}
+{# Trip length is the other video *facet*: 🌙 N nights, and only when we
+   actually know. NULL means Unknown and renders nothing -- 0 is a real
+   answer (a day trip) and is never confused with "no idea". #}
+{% macro nights_chip(nights, link=true) %}
+{%- if nights is not none -%}
+  {%- set bucket = 'day' if nights == 0 else ('overnight' if nights == 1 else
+        ('weekend' if nights <= 3 else ('week' if nights <= 7 else 'epic'))) -%}
+  {%- if nights == 0 -%}
+    {%- set icon, label = '🥾', 'Day trip' -%}
+  {%- else -%}
+    {%- set icon, label = '🌙', nights ~ ' night' ~ ('' if nights == 1 else 's') -%}
+  {%- endif -%}
+  {%- if link -%}
+  <a class="nights-chip nights-chip-{{ bucket }}"
+     href="{{ url_for('video_list', nights=bucket) }}"
+     title="Browse trips of this length">{{ icon }} {{ label }}</a>
+  {%- else -%}
+  <span class="nights-chip nights-chip-{{ bucket }}">{{ icon }} {{ label }}</span>
+  {%- endif -%}
+{%- endif -%}
+{% endmacro %}

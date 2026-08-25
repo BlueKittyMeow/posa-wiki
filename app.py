@@ -247,6 +247,35 @@ SEASON_FILTERS = (
 )
 SEASON_FILTER_KEYS = frozenset(key for key, _label in SEASON_FILTERS)
 
+# Trip length is the other video facet (migration 012). The buckets are the
+# shapes of trip he actually films, not arithmetic slices; 'unknown'
+# (number_of_nights IS NULL) is again first-class -- most of the catalogue has
+# no stated length and we never guess one. ``None`` as the upper bound means
+# open-ended; ``None`` as the whole range means "IS NULL".
+NIGHTS_FILTERS = (
+    ('day', '🥾 Day trip', (0, 0)),
+    ('overnight', '🌙 Overnight', (1, 1)),
+    ('weekend', '⛺ Weekend', (2, 3)),
+    ('week', '🏕️ Week-ish', (4, 7)),
+    ('epic', '🗺️ Epic', (8, None)),
+    ('unknown', '❔ Unknown', None),
+)
+NIGHTS_FILTER_KEYS = frozenset(key for key, _label, _range in NIGHTS_FILTERS)
+NIGHTS_FILTER_RANGES = {key: bounds for key, _label, bounds in NIGHTS_FILTERS}
+
+
+def nights_bucket(nights):
+    """Return the filter key for a concrete ``number_of_nights`` value."""
+    if nights is None:
+        return 'unknown'
+    for key, _label, bounds in NIGHTS_FILTERS:
+        if bounds is None:
+            continue
+        low, high = bounds
+        if nights >= low and (high is None or nights <= high):
+            return key
+    return 'unknown'
+
 
 def paginate(conn, query, params, count_query, count_params=(), per_page=20):
     """A helper function to paginate queries."""
@@ -324,12 +353,32 @@ def video_list():
     season = (request.args.get('season') or '').lower()
     if season not in SEASON_FILTER_KEYS:
         season = ''
+
+    # Trip length is the same kind of facet, and composes with the season.
+    nights = (request.args.get('nights') or '').lower()
+    if nights not in NIGHTS_FILTER_KEYS:
+        nights = ''
+
+    clauses, filter_params = [], []
     if season == 'unknown':
-        season_sql, season_params = 'WHERE season IS NULL', ()
+        clauses.append('season IS NULL')
     elif season:
-        season_sql, season_params = 'WHERE season = ?', (season,)
-    else:
-        season_sql, season_params = '', ()
+        clauses.append('season = ?')
+        filter_params.append(season)
+
+    if nights == 'unknown':
+        clauses.append('number_of_nights IS NULL')
+    elif nights:
+        low, high = NIGHTS_FILTER_RANGES[nights]
+        if high is None:
+            clauses.append('number_of_nights >= ?')
+            filter_params.append(low)
+        else:
+            clauses.append('number_of_nights BETWEEN ? AND ?')
+            filter_params.extend((low, high))
+
+    filter_sql = ('WHERE ' + ' AND '.join(clauses)) if clauses else ''
+    filter_params = tuple(filter_params)
 
     conn = get_db()
 
@@ -338,12 +387,22 @@ def video_list():
 
     # Get total number of videos for pagination
     total = conn.execute(
-        f'SELECT COUNT(*) FROM videos {season_sql}', season_params).fetchone()[0]
+        f'SELECT COUNT(*) FROM videos {filter_sql}', filter_params).fetchone()[0]
 
     # Chip-row counts, so the filter shows how much is behind each option.
     season_counts = {row[0] or 'unknown': row[1] for row in conn.execute(
         'SELECT season, COUNT(*) FROM videos GROUP BY season')}
     season_counts['all'] = sum(season_counts.values())
+
+    # Same for trip length, bucketed in Python so the buckets live in exactly
+    # one place (NIGHTS_FILTERS) rather than being restated as SQL CASEs.
+    nights_counts = {}
+    for value, count in conn.execute(
+            'SELECT number_of_nights, COUNT(*) FROM videos '
+            'GROUP BY number_of_nights'):
+        key = nights_bucket(value)
+        nights_counts[key] = nights_counts.get(key, 0) + count
+    nights_counts['all'] = sum(nights_counts.values())
 
     # Build SQL query with sorting and pagination
     order_sql = 'ASC' if order == 'asc' else 'DESC'
@@ -363,14 +422,14 @@ def video_list():
     # Keep NULLs at the end regardless of direction.
     query = f'''
     SELECT video_id, title, description, upload_date, duration, duration_seconds,
-           view_count, thumbnail_url, season
+           view_count, thumbnail_url, season, number_of_nights
     FROM videos
-    {season_sql}
+    {filter_sql}
     ORDER BY ({sort_column} IS NULL) ASC, {sort_column} {order_sql}
     LIMIT ? OFFSET ?
     '''
 
-    videos = conn.execute(query, season_params + (per_page, offset)).fetchall()
+    videos = conn.execute(query, filter_params + (per_page, offset)).fetchall()
 
     pagination = Pagination(page=page, per_page=per_page, total=total,
                             css_framework='bootstrap4',
@@ -383,6 +442,9 @@ def video_list():
                          season=season,
                          season_filters=SEASON_FILTERS,
                          season_counts=season_counts,
+                         nights=nights,
+                         nights_filters=NIGHTS_FILTERS,
+                         nights_counts=nights_counts,
                          pagination=pagination)
 
 @app.route('/video/<video_id>')

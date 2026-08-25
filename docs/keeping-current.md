@@ -48,7 +48,7 @@ which doubles as the systemd `EnvironmentFile`. Three timers, all
 
 | Unit | Cadence | Does |
 |---|---|---|
-| `posa-catalog.timer` | weekly, Sun 23:30 | `update_catalog.py` → `assign_series.py` → `derive_seasons.py` (three sequential ExecStart lines in one oneshot service) |
+| `posa-catalog.timer` | weekly, Sun 23:30 | `update_catalog.py` → `assign_series.py` → `derive_seasons.py` → `derive_nights.py` (four sequential ExecStart lines in one oneshot service) |
 | `posa-archive.timer` | **daily during backfill**; drop to monthly once caught up | `scripts/archive_channel.sh` — channel backup to `/mnt/media6t/archive/posa/` |
 | `posa-transcripts.timer` | daily | `ingest_transcripts.py` — new subtitle sidecars → transcript search |
 
@@ -101,6 +101,7 @@ the broader thematic rules afterwards:
 python scripts/seed_series.py     # only needed if the taxonomy changed
 python scripts/assign_series.py   # title/tag rules -> video_series
 python scripts/derive_seasons.py  # title/tag rules -> videos.season
+python scripts/derive_nights.py   # title rules -> videos.number_of_nights
 ```
 
 All three are idempotent — a second run inserts nothing. `assign_series.py` writes
@@ -143,6 +144,45 @@ back to a high-confidence write if the owner ever decides otherwise.
 python scripts/derive_seasons.py --dry-run   # counts only, writes nothing
 python scripts/derive_seasons.py             # apply + regenerate the queue
 ```
+
+### Trip length (nights)
+
+`scripts/derive_nights.py` fills `videos.number_of_nights` from title
+evidence, with provenance in `videos.nights_confidence` /
+`videos.nights_source` (migration `012`). It is deliberately the same shape as
+`derive_seasons.py`, and the same three rules govern it:
+
+- **Unknown (NULL) is a legitimate value**, and **0 is never inferred**. A
+  Hike and Cook is *probably* a day trip, but "probably" is a review-tier
+  answer — day-trip series membership only ever *proposes* 0 nights.
+- **A title stating a length is exact.** "7 Nights Of Winter Camping" → 7;
+  the part-title form "(Night 3 of 7)" gives the trip length 7, not 3;
+  "Overnight"/"Overnighter" → 1.
+- **Days convert, `nights = days - 1`** (owner-approved, and validated against
+  his own titles: "8 Day Wilderness Adventure with My Dog (Night 7 of 7)"
+  pairs an 8-day framing with a 7-night one). A title carrying both forms is
+  cross-checked — consistent writes, **inconsistent goes to review** and is
+  never auto-written.
+- **A human decision is untouchable** (`nights_confidence = 'human'`), and an
+  existing value is only re-derived when `number_of_nights` is NULL.
+
+Medium-confidence guesses — week language ("Weeklong", "A Week in the
+Wilderness": 6 or 7 nights, the title does not say which), day-trip series
+membership, description keywords, and inconsistent day/night pairs — go to
+`data/nights_review_candidates.json` and are clicked through at
+`/admin/review/nights`. Approving stamps `nights_confidence = 'human'`;
+rejecting means "Unknown stands" (decisions persist in
+`data/nights_review_decisions.json`).
+
+```bash
+python scripts/derive_nights.py --dry-run   # counts only, writes nothing
+python scripts/derive_nights.py             # apply + regenerate the queue
+```
+
+First run over 358 videos: 91 written (33 overnights, 26 seven-nighters, the
+rest spread from 2 to 14), **267 unknown**, 65 review candidates. A second run
+writes 0.
+
 
 ## Transcripts
 
@@ -198,6 +238,7 @@ first. The monthly flow on Factotum is:
 YOUTUBE_API_KEY=... ./venv/bin/python scripts/update_catalog.py   # new rows in `videos`
 ./venv/bin/python scripts/assign_series.py                        # thematic series
 ./venv/bin/python scripts/derive_seasons.py                       # videos.season
+./venv/bin/python scripts/derive_nights.py                        # videos.number_of_nights
 ./scripts/archive_channel.sh                                      # media + .en.vtt sidecars
 ./venv/bin/python scripts/ingest_transcripts.py                   # sidecars -> searchable text
 ```
@@ -222,8 +263,10 @@ where to look.
 - **Multi-part trip membership.** A multi-part canoe trip with freeform titles
   will not be grouped automatically — assign it in the app or with
   `import_trips.py` / `separate_series_trips.py`.
-- **Locations, number of nights, season, weather, series notes** — all curated
-  fields, untouched by the updater.
+- **Locations, weather, series notes** — curated fields, untouched by the
+  updater. **Season and number of nights** are curated too, but now have
+  derivation scripts behind them (`derive_seasons.py`, `derive_nights.py`) —
+  high-confidence title evidence only, everything else routed to review.
 - **New people or dogs.** Mining only knows the entities hardcoded in
   `mine_video_descriptions.load_known_entities()` and mapped in
   `populate_people_dogs.PEOPLE_MAPPING` / `DOGS_MAPPING`. A new companion needs a
