@@ -37,6 +37,7 @@ import sqlite3
 import sys
 from datetime import datetime
 from pathlib import Path
+from typing import Sequence
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
@@ -144,11 +145,73 @@ def clear_whisper(conn, video_id):
                  (video_id, SOURCE_WHISPER))
 
 
+def clear_pipeline_rows(conn, video_id):
+    """Drop this video's *undecided* pipeline output, for a clean re-run.
+
+    A re-run against a fresh Whisper transcript describes different sentences,
+    so the previous run's correction log and open queue rows are stale — they
+    point at text that no longer exists. This clears exactly three things and
+    nothing else:
+
+    * the video's ``whisper-large-v3`` segments (``clear_whisper``),
+    * its ``transcript_corrections`` rows whose provenance is a *judge* — a
+      ``human:web-review`` correction is Lara's decision and is never touched,
+    * its ``transcript_review_queue`` rows still ``open`` — anything she has
+      approved or rejected stays, so a decision never has to be made twice.
+
+    YouTube segments are never in scope. Take a backup before calling this;
+    ``--redo`` is the only path that reaches it.
+    """
+    clear_whisper(conn, video_id)
+    conn.execute(
+        "DELETE FROM transcript_corrections "
+        "WHERE video_id = ? AND provenance LIKE 'judge:%'", (video_id,))
+    conn.execute(
+        "DELETE FROM transcript_review_queue "
+        "WHERE video_id = ? AND status = 'open'", (video_id,))
+
+
 # --------------------------------------------------------------------------
 # the work
 # --------------------------------------------------------------------------
 
-def plan_video(whisper: dict, verdicts: dict):
+def roster_names(conn=None):
+    """Canonical people/dog names, used to veto corrections that break them."""
+    if conn is None:
+        return []
+    names = []
+    try:
+        for (canonical,) in conn.execute("SELECT canonical_name FROM people"):
+            if canonical:
+                names.append(canonical)
+        for (name,) in conn.execute("SELECT name FROM dogs"):
+            if name:
+                names.append(name)
+    except sqlite3.OperationalError:
+        return []
+    return names
+
+
+#: Write judge corrections straight into the transcript, or route every one of
+#: them to the human queue instead?
+#:
+#: Measured over three whole videos (2026-08-26): of the corrections that
+#: survived every structural guard, **roughly two thirds still made the
+#: transcript worse** -- "Cut the rest of this up." -> "Cut this the rest of
+#: this up.", "I love my crappies." -> "I love my crappie. My cropes.".  The
+#: guards can catch a pathological *shape* (a rewrite, a boundary splice, a
+#: lowercase import from the wrong witness, a destroyed roster name); they
+#: cannot catch a correction that is merely wrong.
+#:
+#: So the default is propose-only.  The pipeline's value is the far better
+#: Whisper transcript plus a prioritised queue of disputed spans *with the
+#: judge's suggested reading attached* -- not unattended edits.  ``--auto-apply``
+#: restores the old behaviour for anyone who wants it.
+AUTO_APPLY_DEFAULT = False
+
+
+def plan_video(whisper: dict, verdicts: dict, names: Sequence[str] = (),
+               auto_apply: bool = AUTO_APPLY_DEFAULT):
     """Compute the final segment texts, the correction log and the queue rows.
 
     Pure: no database, no files.  Returns
@@ -163,7 +226,7 @@ def plan_video(whisper: dict, verdicts: dict):
     corrections = []
     queue_items = []
     stats = {"applied": 0, "refused": 0, "escalated": 0, "confirmed": 0,
-             "unmatched": 0}
+             "unmatched": 0, "proposed": 0}
     # Every plan is computed against the ORIGINAL draft, so a second ruling
     # touching a segment that has already been edited would splice at stale
     # offsets and shred the text.  One edit per segment per run; the loser
@@ -189,10 +252,11 @@ def plan_video(whisper: dict, verdicts: dict):
         queue_reason = None
         if verdict == "correct":
             plan = plan_correction(sentence.text, ruling.get("correction") or "",
-                                   spans, sentence.start_char)
+                                   spans, sentence.start_char,
+                                   roster_names=names)
             grouped = group_edits(plan.edits)
             clash = sorted(set(grouped) & edited_segments)
-            if plan.applicable and not clash:
+            if plan.applicable and not clash and auto_apply:
                 for segment_index, edits in grouped.items():
                     before = texts[segment_index]
                     after = apply_edits(before, edits)
@@ -210,11 +274,17 @@ def plan_video(whisper: dict, verdicts: dict):
                     })
                 stats["applied"] += 1
                 continue
-            stats["refused"] += 1
-            if clash:
+            if not auto_apply and plan.applicable and not clash:
+                # A clean, applicable correction that we are deliberately not
+                # writing: it goes to the queue as a *proposal*, not a refusal.
+                stats["proposed"] += 1
+                queue_reason = None
+            elif clash:
+                stats["refused"] += 1
                 queue_reason = (f"segment {clash[0]} was already corrected by an "
                                 "earlier ruling in this run")
             else:
+                stats["refused"] += 1
                 queue_reason = ("; ".join(plan.refusals)
                                 or "correction not applicable")
 
@@ -239,10 +309,18 @@ def plan_video(whisper: dict, verdicts: dict):
 
 
 def apply_video(conn, video_id: str, whisper: dict, verdicts: dict,
-                judge_provenance: str, quiet=False):
-    segments, texts, corrections, queue_items, stats = plan_video(whisper, verdicts)
+                judge_provenance: str, quiet=False, redo=False,
+                auto_apply: bool = AUTO_APPLY_DEFAULT):
+    segments, texts, corrections, queue_items, stats = plan_video(
+        whisper, verdicts, roster_names(conn), auto_apply=auto_apply)
 
-    clear_whisper(conn, video_id)
+    if redo:
+        # A fresh transcript describes different sentences, so the previous
+        # run's judge corrections and open queue rows are stale. Human
+        # decisions survive; see clear_pipeline_rows.
+        clear_pipeline_rows(conn, video_id)
+    else:
+        clear_whisper(conn, video_id)
     segment_ids = []
     for seg, text in zip(segments, texts):
         start = float(seg.get("start") or 0.0)
@@ -309,9 +387,9 @@ def apply_video(conn, video_id: str, whisper: dict, verdicts: dict,
                   "queued": queued})
     if not quiet:
         print(f"- {video_id}: {len(segments)} whisper segments, "
-              f"{stats['applied']} corrections applied "
-              f"({len(corrections)} segment edits), {queued} queued, "
-              f"{stats['confirmed']} confirmed, {stats['refused']} refused")
+              f"{stats['applied']} applied, {stats['proposed']} proposed, "
+              f"{queued} queued, {stats['confirmed']} confirmed, "
+              f"{stats['refused']} refused")
     return stats
 
 
@@ -342,6 +420,11 @@ def main(argv=None) -> int:
                         help="skip videos that have not been judged yet")
     parser.add_argument("--redo", action="store_true",
                         help="replace existing whisper segments for these videos")
+    parser.add_argument("--auto-apply", action="store_true",
+                        default=AUTO_APPLY_DEFAULT,
+                        help="write judge corrections straight into the "
+                             "transcript instead of queueing them for review "
+                             "(off by default -- see AUTO_APPLY_DEFAULT)")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args(argv)
@@ -357,7 +440,8 @@ def main(argv=None) -> int:
 
         todo = args.only or list(pairs)
         totals = {"videos": 0, "segments": 0, "applied": 0, "queued": 0,
-                  "refused": 0, "confirmed": 0, "skipped": 0, "unmatched": 0}
+                  "refused": 0, "confirmed": 0, "skipped": 0, "unmatched": 0,
+                  "proposed": 0}
         for video_id in todo:
             if video_id not in pairs:
                 print(f"! {video_id}: no whisper transcript", file=sys.stderr)
@@ -380,10 +464,11 @@ def main(argv=None) -> int:
                         else {"rulings": [], "judge": None})
             provenance = f"judge:{verdicts.get('judge') or 'none'}"
             stats = apply_video(conn, video_id, whisper, verdicts, provenance,
-                                quiet=args.quiet)
+                                quiet=args.quiet, redo=args.redo,
+                                auto_apply=args.auto_apply)
             totals["videos"] += 1
             for key in ("segments", "applied", "queued", "refused",
-                        "confirmed", "unmatched"):
+                        "confirmed", "unmatched", "proposed"):
                 totals[key] += stats.get(key, 0)
             if args.limit and totals["videos"] >= args.limit:
                 break
@@ -398,7 +483,8 @@ def main(argv=None) -> int:
     label = "DRY RUN -- nothing written" if args.dry_run else "done"
     print(f"\n{label}: {totals['videos']} videos, {totals['segments']} whisper "
           f"segments, {totals['applied']} corrections applied, "
-          f"{totals['queued']} escalations queued, {totals['refused']} refused, "
+          f"{totals['proposed']} proposed for review, "
+          f"{totals['queued']} queued, {totals['refused']} refused, "
           f"{totals['confirmed']} confirmed, {totals['skipped']} skipped")
     return 0
 

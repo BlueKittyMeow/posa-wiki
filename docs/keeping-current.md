@@ -319,23 +319,78 @@ Where things land:
 Both scratch WAVs reuse **one filename each** and are overwritten per video, so
 nothing is ever deleted and the working set never grows.
 
-### What a full run costs (measured, 2026-08-25)
+### Punctuation decay, and why the transcription is chunked
 
-| Stage | Rate | 112 archived videos (~200 h of audio) |
+Whisper's punctuation is the single most valuable thing the `initial_prompt`
+buys (ASR_SHOWDOWN §4: 422 sentence terminators against 19 without it) — and
+on long videos it **stops working part-way through and never recovers**.
+
+Measured on `-FGTWbshKoE` (2 hours), terminators per 100 words in 5-minute
+buckets:
+
+| config | overall | per-bucket shape | longest unterminated run | wall |
+|---|---|---|---|---|
+| full prompt, `condition_on_previous_text=True` (naive) | 6.9 | fine for 45 min, then **fifteen consecutive buckets at ~0** | **12 120 chars** | 443 s |
+| full prompt, `condition_on_previous_text=False` | 4.5 | uniformly poor from the start | 6 062 chars | 225 s |
+| full prompt, 480 s chunks, conditioning on | 10.6 | recovers repeatedly instead of flatlining | 6 522 chars | 369 s |
+| full prompt, 120 s chunks, conditioning on | 11.5 | steady | 2 787 chars | 290 s |
+| full prompt, **180 s chunks**, conditioning on | **12.9** | **steady — no bucket below 7.0 across two hours** | **2 041 chars** | 311 s |
+
+On the 32-minute video the ordering differs (no chunking 16.6, 480 s 15.4,
+240 s 12.9) because that video never enters the decay regime. The long video
+is the one that decides it: 180 s costs a little on short material and
+prevents the collapse on long material. It is also **~30 % faster** than one
+continuous pass (realtime factor 23.1 vs 16.2) — short windows avoid Whisper's
+long-context decoding and its temperature fallbacks.
+
+Two things this overturns:
+
+1. **Prompt length is not the cause.** Swapping the entity-seeded roster
+   prompt for the short ASR_SHOWDOWN vocabulary line made things dramatically
+   *worse* (1.6 terminators per 100 words, one 10 760-character run). The long
+   prompt is load-bearing.
+2. **`condition_on_previous_text=False` is not the cure.** It is the standard
+   advice for long-form Whisper drift, and it does stop the collapse — by
+   throwing the punctuation away everywhere instead. The `initial_prompt` only
+   conditions the *first* window; its formatting effect reaches the rest of the
+   video precisely *through* conditioning. Turn conditioning off and the prompt
+   stops mattering at all (the short-vocab and full-prompt runs become
+   identical to two decimal places).
+
+So the fix is to **re-anchor**: decode the audio once, cut it into fixed
+chunks, and transcribe each chunk with the *same real* `initial_prompt` and
+conditioning enabled *within* the chunk. Drift cannot accumulate past a chunk
+boundary, and every chunk starts from properly punctuated prose again.
+`chunk_seconds` is a job field (`whisper_worker.py`); the driver sets
+`WHISPER_CHUNK_SECONDS`.
+
+### What a full run costs (measured over 5.4 h of audio, 2026-08-26)
+
+**The honest unit is seconds per audio-hour, not per packet or per video.**
+
+| Stage | Rate | ~200 h of audio |
 |---|---|---|
-| Whisper | 17–27× realtime, model held resident | **~10 GPU-hours** |
-| Judge | ~27 s per packet; a 2-hour video produces ~150 packets | **~100 GPU-hours** with `mistral-small3.2:24b` |
+| Whisper (180 s chunks) | realtime factor 19–50, mean **31.9×** | **~6 GPU-hours** |
+| Judge, `mistral-small3.2:24b` | **1 017 judge-s per audio-hour** | **~56 GPU-hours** |
+| Judge, `qwen3.5:35b-a3b` | 35 % of the wall time (MoE) | **~20 GPU-hours** |
 
-The judge, not the transcription, is the expensive half — the tournament
-measured per-*passage* cost and the per-*video* number is the surprise here.
-Two levers, in order of preference:
+Tuning took the judge from ~1 580 s/audio-hour (≈88 GPU-hours) to 1 017
+(≈56), a **36 % cut**, entirely from raising the selection bar. Chunking made
+transcription ~35 % faster as a side effect.
 
-1. `--model qwen3.5:35b-a3b` — the tournament's understudy, near-identical
-   fix rate at **35 % of the wall time** (MoE). ~35 GPU-hours for the corpus.
-2. Raise the selection bar. 60–66 % of sentences currently carry a flag or a
-   low-confidence word, which is far more than the tournament's hard-case
-   passages implied. `LOW_CONFIDENCE_THRESHOLD` in `scripts/pipeline/flags.py`
-   (0.55) and the flag filter are the two knobs.
+A negative result worth keeping: **consolidating packets saved almost
+nothing.** Regrouping cut 269 packets to 102, which looked like a 2.6×
+saving, but per-packet time rose from 27 s to 54 s — the judge's cost tracks
+the text it reasons over, not the number of calls.
+
+Remaining levers, in order:
+
+1. `--model qwen3.5:35b-a3b` — the tournament's runner-up, near-identical
+   fix rate at a third of the wall time. This is the obvious pick for a
+   corpus run; `mistral-small3.2:24b` is the pick for accuracy on a small
+   batch.
+2. Tighten the flag filter further (`is_substantive` in
+   `scripts/pipeline/flags.py`). 36–49 % of sentences still reach the judge.
 
 Run the two stages **one at a time** — the GPU holds one workload at a time on
 this box, and `mistral-small3.2:24b` alone is 13.9 GB of the 16 GB card.
@@ -368,18 +423,50 @@ Everything is ledger-driven and idempotent, so **just run the command again**.
 
 ### What the judge is allowed to do
 
-* Only sentences carrying a **disagreement flag or a low-confidence Whisper
-  word** are put up for judgement. Unflagged sentences are read-only context.
+* Only sentences carrying a **substantive witness disagreement** are put up for
+  judgement — a place where Whisper and the YouTube ASR heard genuinely
+  different words. Unflagged sentences are read-only context. Three kinds of
+  disagreement do **not** count (`flags.is_substantive`):
+  * **register variants** — `"going to"` vs `"gonna"`. On a two-hour video
+    this was the single commonest pattern, 147 of 831 flags. The speaker says
+    "gonna"; that is not an error to adjudicate.
+  * **long one-sided gaps** — one witness has 3+ words the other has none for.
+    That is alignment drift between two independently-segmented transcripts,
+    not a dropped phrase. Short gaps are kept, because the tournament's
+    strongest single result (recovering "Say hi" from the other witnesses)
+    lives exactly there.
+  * a **low-confidence Whisper word on its own**. Low confidence marks
+    disfluency far more often than error. Such words still ride into the
+    packet as supporting evidence — they just no longer summon the judge.
 * A `correct` verdict with no `correction` is invalid: one repair re-ask, then
   the ruling is demoted to `escalate`.
+* **Corrections are proposed, not written.** `apply_verdicts.py` defaults to
+  propose-only: every `correct` verdict goes to the review queue with the
+  judge's suggested reading attached, and the transcript is left as Whisper
+  wrote it. `--auto-apply` restores unattended writes. Why: over three whole
+  videos, of the corrections that survived every structural guard, **most
+  still made the transcript worse** — `"Cut the rest of this up."` →
+  `"Cut this the rest of this up."`, `"I love my crappies."` → `"I love my
+  crappie. My cropes."` The guards catch a pathological *shape*; they cannot
+  catch an answer that is merely wrong.
+* The prompt carries a **register guard** (`judge_batch.CONTRACTION_GUARD`) on
+  top of the style card: never expand a contraction, never correct casual
+  grammar, never swap in a more formal synonym. *"It would read better as X"
+  is not a correction; it is damage.*
 * A correction is applied as a **minimal in-segment edit**, never a sentence
   rewrite. The applier refuses — and escalates instead — when a change:
   straddles two segments; changes nothing; rewrites more than 60 % of the
   sentence (or leaves no word standing, in a short one); **adds or drops words
   at either end of the sentence** (that is the judge dragging in the next
-  utterance, not repairing this one); or lands on a segment another ruling in
-  the same run has already edited. Roughly **two thirds of `correct` verdicts
-  are refused this way** in practice, and that is the design working.
+  utterance, not repairing this one); **formalises casual speech**
+  (`"wanna"` → `"want to"`); **drops capitalisation the draft had** (the
+  YouTube witness is entirely lowercase, so `"Layla's"` → `"leila's"` is a
+  splice from the wrong witness); **rewrites a canonical roster name into
+  something absent from the roster**; or lands on a segment another ruling in
+  the same run has already edited. Refusals are **all-or-nothing per
+  correction** — applying the half of a sentence that passed yields text
+  nobody proposed. Roughly **two thirds of `correct` verdicts are refused this
+  way**, and that is the design working.
 * Every applied edit is logged in `transcript_corrections` with the pre-edit
   text and `judge:<model>` provenance. Human approvals log
   `human:web-review`.

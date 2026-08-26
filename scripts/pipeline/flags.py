@@ -40,6 +40,91 @@ DEFAULT_WINDOW_SECONDS = 60.0
 
 _WORD_RE = re.compile(r"[A-Za-z0-9']+")
 
+#: Colloquial forms and the standard-English renderings of them.  Two ASR
+#: engines disagreeing across this table have not heard different words; they
+#: have made different transcription-style choices, and on this channel the
+#: colloquial one is right.  Used twice: to stop a disagreement here summoning
+#: the judge (:func:`is_substantive`), and to stop the judge's "correction"
+#: being written if it asks for one anyway
+#: (``scripts.pipeline.corrections.is_register_smoothing``).
+CONTRACTION_EXPANSIONS = {
+    "wanna": {"want to", "want a"},
+    "gonna": {"going to"},
+    "gotta": {"got to", "have to"},
+    "kinda": {"kind of"},
+    "sorta": {"sort of"},
+    "lotta": {"lot of"},
+    "outta": {"out of"},
+    "gimme": {"give me"},
+    "lemme": {"let me"},
+    "dunno": {"do not know", "don't know"},
+    "cuz": {"because"},
+    "cause": {"because"},
+    "em": {"them"},
+    "ya": {"you"},
+    "yeah": {"yes"},
+    "yep": {"yes"},
+    "nah": {"no"},
+    "nope": {"no"},
+    "ain't": {"is not", "isn't", "are not", "aren't", "am not"},
+    "til": {"until"},
+    "'til": {"until"},
+}
+
+#: A pure insertion or deletion longer than this is witness *misalignment*,
+#: not a dropped phrase.  Measured on a 2-hour video: 174 of 831 flags were
+#: one witness having 3+ words the other had nothing for, and the samples are
+#: unmistakable -- e.g. YouTube carrying "was so long it was getting tangled
+#: at every single tree got here" against nothing in the draft.  Short gaps
+#: are kept, because the tournament's single strongest result (recovering
+#: "Say hi" from witnesses 2+3 in the dog-chaos passage) lives exactly there.
+MAX_GAP_WORDS = 2
+
+
+def is_register_variant(left: str, right: str) -> bool:
+    """True when two readings differ only in colloquial vs standard form."""
+    left = re.sub(r"\s+", " ", (left or "").strip().lower())
+    right = re.sub(r"\s+", " ", (right or "").strip().lower())
+    if not left or not right or left == right:
+        return left == right and bool(left)
+    return (right in CONTRACTION_EXPANSIONS.get(left, ())
+            or left in CONTRACTION_EXPANSIONS.get(right, ()))
+
+
+def is_substantive(flag: dict) -> bool:
+    """Is this disagreement worth waking the judge for?
+
+    Substantive means the two witnesses heard the *same stretch of audio* and
+    rendered it as different words.  Three kinds of flag are not that:
+
+    * **Register variants** -- ``"going to"`` vs ``"gonna"``.  147 of 831 flags
+      on the measured video, and by far the commonest single pattern.  The
+      channel's speaker says "gonna"; that is not an error to adjudicate.
+    * **Long one-sided gaps** -- one witness has 3+ words the other has none
+      for.  That is alignment drift between two independently-segmented
+      transcripts, not a dropped phrase.
+    * **Empty flags** -- nothing on either side.
+    """
+    draft = "" if flag.get("span") in (None, "(nothing)") else flag["span"].strip()
+    alternatives = [v for v in (flag.get("alternatives") or {}).values()
+                    if v and v != "(nothing)"]
+    if not draft and not alternatives:
+        return False
+    for alternative in alternatives or [""]:
+        if draft and alternative:
+            if is_register_variant(draft, alternative):
+                continue          # this witness adds nothing; try the next
+            return True
+        else:                     # one-sided: a gap
+            words = len((draft or alternative).split())
+            if words <= MAX_GAP_WORDS:
+                return True
+    return False
+
+
+def substantive_flags(flags: Sequence[dict]) -> List[dict]:
+    return [f for f in flags if is_substantive(f)]
+
 
 def normalise_word(word: str) -> str:
     """Lowercase, expand the two contractions the showdown expanded, strip."""
@@ -207,23 +292,36 @@ def low_confidence_words(segments: Sequence[dict],
 
 def select_sentences(sentences: Sequence["object"],
                      flags: Sequence[dict],
-                     lows: Sequence[dict]) -> List[int]:
+                     lows: Sequence[dict],
+                     require_flag: bool = True) -> List[int]:
     """Indices of the sentences that must go to the judge.
 
-    A sentence is selected when it contains a flagged span (by character
-    overlap) or a low-confidence word (by timestamp).  Everything else is
-    context: the tournament showed that handing a judge unflagged text is how
-    you get false corrections (`bare` packets: WER +0.176), so unflagged
+    A sentence is selected when it contains a **substantive witness
+    disagreement flag** — a place where Whisper and the YouTube ASR actually
+    heard different words, after register variants and long one-sided
+    alignment gaps are discounted (:func:`is_substantive`).  Everything else
+    is context: the tournament showed that handing a judge unflagged text is
+    how you get false corrections (`bare` packets: WER +0.176), so unflagged
     sentences are never put up for judgement.
+
+    ``require_flag=False`` restores the older, looser bar where a
+    low-confidence Whisper word was enough on its own.  That bar selected
+    60–66 % of every video's sentences and put the corpus cost at ~100 GPU
+    hours; low confidence turns out to mark *disfluency* far more often than
+    error, which is the one thing the tournament proved is reliably **not**
+    an error.  Low-confidence words still ride into the packet as supporting
+    evidence for a sentence a flag already selected — they just no longer
+    summon the judge by themselves.
 
     ``sentences`` are :class:`scripts.pipeline.sentences.Sentence` objects (or
     anything with ``start_char``/``end_char``/``start``/``end``).
     """
+    triggers = substantive_flags(flags)
     selected = set()
     for index, sentence in enumerate(sentences):
         s_start = getattr(sentence, "start_char")
         s_end = getattr(sentence, "end_char")
-        for flag in flags:
+        for flag in triggers:
             f_start = flag.get("start_char")
             f_end = flag.get("end_char", f_start)
             if f_start is None:
@@ -233,6 +331,8 @@ def select_sentences(sentences: Sequence["object"],
                 selected.add(index)
                 break
         else:
+            if require_flag:
+                continue
             t0 = getattr(sentence, "start", None)
             t1 = getattr(sentence, "end", None)
             if t0 is None or t1 is None:
@@ -261,17 +361,31 @@ def lows_for_sentence(sentence, lows: Sequence[dict]) -> List[dict]:
     return [low for low in lows if sentence.start <= low["t"] <= sentence.end]
 
 
-def group_runs(indices: Sequence[int], max_gap: int = 3,
-               max_size: int = 8) -> List[List[int]]:
+def group_runs(indices: Sequence[int], max_gap: int = 8,
+               max_size: int = 12) -> List[List[int]]:
     """Group selected sentence indices into packet-sized runs.
 
-    Consecutive (or near-consecutive) flagged sentences travel together so the
-    judge sees them in their own context; ``max_size`` keeps a packet inside
-    the 8 192-token context the tournament ran with.
+    Nearby flagged sentences travel together so the judge sees them in their
+    own context, and — this is the cost lever — so that one model call covers
+    several of them.
 
-    The defaults are tuned against the tournament video: ``gap=1, size=6``
-    produced 49 packets for one 32-minute video (~20 GPU-minutes of judging),
-    ``gap=3, size=8`` produces 19 for the same coverage.
+    A caution learned by measuring rather than reasoning: **packet count is
+    not the cost.**  Consolidating 269 packets into 102 looked like a 2.6x
+    saving on paper and delivered nothing like it — judge time scales with the
+    *content* reasoned over, not with the number of calls, so bigger packets
+    simply take proportionally longer (27 s each at 3/8, 54 s each at 8/12).
+    The honest unit is **judge-seconds per audio-hour**, and the real saving
+    came from raising the selection bar, not from regrouping.
+
+    Grouping still matters for a different reason: fewer calls means the fixed
+    ~8 k-character preamble (style card + roster + register guard) is paid
+    fewer times, and it keeps related flags in front of the judge together.
+
+    8/12 is the largest grouping whose worst-case prompt (31 k characters)
+    still fits the judge's context with the answer budget intact; anything
+    bigger needs ``num_ctx`` raised.  :func:`scripts.pipeline.judge_batch.prepare`
+    splits any packet that overruns anyway, so this is a target rather than a
+    guarantee.
     """
     groups: List[List[int]] = []
     current: List[int] = []

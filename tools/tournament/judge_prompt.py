@@ -61,7 +61,18 @@ GENERIC_CAUTION = """CAUTION: changing text that was already correct into someth
 plausible is worse than useless. When unsure, escalate."""
 
 
-def build_prompt(packet, style=True, lex=True, flags=True):
+def build_prompt(packet, style=True, lex=True, flags=True, extra_caution=None):
+    """Assemble the judge prompt.
+
+    ``extra_caution`` is appended verbatim after the task description. It
+    defaults to None so every tournament cell reproduces byte-for-byte; the
+    production pipeline passes a contraction/register guard through it (see
+    ``scripts/pipeline/judge_batch.CONTRACTION_GUARD``).
+    """
+    return _build_prompt(packet, style, lex, flags, extra_caution)
+
+
+def _build_prompt(packet, style=True, lex=True, flags=True, extra_caution=None):
     p = packet
     parts = [ROLE, ""]
 
@@ -126,6 +137,10 @@ def build_prompt(packet, style=True, lex=True, flags=True):
         parts.append(TASK_FLAGGED)
     else:
         parts.append(TASK_UNFLAGGED)
+
+    if extra_caution:
+        parts.append("")
+        parts.append(extra_caution)
 
     parts.append("")
     parts.append(OUTPUT_SPEC)

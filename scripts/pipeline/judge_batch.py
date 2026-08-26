@@ -66,7 +66,36 @@ JUDGE_MODEL = os.environ.get("POSA_JUDGE_MODEL", "mistral-small3.2:24b")
 JUDGE_ENDPOINT = os.environ.get("POSA_JUDGE_ENDPOINT", "http://127.0.0.1:11435")
 JUDGE_ABLATION = "full"
 CELL_TIMEOUT = 1200
+
+#: Hard ceiling on a packet's prompt.  num_ctx is 12288 tokens and the answer
+#: budget is 1600, leaving ~10 700 tokens of input; at ~3.5 characters per
+#: token that is ~37 k characters, so 32 k keeps a safety margin.  A packet
+#: over this is split rather than truncated.
+MAX_PROMPT_CHARS = 32000
 SOURCE_YOUTUBE_ASR = "youtube-asr-vtt"
+
+#: Production-only addendum to the tournament prompt.  The first live run
+#: applied "wanna cut" -> "want to cut" and "Did you sleep good?" -> "Do you
+#: sleep good?": the judge tidying casual speech into standard English.  That
+#: is the `gutenberg-12b` smoothing failure at small scale, and it is
+#: invisible to the tournament's metrics because it never touches a hard span.
+CONTRACTION_GUARD = """REGISTER GUARD — this transcript is a record of how someone actually
+spoke, not a tidy-up of it:
+
+- NEVER expand a contraction or a colloquial form. "wanna" stays "wanna",
+  "gonna" stays "gonna", "gimme" stays "gimme", "'em" stays "'em",
+  "ain't" stays "ain't".
+- NEVER correct casual or non-standard grammar. "Did you sleep good?" is
+  what he said; do not make it "well". Dropped auxiliaries, doubled
+  subjects, sentence fragments and false starts are all correct as they
+  stand.
+- NEVER swap a word for a more formal synonym, and never re-punctuate for
+  elegance.
+- Repetition, trailing off, and talking to a dog in baby-talk are normal
+  here and are never evidence of a transcription error.
+
+Only rule that a span is wrong when you believe a DIFFERENT WORD was spoken.
+"It would read better as X" is not a correction; it is damage."""
 
 REPAIR = """Your previous answer used the verdict "correct" for one or more spans
 without supplying a "correction". A "correct" verdict with no correction states
@@ -304,12 +333,31 @@ def prepare(video_id: str, whisper: dict, youtube_segments: list,
     lows = flagmod.low_confidence_words(segments)
     selected = flagmod.select_sentences(sentences, all_flags, lows)
     groups = flagmod.group_runs(selected)
-    built = [
-        packetmod.build_packet(video_meta, roster, sentences, group, all_flags,
-                               lows, youtube_segments,
-                               packet_id=f"{video_id}__{i:04d}")
-        for i, group in enumerate(groups)
-    ]
+
+    def make(group, packet_id):
+        return packetmod.build_packet(video_meta, roster, sentences, group,
+                                      all_flags, lows, youtube_segments,
+                                      packet_id=packet_id)
+
+    def fits(packet):
+        return len(build_prompt(packet, extra_caution=CONTRACTION_GUARD,
+                                **ABLATIONS[JUDGE_ABLATION])) <= MAX_PROMPT_CHARS
+
+    # Grouping targets a packet size; content decides the actual prompt. A
+    # packet that overruns the context would be silently truncated by ollama --
+    # the flags at the end simply would not be read -- so oversized groups are
+    # halved until they fit.
+    built, queue, counter = [], list(groups), 0
+    while queue:
+        group = queue.pop(0)
+        packet = make(group, f"{video_id}__{counter:04d}")
+        if len(group) > 1 and not fits(packet):
+            middle = len(group) // 2
+            queue.insert(0, group[middle:])
+            queue.insert(0, group[:middle])
+            continue
+        built.append(packet)
+        counter += 1
     return {
         "draft": draft, "spans": spans, "sentences": sentences,
         "flags": all_flags, "lows": lows, "selected": selected,
@@ -344,7 +392,8 @@ def judge_video(video_id: str, model: str = JUDGE_MODEL,
              "confirm": 0, "correct": 0, "escalate": 0, "judge_seconds": 0.0}
 
     for packet in built:
-        prompt = build_prompt(packet, **ABLATIONS[JUDGE_ABLATION])
+        prompt = build_prompt(packet, extra_caution=CONTRACTION_GUARD,
+                              **ABLATIONS[JUDGE_ABLATION])
         t0 = time.time()
         raw = generate(prompt)
         rulings, note = parse_rulings(raw)

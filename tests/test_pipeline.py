@@ -183,8 +183,50 @@ def test_unflagged_sentences_are_context_only():
     assert selected == [1]
 
 
+def test_low_confidence_alone_no_longer_summons_the_judge():
+    """The raised bar: a witness disagreement is required, not mere doubt.
+
+    Low confidence marks disfluency far more often than error, and the loose
+    bar selected 60-66 % of every video (~100 GPU-hours for the corpus).
+    """
+    segments = [
+        {"start": 0.0, "end": 2.0, "text": "The weather is beautiful.",
+         "words": [_word(" The", 0.0), _word(" weather", 0.4, 0.20),
+                   _word(" is", 0.9), _word(" beautiful", 1.2, 0.18)]},
+        {"start": 2.0, "end": 4.0, "text": "Say hi, Funk.",
+         "words": [_word(" Say", 2.0), _word(" hi", 2.4), _word(" Funk", 2.8)]},
+    ]
+    youtube = [{"start_seconds": 0.0, "duration_seconds": 4.0,
+                "text": "the weather is beautiful say hi punk"}]
+    draft, spans, sentences = sentences_from_segments(segments)
+    found = packetmod.compute_flags(draft, spans, youtube)
+    lows = flagmod.low_confidence_words(segments)
+    assert len(lows) == 2                      # sentence 0 is full of doubt ...
+    assert flagmod.select_sentences(sentences, found, lows) == [1]
+    # ... and the old bar would have taken it
+    assert flagmod.select_sentences(sentences, found, lows,
+                                    require_flag=False) == [0, 1]
+
+
+def test_low_confidence_still_rides_into_the_packet(whisper_payload,
+                                                    youtube_segments,
+                                                    video_meta, roster):
+    """Demoted as a trigger, kept as evidence."""
+    draft, spans, sentences = sentences_from_segments(whisper_payload["segments"])
+    found = packetmod.compute_flags(draft, spans, youtube_segments)
+    lows = flagmod.low_confidence_words(whisper_payload["segments"])
+    packet = packetmod.build_packet(video_meta, roster, sentences, [2], found,
+                                    lows, youtube_segments, "vid__0000")
+    assert packet["whisper_low_confidence"]
+
+
 def test_group_runs_caps_packet_size():
-    assert flagmod.group_runs([0, 1, 2, 10, 11]) == [[0, 1, 2], [10, 11]]
+    # a gap wider than max_gap starts a new packet ...
+    assert flagmod.group_runs([0, 1, 2, 10, 11], max_gap=3) == [[0, 1, 2],
+                                                               [10, 11]]
+    # ... but the production default merges across it, because packets (not
+    # flagged sentences) are what a run costs
+    assert flagmod.group_runs([0, 1, 2, 10, 11]) == [[0, 1, 2, 10, 11]]
     assert flagmod.group_runs(list(range(8)), max_size=3) == [
         [0, 1, 2], [3, 4, 5], [6, 7]]
 
@@ -385,11 +427,97 @@ def test_second_ruling_on_one_segment_is_queued_not_applied():
          "reasoning": "domain term", "witness_disagreement": ""},
     ]}
     _segments, texts, corrections, queue_items, stats = \
-        apply_verdicts.plan_video(whisper, verdicts)
+        apply_verdicts.plan_video(whisper, verdicts, auto_apply=True)
     assert texts[0] == "Captain Teeny Trout caught seven crappy."
     assert len(corrections) == 1
     assert stats["applied"] == 1 and stats["refused"] == 1
     assert "already corrected" in queue_items[0]["judge_reasoning"]
+
+
+def test_contraction_expansion_is_refused():
+    """Live run: "wanna cut" was written as "want to cut"."""
+    segments = [{"start": 0.0, "end": 3.0,
+                 "text": "See, you wanna cut on the bottom side."}]
+    _draft, spans, sentences = sentences_from_segments(segments)
+    plan = plan_correction(sentences[0].text,
+                           "See, you want to cut on the bottom side.",
+                           spans, sentences[0].start_char)
+    assert not plan.applicable
+    assert "register smoothing" in plan.refusals[0]
+
+
+@pytest.mark.parametrize("before,after", [
+    ("gonna", "going to"), ("gotta", "have to"), ("kinda", "kind of"),
+    ("gimme", "give me"), ("em", "them"), ("yeah", "yes"),
+])
+def test_register_smoothing_table(before, after):
+    from scripts.pipeline.corrections import is_register_smoothing
+    assert is_register_smoothing(before, after)
+    assert not is_register_smoothing(before, "something else entirely")
+
+
+def test_lowercase_splice_from_the_youtube_witness_is_refused():
+    """Live run: "Layla's sleeping" came back as "leila's sleeping"."""
+    segments = [{"start": 0.0, "end": 3.0,
+                 "text": "Seeing as how I didn't get much sleep."}]
+    _draft, spans, sentences = sentences_from_segments(segments)
+    plan = plan_correction(sentences[0].text,
+                           "see is how I didn't get much sleep.",
+                           spans, sentences[0].start_char)
+    assert not plan.applicable
+    assert "casing refused" in plan.refusals[0]
+
+
+def test_correction_that_destroys_a_roster_name_is_refused():
+    segments = [{"start": 0.0, "end": 3.0,
+                 "text": "Layla's sleeping under Lucas's cot over there."}]
+    _draft, spans, sentences = sentences_from_segments(segments)
+    plan = plan_correction(sentences[0].text,
+                           "Leila's sleeping under Lucas's cod over there.",
+                           spans, sentences[0].start_char,
+                           roster_names=["Layla", "Lucas", "Monty", "Rueger"])
+    assert not plan.applicable
+    assert any("entity refused" in r for r in plan.refusals)
+
+
+def test_roster_guard_still_allows_recovering_a_name():
+    """The lexicon must keep working in the direction it was built for."""
+    segments = [{"start": 0.0, "end": 3.0, "text": "Rouger is not here."}]
+    _draft, spans, sentences = sentences_from_segments(segments)
+    plan = plan_correction(sentences[0].text, "Rueger is not here.", spans,
+                           sentences[0].start_char,
+                           roster_names=["Rueger", "Layla"])
+    assert plan.applicable
+    assert apply_edits(segments[0]["text"], plan.edits) == "Rueger is not here."
+
+
+def test_a_real_word_swap_is_not_register_smoothing():
+    from scripts.pipeline.corrections import is_register_smoothing
+    assert not is_register_smoothing("gal", "gill")
+    assert not is_register_smoothing("Rouger", "Rueger")
+
+
+def test_judge_prompt_carries_the_register_guard(whisper_payload,
+                                                 youtube_segments,
+                                                 video_meta, roster):
+    sys.path.insert(0, str(REPO_ROOT / "tools" / "tournament"))
+    from judge_prompt import ABLATIONS, build_prompt
+
+    from scripts.pipeline.judge_batch import CONTRACTION_GUARD
+
+    draft, spans, sentences = sentences_from_segments(whisper_payload["segments"])
+    found = packetmod.compute_flags(draft, spans, youtube_segments)
+    lows = flagmod.low_confidence_words(whisper_payload["segments"])
+    packet = packetmod.build_packet(video_meta, roster, sentences, [2], found,
+                                    lows, youtube_segments, "vid__0000")
+    guarded = build_prompt(packet, extra_caution=CONTRACTION_GUARD,
+                           **ABLATIONS["full"])
+    assert "REGISTER GUARD" in guarded
+    assert '"wanna" stays "wanna"' in guarded
+    # the guard sits before the output spec, so the JSON instruction stays last
+    assert guarded.index("REGISTER GUARD") < guarded.index("OUTPUT FORMAT")
+    # and the tournament prompt is unchanged without it
+    assert "REGISTER GUARD" not in build_prompt(packet, **ABLATIONS["full"])
 
 
 def test_group_edits_by_segment():
@@ -437,6 +565,44 @@ def test_attach_ruling_by_span_and_by_correction(whisper_payload):
     assert judge_batch.attach_ruling(
         {"span": "zzz", "correction": "completely unrelated words here"},
         sentences) is None
+
+
+def test_oversized_packets_are_split_not_truncated(monkeypatch, video_meta,
+                                                   roster):
+    """A packet over the context ceiling is halved until it fits.
+
+    ollama truncates silently, so an overrun would drop the flags at the end
+    of the prompt without any error to notice.
+    """
+    judge_batch = _judge_module()
+    # 40 flagged sentences, each long, all adjacent -> one huge group
+    segments, youtube = [], []
+    for i in range(40):
+        start = i * 2.0
+        text = ("We are going to talk about the %s crappie and the bluegill "
+                "and the whole business of it now." % ("big" if i % 2 else "small"))
+        segments.append({"start": start, "end": start + 2.0, "text": text,
+                         "words": []})
+        youtube.append({"start_seconds": start, "duration_seconds": 2.0,
+                        "text": text.lower().replace("crappie", "crappy")})
+    whisper = {"segments": segments}
+
+    prepared = judge_batch.prepare("vidBIG", whisper, youtube, video_meta, roster)
+    assert prepared["packets"], "expected at least one packet"
+    sizes = [len(build_guarded_prompt(p)) for p in prepared["packets"]]
+    assert max(sizes) <= judge_batch.MAX_PROMPT_CHARS
+    # and nothing was dropped: every selected sentence is still covered
+    covered = {i for p in prepared["packets"] for i in p["_sentence_indices"]}
+    assert covered == set(prepared["selected"])
+
+
+def build_guarded_prompt(packet):
+    sys.path.insert(0, str(REPO_ROOT / "tools" / "tournament"))
+    from judge_prompt import ABLATIONS, build_prompt
+
+    from scripts.pipeline.judge_batch import CONTRACTION_GUARD
+    return build_prompt(packet, extra_caution=CONTRACTION_GUARD,
+                        **ABLATIONS["full"])
 
 
 def test_judge_video_end_to_end_with_a_mocked_model(
@@ -560,16 +726,42 @@ def test_plan_video_splits_corrections_from_escalations(whisper_payload):
 
     verdicts = _verdicts_for(whisper_payload)
     segments, texts, corrections, queue_items, stats = \
-        apply_verdicts.plan_video(whisper_payload, verdicts)
+        apply_verdicts.plan_video(whisper_payload, verdicts, auto_apply=True)
     assert len(segments) == 3
     assert texts[2] == "Captain Teeny Trout caught seven of them."
     assert texts[0] == "We are targeting some crappie today."   # untouched
     assert stats == {"applied": 1, "refused": 0, "escalated": 1,
-                     "confirmed": 1, "unmatched": 0}
+                     "confirmed": 1, "unmatched": 0, "proposed": 0}
     assert len(corrections) == 1
     assert corrections[0]["before_text"].startswith("Captain Tea Truck")
     assert len(queue_items) == 1
     assert queue_items[0]["draft_sentence"].startswith("We are targeting")
+
+
+def test_propose_only_is_the_default(whisper_payload):
+    """Corrections are candidates, not writes, unless --auto-apply is passed.
+
+    Measured over three whole videos: of the corrections that survived every
+    structural guard, most still made the transcript worse. The guards catch a
+    pathological shape, not a wrong answer.
+    """
+    from scripts.pipeline import apply_verdicts
+
+    assert apply_verdicts.AUTO_APPLY_DEFAULT is False
+    verdicts = _verdicts_for(whisper_payload)
+    _segments, texts, corrections, queue_items, stats = \
+        apply_verdicts.plan_video(whisper_payload, verdicts)
+    # the draft is untouched ...
+    assert texts[2] == "Captain Tea Truck caught seven of them."
+    assert corrections == []
+    assert stats["applied"] == 0 and stats["proposed"] == 1
+    # ... and the judge's reading reaches the human with the proposal attached
+    proposed = [q for q in queue_items if q["proposed_correction"]]
+    assert proposed[0]["proposed_correction"] == \
+        "Captain Teeny Trout caught seven of them."
+    # a clean proposal is not reported as a refusal
+    assert stats["refused"] == 0
+    assert "applier:" not in (proposed[0]["judge_reasoning"] or "")
 
 
 def test_refused_correction_becomes_an_escalation(whisper_payload):
@@ -579,7 +771,7 @@ def test_refused_correction_becomes_an_escalation(whisper_payload):
     verdicts["rulings"][0]["correction"] = (
         "The captain, a fine gentleman indeed, did land a full seven fish.")
     _segments, texts, corrections, queue_items, stats = \
-        apply_verdicts.plan_video(whisper_payload, verdicts)
+        apply_verdicts.plan_video(whisper_payload, verdicts, auto_apply=True)
     assert texts[2] == "Captain Tea Truck caught seven of them."   # untouched
     assert corrections == []
     assert stats["refused"] == 1
@@ -638,7 +830,7 @@ def test_apply_video_writes_segments_corrections_and_queue(pipeline_db,
     verdicts = _verdicts_for(whisper_payload)
     stats = apply_verdicts.apply_video(conn, "vidTEST0001", whisper_payload,
                                        verdicts, "judge:mistral-small3.2:24b",
-                                       quiet=True)
+                                       quiet=True, auto_apply=True)
     conn.commit()
 
     whisper_rows = conn.execute(
@@ -679,13 +871,56 @@ def test_apply_video_is_idempotent(pipeline_db, whisper_payload):
     verdicts = _verdicts_for(whisper_payload)
     for _ in range(2):
         apply_verdicts.apply_video(conn, "vidTEST0001", whisper_payload,
-                                   verdicts, "judge:test", quiet=True)
+                                   verdicts, "judge:test", quiet=True, auto_apply=True)
     conn.commit()
     assert conn.execute(
         "SELECT COUNT(*) FROM transcript_segments "
         "WHERE source = 'whisper-large-v3'").fetchone()[0] == 3
     assert conn.execute(
         "SELECT COUNT(*) FROM transcript_review_queue").fetchone()[0] == 1
+
+
+def test_redo_clears_stale_rows_but_keeps_human_decisions(pipeline_db,
+                                                          whisper_payload):
+    """A re-run must not leave the previous run's rows behind — or eat Lara's."""
+    from scripts.pipeline import apply_verdicts
+
+    conn = pipeline_db
+    apply_verdicts.apply_video(conn, "vidTEST0001", whisper_payload,
+                               _verdicts_for(whisper_payload), "judge:test",
+                               quiet=True, auto_apply=True)
+    conn.commit()
+    # Lara decides one of them, and her decision writes a correction
+    queue = review_service.get_queue("transcripts")
+    decided = queue.items(conn)[0]
+    queue.reject(conn, {"item_id": decided.item_id})
+    conn.execute(
+        "INSERT INTO transcript_corrections (video_id, before_text, after_text, "
+        "provenance, applied_at) VALUES ('vidTEST0001', 'a', 'b', "
+        "'human:web-review', '2026-08-26')")
+    conn.commit()
+
+    apply_verdicts.apply_video(conn, "vidTEST0001", whisper_payload,
+                               _verdicts_for(whisper_payload), "judge:test",
+                               quiet=True, redo=True, auto_apply=True)
+    conn.commit()
+
+    # judge corrections replaced, not accumulated
+    assert conn.execute(
+        "SELECT COUNT(*) FROM transcript_corrections "
+        "WHERE provenance LIKE 'judge:%'").fetchone()[0] == 1
+    # the human's correction survives
+    assert conn.execute(
+        "SELECT COUNT(*) FROM transcript_corrections "
+        "WHERE provenance = 'human:web-review'").fetchone()[0] == 1
+    # the decided queue row survives; it is not asked again
+    assert conn.execute(
+        "SELECT status FROM transcript_review_queue WHERE item_id = ?",
+        (decided.item_id,)).fetchone()[0] == "rejected"
+    # and the YouTube witnesses are untouched throughout
+    assert conn.execute(
+        "SELECT COUNT(*) FROM transcript_segments "
+        "WHERE source = 'youtube-asr-vtt'").fetchone()[0] == 3
 
 
 def test_search_prefers_whisper_over_youtube(pipeline_db, whisper_payload):
@@ -699,7 +934,7 @@ def test_search_prefers_whisper_over_youtube(pipeline_db, whisper_payload):
 
     apply_verdicts.apply_video(conn, "vidTEST0001", whisper_payload,
                                _verdicts_for(whisper_payload), "judge:test",
-                               quiet=True)
+                               quiet=True, auto_apply=True)
     conn.commit()
 
     # the YouTube-only spelling is now invisible for this video ...
@@ -742,7 +977,7 @@ def test_queue_items_and_reject(pipeline_db, whisper_payload):
     conn = pipeline_db
     apply_verdicts.apply_video(conn, "vidTEST0001", whisper_payload,
                                _verdicts_for(whisper_payload), "judge:test",
-                               quiet=True)
+                               quiet=True, auto_apply=True)
     conn.commit()
     queue = review_service.get_queue("transcripts")
     items = queue.items(conn)
@@ -805,7 +1040,7 @@ def test_queue_approve_without_a_proposal_just_resolves(pipeline_db,
     conn = pipeline_db
     apply_verdicts.apply_video(conn, "vidTEST0001", whisper_payload,
                                _verdicts_for(whisper_payload), "judge:test",
-                               quiet=True)
+                               quiet=True, auto_apply=True)
     conn.commit()
     queue = review_service.get_queue("transcripts")
     item = queue.items(conn)[0]
@@ -828,6 +1063,58 @@ def test_queue_is_empty_without_the_table(tmp_path):
 # --------------------------------------------------------------------------
 # initial_prompt construction
 # --------------------------------------------------------------------------
+
+def test_worker_liveness_is_three_valued(monkeypatch):
+    """A dropped SSH connection is not evidence that the worker died.
+
+    Reading an empty reply as "inactive" aborted a healthy 8-minute
+    transcription during validation.
+    """
+    from scripts.pipeline import transcribe_batch as tb
+
+    monkeypatch.setattr(tb, "wsl", lambda *a, **k: (0, "active\n", ""))
+    assert tb.worker_active() is True
+    monkeypatch.setattr(tb, "wsl", lambda *a, **k: (0, "inactive\n", ""))
+    assert tb.worker_active() is False
+    # ssh reset: non-zero rc, no output
+    monkeypatch.setattr(tb, "wsl", lambda *a, **k: (255, "", "Connection reset"))
+    assert tb.worker_active() is None
+
+    def boom(*a, **k):
+        raise tb.RemoteError("Connection reset by 192.168.1.156 port 22")
+
+    monkeypatch.setattr(tb, "wsl", boom)
+    assert tb.worker_active() is None
+
+
+def test_await_result_survives_transient_drops(monkeypatch):
+    """Only repeated *confirmed* inactive readings end the wait."""
+    from scripts.pipeline import transcribe_batch as tb
+
+    monkeypatch.setattr(tb.time, "sleep", lambda _s: None)
+    calls = {"n": 0}
+
+    def fake_wsl(script, **kwargs):
+        calls["n"] += 1
+        if calls["n"] < 4:
+            return (0, "{}", "")           # not ready yet
+        return (0, json.dumps({"n": 7, "ok": True}), "")
+
+    monkeypatch.setattr(tb, "wsl", fake_wsl)
+    # unknown every time -- must not be treated as death
+    monkeypatch.setattr(tb, "worker_active", lambda: None)
+    assert tb.await_result(7, poll=0, timeout=60)["ok"] is True
+
+
+def test_await_result_gives_up_after_repeated_confirmed_death(monkeypatch):
+    from scripts.pipeline import transcribe_batch as tb
+
+    monkeypatch.setattr(tb.time, "sleep", lambda _s: None)
+    monkeypatch.setattr(tb, "wsl", lambda *a, **k: (0, "{}", ""))
+    monkeypatch.setattr(tb, "worker_active", lambda: False)
+    with pytest.raises(tb.RemoteError, match="went inactive"):
+        tb.await_result(7, poll=0, timeout=60)
+
 
 def test_initial_prompt_extends_the_showdown_vocabulary():
     from scripts.pipeline.transcribe_batch import build_initial_prompt

@@ -276,11 +276,65 @@ Built:
   smoothing a real contraction), and the rest are unverifiable. The refusal
   rules above are what keeps this survivable; the review queue is where it
   gets settled.
-- Tests: `tests/test_pipeline.py` (43 tests) — flag computation, sentence
-  selection, the correction-applier's seven refusal modes, schema demotion,
-  ruling attachment, verdict application, queue insert/approve/reject, and the
-  search preference — all against fixtures with the model mocked, so no GPU
-  and no network. Plus 4 route tests in `tests/test_admin_review.py`.
+- **Second validation round (2026-08-26), gated by the owner on cost and on
+  Whisper's punctuation decay. Four changes:**
+  1. **Punctuation decay fixed by chunking.** On a 2-hour video Whisper stops
+     emitting terminators ~45 minutes in and never recovers (one
+     12 120-character run). The suspected cause — the long entity-seeded
+     `initial_prompt` — was wrong: the *short* vocabulary line was far worse.
+     `condition_on_previous_text=False`, the standard advice, was also wrong:
+     it stops the collapse by throwing the punctuation away everywhere,
+     because the prompt's formatting effect only reaches the video *through*
+     conditioning. The fix is to re-anchor — decode once, transcribe in 180 s
+     chunks, each starting fresh from the same real prompt. Terminators per
+     100 words 6.9 → **12.9**, longest unpunctuated run 12 120 → **2 041
+     chars**, steady across all 24 buckets, and **~30 % faster**.
+  2. **Judge bar raised** to require a *substantive* witness disagreement.
+     Register variants (`"going to"` vs `"gonna"` — 147 of 831 flags on one
+     video) and long one-sided alignment gaps no longer count, and a
+     low-confidence word no longer triggers on its own. Sentences under review
+     fell from 60–66 % to 36–49 %.
+  3. **Register guard** in the judge prompt plus a matching applier veto, so
+     `"wanna"` survives. Added via a new optional `extra_caution` argument to
+     `judge_prompt.build_prompt` that defaults to None — every tournament cell
+     still reproduces byte-for-byte.
+  4. **Auto-apply turned off by default.** See the finding below.
+- **Finding — the cost model was wrong, and packet count is not the cost.**
+  Consolidating 269 packets into 102 looked like a 2.6× saving and delivered
+  almost nothing: per-packet time rose from 27 s to 54 s, because the judge's
+  cost tracks the text it reasons over, not the number of calls. The honest
+  unit is **judge-seconds per audio-hour**: 1 580 → **1 017**, i.e. ~88 → **56
+  GPU-hours** for the corpus at `mistral-small3.2:24b`, **~20** at
+  `qwen3.5:35b-a3b`. The saving came entirely from the raised bar.
+- **Finding — auto-applying corrections is not safe on this material, and the
+  guards cannot make it safe.** Over three whole videos, of the corrections
+  that survived every structural guard, most still degraded the transcript
+  (`"Cut the rest of this up."` → `"Cut this the rest of this up."`;
+  `"I love my crappies."` → `"I love my crappie. My cropes."`). Two further
+  guards were added from this evidence — refuse a replacement that drops
+  capitalisation (a splice from the all-lowercase YouTube witness:
+  `"Layla's"` → `"leila's"`) and refuse one that rewrites a canonical roster
+  name out of the roster — and refusals are now all-or-nothing per correction.
+  That took applied corrections from 14 to 6, of which ~4 were still wrong.
+  So `apply_verdicts.py` now **proposes rather than writes** by default
+  (`AUTO_APPLY_DEFAULT = False`, `--auto-apply` to override). The pipeline's
+  deliverable is the much better Whisper transcript plus a queue of disputed
+  spans with suggested readings — not unattended edits.
+- **Finding — a transport fault was being read as a dead worker.** An empty
+  reply from `systemctl is-active` (MarshLair's sshd resets connections at
+  random) aborted a healthy 8-minute transcription. Liveness is now
+  three-valued, and only repeated *confirmed* inactive readings end a wait.
+- Also fixed in passing: `ingest_transcripts.py` was writing NULL into the
+  `source` column added by migration 013, leaving 9 167 untagged rows on
+  Factotum (harmless — the search preference treats NULL as "not Whisper" —
+  but now stamped, and the existing rows backfilled).
+- Tests: `tests/test_pipeline.py` (63 tests) — flag computation and the
+  substantive-flag filter, sentence selection, the correction-applier's ten
+  refusal modes, schema demotion, ruling attachment, propose-vs-apply, the
+  packet-size guard, three-valued worker liveness, queue
+  insert/approve/reject, and the search preference — all against fixtures with
+  the model mocked, so no GPU and no network. Plus 4 route tests in
+  `tests/test_admin_review.py`.
 *Completed by Claude*
 
 **Step 1.5: Viewer Test Account & Login Flow** ⏳ TODO

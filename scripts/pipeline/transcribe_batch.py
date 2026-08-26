@@ -32,6 +32,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shlex
 import sys
 import time
@@ -62,6 +63,17 @@ BASE_VOCAB = ["Matthew Posa", "Monty", "Rueger", "Layla", "Captain Teeny Trout",
 
 #: faster-whisper truncates initial_prompt at 224 tokens; stay well inside it.
 MAX_PROMPT_CHARS = 700
+
+#: Transcribe in chunks of this many seconds, each re-anchored on the real
+#: initial_prompt.  See "Punctuation decay" in docs/keeping-current.md: with
+#: one continuous pass, Whisper stops emitting terminators ~45 minutes into a
+#: 2-hour video and never recovers (one 12 120-character unpunctuated run).
+#: Measured on that video, terminators per 100 words / longest unpunctuated
+#: run: no chunking 6.9 / 12 120 c, 480 s 10.6 / 6 522 c, **180 s 12.9 /
+#: 2 041 c**, 120 s 11.5 / 2 787 c.  180 s is also ~30 % faster than one pass
+#: (rtf 23.1 vs 16.2) because short windows avoid Whisper's long-context
+#: decoding and its temperature fallbacks.  0 disables chunking.
+CHUNK_SECONDS = float(os.environ.get("WHISPER_CHUNK_SECONDS", "180"))
 
 #: Where the `asr` conda env's pip-installed CUDA wheels live inside WSL.
 ASR_SITE_PACKAGES = ("/home/bluekitty/miniforge3/envs/asr/lib/python3.11/"
@@ -114,9 +126,28 @@ def roster_names_from_db():
 # MarshLair worker lifecycle
 # --------------------------------------------------------------------------
 
-def worker_active() -> bool:
-    _rc, out, _err = wsl(f"systemctl is-active {MARSH_UNIT} || true", check=False)
-    return out.strip().startswith("active")
+def worker_active():
+    """``True`` / ``False`` / ``None`` when the box could not be asked.
+
+    The three-valued answer matters.  MarshLair's sshd resets connections at
+    random (CLAUDE.md), and a reset makes this call return no output -- which
+    an ``out.startswith("active")`` test reads as "the worker is dead".  That
+    aborted a perfectly healthy 8-minute transcription once already, and it is
+    the same trap TOURNAMENT_RESULTS records under *"they look like parse
+    failures in the scorer -- check `error` before concluding a model failed"*.
+    A transport fault is never evidence about the worker.
+    """
+    try:
+        rc, out, _err = wsl(f"systemctl is-active {MARSH_UNIT} || true",
+                            check=False, timeout=90)
+    except Exception:  # noqa: BLE001 - ssh reset / timeout: we simply don't know
+        return None
+    if rc != 0 and not out.strip():
+        return None
+    text = out.strip()
+    if not text:
+        return None
+    return text.startswith("active")
 
 
 def stop_worker() -> None:
@@ -179,7 +210,7 @@ def wait_for_model(timeout: float = 900.0) -> None:
         if out.strip():
             log(f"- worker ready (pid {out.split()[0]})")
             return
-        if not worker_active():
+        if worker_active() is False:   # never `not ...` -- None means "unknown"
             _rc, journal, _err = wsl(
                 f"sudo journalctl -u {MARSH_UNIT} -n 60 --no-pager",
                 check=False, timeout=120)
@@ -198,34 +229,60 @@ def next_job_number() -> int:
         return 1
 
 
-def submit_job(n: int, video_id: str, prompt: str) -> None:
+def submit_job(n: int, video_id: str, prompt: str,
+               chunk_seconds: float = CHUNK_SECONDS) -> None:
     import base64
     payload = base64.b64encode(
-        json.dumps({"n": n, "video_id": video_id, "prompt": prompt}).encode()
+        json.dumps({"n": n, "video_id": video_id, "prompt": prompt,
+                    "condition_on_previous_text": True,
+                    "chunk_seconds": chunk_seconds}).encode()
     ).decode()
     wsl(f"printf %s '{payload}' | base64 -d > {MARSH_WORKDIR}/job.json.tmp\n"
         f"mv {MARSH_WORKDIR}/job.json.tmp {MARSH_WORKDIR}/job.json\n"
         f"echo SUBMITTED\n", timeout=120)
 
 
+#: Consecutive *confirmed* inactive readings before we call the worker dead.
+DEAD_WORKER_STRIKES = 3
+
+
 def await_result(n: int, poll: float = 15.0, timeout: float = 5400.0) -> dict:
-    """Poll for the worker's result with short reconnecting calls."""
+    """Poll for the worker's result with short reconnecting calls.
+
+    A crash looks exactly like "still running" unless the unit is checked --
+    but a dropped SSH connection looks exactly like a crash unless the check
+    can say "I don't know".  So a single inactive reading is never enough:
+    the result file is re-read first (the worker may have finished and exited
+    between the two calls) and the unit has to come back inactive
+    :data:`DEAD_WORKER_STRIKES` times in a row.
+    """
     deadline = time.time() + timeout
+    strikes = 0
     while time.time() < deadline:
         time.sleep(poll)
-        _rc, out, _err = wsl(
-            f"cat {MARSH_WORKDIR}/result.json 2>/dev/null || echo '{{}}'",
-            check=False, timeout=300)
+        try:
+            _rc, out, _err = wsl(
+                f"cat {MARSH_WORKDIR}/result.json 2>/dev/null || echo '{{}}'",
+                check=False, timeout=300)
+        except Exception as exc:  # noqa: BLE001 - transport fault, just retry
+            log(f"  · poll failed ({type(exc).__name__}); retrying")
+            continue
         try:
             payload = json.loads(out.strip() or "{}")
         except ValueError:
             continue
         if payload.get("n") == n:
             return payload
-        if not worker_active():
-            # A crash looks exactly like "still running" unless you check.
-            raise RemoteError(f"whisper worker went inactive without producing "
-                              f"result n={n}")
+
+        alive = worker_active()
+        if alive is False:
+            strikes += 1
+            if strikes >= DEAD_WORKER_STRIKES:
+                raise RemoteError("whisper worker went inactive without "
+                                  f"producing result n={n}")
+            log(f"  · unit reported inactive ({strikes}/{DEAD_WORKER_STRIKES})")
+        else:
+            strikes = 0
     raise RemoteError(f"timed out waiting for result n={n}")
 
 
@@ -387,7 +444,7 @@ def main(argv=None) -> int:
             ledger.append({"video_id": video_id, "status": "failed",
                            "error": str(exc)[:500]})
             try:
-                if not worker_active():
+                if worker_active() is False:
                     log("  · worker is down; restarting")
                     deploy_worker()
                     wait_for_model()

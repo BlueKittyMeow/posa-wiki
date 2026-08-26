@@ -1220,8 +1220,14 @@ class TranscriptCandidateQueue(ReviewQueue):
                          if s.text == row['draft_sentence']), None)
         if sentence is None:
             return 0
+        try:
+            names = [r[0] for r in conn.execute(
+                'SELECT canonical_name FROM people') if r[0]]
+            names += [r[0] for r in conn.execute('SELECT name FROM dogs') if r[0]]
+        except Exception:  # sqlite3.OperationalError on a partial fixture db
+            names = []
         plan = plan_correction(sentence.text, row['proposed_correction'],
-                               spans, sentence.start_char)
+                               spans, sentence.start_char, roster_names=names)
         if not plan.applicable:
             return 0
 

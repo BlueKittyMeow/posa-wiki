@@ -22,7 +22,8 @@ from dataclasses import dataclass
 from difflib import SequenceMatcher
 from typing import Dict, List, Sequence, Tuple
 
-from scripts.pipeline.flags import FILLERS, normalise_word
+from scripts.pipeline.flags import (
+    CONTRACTION_EXPANSIONS, FILLERS, normalise_word)
 
 _WORD_RE = re.compile(r"[A-Za-z0-9']+")
 
@@ -37,6 +38,60 @@ MAX_CHANGED_FRACTION = 0.6
 #: "All right, Monty." with "monte come on out" is a substitution, not a
 #: repair, and the live run produced exactly that.
 SHORT_SENTENCE_TOKENS = 5
+
+
+def _bare(word: str) -> str:
+    """Lowercase, possessive-stripped form: ``Layla's`` -> ``layla``."""
+    word = normalise_word(word).lower()
+    word = re.sub(r"'s$", "", word)
+    return word.replace("'", "")
+
+
+def degrades_casing(before: str, after: str) -> bool:
+    """True when a replacement drops capitalisation the draft had.
+
+    The YouTube witness is entirely lowercase and unpunctuated. When a judge
+    splices from it, the giveaway is casing: ``"Layla's"`` comes back as
+    ``"leila's"``, ``"Seeing as how"`` as ``"see is how"``. Whisper's casing is
+    good and the other witness has none, so a correction that *removes* a
+    capital is importing the wrong witness's style, not fixing a word.
+    """
+    before_words = before.split()
+    after_words = after.split()
+    if not before_words or not after_words:
+        return False
+    return before_words[0][:1].isupper() and after_words[0][:1].islower()
+
+
+def breaks_entity_name(before: str, after: str, roster_names) -> bool:
+    """True when a correction rewrites a canonical entity name into a non-name.
+
+    The roster exists to *recover* names — 4 of 10 tournament judges got
+    "Captain Teeny Trout" by matching against it. A ruling that runs the other
+    way, turning ``"Layla"`` into ``"leila"`` or ``"Rueger"`` into something
+    absent from the roster, is using the lexicon backwards and is always
+    wrong.
+    """
+    canonical = {_bare(n) for name in (roster_names or []) for n in name.split()}
+    canonical.discard("")
+    if not canonical:
+        return False
+    before_set = {_bare(w) for w in _WORD_RE.findall(before)}
+    after_set = {_bare(w) for w in _WORD_RE.findall(after)}
+    lost = (before_set & canonical) - after_set
+    return bool(lost)
+
+
+def is_register_smoothing(before: str, after: str) -> bool:
+    """True when an edit only formalises casual speech.
+
+    ``"wanna"`` -> ``"want to"`` is not a transcription correction, it is the
+    judge tidying up how someone talks.  Measured in the first live run.
+    """
+    key = normalise_word(before.strip()).lower()
+    target = re.sub(r"\s+", " ", after.strip().lower()).strip(" .,!?")
+    expansions = CONTRACTION_EXPANSIONS.get(key)
+    return bool(expansions and target in expansions)
 
 
 @dataclass
@@ -82,7 +137,8 @@ def _comparable(tokens: Sequence[Tuple[str, int, int]]) -> List[str]:
 def plan_correction(draft_sentence: str,
                     correction: str,
                     segment_spans: Sequence["object"],
-                    sentence_start_char: int) -> CorrectionPlan:
+                    sentence_start_char: int,
+                    roster_names: Sequence[str] = ()) -> CorrectionPlan:
     """Plan the edits that turn ``draft_sentence`` into ``correction``.
 
     ``segment_spans`` are :class:`scripts.pipeline.sentences.SegmentSpan`
@@ -148,6 +204,23 @@ def plan_correction(draft_sentence: str,
         else:
             replacement = ""
 
+        before_text = draft_sentence[local_start:local_end]
+        if is_register_smoothing(before_text, replacement):
+            refusals.append(
+                f'register smoothing refused: "{before_text}" -> '
+                f'"{replacement.strip()}" formalises casual speech')
+            continue
+        if degrades_casing(before_text, replacement):
+            refusals.append(
+                f'casing refused: "{before_text}" -> "{replacement.strip()}" '
+                'imports the lowercase witness\'s style')
+            continue
+        if breaks_entity_name(before_text, replacement, roster_names):
+            refusals.append(
+                f'entity refused: "{before_text}" -> "{replacement.strip()}" '
+                'rewrites a canonical name out of the roster')
+            continue
+
         abs_start = sentence_start_char + local_start
         abs_end = sentence_start_char + local_end
         owners = [s for s in segment_spans
@@ -164,7 +237,12 @@ def plan_correction(draft_sentence: str,
                           replacement=replacement,
                           before=draft_sentence[local_start:local_end]))
 
-    return CorrectionPlan(edits, refusals, changed, bool(edits))
+    # All or nothing. The judge proposed one coherent sentence; applying the
+    # half of it that passed the guards yields text nobody proposed, which
+    # fails the design's own test that a ruling "must yield a sentence that
+    # reads as something a human actually said". A partly-refused correction
+    # is a question for the human, not a licence to write part of it.
+    return CorrectionPlan(edits, refusals, changed, bool(edits) and not refusals)
 
 
 def apply_edits(segment_text: str, edits: Sequence[Edit]) -> str:

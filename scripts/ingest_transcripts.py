@@ -275,7 +275,33 @@ def upsert_status(conn, video_id, status, source, language, segment_count, error
     )
 
 
-def insert_segments(conn, video_id, segments):
+def has_source_column(conn):
+    """True once migration 013 has added transcript_segments.source."""
+    return any(row[1] == "source"
+               for row in conn.execute("PRAGMA table_info(transcript_segments)"))
+
+
+def insert_segments(conn, video_id, segments, source=SOURCE_YOUTUBE_ASR):
+    """Insert parsed segments, stamping the source when the column exists.
+
+    Migration 013 added ``transcript_segments.source`` so Whisper rows can sit
+    alongside these without /search returning both. This script kept writing
+    NULL for a day after that migration landed -- harmless (the search
+    preference treats NULL as "not Whisper") but it left 9 167 untagged rows,
+    so the column is now filled in explicitly. Databases predating 013 still
+    work: the column is simply omitted.
+    """
+    if has_source_column(conn):
+        conn.executemany(
+            """
+            INSERT INTO transcript_segments
+                (video_id, start_seconds, duration_seconds, text, source)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            [(video_id, start, duration, text, source)
+             for start, duration, text in segments],
+        )
+        return
     conn.executemany(
         """
         INSERT INTO transcript_segments

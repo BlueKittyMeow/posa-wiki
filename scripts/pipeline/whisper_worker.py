@@ -56,6 +56,66 @@ def read_json(path):
         return None
 
 
+SAMPLE_RATE = 16000
+
+
+class _Info:
+    """Duck-type of faster-whisper's TranscriptionInfo, for the chunked path."""
+
+    def __init__(self, duration):
+        self.duration = duration
+
+
+def _collect(segments_iter, offset=0.0):
+    out = []
+    for seg in segments_iter:
+        out.append({
+            "start": round(seg.start + offset, 3),
+            "end": round(seg.end + offset, 3),
+            "text": seg.text,
+            "words": [
+                {"w": w.word, "s": round(w.start + offset, 3),
+                 "e": round(w.end + offset, 3), "p": round(w.probability, 3)}
+                for w in (seg.words or [])
+            ],
+        })
+    return out
+
+
+def transcribe(model, prompt, condition, chunk_seconds):
+    """Whole-file or chunk-anchored transcription.
+
+    With ``chunk_seconds`` set, the audio is decoded once and cut into
+    fixed-length pieces; every piece is transcribed with the *same* real
+    ``initial_prompt`` and conditioning enabled within the piece, then the
+    timestamps are shifted back. That keeps the prompt's formatting effect
+    alive for the whole video without letting drift accumulate.
+    """
+    kwargs = dict(language="en", word_timestamps=True, vad_filter=True,
+                  initial_prompt=prompt, beam_size=5,
+                  condition_on_previous_text=condition)
+    if not chunk_seconds:
+        segments_iter, info = model.transcribe(WAV, **kwargs)
+        return _collect(segments_iter), info
+
+    from faster_whisper.audio import decode_audio
+
+    audio = decode_audio(WAV, sampling_rate=SAMPLE_RATE)
+    total = len(audio) / SAMPLE_RATE
+    step = int(chunk_seconds * SAMPLE_RATE)
+    segments = []
+    for index, begin in enumerate(range(0, len(audio), step)):
+        piece = audio[begin:begin + step]
+        if len(piece) < SAMPLE_RATE:      # under a second of tail; nothing to say
+            continue
+        offset = begin / SAMPLE_RATE
+        piece_iter, _piece_info = model.transcribe(piece, **kwargs)
+        got = _collect(piece_iter, offset=offset)
+        segments.extend(got)
+        print(f"  CHUNK {index} @{offset:.0f}s -> {len(got)} segs", flush=True)
+    return segments, _Info(total)
+
+
 def main():
     from faster_whisper import WhisperModel
 
@@ -98,25 +158,24 @@ def main():
         n = job["n"]
         video_id = job.get("video_id") or "?"
         prompt = job.get("prompt") or None
-        print(f"JOB_START n={n} video={video_id}", flush=True)
+        # Punctuation decay, measured 2026-08-25 (see docs/keeping-current.md):
+        # the initial_prompt only conditions the FIRST window, and its
+        # formatting effect reaches the rest of the video *through*
+        # conditioning -- so turning conditioning off does not cure the decay,
+        # it throws the punctuation away everywhere (3.4 terminators per 100
+        # words against 16.6). But leaving it on lets the model drift into
+        # unpunctuated lowercase and never recover.
+        #
+        # The fix is to re-anchor: transcribe in chunks, each one starting
+        # fresh from the real initial_prompt with conditioning ON *inside* the
+        # chunk. Drift cannot accumulate past a chunk boundary.
+        condition = bool(job.get("condition_on_previous_text", True))
+        chunk_seconds = float(job.get("chunk_seconds") or 0)
+        print(f"JOB_START n={n} video={video_id} condition={condition} "
+              f"chunk={chunk_seconds or 'off'}", flush=True)
         start = time.time()
         try:
-            segments_iter, info = model.transcribe(
-                WAV, language="en", word_timestamps=True, vad_filter=True,
-                initial_prompt=prompt, beam_size=5,
-            )
-            segments = []
-            for seg in segments_iter:
-                segments.append({
-                    "start": round(seg.start, 3),
-                    "end": round(seg.end, 3),
-                    "text": seg.text,
-                    "words": [
-                        {"w": w.word, "s": round(w.start, 3),
-                         "e": round(w.end, 3), "p": round(w.probability, 3)}
-                        for w in (seg.words or [])
-                    ],
-                })
+            segments, info = transcribe(model, prompt, condition, chunk_seconds)
             elapsed = time.time() - start
             payload = {
                 "n": n, "ok": True, "video_id": video_id,
@@ -125,6 +184,8 @@ def main():
                     "engine": "faster-whisper large-v3 float16",
                     "beam_size": 5, "vad_filter": True,
                     "word_timestamps": True,
+                    "condition_on_previous_text": condition,
+                    "chunk_seconds": chunk_seconds or None,
                     "initial_prompt": prompt,
                     "audio_duration_s": round(info.duration, 2),
                     "transcribe_wall_s": round(elapsed, 2),
