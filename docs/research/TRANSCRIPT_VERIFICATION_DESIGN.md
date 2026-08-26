@@ -120,3 +120,26 @@ card defines the register, so the coherence test never becomes a second
 smoothing pass. Tournament scoring: add sentence-coherence-of-output as a
 metric, but ONLY paired with false-correction rate so models can't win by
 prettifying.
+
+## PRODUCTION CONFIG — settled by tournament, 2026-08-25 (FINAL)
+
+Full evidence: TOURNAMENT_RESULTS.md + tournament_data/.
+
+- **Witnesses:** Whisper large-v3 (prompted, word timestamps) + YouTube ASR.
+  **Parakeet dropped** — its confident garbage seduces judges (fix rate 46%
+  W+YT vs 26% with it added). May be recalled selectively for dog-chaos spans.
+- **Judge:** `mistral-small3.2:24b`, full packet (style card v1.1 + entity
+  lexicon + disagreement flags). Understudy: `qwen3.5:35b-a3b` (≈equal, 3×
+  faster). Bare judges are BANNED (they vandalize: +0.176 WER).
+- **Appellate:** HUMAN, via the pinned-player dashboard. Local audio judges
+  rejected: the ±clip control proved ears buy detection, not resolution — no
+  audio model ever produced a correction. (MOSS-Audio blocked by transformers
+  incompat, groundwork parked; revisit in an attended session someday.)
+- **Schema rule:** a 'correct' verdict without a correction field is invalid —
+  one re-ask, then scored/queued as escalate.
+- Validated against Lara's ground truth: auto-fixed the nickname, protected
+  Funk against two hostile witnesses, escalated the pun with the right
+  question, zero false corrections.
+- Known caveats carried forward: composite metric rewards abstention (use fix
+  rate + false corrections); passage-c accept-pattern artefact means the
+  "consensus solved dog chaos 9/10" claim needs re-verification.
