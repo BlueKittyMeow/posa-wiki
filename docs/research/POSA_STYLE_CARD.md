@@ -44,6 +44,13 @@ recurring deliberate deformation. Odd phonology is a stylistic signature.
 (a log). "The SS Tin Can 3.0" (a boat, versioned). Boats, logs, and gear get
 proper nouns and personalities.
 
+**Fish species have recurring first names** (validated by Lara, 2026-08-25):
+**Peter Pike, Larry (lake trout), Bobby Bass, Walter Walleye** — alliterative
+or near-alliterative characters, used across episodes, with more of the same
+pattern less formalized. A first name adjacent to a fish species in a
+transcript is likely CORRECT, not an ASR intrusion — check this roster before
+"fixing" it.
+
 **He talks to his dogs as conversation partners**, mid-narration, without
 marking the switch — second-person imperatives, greetings, and mock-scolding
 addressed to a dog are normal sentences here, and they interleave with
