@@ -143,3 +143,14 @@ Full evidence: TOURNAMENT_RESULTS.md + tournament_data/.
 - Known caveats carried forward: composite metric rewards abstention (use fix
   rate + false corrections); passage-c accept-pattern artefact means the
   "consensus solved dog chaos 9/10" claim needs re-verification.
+
+## Watch-page enhanced subtitles (Lara, 2026-08-25 — approved feature)
+
+Render the wiki's OWN subtitle track over the official embed: poll
+player.getCurrentTime() (~4 Hz), display the matching transcript_segments
+(whisper source, judge-corrected, human-approved) in the existing overlay
+layer (pointer-events:none, coexists with dim states). Toggle: YouTube CC off
+/ wiki subs on. Future compounding: speaker prefixes from diarization,
+styling for sung lines from music tags. This keeps viewing on the monetized
+official player while delivering the corrected transcript experience — the
+sanctioned answer to "local copy has better subs".
