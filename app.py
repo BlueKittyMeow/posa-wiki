@@ -926,6 +926,21 @@ def search():
 
 TRANSCRIPT_HIT_LIMIT = 10
 
+#: A video can hold two transcripts at once: the YouTube auto-captions
+#: (scripts/ingest_transcripts.py) and the Whisper large-v3 re-transcription
+#: (scripts/pipeline/). Whisper is the better witness -- higher precision,
+#: real punctuation, and it is the text the adjudicator has corrected -- so
+#: search prefers it *per video*. The YouTube rows are never deleted: a video
+#: that has not been re-transcribed yet keeps searching exactly as before.
+PREFERRED_TRANSCRIPT_SOURCE = 'whisper-large-v3'
+
+# Anded into the FTS query. The subselect is evaluated once, not per row.
+_PREFER_WHISPER_SQL = '''
+          AND (s.source = ?
+               OR s.video_id NOT IN (SELECT video_id FROM transcript_segments
+                                     WHERE source = ?))
+'''
+
 
 def search_transcripts(conn, sanitized_query, limit=TRANSCRIPT_HIT_LIMIT):
     """Return the best-ranked transcript segment per video for an FTS query.
@@ -934,11 +949,13 @@ def search_transcripts(conn, sanitized_query, limit=TRANSCRIPT_HIT_LIMIT):
     ``videos_fts``.  Returns [] when the transcript tables have not been
     created yet (migration 010 / scripts/ingest_transcripts.py) so search keeps
     working on a database without transcripts.
+
+    Where both sources exist for a video only the Whisper segments are
+    considered, so one video never produces two hits for the same moment.
     """
     # snippet() cannot be used in an aggregate/GROUP BY context, so pull the
     # top-ranked segments and keep the first (best) one per video in Python.
-    try:
-        rows = conn.execute('''
+    base_sql = '''
         SELECT s.video_id,
                v.title,
                s.start_seconds,
@@ -948,11 +965,23 @@ def search_transcripts(conn, sanitized_query, limit=TRANSCRIPT_HIT_LIMIT):
         JOIN transcript_segments s ON s.segment_id = f.rowid
         JOIN videos v ON v.video_id = s.video_id
         WHERE f.transcripts_fts MATCH ?
+        {preference}
         ORDER BY f.rank
         LIMIT ?
-        ''', (sanitized_query, limit * 20)).fetchall()
+    '''
+    try:
+        rows = conn.execute(
+            base_sql.format(preference=_PREFER_WHISPER_SQL),
+            (sanitized_query, PREFERRED_TRANSCRIPT_SOURCE,
+             PREFERRED_TRANSCRIPT_SOURCE, limit * 20)).fetchall()
     except sqlite3.OperationalError:
-        return []
+        # No `source` column yet (pre-migration-013 database): fall back to the
+        # unfiltered query rather than losing transcript search entirely.
+        try:
+            rows = conn.execute(base_sql.format(preference=''),
+                                (sanitized_query, limit * 20)).fetchall()
+        except sqlite3.OperationalError:
+            return []
 
     hits = []
     seen = set()

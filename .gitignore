@@ -74,3 +74,8 @@ data/*.txt
 !data/dog_review_dismissed.json
 !data/season_review_decisions.json
 !data/nights_review_decisions.json
+
+# Transcript pipeline ledgers, logs and cached transcripts (scripts/pipeline/).
+# The outputs of record live on Factotum: /mnt/media6t/archive/posa/
+# transcripts_whisper/ and transcripts_verdicts/, plus posa_wiki.db.
+data/pipeline/

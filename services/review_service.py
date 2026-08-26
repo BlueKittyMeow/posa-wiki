@@ -1081,6 +1081,205 @@ class NightsCandidateQueue(ReviewQueue):
 
 
 # --------------------------------------------------------------------------
+# 6. Transcript spans the adjudicator escalated
+# --------------------------------------------------------------------------
+
+WHISPER_SOURCE = 'whisper-large-v3'
+
+
+class TranscriptCandidateQueue(ReviewQueue):
+    """Spans the transcript judge could not resolve.
+
+    Unlike the other queues this one is fed from the *database*
+    (``transcript_review_queue``, migration 013) rather than a regenerable JSON
+    dump, because the proposals are expensive to produce -- they are the output
+    of a Whisper pass plus an LLM adjudication pass over hours of audio, not a
+    title regex that can be re-run in a second.
+
+    Lara is the appellate court here by design: the tournament's audio bracket
+    produced zero corrections, so a deadlocked span goes straight to a human
+    (TOURNAMENT_RESULTS, "Appellate audio tier: do NOT deploy one").
+
+    v1 semantics, deliberately narrow:
+
+    * **approve** applies ``proposed_correction`` when the judge supplied one
+      (stamped ``human:web-review`` in ``transcript_corrections``), and
+      otherwise simply marks the span resolved -- the draft stands.
+    * **reject** keeps the Whisper draft untouched.
+
+    Neither ever deletes anything: the pre-edit text is kept in
+    ``transcript_corrections``.
+    """
+
+    key = 'transcripts'
+    label = 'Transcript spans'
+    icon = '🎙️'
+    description = ('Spans where the transcript judge (mistral-small3.2:24b) '
+                   'deadlocked or proposed a correction the applier would not '
+                   'write blind. Approving applies the proposed correction '
+                   'with ' + REVIEW_PROVENANCE + ' provenance; rejecting keeps '
+                   'the Whisper draft.')
+    empty_message = ('No transcript spans awaiting review. Regenerate them '
+                     'with scripts/pipeline/judge_batch.py + apply_verdicts.py.')
+    regenerate_command = ('python scripts/pipeline/judge_batch.py && '
+                          'python scripts/pipeline/apply_verdicts.py')
+
+    #: Cards shown at once -- the queue can hold thousands of rows.
+    PAGE_SIZE = 60
+
+    def _table_present(self, conn) -> bool:
+        try:
+            conn.execute('SELECT 1 FROM transcript_review_queue LIMIT 1')
+            return True
+        except Exception:  # sqlite3.OperationalError outside an app context
+            return False
+
+    def count(self, conn) -> int:
+        if not self._table_present(conn):
+            return 0
+        row = conn.execute(
+            "SELECT COUNT(*) FROM transcript_review_queue WHERE status = 'open'"
+        ).fetchone()
+        return row[0] if row else 0
+
+    def items(self, conn) -> List[ReviewItem]:
+        if not self._table_present(conn):
+            return []
+        rows = conn.execute(
+            'SELECT q.item_id, q.video_id, q.start_seconds, q.end_seconds, '
+            '       q.draft_sentence, q.witness_disagreement, '
+            '       q.judge_reasoning, q.proposed_correction, '
+            '       v.title, v.thumbnail_url, v.upload_date '
+            'FROM transcript_review_queue q '
+            'JOIN videos v ON v.video_id = q.video_id '
+            "WHERE q.status = 'open' "
+            'ORDER BY q.video_id, q.start_seconds '
+            'LIMIT ?', (self.PAGE_SIZE,)).fetchall()
+
+        items = []
+        for row in rows:
+            start = int(row['start_seconds'] or 0)
+            proposed = row['proposed_correction']
+            samples = [f'draft: “{row["draft_sentence"]}”']
+            if proposed:
+                samples.append(f'proposed: “{proposed}”')
+            if row['witness_disagreement']:
+                samples.append(row['witness_disagreement'])
+            items.append(ReviewItem(
+                kind='transcripts',
+                item_id=row['item_id'],
+                title=row['title'] or row['video_id'],
+                proposal=(f'Apply: “{proposed}”' if proposed
+                          else 'Listen and decide (no correction proposed)'),
+                provenance='judge: ' + (row['judge_reasoning'] or 'escalated'),
+                payload={'item_id': row['item_id']},
+                video_id=row['video_id'],
+                thumbnail_url=row['thumbnail_url'],
+                upload_date=row['upload_date'],
+                detail=f'{start // 60}:{start % 60:02d}',
+                samples=samples,
+            ))
+        return items
+
+    # -- actions ----------------------------------------------------------
+    def _row(self, conn, payload):
+        item_id = (payload.get('item_id') or '').strip()
+        if not item_id:
+            raise ValueError('Missing item_id.')
+        row = conn.execute(
+            'SELECT * FROM transcript_review_queue WHERE item_id = ?',
+            (item_id,)).fetchone()
+        if row is None:
+            raise ValueError(f'Review item {item_id} does not exist.')
+        return row
+
+    def _apply_correction(self, conn, row) -> int:
+        """Write ``proposed_correction`` onto the stored Whisper segments.
+
+        Returns the number of segments edited.  Uses the same minimal-edit
+        planner the batch applier uses, so an approval can never rewrite a
+        sentence wholesale -- if the planner refuses, the span is simply marked
+        resolved and the draft stands.
+        """
+        from scripts.pipeline.corrections import (
+            apply_edits, group_edits, plan_correction)
+        from scripts.pipeline.sentences import sentences_from_segments
+
+        segments = conn.execute(
+            'SELECT segment_id, start_seconds, duration_seconds, text '
+            'FROM transcript_segments WHERE video_id = ? AND source = ? '
+            'ORDER BY start_seconds', (row['video_id'], WHISPER_SOURCE)
+        ).fetchall()
+        if not segments:
+            return 0
+        as_dicts = [{'start_seconds': s['start_seconds'],
+                     'duration_seconds': s['duration_seconds'],
+                     'text': s['text']} for s in segments]
+        _draft, spans, sentences = sentences_from_segments(as_dicts)
+        sentence = next((s for s in sentences
+                         if s.text == row['draft_sentence']), None)
+        if sentence is None:
+            return 0
+        plan = plan_correction(sentence.text, row['proposed_correction'],
+                               spans, sentence.start_char)
+        if not plan.applicable:
+            return 0
+
+        edited = 0
+        for segment_index, edits in group_edits(plan.edits).items():
+            before = segments[segment_index]['text']
+            after = apply_edits(before, edits)
+            if after == before:
+                continue
+            segment_id = segments[segment_index]['segment_id']
+            conn.execute('UPDATE transcript_segments SET text = ? '
+                         'WHERE segment_id = ?', (after, segment_id))
+            conn.execute(
+                'INSERT INTO transcript_corrections '
+                '(video_id, segment_id, start_seconds, before_text, after_text, '
+                ' span, reasoning, provenance, applied_at) '
+                'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                (row['video_id'], segment_id,
+                 segments[segment_index]['start_seconds'], before, after,
+                 row['draft_sentence'], row['judge_reasoning'],
+                 REVIEW_PROVENANCE, _now()))
+            edited += 1
+        return edited
+
+    def approve(self, conn, payload):
+        row = self._row(conn, payload)
+        edited = 0
+        if row['proposed_correction']:
+            edited = self._apply_correction(conn, row)
+        note = (f'applied proposed correction to {edited} segment(s)' if edited
+                else 'resolved; Whisper draft stands')
+        conn.execute(
+            "UPDATE transcript_review_queue SET status = 'approved', "
+            'decided_at = ?, decision_note = ? WHERE item_id = ?',
+            (_now(), note, row['item_id']))
+        conn.commit()
+        return {
+            'message': f'{row["video_id"]}: {note}.',
+            'resource_id': row['item_id'],
+            'details': {'video_id': row['video_id'], 'segments_edited': edited,
+                        'provenance': REVIEW_PROVENANCE},
+        }
+
+    def reject(self, conn, payload):
+        row = self._row(conn, payload)
+        conn.execute(
+            "UPDATE transcript_review_queue SET status = 'rejected', "
+            'decided_at = ?, decision_note = ? WHERE item_id = ?',
+            (_now(), 'draft stands', row['item_id']))
+        conn.commit()
+        return {
+            'message': f'{row["video_id"]}: Whisper draft stands.',
+            'resource_id': row['item_id'],
+            'details': {'video_id': row['video_id']},
+        }
+
+
+# --------------------------------------------------------------------------
 # Registry
 # --------------------------------------------------------------------------
 
@@ -1088,7 +1287,7 @@ QUEUES: Dict[str, ReviewQueue] = {
     queue.key: queue
     for queue in (SeriesCandidateQueue(), UnvalidatedTagQueue(),
                   DogCandidateQueue(), SeasonCandidateQueue(),
-                  NightsCandidateQueue())
+                  NightsCandidateQueue(), TranscriptCandidateQueue())
 }
 
 

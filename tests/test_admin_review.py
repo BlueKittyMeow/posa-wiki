@@ -523,3 +523,90 @@ def test_bulk_approve_applies_every_payload(admin_app, client, review_env):
     finally:
         conn.close()
     assert count == 2
+
+
+# ---------------------------------------------------------------------------
+# transcripts queue (migration 013)
+# ---------------------------------------------------------------------------
+
+def _seed_transcript_span(admin_app, item_id, proposed=None):
+    """One Whisper segment plus an open review row pointing at it."""
+    conn = _db(admin_app)
+    try:
+        conn.execute(
+            'INSERT INTO transcript_segments '
+            '(video_id, start_seconds, duration_seconds, text, source) '
+            "VALUES ('vid_lucas', 12.0, 3.0, "
+            "'Captain Tea Truck caught seven of them.', 'whisper-large-v3')")
+        conn.execute(
+            'INSERT INTO transcript_review_queue '
+            '(item_id, video_id, start_seconds, end_seconds, draft_sentence, '
+            ' witness_disagreement, judge_reasoning, proposed_correction, '
+            " status, created_at) VALUES (?, 'vid_lucas', 12.0, 15.0, "
+            "'Captain Tea Truck caught seven of them.', "
+            '\'draft "tea truck" vs youtube heard "trot"\', '
+            "'roster alias', ?, 'open', '2026-08-25T00:00:00')",
+            (item_id, proposed))
+        conn.commit()
+    finally:
+        conn.close()
+
+
+def test_transcripts_queue_page_renders(admin_app, client):
+    _seed_transcript_span(admin_app, 'vid_lucas:render',
+                          'Captain Teeny Trout caught seven of them.')
+    response = client.get('/admin/review/transcripts')
+    assert response.status_code == 200
+    assert b'Captain Teeny Trout caught seven of them.' in response.data
+    assert b'Camping With Lucas' in response.data
+
+
+def test_transcripts_queue_appears_on_the_dashboard(admin_app, client):
+    _seed_transcript_span(admin_app, 'vid_lucas:dashboard')
+    response = client.get('/admin/')
+    assert response.status_code == 200
+    assert b'Transcript spans' in response.data
+
+
+def test_transcripts_approve_applies_and_logs(admin_app, client):
+    _seed_transcript_span(admin_app, 'vid_lucas:approve',
+                          'Captain Teeny Trout caught seven of them.')
+    response = client.post('/admin/review/transcripts/approve', data={
+        'payload': _payload(item_id='vid_lucas:approve'),
+    }, follow_redirects=True)
+    assert response.status_code == 200
+
+    conn = _db(admin_app)
+    try:
+        row = conn.execute(
+            'SELECT status, decision_note FROM transcript_review_queue '
+            "WHERE item_id = 'vid_lucas:approve'").fetchone()
+        assert row['status'] == 'approved'
+        texts = [r['text'] for r in conn.execute(
+            "SELECT text FROM transcript_segments WHERE video_id = 'vid_lucas' "
+            "AND source = 'whisper-large-v3'")]
+        assert 'Captain Teeny Trout caught seven of them.' in texts
+        logged = conn.execute(
+            'SELECT provenance FROM transcript_corrections '
+            "WHERE video_id = 'vid_lucas'").fetchall()
+        assert any(r['provenance'] == 'human:web-review' for r in logged)
+    finally:
+        conn.close()
+
+
+def test_transcripts_reject_keeps_the_draft(admin_app, client):
+    _seed_transcript_span(admin_app, 'vid_lucas:reject',
+                          'Captain Teeny Trout caught seven of them.')
+    response = client.post('/admin/review/transcripts/reject', data={
+        'payload': _payload(item_id='vid_lucas:reject'),
+    }, follow_redirects=True)
+    assert response.status_code == 200
+
+    conn = _db(admin_app)
+    try:
+        row = conn.execute(
+            'SELECT status FROM transcript_review_queue '
+            "WHERE item_id = 'vid_lucas:reject'").fetchone()
+        assert row['status'] == 'rejected'
+    finally:
+        conn.close()

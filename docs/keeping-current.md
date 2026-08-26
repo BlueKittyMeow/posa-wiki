@@ -255,6 +255,153 @@ future caption source parses badly, that function (and
 `tests/test_transcripts.py`, which runs it against real trimmed sidecars) is
 where to look.
 
+## Whisper re-transcription + adjudication (`scripts/pipeline/`)
+
+The YouTube auto-captions above are witness #2. The transcript of record is a
+**faster-whisper large-v3** re-transcription, adjudicated against the YouTube
+track by a local LLM judge and then reviewed by a human where the judge could
+not decide. The configuration is the one the adjudicator tournament settled
+(`docs/research/TRANSCRIPT_VERIFICATION_DESIGN.md` → *PRODUCTION CONFIG*;
+evidence in `TOURNAMENT_RESULTS.md`):
+
+| | |
+|---|---|
+| Witnesses | Whisper large-v3 (prompted, word timestamps) **+ YouTube ASR**. Parakeet is **not** run — adding it dropped the hard-error fix rate 46 % → 26 %. |
+| Judge | `mistral-small3.2:24b` on MarshLair's agent ollama store, `full` packet (style card v1.1 + entity roster + disagreement flags). Understudy `qwen3.5:35b-a3b` (≈equal, 3× faster) via `--model`. |
+| Banned | `bare` packets — no card, no lexicon, no flags made the transcript *worse* (WER +0.176). |
+| Appellate | **A human**, via `/admin/review/transcripts`. No audio judge: none produced a single correction. |
+
+### The three scripts
+
+```bash
+# 1. transcribe  (MysteryOfGlass driver, GPU work on MarshLair)
+./venv/bin/python scripts/pipeline/transcribe_batch.py --status
+./venv/bin/python scripts/pipeline/transcribe_batch.py            # all remaining
+./venv/bin/python scripts/pipeline/transcribe_batch.py --limit 3  # a few
+
+# 2. judge  (MysteryOfGlass, drives ollama over the :11435 tunnel)
+./venv/bin/python scripts/pipeline/judge_batch.py --status
+./venv/bin/python scripts/pipeline/judge_batch.py
+
+# 3. apply  (on Factotum, where the archive and the DB live)
+ssh bluekitty@192.168.1.201
+cd /srv/posa-wiki
+cp posa_wiki.db posa_wiki.db.bak.whisper          # always, before the first run
+./venv/bin/python scripts/pipeline/apply_verdicts.py --dry-run
+./venv/bin/python scripts/pipeline/apply_verdicts.py --require-verdicts
+```
+
+Where things land:
+
+| Path | What |
+|---|---|
+| `/mnt/media6t/archive/posa/transcripts_whisper/<id>.whisper.json` | segments + per-word probabilities (the record) |
+| `/mnt/media6t/archive/posa/transcripts_verdicts/<id>.verdicts.json` | the judge's sentence-level rulings |
+| `data/pipeline/*.jsonl` | the two ledgers (gitignored) |
+| `data/pipeline/cache/` | local copies of both of the above (gitignored) |
+
+### How stage 1 actually works
+
+`transcribe_batch.py` is a **thin driver**; it never holds a long SSH session.
+
+1. Factotum extracts 16 kHz mono WAV with ffmpeg into `/mnt/media6t/staging/`
+   (**never** `/tmp` on the Pi — 4 GB tmpfs).
+2. The WAV relays Factotum → MysteryOfGlass → MarshLair. `scp`/`rsync` cannot
+   parse the space in `Blue Kitty`, and Windows `sftp` would land it on the
+   near-full C:, so the bytes go over `ssh … wsl dd` straight into the WSL
+   filesystem.
+3. Inside WSL, `scripts/pipeline/whisper_worker.py` runs as the `systemd-run`
+   unit **`posa-whisper`**, holding `large-v3` resident on the GPU across the
+   whole batch (one 13–44 s load instead of one per video). The driver submits
+   `job.json` and polls `result.json` with short reconnecting calls.
+4. The JSON comes back and is copied to Factotum.
+
+Both scratch WAVs reuse **one filename each** and are overwritten per video, so
+nothing is ever deleted and the working set never grows.
+
+### What a full run costs (measured, 2026-08-25)
+
+| Stage | Rate | 112 archived videos (~200 h of audio) |
+|---|---|---|
+| Whisper | 17–27× realtime, model held resident | **~10 GPU-hours** |
+| Judge | ~27 s per packet; a 2-hour video produces ~150 packets | **~100 GPU-hours** with `mistral-small3.2:24b` |
+
+The judge, not the transcription, is the expensive half — the tournament
+measured per-*passage* cost and the per-*video* number is the surprise here.
+Two levers, in order of preference:
+
+1. `--model qwen3.5:35b-a3b` — the tournament's understudy, near-identical
+   fix rate at **35 % of the wall time** (MoE). ~35 GPU-hours for the corpus.
+2. Raise the selection bar. 60–66 % of sentences currently carry a flag or a
+   low-confidence word, which is far more than the tournament's hard-case
+   passages implied. `LOW_CONFIDENCE_THRESHOLD` in `scripts/pipeline/flags.py`
+   (0.55) and the flag filter are the two knobs.
+
+Run the two stages **one at a time** — the GPU holds one workload at a time on
+this box, and `mistral-small3.2:24b` alone is 13.9 GB of the 16 GB card.
+
+### Polling a running batch
+
+```bash
+./venv/bin/python scripts/pipeline/transcribe_batch.py --status    # ledger view
+tail -f data/pipeline/transcribe_ledger.jsonl
+ssh "Blue Kitty@192.168.1.156" "wsl -d Ubuntu -u bluekitty sudo journalctl -u posa-whisper -n 20 --no-pager"
+```
+
+A crash looks exactly like "still running" unless you check: `systemctl
+is-active posa-whisper` going inactive **without** a fresh `JOB_OK` is a
+failure. The driver checks this itself and restarts the worker once.
+
+### Resuming
+
+Everything is ledger-driven and idempotent, so **just run the command again**.
+
+* stage 1 skips any video with an `ok` ledger record *or* an existing
+  `.whisper.json` on Factotum;
+* stage 2 skips any video with an existing `.verdicts.json`;
+* stage 3 skips any video that already has `whisper-large-v3` segments
+  (`--redo` replaces them; it only ever deletes that video's Whisper rows,
+  never the YouTube witnesses).
+
+`--only VIDEO_ID` re-runs one video (note: an id starting with `-` needs
+`--only=-zr_N8CDKUA`, not `--only -zr_N8CDKUA`).
+
+### What the judge is allowed to do
+
+* Only sentences carrying a **disagreement flag or a low-confidence Whisper
+  word** are put up for judgement. Unflagged sentences are read-only context.
+* A `correct` verdict with no `correction` is invalid: one repair re-ask, then
+  the ruling is demoted to `escalate`.
+* A correction is applied as a **minimal in-segment edit**, never a sentence
+  rewrite. The applier refuses — and escalates instead — when a change:
+  straddles two segments; changes nothing; rewrites more than 60 % of the
+  sentence (or leaves no word standing, in a short one); **adds or drops words
+  at either end of the sentence** (that is the judge dragging in the next
+  utterance, not repairing this one); or lands on a segment another ruling in
+  the same run has already edited. Roughly **two thirds of `correct` verdicts
+  are refused this way** in practice, and that is the design working.
+* Every applied edit is logged in `transcript_corrections` with the pre-edit
+  text and `judge:<model>` provenance. Human approvals log
+  `human:web-review`.
+* A ruling on a sentence with no uncertainty signal behind it is dropped —
+  the tournament measured 71 escalations of which 2 were on a genuinely hard
+  span.
+
+### Schema (migration 013)
+
+`transcript_segments` gains `source`; `transcript_status` gains
+`whisper_status` / `judge_status` / counters; plus two new tables,
+`transcript_corrections` (applied-edit log) and `transcript_review_queue`
+(the human queue). **The YouTube rows are never deleted** — `/search` simply
+*prefers* Whisper segments for a video that has them, so a video that has not
+been re-transcribed searches exactly as before.
+
+```bash
+python run_migration.py migrations/013_transcript_review.sql
+```
+
+(`apply_verdicts.py` applies it itself if the columns are missing.)
+
 ## What stays manual
 
 - **Medium-confidence series membership.** Day Hiking and Backyard Adventures

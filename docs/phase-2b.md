@@ -204,6 +204,85 @@ Built:
   *non*-rendering.
 *Completed by Claude*
 
+**Step 2.7: Transcript Pipeline (Whisper + adjudication + review queue)** ✓ COMPLETE
+- The transcript of record is no longer YouTube's auto-captions. Three
+  idempotent, ledger-driven, resumable stages under `scripts/pipeline/`:
+  `transcribe_batch.py` (faster-whisper large-v3 on MarshLair) →
+  `judge_batch.py` (`mistral-small3.2:24b` adjudicating Whisper vs YouTube ASR)
+  → `apply_verdicts.py` (writes to the database on Factotum). Runbook:
+  `docs/keeping-current.md`.
+- **The configuration is not a choice made here** — it is the one the
+  adjudicator tournament settled (`TRANSCRIPT_VERIFICATION_DESIGN.md` →
+  *PRODUCTION CONFIG*, evidence in `TOURNAMENT_RESULTS.md`). Witnesses
+  Whisper + YouTube (Parakeet dropped: fix rate 46 % → 26 % with it added),
+  `full` packet (style card v1.1 + entity roster + flags; `bare` is banned —
+  WER +0.176), schema rule enforced (a `correct` verdict with no `correction`
+  gets one re-ask, then becomes an `escalate`), human appellate tier.
+- Migration `013_transcript_review.sql`: `transcript_segments.source`;
+  `transcript_status.{whisper_status,judge_status,…}`;
+  `transcript_corrections` (applied-edit log, keeps the pre-edit text);
+  `transcript_review_queue`.
+- **Two transcripts coexist per video and nothing is ever deleted.** `/search`
+  *prefers* Whisper segments for a video that has them
+  (`PREFERRED_TRANSCRIPT_SOURCE` in `app.py`), and falls back cleanly on a
+  pre-migration database.
+- Corrections are **minimal in-segment edits**, never sentence rewrites. The
+  applier refuses (→ escalation) when a change straddles two segments, changes
+  nothing, or rewrites >60 % of a sentence. This is a direct answer to the
+  three scorer bugs `TOURNAMENT_RESULTS.md` records as *"found by inspection,
+  not by test"*.
+- Review queue `transcripts` (6th entry in the `QUEUES` registry). Unlike the
+  others it is fed from the **database**, because a proposal costs a Whisper
+  pass plus an LLM pass over hours of audio rather than a title regex. v1:
+  approve applies `proposed_correction` when there is one (stamped
+  `human:web-review` in `transcript_corrections`) and otherwise marks the span
+  resolved; reject keeps the draft.
+- **Finding — the judge is over-eager, exactly as the tournament predicted.**
+  Only sentences carrying a disagreement flag or a low-confidence Whisper word
+  are put up for judgement, and a ruling on a sentence with no signal behind
+  it is dropped. Without those two filters the queue would fill with
+  escalations on disfluency, which is the one thing that is reliably *not* an
+  error.
+- **Finding — Whisper's punctuation discipline decays over long videos.** On
+  `-zr_N8CDKUA` it stops emitting terminators around the 15-minute mark,
+  producing one 7 775-character "sentence" spanning 17 minutes. Oversized runs
+  are therefore split at *segment* boundaries (never mid-segment, so
+  corrections still map to one row).
+- **Finding — the first live run found two applier bugs, both now tested.**
+  This is the fourth and fifth instance of the bug class
+  `TOURNAMENT_RESULTS.md` warns about, and neither was visible in the
+  three-passage tournament:
+  1. *Stale offsets.* Two rulings landing on one segment were planned against
+     the original text but applied to the already-edited text, producing a
+     compounding cascade — `"All right, Monty."` → `"bags overAll right,."` →
+     `"monte come on outht,."`. Fixed: **one edit per segment per run**, the
+     loser goes to the human with its proposal.
+  2. *Boundary edits.* The judge frequently returns a "correction" that adds
+     the next sentence or drops the leading clause — `"Yeah, not big enough."`
+     → `"Yeah, not big enough. Too small."`, written as
+     `"Yeah, not big enoughToo small."`. Fixed: **pure insertions and
+     deletions at either end of a sentence are refused**, because they are the
+     judge re-bracketing an utterance rather than repairing a word.
+     Substitutions at a boundary are still allowed.
+  Plus: short sentences now require at least one word to survive, so
+  `"All right, Monty."` → `"Monte, come on out."` is a substitution, not a
+  repair, and is refused.
+- **Finding — mistral's false-correction rate is not zero on bulk text.**
+  The tournament measured 0 false corrections over three hard passages. Over
+  three whole videos, of 8 corrections the applier let through, ~3 are clear
+  wins (Rouger's → Rueger's from the roster, "a gal" → "a gill" from the
+  domain lexicon, "on the woods" → "out in the woods"), ~2 are clear
+  regressions ("camp I go" → "camp by go", "wanna cut" → "want to cut" —
+  smoothing a real contraction), and the rest are unverifiable. The refusal
+  rules above are what keeps this survivable; the review queue is where it
+  gets settled.
+- Tests: `tests/test_pipeline.py` (43 tests) — flag computation, sentence
+  selection, the correction-applier's seven refusal modes, schema demotion,
+  ruling attachment, verdict application, queue insert/approve/reject, and the
+  search preference — all against fixtures with the model mocked, so no GPU
+  and no network. Plus 4 route tests in `tests/test_admin_review.py`.
+*Completed by Claude*
+
 **Step 1.5: Viewer Test Account & Login Flow** ⏳ TODO
 - Seed a default viewer user for non-admin testing (CLI helper or migration)
 - Expose a simple “viewer login” helper in docs for QA scenarios
