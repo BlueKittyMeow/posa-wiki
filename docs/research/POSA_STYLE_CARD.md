@@ -132,3 +132,13 @@ you're successful").
 > 5. **When you cannot tell, escalate.** Guessing a plausible replacement for
 >    text that was already correct is the worst possible outcome. It is better
 >    to escalate ten spans than to invent one.
+
+**Vocabulary addendum (Lara, from comment-corpus reading, 2026-08-26):** he
+calls the tent vestibule **"the vegetable"** — deliberate word-substitution
+is part of the register (same family as blue sklies). Songbook leads from the
+same reading: an "Oh! Monty" serenade documented by a fan comment — verbatim
+Neil Sedaka "Oh! Carol" with Monty substituted (performance not yet located
+in the transcribed corpus; distinctive lyric "I am but a fool" should surface
+it as transcription completes); a "snag song" (Fisher Man Song) in the 7
+Night trip Part 2; Lollipop earworm episode; "Let It Snow" sung in June;
+possible John Denver "Country Roads" repertoire mention.
