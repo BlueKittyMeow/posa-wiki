@@ -142,3 +142,7 @@ in the transcribed corpus; distinctive lyric "I am but a fool" should surface
 it as transcription completes); a "snag song" (Fisher Man Song) in the 7
 Night trip Part 2; Lollipop earworm episode; "Let It Snow" sung in June;
 possible John Denver "Country Roads" repertoire mention.
+
+**Roster addendum (Lara, 2026-08-26):** Rueger's full nickname is
+**"Rugas McTugas"** (Whisper's batch pass surfaced "Rueger McTugas"; the
+canonical form per Lara is Rugas). Add to Rueger's aliases.
